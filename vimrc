@@ -32,7 +32,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 nnoremap <silent> <F8> :TlistToggle<CR>
-nnoremap <silent> <F9> :NERDTreeToggle<CR>
+nnoremap <silent> <C-o> :NERDTreeToggle<CR>
 
 "nnoremap <leader>n :set nonumber!<CR>
 "nnoremap <leader>rn :set norelativenumber!<CR>
