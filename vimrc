@@ -14,12 +14,20 @@ set showmatch
 set matchtime=5
 set laststatus=2
 
-call plug#begin()
+if empty(glob("~/.vim/autoload/plug.vim"))
+  echo "Installing Vim-Plug\n"
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -66,6 +74,7 @@ set ttimeoutlen=50
 set noshowmode
 
 let g:airline_powerline_fonts = 1
+let g:airline_theme='simple'
 
 " LATEX
 "
