@@ -14,7 +14,28 @@ set showmatch
 set matchtime=5
 set laststatus=2
 
-execute pathogen#infect()
+call plug#begin()
+
+Plug 'tpope/vim-sensible'
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
+Plug 'chriskempson/base16-vim'
+Plug 'travisjeffery/vim-gotosymbol'
+Plug 'Raimondi/delimitMate'
+Plug 'SirVer/ultisnips'
+Plug 'vim-latex/vim-latex'
+
+call plug#end()
 
 "set mouse=a
 
