@@ -8,7 +8,7 @@ set expandtab
 set number
 set scrolloff=5
 
-set nohlsearch
+set hlsearch
 set incsearch
 set showmatch
 set matchtime=5
@@ -42,6 +42,7 @@ Plug 'travisjeffery/vim-gotosymbol'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'vim-latex/vim-latex'
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
@@ -67,6 +68,7 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufWritePre * :%s/\s+$//e
 
 "nnoremap <leader>n :set nonumber!<CR>
 "nnoremap <leader>rn :set norelativenumber!<CR>
