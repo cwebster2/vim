@@ -68,7 +68,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd BufWritePre * %s/\s+$//e
+autocmd BufWritePre * :%s/\s+$//e
+au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
 
 "nnoremap <leader>n :set nonumber!<CR>
 "nnoremap <leader>rn :set norelativenumber!<CR>
