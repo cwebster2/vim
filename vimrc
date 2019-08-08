@@ -73,6 +73,10 @@ autocmd BufWritePre * %s/\s+$//e
 "nnoremap <leader>n :set nonumber!<CR>
 "nnoremap <leader>rn :set norelativenumber!<CR>
 
+if has('nvim-0.3.2') || has("patch-8.1.0360")
+  set diffopt=filler,internal,algorithm:histogram,indent-heuristic
+endif
+
 set t_Co=256
 "filetype plugin indent on
 syntax on
