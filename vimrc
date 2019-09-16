@@ -43,6 +43,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'vim-latex/vim-latex'
 Plug 'scrooloose/nerdcommenter'
+Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -70,6 +71,13 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufWritePre * :%s/\s+$//e
 au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
+
+" Autoimport on save in Go.
+augroup filetype_go
+    autocmd!
+    autocmd BufWritePre *.go :GoFmt
+    autocmd BufWritePre *.go :GoImports
+augroup END
 
 "nnoremap <leader>n :set nonumber!<CR>
 "nnoremap <leader>rn :set norelativenumber!<CR>
