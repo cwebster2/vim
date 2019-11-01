@@ -72,6 +72,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd BufWritePre * :%s/\s+$//e
 au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
 
+" GLG specific
+au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
+
 " Autoimport on save in Go.
 augroup filetype_go
     autocmd!
