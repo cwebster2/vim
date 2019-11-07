@@ -44,6 +44,7 @@ Plug 'SirVer/ultisnips'
 Plug 'vim-latex/vim-latex'
 Plug 'scrooloose/nerdcommenter'
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -103,6 +104,8 @@ let g:airline_inactive_collapse=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#syntastic#enabled=1
 "let g:airline_theme='simple'
+let g:indentLine_char = '▏'
+let g:indentLine_color_term = 239
 
 " LATEX
 "
