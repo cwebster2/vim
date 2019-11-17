@@ -71,7 +71,6 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufWritePre * :%s/\s+$//e
-au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
 
 " GLG specific
 au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
@@ -96,6 +95,8 @@ syntax on
 
 set ttimeoutlen=50
 set noshowmode
+set splitright
+set splitbelow
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
