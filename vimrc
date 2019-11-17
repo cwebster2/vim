@@ -50,10 +50,10 @@ call plug#end()
 
 "set mouse=a
 
-let mapleader=','
+map <Space> <Leader>
 
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+map <Leader>h <esc>:tabprevious<CR>
+map <Leader>l <esc>:tabnext<CR>
 
 "au InsertLeave * match ExtraWhitespace /\s\+$/
 "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -71,6 +71,25 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufWritePre * :%s/\s+$//e
+
+" Tab helpers
+
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+" Go to last active tab
+
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 
 " GLG specific
 au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
