@@ -14,6 +14,18 @@ set showmatch
 set matchtime=5
 set laststatus=2
 
+" Colors
+
+let g:jellybeans_overrides = {
+  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  \}
+if has('termguicolors') && &termguicolors
+  let g:jellybeans_overrides['background']['guibg'] = 'none'
+endif
+colorscheme jellybeans
+
+"plugins
+
 if empty(glob("~/.vim/autoload/plug.vim"))
   echo "Installing Vim-Plug\n"
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -149,9 +161,21 @@ hi SpellBad cterm=underline
 
 " ALE
 
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
 let b:ale_fixers = {
   \  '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ }
+let g:ale_rust_rls_executable = '/home/casey/.cargo/bin/rls'
+let g:ale_go_langserver_executable  = '/home/casey/go/bin/go-langserver'
+let g:go_fmt_fail_silently = 1
+let g:ale_linters = {
+  \ 'sh': ['language_server'],
+  \ 'go': ['golangserver'],
+  \ 'rust': ['rls'],
+  \ }
+set omnifunc=ale#completion#OmniFunc
+
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_enter = 0
@@ -159,14 +183,26 @@ nnoremap <leader>n :lnext<CR>
 nnoremap <leader>p :lprevious<CR>
 nnoremap <leader>r :lrewind<CR>
 let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
-let g:jellybeans_overrides = {
-  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-  \}
-if has('termguicolors') && &termguicolors
-  let g:jellybeans_overrides['background']['guibg'] = 'none'
-endif
-colorscheme jellybeans
+function ALELSPMappings()
+	let l:lsp_found=0
+	for l:linter in ale#linter#Get(&filetype) | if !empty(l:linter.lsp) | let l:lsp_found=1 | endif | endfor
+	if (l:lsp_found)
+		nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
+    nnoremap <buffer> <F12> :ALEGoToDefinitionInVSplit<CR>
+		nnoremap <buffer> <C-[> :ALEFindReferences<CR>
+	else
+		silent! unmap <buffer> <C-]>
+		silent! unmap <buffer> <F12>
+		silent! unmap <buffer> <C-[>
+	endif
+endfunction
+autocmd BufRead,FileType * call ALELSPMappings()
+
 
 " Put these lines at the very end of your vimrc file.
 
