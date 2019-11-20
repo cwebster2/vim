@@ -33,6 +33,8 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
@@ -88,8 +90,8 @@ noremap <leader>0 :tablast<cr>
 " Go to last active tab
 
 au TabLeave * let g:lasttab = tabpagenr()
-nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
-vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+"nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+"vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 
 " GLG specific
 au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
@@ -145,3 +147,32 @@ let g:Tex_CompileRule_pdf='pdflatex --interaction=nonstopmode $*'
 hi clear SpellBad
 hi SpellBad cterm=underline
 
+" ALE
+
+let b:ale_fixers = {
+  \  '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ }
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_enter = 0
+nnoremap <leader>n :lnext<CR>
+nnoremap <leader>p :lprevious<CR>
+nnoremap <leader>r :lrewind<CR>
+let g:airline#extensions#ale#enabled = 1
+
+let g:jellybeans_overrides = {
+  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  \}
+if has('termguicolors') && &termguicolors
+  let g:jellybeans_overrides['background']['guibg'] = 'none'
+endif
+colorscheme jellybeans
+
+" Put these lines at the very end of your vimrc file.
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
