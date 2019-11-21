@@ -51,6 +51,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'chriskempson/base16-vim'
 Plug 'travisjeffery/vim-gotosymbol'
 Plug 'Raimondi/delimitMate'
@@ -161,6 +162,13 @@ hi SpellBad cterm=underline
 
 " ALE
 
+inoremap <silent><expr> <Tab>
+  \ pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-Tab>
+  \ pumvisible() ? "\<C-p>" : "\<TAB>"
+
+set completeopt+=noinsert
+
 let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 let b:ale_fixers = {
@@ -168,13 +176,14 @@ let b:ale_fixers = {
   \ }
 let g:ale_rust_rls_executable = '/home/casey/.cargo/bin/rls'
 let g:ale_go_langserver_executable  = '/home/casey/go/bin/go-langserver'
+
+let g:ale_completion_tsserver_autoimport = 1
 let g:go_fmt_fail_silently = 1
 let g:ale_linters = {
   \ 'sh': ['language_server'],
   \ 'go': ['golangserver'],
   \ 'rust': ['rls'],
   \ }
-set omnifunc=ale#completion#OmniFunc
 
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'always'
@@ -187,6 +196,8 @@ let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 
 function ALELSPMappings()
 	let l:lsp_found=0
