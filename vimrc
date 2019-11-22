@@ -31,7 +31,7 @@ Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
 "Plug 'travisjeffery/vim-gotosymbol'
 Plug 'Raimondi/delimitMate'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'sheerun/vim-polyglot'  " syntax files for most languages
 Plug 'vim-python/python-syntax'  " Improved python syntax
 Plug 'Vimjas/vim-python-pep8-indent'  " Proper python indenting
@@ -39,6 +39,8 @@ Plug 'chrisbra/Colorizer'  " Highlight CSS colors
 Plug 'vim-latex/vim-latex'
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 "Plug 'Yggdroot/indentLine'
 
 call plug#end()
@@ -111,13 +113,41 @@ let g:airline_inactive_collapse=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#syntastic#enabled=1
 "let g:airline_theme='simple'
-let g:indentLine_char = '▏'
-let g:indentLine_color_term = 239
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>h <Plug>AirlineSelectPrevTab
+nmap <leader>l <Plug>AirlineSelectNextTab
+let g:airline#extensions#tabline#buffer_idx_format = {
+			\ '0': ' ',
+			\ '1': '➊ ',
+			\ '2': '➋ ',
+			\ '3': '➌ ',
+			\ '4': '➍ ',
+			\ '5': '➎ ',
+			\ '6': '➏ ',
+			\ '7': '➐ ',
+			\ '8': '➑ ',
+			\ '9': '➒ '
+			\}
+
+"indentline
+"let g:indentLine_char = '▏'
+"let g:indentLine_color_term = 239
 
 "nerdtree
 nnoremap <silent> <leader>d :NERDTreeToggle<CR>
 nnoremap <silent> <leader>D :NERDTreeFind<CR>
 let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]']
+
+"nerdcommenter
 
 "alr
 let g:ale_completion_enabled = 1
@@ -195,11 +225,16 @@ let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
 
+"neosnippets
+imap <M-k>     <Plug>(neosnippet_expand_or_jump)
+smap <M-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <M-k>     <Plug>(neosnippet_expand_target)
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
-
-map <Leader>h <esc>:tabprevious<CR>
-map <Leader>l <esc>:tabnext<CR>
-
+"Other configuration
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -220,22 +255,15 @@ autocmd Filetype *tex nnoremap <silent> <F2> :silent make\|redraw!\|cw<CR>
 " GLG specific
 au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
 
-"
-" Tab helpers
-
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
+"quick buffer swap
+nnoremap <leader>b :e#<CR>
+"quick save and quit
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+"quick split
+nnoremap <Leader>v <C-w>v<C-w>w
 
 " Go to last active tab
-
 au TabLeave * let g:lasttab = tabpagenr()
 "nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 "vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
@@ -246,6 +274,18 @@ augroup filetype_go
     autocmd BufWritePre *.go :GoFmt
     autocmd BufWritePre *.go :GoImports
 augroup END
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 1
+let g:go_auto_type_info = 1
+let g:go_addtags_transform = "snakecase"
+let g:go_snippet_engine = "neosnippet"
 
 nnoremap <leader>nn :set nonumber!<CR>
 nnoremap <leader>rr :set norelativenumber!<CR>
