@@ -13,141 +13,32 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
-
 Plug 'airblade/vim-gitgutter'
-let g:gitgutter_map_keys = 0
-nmap <leader>gh <Plug>(GitGutterStageHunk)
-nmap <leader>gH <Plug>(GitGutterUndoHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-nmap ]h <Plug>(GitGutterNextHunk)
-set updatetime=200 " faster updates
-
 Plug 'editorconfig/editorconfig-vim'
-
 Plug 'vim-airline/vim-airline'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_detect_paste=1
-let g:airline_inactive_collapse=1
-let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#syntastic#enabled=1
-"let g:airline_theme='simple'
-let g:indentLine_char = '▏'
-let g:indentLine_color_term = 239
-
 Plug 'vim-airline/vim-airline-themes'
-
 Plug 'tpope/vim-fugitive'
-
 Plug 'junegunn/fzf'
-
 Plug 'junegunn/fzf.vim'
-
 Plug 'mattn/emmet-vim'
-
 Plug 'scrooloose/nerdtree'
-nnoremap <silent> <leader>d :NERDTreeToggle<CR>
-nnoremap <silent> <leader>D :NERDTreeFind<CR>
-let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]']
-
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
 Plug 'scrooloose/nerdcommenter'
-
 Plug 'ryanoasis/vim-devicons'
-
 Plug 'terryma/vim-multiple-cursors'
-
 Plug 'tpope/vim-eunuch'
-
 Plug 'tpope/vim-surround'
-
 Plug 'w0rp/ale'
-let g:ale_completion_enabled = 1
-let g:ale_sign_column_always = 1
-let g:ale_maximum_file_size = 500000
-let g:ale_rust_rls_executable = '/home/casey/.cargo/bin/rls'
-let g:ale_go_langserver_executable  = '/home/casey/go/bin/go-langserver'
-let g:ale_python_pyls_config = {'pyls': {'plugins': {'pycodestyle': {'enabled': v:false}}}}
-let g:ale_completion_tsserver_autoimport = 1
-let g:go_fmt_fail_silently = 1
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_enter = 0
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
-let b:ale_fixers = {
-  \  '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \  'typescript': ['prettier'],
-  \  'javascript': ['prettier'],
-  \  'css': ['prettier'],
-  \  'python': ['black'],
-  \ }
-"gofmt golint go vet
-let g:ale_linters = {
-  \ 'bash': ['language_server', 'shell'],
-  \ 'sh': ['shell'],
-  \ 'zsh': ['shell'],
-  \ 'cpp': ['clang', 'cppcheck']
-  \ 'go': ['golangserver'],
-  \ 'rust': ['cargo', 'rls'],
-  \ 'javascript': ['eslint', 'tsserver'],
-  \ 'typescript': ['eslint', 'tsserver'],
-  \ 'python': ['flake8', 'mypy', 'pyls'],
-  \ }
-let g:ale_pattern_options = {
-\   '.*\.md$': {'ale_enabled': 0},
-\   '.*\.markdown$': {'ale_enabled': 0},
-\   '.*\.rst$': {'ale_enabled': 0},
-\   '.*\.txt$': {'ale_enabled': 0},
-\   '.*\.tex$': {'ale_enabled': 0},
-\}
-nnoremap <leader>n :lnext<CR>
-nnoremap <leader>p :lprevious<CR>
-nnoremap <leader>r :lrewind<CR>
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
-nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>j <Plug>(ale_next_wrap)
-nmap <leader>= <Plug>(ale_fix)
-nmap <leader>- :ALEToggleBuffer<cr>
-nmap gd <Plug>(ale_go_to_definition)
-
-
 "Plug 'travisjeffery/vim-gotosymbol'
-"
 Plug 'Raimondi/delimitMate'
-
 Plug 'SirVer/ultisnips'
-
 Plug 'sheerun/vim-polyglot'  " syntax files for most languages
-let g:polyglot_disabled = ['python', 'latex', 'typescript'] " Use python-syntax and vimtex
-let g:jsx_ext_required = 0
-let g:markdown_fenced_languages = ['javascript', 'python', 'clojure', 'ruby']
-
 Plug 'vim-python/python-syntax'  " Improved python syntax
-let g:python_highlight_all = 1
-
 Plug 'Vimjas/vim-python-pep8-indent'  " Proper python indenting
-
 Plug 'chrisbra/Colorizer'  " Highlight CSS colors
-let g:colorizer_auto_filetype='css,html'
-
 Plug 'vim-latex/vim-latex'
-let g:tex_flavor='latex'
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_CompileRule_pdf='pdflatex --interaction=nonstopmode $*'
-
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
-
 Plug 'ntpeters/vim-better-whitespace'
-let g:better_whitespace_ctermcolor='red'
-let g:better_whitespace_guicolor='red'
-let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=1
-let g:strip_whitespace_confirm=0
-
 "Plug 'Yggdroot/indentLine'
 
 call plug#end()
@@ -203,6 +94,108 @@ if has('termguicolors') && &termguicolors
   let g:jellybeans_overrides['background']['guibg'] = 'none'
 endif
 colorscheme jellybeans
+
+"vim-gitgutter
+let g:gitgutter_map_keys = 0
+nmap <leader>gh <Plug>(GitGutterStageHunk)
+nmap <leader>gH <Plug>(GitGutterUndoHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
+set updatetime=200 " faster updates
+
+"airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_detect_paste=1
+let g:airline_inactive_collapse=1
+let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#syntastic#enabled=1
+"let g:airline_theme='simple'
+let g:indentLine_char = '▏'
+let g:indentLine_color_term = 239
+
+"nerdtree
+nnoremap <silent> <leader>d :NERDTreeToggle<CR>
+nnoremap <silent> <leader>D :NERDTreeFind<CR>
+let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]']
+
+"alr
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_maximum_file_size = 500000
+let g:ale_rust_rls_executable = '/home/casey/.cargo/bin/rls'
+let g:ale_go_langserver_executable  = '/home/casey/go/bin/go-langserver'
+let g:ale_python_pyls_config = {'pyls': {'plugins': {'pycodestyle': {'enabled': v:false}}}}
+let g:ale_completion_tsserver_autoimport = 1
+let g:go_fmt_fail_silently = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_enter = 0
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+let b:ale_fixers = {
+  \  '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \  'typescript': ['prettier'],
+  \  'javascript': ['prettier'],
+  \  'css': ['prettier'],
+  \  'python': ['black'],
+  \ }
+"gofmt golint go vet
+let g:ale_linters = {
+  \ 'bash': ['language_server', 'shell'],
+  \ 'sh': ['shell'],
+  \ 'zsh': ['shell'],
+  \ 'cpp': ['clang', 'cppcheck'],
+  \ 'go': ['golangserver'],
+  \ 'rust': ['cargo', 'rls'],
+  \ 'javascript': ['eslint', 'tsserver'],
+  \ 'typescript': ['eslint', 'tsserver'],
+  \ 'python': ['flake8', 'mypy', 'pyls'],
+  \ }
+let g:ale_pattern_options = {
+\   '.*\.md$': {'ale_enabled': 0},
+\   '.*\.markdown$': {'ale_enabled': 0},
+\   '.*\.rst$': {'ale_enabled': 0},
+\   '.*\.txt$': {'ale_enabled': 0},
+\   '.*\.tex$': {'ale_enabled': 0},
+\}
+nnoremap <leader>n :lnext<CR>
+nnoremap <leader>p :lprevious<CR>
+nnoremap <leader>r :lrewind<CR>
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>j <Plug>(ale_next_wrap)
+nmap <leader>= <Plug>(ale_fix)
+nmap <leader>- :ALEToggleBuffer<cr>
+nmap gd <Plug>(ale_go_to_definition)
+
+
+"polyglot
+let g:polyglot_disabled = ['python', 'latex', 'typescript'] " Use python-syntax and vimtex
+let g:jsx_ext_required = 0
+let g:markdown_fenced_languages = ['javascript', 'python', 'clojure', 'ruby']
+
+"python syntax
+let g:python_highlight_all = 1
+
+"colorizer
+let g:colorizer_auto_filetype='css,html'
+
+"tex
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_CompileRule_pdf='pdflatex --interaction=nonstopmode $*'
+
+"better whitespace
+let g:better_whitespace_ctermcolor='red'
+let g:better_whitespace_guicolor='red'
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitespace_confirm=0
+
+
 
 map <Leader>h <esc>:tabprevious<CR>
 map <Leader>l <esc>:tabnext<CR>
