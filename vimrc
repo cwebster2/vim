@@ -148,6 +148,8 @@ nnoremap <silent> <leader>D :NERDTreeFind<CR>
 let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]']
 
 "nerdcommenter
+nmap ++ <Plug>NERDCommenterToggle
+vmap ++ <Plug>NERDCommenterToggle
 
 "alr
 let g:ale_completion_enabled = 1
