@@ -1,35 +1,5 @@
-let fortran_free_source=1
-set noautoindent
-set textwidth=0
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-set number
-set scrolloff=5
-set hlsearch
-set incsearch
-set showmatch
-set matchtime=5
-set laststatus=2
-set ttimeoutlen=50
-set noshowmode
-set splitright
-set splitbelow
-set completeopt=menu,menuone,noselect,noinsert
-set diffopt=filler,internal,algorithm:histogram,indent-heuristic
-set termguicolors
-syntax on
+map <Space> <Leader>
 
-" Colors
-
-let g:jellybeans_overrides = {
-  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-  \}
-if has('termguicolors') && &termguicolors
-  let g:jellybeans_overrides['background']['guibg'] = 'none'
-endif
-colorscheme jellybeans
 
 "plugins
 
@@ -102,7 +72,7 @@ let g:ale_python_pyls_config = {'pyls': {'plugins': {'pycodestyle': {'enabled': 
 let g:ale_completion_tsserver_autoimport = 1
 let g:go_fmt_fail_silently = 1
 let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_enter = 0
 let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_error = '✘'
@@ -113,12 +83,15 @@ let b:ale_fixers = {
   \  'javascript': ['prettier'],
   \  'css': ['prettier'],
   \  'python': ['black'],
-  \  'go': ['gofmt'],
   \ }
+"gofmt golint go vet
 let g:ale_linters = {
-  \ 'sh': ['language_server'],
-  \ 'go': ['golangserver', 'gofmt'],
-  \ 'rust': ['rls'],
+  \ 'bash': ['language_server', 'shell'],
+  \ 'sh': ['shell'],
+  \ 'zsh': ['shell'],
+  \ 'cpp': ['clang', 'cppcheck']
+  \ 'go': ['golangserver'],
+  \ 'rust': ['cargo', 'rls'],
   \ 'javascript': ['eslint', 'tsserver'],
   \ 'typescript': ['eslint', 'tsserver'],
   \ 'python': ['flake8', 'mypy', 'pyls'],
@@ -141,7 +114,6 @@ nmap <leader>= <Plug>(ale_fix)
 nmap <leader>- :ALEToggleBuffer<cr>
 nmap gd <Plug>(ale_go_to_definition)
 
-Plug 'chriskempson/base16-vim'
 
 "Plug 'travisjeffery/vim-gotosymbol'
 "
@@ -149,26 +121,91 @@ Plug 'Raimondi/delimitMate'
 
 Plug 'SirVer/ultisnips'
 
+Plug 'sheerun/vim-polyglot'  " syntax files for most languages
+let g:polyglot_disabled = ['python', 'latex', 'typescript'] " Use python-syntax and vimtex
+let g:jsx_ext_required = 0
+let g:markdown_fenced_languages = ['javascript', 'python', 'clojure', 'ruby']
+
+Plug 'vim-python/python-syntax'  " Improved python syntax
+let g:python_highlight_all = 1
+
+Plug 'Vimjas/vim-python-pep8-indent'  " Proper python indenting
+
+Plug 'chrisbra/Colorizer'  " Highlight CSS colors
+let g:colorizer_auto_filetype='css,html'
+
 Plug 'vim-latex/vim-latex'
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_CompileRule_pdf='pdflatex --interaction=nonstopmode $*'
 
-"Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
+
+Plug 'ntpeters/vim-better-whitespace'
+let g:better_whitespace_ctermcolor='red'
+let g:better_whitespace_guicolor='red'
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitespace_confirm=0
 
 "Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
 "set mouse=a
+filetype plugin indent on
+let fortran_free_source=1
+set noautoindent
+set autoread
+set encoding=utf-8
+set previewheight=25
+set clipboard^=unnamedplus,unnamed " Make "yanks"
+set textwidth=0
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set shiftround
+set expandtab
+set number
+set scrolloff=5
+set hlsearch
+set incsearch
+set showmatch
+set matchtime=5
+set laststatus=2
+set ttimeoutlen=50
+set noshowmode
+set undofile
+set nobackup
+set splitright
+set splitbelow
+set completeopt=menu,menuone,noselect,noinsert
+set diffopt=filler,internal,algorithm:histogram,indent-heuristic
+set termguicolors
+syntax on
+set cursorline
+set list listchars=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○
 
-map <Space> <Leader>
+" Persistent undo (can use undos after exiting and restarting)
+if exists("+undofile")
+  if isdirectory($HOME . '/.vim/undo') == 0
+    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  endif
+  set undodir=./.vim-undo// undodir+=~/.vim/undo// undofile
+endif
+
+" Colors
+
+let g:jellybeans_overrides = {
+  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  \}
+if has('termguicolors') && &termguicolors
+  let g:jellybeans_overrides['background']['guibg'] = 'none'
+endif
+colorscheme jellybeans
 
 map <Leader>h <esc>:tabprevious<CR>
 map <Leader>l <esc>:tabnext<CR>
-
-"au InsertLeave * match ExtraWhitespace /\s\+$/
-"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -211,14 +248,14 @@ au TabLeave * let g:lasttab = tabpagenr()
 "vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 
 " Autoimport on save in Go.
-"augroup filetype_go
-"    autocmd!
-"    autocmd BufWritePre *.go :GoFmt
-"    autocmd BufWritePre *.go :GoImports
-"augroup END
+augroup filetype_go
+    autocmd!
+    autocmd BufWritePre *.go :GoFmt
+    autocmd BufWritePre *.go :GoImports
+augroup END
 
-"nnoremap <leader>n :set nonumber!<CR>
-"nnoremap <leader>rn :set norelativenumber!<CR>
+nnoremap <leader>nn :set nonumber!<CR>
+nnoremap <leader>rr :set norelativenumber!<CR>
 "
 
 " spelling
