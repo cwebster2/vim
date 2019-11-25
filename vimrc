@@ -165,8 +165,8 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 "nerdcommenter
-nmap ++ <Plug>NERDCommenterToggle
-vmap ++ <Plug>NERDCommenterToggle
+nmap <C-_> <Plug>NERDCommenterToggle
+vmap <C-_> <Plug>NERDCommenterToggle
 
 "alr
 let g:ale_completion_enabled = 1
