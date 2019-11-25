@@ -1,6 +1,5 @@
 map <Space> <Leader>
 
-
 "plugins
 
 if empty(glob("~/.vim/autoload/plug.vim"))
@@ -23,6 +22,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
@@ -42,6 +43,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 "Plug 'Yggdroot/indentLine'
+Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -113,6 +115,7 @@ let g:airline_inactive_collapse=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#syntastic#enabled=1
 "let g:airline_theme='simple'
+let g:airline#extensions#tabline#tab_nr_type = 2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -146,6 +149,20 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 nnoremap <silent> <leader>d :NERDTreeToggle<CR>
 nnoremap <silent> <leader>D :NERDTreeFind<CR>
 let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]']
+
+"nerdtree git plugin
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
 
 "nerdcommenter
 nmap ++ <Plug>NERDCommenterToggle
@@ -236,13 +253,53 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
+"fzf
+let g:fzf_command_prefix = 'F'
+let g:fzf_buffers_jump = 1
+let g:fzf_commands_expect = 'alt-enter'
+" Set custom layout.
+let g:fzf_layout = {
+	\ 'window': 'silent 18split enew'
+\ }
+
+" Set actions manually.
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+	\ 'ctrl-e': 'split',
+	\ 'ctrl-v': 'vsplit'
+\ }
+
+" History directory.
+let g:fzf_history_dir = $HOME . '/.vim/cache/share/fzf/'
+
+" Customize `fzf` colors to match current color scheme.
+let g:fzf_colors = {
+	\ 'fg': ['fg', 'Normal'],
+	\ 'bg': ['bg', 'Normal'],
+	\ 'hl': ['fg', 'Comment'],
+	\ 'fg+': ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+	\ 'bg+': ['bg', 'CursorLine', 'CursorColumn'],
+	\ 'hl+': ['fg', 'Statement'],
+	\ 'info': ['fg', 'Comment'],
+	\ 'border': ['fg', 'Ignore'],
+	\ 'prompt': ['fg', 'Conditional'],
+	\ 'pointer': ['fg', 'Exception'],
+	\ 'marker': ['fg', 'Keyword'],
+	\ 'spinner': ['fg', 'Label'],
+	\ 'header': ['fg', 'Comment']
+\ }
+nnoremap <silent> <C-p> :FGFiles<Enter>
+nnoremap <silent> <Leader><C-p> :FFiles<Enter>
+nnoremap <silent> <M-x> :FCommands<Enter>
+nnoremap <silent> <M-b> :FBuffers<Enter>
+command! -bang -complete=dir -nargs=* LS
+    \ call fzf#run(fzf#wrap('ls', {'source': 'ls', 'dir': <q-args>}, <bang>0))
+
 "Other configuration
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-nnoremap <silent> <F8> :TlistToggle<CR>
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
@@ -288,7 +345,13 @@ let g:go_auto_sameids = 1
 let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 let g:go_snippet_engine = "neosnippet"
+au FileType go nnoremap <Leader>gv <Plug>(go-doc-vertical)
+autocmd FileType go nmap <leader>gr :w<CR>:vsplit <bar> terminal go run %<CR>
 
+"tagbar
+nnoremap <silent> <leader>tb :TagbarToggle<CR>
+
+"other
 nnoremap <leader>nn :set nonumber!<CR>
 nnoremap <leader>rr :set norelativenumber!<CR>
 "
@@ -303,6 +366,8 @@ inoremap <silent><expr> <Tab>
   \ pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr> <S-Tab>
   \ pumvisible() ? "\<C-p>" : "\<TAB>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
 function ALELSPMappings()
 	let l:lsp_found=0
 	for l:linter in ale#linter#Get(&filetype) | if !empty(l:linter.lsp) | let l:lsp_found=1 | endif | endfor
