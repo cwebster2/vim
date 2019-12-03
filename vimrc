@@ -42,7 +42,7 @@ Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-"Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
 
 call plug#end()
@@ -101,8 +101,9 @@ colorscheme jellybeans
 
 "vim-gitgutter
 let g:gitgutter_map_keys = 0
-nmap <leader>gh <Plug>(GitGutterStageHunk)
-nmap <leader>gH <Plug>(GitGutterUndoHunk)
+nmap <leader>gs <Plug>(GitGutterStageHunk)
+nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
 set updatetime=200 " faster updates
@@ -115,7 +116,8 @@ let g:airline_inactive_collapse=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#syntastic#enabled=1
 "let g:airline_theme='simple'
-let g:airline#extensions#tabline#tab_nr_type = 2
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -142,13 +144,13 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 			\}
 
 "indentline
-"let g:indentLine_char = '▏'
-"let g:indentLine_color_term = 239
+let g:indentLine_char = '▏'
+let g:indentLine_color_term = 239
 
 "nerdtree
 nnoremap <silent> <leader>d :NERDTreeToggle<CR>
 nnoremap <silent> <leader>D :NERDTreeFind<CR>
-let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]']
+let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]', 'node_modules']
 
 "nerdtree git plugin
 let g:NERDTreeIndicatorMapCustom = {
@@ -300,6 +302,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+" j/k will move virtual lines (lines that wrap)
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
@@ -327,6 +332,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 "nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 "vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 
+"vim-go
 " Autoimport on save in Go.
 augroup filetype_go
     autocmd!
@@ -366,7 +372,7 @@ inoremap <silent><expr> <Tab>
   \ pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr> <S-Tab>
   \ pumvisible() ? "\<C-p>" : "\<TAB>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
 function ALELSPMappings()
 	let l:lsp_found=0
@@ -383,6 +389,7 @@ function ALELSPMappings()
 endfunction
 autocmd BufRead,FileType * call ALELSPMappings()
 
+"hi! airline_tabfill guibg=none ctermbg=none ctermfg=none guifg=none
 
 " Put these lines at the very end of your vimrc file.
 
