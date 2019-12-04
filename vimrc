@@ -48,6 +48,7 @@ Plug 'majutsushi/tagbar'
 call plug#end()
 
 "set mouse=a
+set nocompatible
 filetype plugin indent on
 let fortran_free_source=1
 set noautoindent
@@ -145,7 +146,7 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 
 "indentline
 let g:indentLine_char = '▏'
-let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#222222'
 
 "nerdtree
 nnoremap <silent> <leader>d :NERDTreeToggle<CR>
