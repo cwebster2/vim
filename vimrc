@@ -215,8 +215,10 @@ let g:ale_pattern_options = {
 nnoremap <leader>n :lnext<CR>
 nnoremap <leader>p :lprevious<CR>
 nnoremap <leader>r :lrewind<CR>
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
+highlight PMenu ctermbg=none ctermfg=lightgrey guibg=none guifg=lightgrey
+highlight PMenuSel ctermbg=grey guibg=grey
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 nmap <leader>= <Plug>(ale_fix)
@@ -365,7 +367,7 @@ nnoremap <leader>rr :set norelativenumber!<CR>
 
 " spelling
 hi clear SpellBad
-hi SpellBad cterm=underline
+hi SpellBad gui=underline cterm=underline
 
 " ALE
 
