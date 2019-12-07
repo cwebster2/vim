@@ -1,4 +1,6 @@
 map <Space> <Leader>
+set shell=/bin/bash
+set nocompatible
 
 "plugins
 
@@ -22,17 +24,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
-Plug 'w0rp/ale'
-"Plug 'travisjeffery/vim-gotosymbol'
+"Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Raimondi/delimitMate'
-"Plug 'SirVer/ultisnips'
 Plug 'sheerun/vim-polyglot'  " syntax files for most languages
 Plug 'vim-python/python-syntax'  " Improved python syntax
 Plug 'Vimjas/vim-python-pep8-indent'  " Proper python indenting
@@ -44,11 +44,17 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
+if has('nvim')
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/denite.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 call plug#end()
 
 "set mouse=a
-set nocompatible
 filetype plugin indent on
 let fortran_free_source=1
 set noautoindent
@@ -75,12 +81,18 @@ set undofile
 set nobackup
 set splitright
 set splitbelow
-set completeopt=menu,menuone,noselect,noinsert
+"set completeopt=menu,menuone,noselect,noinsert
 set diffopt=filler,internal,algorithm:histogram,indent-heuristic
 set termguicolors
 syntax on
 set cursorline
 set list listchars=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○
+set hidden
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
 " Persistent undo (can use undos after exiting and restarting)
 if exists("+undofile")
@@ -112,6 +124,8 @@ set updatetime=200 " faster updates
 "airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#denite#enabled = 1
 let g:airline_detect_paste=1
 let g:airline_inactive_collapse=1
 let g:airline#extensions#branch#enabled=1
@@ -171,60 +185,112 @@ let g:NERDTreeIndicatorMapCustom = {
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle
 
-"alr
-let g:ale_completion_enabled = 1
-let g:ale_sign_column_always = 1
-let g:ale_maximum_file_size = 500000
-let g:ale_rust_rls_executable = '/home/casey/.cargo/bin/rls'
-let g:ale_go_langserver_executable  = '/home/casey/go/bin/go-langserver'
-let g:ale_python_pyls_config = {'pyls': {'plugins': {'pycodestyle': {'enabled': v:false}}}}
-let g:ale_completion_tsserver_autoimport = 1
-let g:go_fmt_fail_silently = 1
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 'always'
-let g:ale_lint_on_enter = 0
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
-let b:ale_fixers = {
-  \  '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \  'typescript': ['prettier'],
-  \  'javascript': ['prettier'],
-  \  'css': ['prettier'],
-  \  'python': ['black'],
-  \ }
-"gofmt golint go vet
-let g:ale_linters = {
-  \ 'bash': ['language_server', 'shell'],
-  \ 'sh': ['shell'],
-  \ 'zsh': ['shell'],
-  \ 'cpp': ['clang', 'cppcheck'],
-  \ 'go': ['golangserver'],
-  \ 'rust': ['cargo', 'rls'],
-  \ 'javascript': ['eslint', 'tsserver'],
-  \ 'typescript': ['eslint', 'tsserver'],
-  \ 'python': ['flake8', 'mypy', 'pyls'],
-  \ }
-let g:ale_pattern_options = {
-\   '.*\.md$': {'ale_enabled': 0},
-\   '.*\.markdown$': {'ale_enabled': 0},
-\   '.*\.rst$': {'ale_enabled': 0},
-\   '.*\.txt$': {'ale_enabled': 0},
-\   '.*\.tex$': {'ale_enabled': 0},
-\}
-nnoremap <leader>n :lnext<CR>
-nnoremap <leader>p :lprevious<CR>
-nnoremap <leader>r :lrewind<CR>
-highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
-highlight PMenu ctermbg=none ctermfg=lightgrey guibg=none guifg=lightgrey
-highlight PMenuSel ctermbg=grey guibg=grey
-nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>j <Plug>(ale_next_wrap)
-nmap <leader>= <Plug>(ale_fix)
-nmap <leader>- :ALEToggleBuffer<cr>
-nmap gd <Plug>(ale_go_to_definition)
+highlight PMenu ctermbg=none guibg=none
 
+"coc
+let g:coc_global_extensions='coc-eslint coc-json coc-css coc-python coc-rls coc-tsserver coc-highlight coc-git coc-emmet coc-markdownlint coc-yank coc-neosnippet'
+inoremap <silent><expr> <Tab>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ?  "\<TAB>" :
+  \ coc#refresh()
+inoremap <silent><expr> <S-Tab>
+  \ pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <silent><expr> <c-space> coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-d> <Plug>(coc-range-select)
+xmap <silent> <C-d> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 "polyglot
 let g:polyglot_disabled = ['python', 'latex', 'typescript'] " Use python-syntax and vimtex
@@ -318,6 +384,7 @@ autocmd BufWritePre * :%s/\s+$//e
 autocmd Filetype *tex set spell
 autocmd Filetype *tex nnoremap <silent> <F2> :silent make\|redraw!\|cw<CR>
 "autocmd BufWritePost *.tex <F2>
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " GLG specific
 au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
@@ -369,30 +436,26 @@ nnoremap <leader>rr :set norelativenumber!<CR>
 hi clear SpellBad
 hi SpellBad gui=underline cterm=underline
 
-" ALE
-
-inoremap <silent><expr> <Tab>
-  \ pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr> <S-Tab>
-  \ pumvisible() ? "\<C-p>" : "\<TAB>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-function ALELSPMappings()
-	let l:lsp_found=0
-	for l:linter in ale#linter#Get(&filetype) | if !empty(l:linter.lsp) | let l:lsp_found=1 | endif | endfor
-	if (l:lsp_found)
-		nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
-    nnoremap <buffer> <F12> :ALEGoToDefinitionInVSplit<CR>
-		nnoremap <buffer> <C-[> :ALEFindReferences<CR>
-	else
-		silent! unmap <buffer> <C-]>
-		silent! unmap <buffer> <F12>
-		silent! unmap <buffer> <C-[>
-	endif
+"denite
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
 endfunction
-autocmd BufRead,FileType * call ALELSPMappings()
 
-"hi! airline_tabfill guibg=none ctermbg=none ctermfg=none guifg=none
+nnoremap <C-x>b :Denite buffer<CR>
+nnoremap <C-x>f :Denite file<CR>
 
 " Put these lines at the very end of your vimrc file.
 

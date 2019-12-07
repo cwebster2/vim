@@ -1,0 +1,98 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "go",
+    "javascript",
+    "typescript",
+    "json",
+    "jsonc"
+  ],
+  "codeLens.enable": true,
+  "diagnostic.virtualText": true,
+  "diagnostic.checkCurrentLine": true,
+  "list.normalMappings": {
+    "<C-c>": "do:exit"
+  },
+  "list.insertMappings": {
+    "<C-c>": "do:exit"
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "javascriptreact"
+  ],
+  "suggest.detailField": "abbr",
+  "suggest.snippetIndicator": "🌟",
+  "suggest.triggerCompletionWait": 100,
+  "suggest.completionItemKindLabels": {
+    "keyword": "\uf1de",
+    "variable": "\ue79b",
+    "value": "\uf89f",
+    "operator": "\u03a8",
+    "function": "\u2A15",
+    "reference": "\ufa46",
+    "constant": "\uf8fe",
+    "method": "\uf09a",
+    "struct": "\ufb44",
+    "class": "\uf0e8",
+    "interface": "\uf417",
+    "text": "\u2663",
+    "enum": "\uf435",
+    "enumMember": "\uf02b",
+    "module": "\uf530",
+    "color": "\ue22b",
+    "property": "\ue624",
+    "field": "\uf6a6",
+    "unit": "\uf475",
+    "event": "\ufacd",
+    "file": "\uf723",
+    "folder": "\uf114",
+    "snippet": "\ue60b",
+    "typeParameter": "\uf728",
+    "default": "\uf29c"
+  },
+  "git.enableGutters": true,
+  "git.branchCharacter": "\uf408",
+  "git.addGBlameToBufferVar": true,
+  "git.addGBlameToVirtualText": true,
+  "git.virtualTextPrefix": " ❯❯❯ ",
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "git.addedSign.text": "▎",
+  "git.changedSign.text": "▎",
+  "git.removedSign.text": "▏",
+  "git.topRemovedSign.text": "▔",
+  "git.changeRemovedSign.text": "▋",
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  },
+  "languageserver": {
+    "golang": {
+      "command": "/home/casey/go/bin/go-langserver",
+      "filetypes": [
+        "go"
+      ],
+      "initializationOptions": {
+        "gocodeCompletionEnabled": true,
+        "diagnosticsEnabled": true,
+        "lintTool": "golint"
+      }
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": [
+        "start"
+      ],
+      "filetypes": [
+        "sh"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
+    }
+  }
+}
