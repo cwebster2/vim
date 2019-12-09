@@ -6,6 +6,7 @@
     "json",
     "jsonc"
   ],
+  "diagnostic.displayByAle": true,
   "codeLens.enable": true,
   "diagnostic.virtualText": true,
   "diagnostic.checkCurrentLine": true,

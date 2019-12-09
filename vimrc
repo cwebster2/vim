@@ -30,8 +30,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
-"Plug 'w0rp/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
 Plug 'Raimondi/delimitMate'
 Plug 'sheerun/vim-polyglot'  " syntax files for most languages
 Plug 'vim-python/python-syntax'  " Improved python syntax
@@ -44,6 +44,10 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
+Plug 'plasticboy/vim-markdown'
+Plug 'jaxbot/github-issues.vim'
+Plug 'junegunn/gv.vim'
+Plug 'jreybert/vimagit'
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -59,6 +63,10 @@ filetype plugin indent on
 let fortran_free_source=1
 set noautoindent
 set autoread
+set shortmess=aoOtTc
+set viewoptions=cursor,folds,options,unix,slash
+set virtualedit=onemore
+set lazyredraw
 set encoding=utf-8
 set previewheight=25
 set clipboard^=unnamedplus,unnamed " Make "yanks"
@@ -77,21 +85,23 @@ set matchtime=5
 set laststatus=2
 set ttimeoutlen=50
 set noshowmode
-set undofile
 set nobackup
 set splitright
 set splitbelow
-"set completeopt=menu,menuone,noselect,noinsert
+set completeopt=menu,menuone,noselect,noinsert
 set diffopt=filler,internal,algorithm:histogram,indent-heuristic
 set termguicolors
 syntax on
 set cursorline
+set pastetoggle=<F11>
+set backspace=indent,eol,start
+set wildmenu
+set wildmode=list:longest,full
 set list listchars=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○
 set hidden
 set nowritebackup
 set cmdheight=2
 set updatetime=300
-set shortmess+=c
 set signcolumn=yes
 
 " Persistent undo (can use undos after exiting and restarting)
@@ -100,6 +110,12 @@ if exists("+undofile")
     :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
   endif
   set undodir=./.vim-undo// undodir+=~/.vim/undo// undofile
+endif
+
+if has('persistent_undo')
+  set undofile       " So is persistent undo ...
+  set undolevels=250 " Maximum number of changes that can be undone
+  set undoreload=500 " Maximum number lines to save for undo on a buffer reload
 endif
 
 " Colors
@@ -112,20 +128,26 @@ if has('termguicolors') && &termguicolors
 endif
 colorscheme jellybeans
 
+"vim-fugitive
+nmap <silent><Leader>gw :Gwrite<CR>
+nmap <silent><Leader>gs :Gstatus<CR>
+nmap <silent><Leader>gc :Gcommit<CR>
+
 "vim-gitgutter
 let g:gitgutter_map_keys = 0
-nmap <leader>gs <Plug>(GitGutterStageHunk)
-nmap <leader>gu <Plug>(GitGutterUndoHunk)
-nmap <leader>gp <Plug>(GitGutterPreviewHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-nmap ]h <Plug>(GitGutterNextHunk)
 set updatetime=200 " faster updates
+highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=#012800
+highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#012800
+highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#340001
+highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#340001
 
 "airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#denite#enabled = 1
+let g:airline#extensions#fugutive#enabled = 1
 let g:airline_detect_paste=1
 let g:airline_inactive_collapse=1
 let g:airline#extensions#branch#enabled=1
@@ -146,17 +168,17 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>h <Plug>AirlineSelectPrevTab
 nmap <leader>l <Plug>AirlineSelectNextTab
 let g:airline#extensions#tabline#buffer_idx_format = {
-			\ '0': ' ',
-			\ '1': '➊ ',
-			\ '2': '➋ ',
-			\ '3': '➌ ',
-			\ '4': '➍ ',
-			\ '5': '➎ ',
-			\ '6': '➏ ',
-			\ '7': '➐ ',
-			\ '8': '➑ ',
-			\ '9': '➒ '
-			\}
+  \ '0': ' ',
+  \ '1': '➊ ',
+  \ '2': '➋ ',
+  \ '3': '➌ ',
+  \ '4': '➍ ',
+  \ '5': '➎ ',
+  \ '6': '➏ ',
+  \ '7': '➐ ',
+  \ '8': '➑ ',
+  \ '9': '➒ '
+  \}
 
 "indentline
 let g:indentLine_char = '▏'
@@ -166,6 +188,10 @@ let g:indentLine_color_gui = '#222222'
 nnoremap <silent> <leader>d :NERDTreeToggle<CR>
 nnoremap <silent> <leader>D :NERDTreeFind<CR>
 let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]', 'node_modules']
+let NERDTreeQuitOnOpen=1
+let NERDTreeKeepTreeInNewTab=1
+let NERDTreeShowHidden=1
+let NERDTreeChDirMode=0
 
 "nerdtree git plugin
 let g:NERDTreeIndicatorMapCustom = {
@@ -186,6 +212,58 @@ nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle
 
 highlight PMenu ctermbg=none guibg=none
+
+"ale
+let g:ale_sign_column_always = 1
+let g:ale_statusline_format = ['E%d', 'W%d', 'K']
+let g:ale_maximum_file_size = 500000
+let g:ale_rust_rls_executable = '/home/casey/.cargo/bin/rls'
+let g:ale_go_langserver_executable  = '/home/casey/go/bin/go-langserver'
+let g:ale_python_pyls_config = {'pyls': {'plugins': {'pycodestyle': {'enabled': v:false}}}}
+"let g:ale_completion_tsserver_autoimport = 1
+let g:go_fmt_fail_silently = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_enter = 0
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+let b:ale_fixers = {
+  \  '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \  'typescript': ['prettier'],
+  \  'javascript': ['prettier'],
+  \  'css': ['prettier'],
+  \  'python': ['black'],
+  \ }
+"gofmt golint go vet
+let g:ale_linters = {
+  \ 'bash': ['language_server', 'shell'],
+  \ 'sh': ['shell'],
+  \ 'zsh': ['shell'],
+  \ 'cpp': ['clang', 'cppcheck'],
+  \ 'go': ['golangserver'],
+  \ 'rust': ['cargo', 'rls'],
+  \ 'javascript': ['eslint', 'tsserver'],
+  \ 'typescript': ['eslint', 'tsserver'],
+  \ 'python': ['flake8', 'mypy', 'pyls'],
+  \ }
+let g:ale_pattern_options = {
+\   '.*\.md$': {'ale_enabled': 0},
+\   '.*\.markdown$': {'ale_enabled': 0},
+\   '.*\.rst$': {'ale_enabled': 0},
+\   '.*\.txt$': {'ale_enabled': 0},
+\   '.*\.tex$': {'ale_enabled': 0},
+\}
+"nnoremap <leader>n :lnext<CR>
+"nnoremap <leader>p :lprevious<CR>
+"nnoremap <leader>r :lrewind<CR>
+highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
+"nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
+"nmap <silent> <Leader>j <Plug>(ale_next_wrap)
+"nmap <leader>= <Plug>(ale_fix)
+"nmap <leader>- :ALEToggleBuffer<cr>
+"nmap gd <Plug>(ale_go_to_definition)
+
 
 "coc
 let g:coc_global_extensions='coc-eslint coc-json coc-css coc-python coc-rls coc-tsserver coc-highlight coc-git coc-emmet coc-markdownlint coc-yank coc-neosnippet'
@@ -292,7 +370,11 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-"polyglot
+"markdown
+let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript',
+    \ 'go', 'python', 'py=python', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
+
+""polyglot
 let g:polyglot_disabled = ['python', 'latex', 'typescript'] " Use python-syntax and vimtex
 let g:jsx_ext_required = 0
 let g:markdown_fenced_languages = ['javascript', 'python', 'clojure', 'ruby']
@@ -330,14 +412,14 @@ let g:fzf_buffers_jump = 1
 let g:fzf_commands_expect = 'alt-enter'
 " Set custom layout.
 let g:fzf_layout = {
-	\ 'window': 'silent 18split enew'
+\ 'window': 'silent 18split enew'
 \ }
 
 " Set actions manually.
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-	\ 'ctrl-e': 'split',
-	\ 'ctrl-v': 'vsplit'
+\ 'ctrl-t': 'tab split',
+\ 'ctrl-e': 'split',
+\ 'ctrl-v': 'vsplit'
 \ }
 
 " History directory.
@@ -345,19 +427,19 @@ let g:fzf_history_dir = $HOME . '/.vim/cache/share/fzf/'
 
 " Customize `fzf` colors to match current color scheme.
 let g:fzf_colors = {
-	\ 'fg': ['fg', 'Normal'],
-	\ 'bg': ['bg', 'Normal'],
-	\ 'hl': ['fg', 'Comment'],
-	\ 'fg+': ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-	\ 'bg+': ['bg', 'CursorLine', 'CursorColumn'],
-	\ 'hl+': ['fg', 'Statement'],
-	\ 'info': ['fg', 'Comment'],
-	\ 'border': ['fg', 'Ignore'],
-	\ 'prompt': ['fg', 'Conditional'],
-	\ 'pointer': ['fg', 'Exception'],
-	\ 'marker': ['fg', 'Keyword'],
-	\ 'spinner': ['fg', 'Label'],
-	\ 'header': ['fg', 'Comment']
+\ 'fg': ['fg', 'Normal'],
+\ 'bg': ['bg', 'Normal'],
+\ 'hl': ['fg', 'Comment'],
+\ 'fg+': ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+\ 'bg+': ['bg', 'CursorLine', 'CursorColumn'],
+\ 'hl+': ['fg', 'Statement'],
+\ 'info': ['fg', 'Comment'],
+\ 'border': ['fg', 'Ignore'],
+\ 'prompt': ['fg', 'Conditional'],
+\ 'pointer': ['fg', 'Exception'],
+\ 'marker': ['fg', 'Keyword'],
+\ 'spinner': ['fg', 'Label'],
+\ 'header': ['fg', 'Comment']
 \ }
 nnoremap <silent> <C-p> :FGFiles<Enter>
 nnoremap <silent> <Leader><C-p> :FFiles<Enter>
@@ -386,7 +468,7 @@ autocmd Filetype *tex nnoremap <silent> <F2> :silent make\|redraw!\|cw<CR>
 "autocmd BufWritePost *.tex <F2>
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" GLG specific
+" starphleet specific
 au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
 
 "quick buffer swap
@@ -396,6 +478,13 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 "quick split
 nnoremap <Leader>v <C-w>v<C-w>w
+
+nmap <silent><Leader>/ :let @/=""<CR>
+vnoremap < <gv
+vnoremap > >gv
+vnoremap . :normal .<CR>
+
+cmap w!! w !sudo tee % > /dev/null
 
 " Go to last active tab
 au TabLeave * let g:lasttab = tabpagenr()
@@ -453,6 +542,31 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <Space>
   \ denite#do_map('toggle_select').'j'
 endfunction
+
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+endfunction
+
+call denite#custom#var('file/rec', 'command',
+\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+" Change default action.
+call denite#custom#kind('file', 'default_action', 'tabswitch')
+
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
+      \ [ '.git/', '.ropeproject/', '__pycache__/',
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
 nnoremap <C-x>b :Denite buffer<CR>
 nnoremap <C-x>f :Denite file<CR>
