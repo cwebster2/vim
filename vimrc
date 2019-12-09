@@ -2,6 +2,8 @@ map <Space> <Leader>
 set shell=/bin/bash
 set nocompatible
 
+let g:python3_host_prog = '/home/casey/miniconda3/bin/python3'
+
 "plugins
 
 if empty(glob("~/.vim/autoload/plug.vim"))
