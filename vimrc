@@ -47,7 +47,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
 Plug 'plasticboy/vim-markdown'
-Plug 'jaxbot/github-issues.vim'
+"Plug 'jaxbot/github-issues.vim'
 Plug 'junegunn/gv.vim'
 Plug 'jreybert/vimagit'
 if has('nvim')
