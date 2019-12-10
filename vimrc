@@ -138,10 +138,10 @@ nmap <silent><Leader>gc :Gcommit<CR>
 "vim-gitgutter
 let g:gitgutter_map_keys = 0
 set updatetime=200 " faster updates
-highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=#012800
-highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#012800
-highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#340001
-highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#340001
+highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=green
+highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#2B5B77
+highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red
+highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B77
 
 "airline
 let g:airline_powerline_fonts = 1
@@ -255,16 +255,15 @@ let g:ale_pattern_options = {
 \   '.*\.txt$': {'ale_enabled': 0},
 \   '.*\.tex$': {'ale_enabled': 0},
 \}
-"nnoremap <leader>n :lnext<CR>
-"nnoremap <leader>p :lprevious<CR>
-"nnoremap <leader>r :lrewind<CR>
+nnoremap <leader>n :lnext<CR>
+nnoremap <leader>p :lprevious<CR>
+nnoremap <leader>r :lrewind<CR>
 highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
-"nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
-"nmap <silent> <Leader>j <Plug>(ale_next_wrap)
-"nmap <leader>= <Plug>(ale_fix)
-"nmap <leader>- :ALEToggleBuffer<cr>
-"nmap gd <Plug>(ale_go_to_definition)
+nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>j <Plug>(ale_next_wrap)
+nmap <leader>= <Plug>(ale_fix)
+nmap <leader>- :ALEToggleBuffer<cr>
 
 
 "coc
