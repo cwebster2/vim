@@ -2,7 +2,7 @@ map <Space> <Leader>
 set shell=/bin/bash
 set nocompatible
 
-let g:python3_host_prog = '/home/casey/miniconda3/bin/python3'
+let g:python3_host_prog = $HOME . '/miniconda3/bin/python3'
 
 "plugins
 
