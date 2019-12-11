@@ -229,6 +229,9 @@ let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_enter = 0
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
+"let g:ale_open_list = 1
+"let g:ale_set_loclist = 0
+"let g:ale_set_quickfix = 1
 let b:ale_fixers = {
   \  '*': ['remove_trailing_lines', 'trim_whitespace'],
   \  'typescript': ['prettier'],
@@ -258,6 +261,8 @@ let g:ale_pattern_options = {
 nnoremap <leader>n :lnext<CR>
 nnoremap <leader>p :lprevious<CR>
 nnoremap <leader>r :lrewind<CR>
+nnoremap <leader>eo :lopen<CR>
+nnoremap <leader>ec :lclose<CR>
 highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
@@ -284,7 +289,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -356,21 +361,21 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <leader>ex  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
 "markdown
 let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript',
