@@ -73,7 +73,7 @@
   },
   "languageserver": {
     "golang": {
-      "command": "/home/casey/go/bin/go-langserver",
+      "command": "~/go/bin/go-langserver",
       "filetypes": [
         "go"
       ],

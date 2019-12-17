@@ -219,8 +219,8 @@ highlight PMenu ctermbg=none guibg=none
 let g:ale_sign_column_always = 1
 let g:ale_statusline_format = ['E%d', 'W%d', 'K']
 let g:ale_maximum_file_size = 500000
-let g:ale_rust_rls_executable = '/home/casey/.cargo/bin/rls'
-let g:ale_go_langserver_executable  = '/home/casey/go/bin/go-langserver'
+let g:ale_rust_rls_executable = $HOME . '/.cargo/bin/rls'
+let g:ale_go_langserver_executable  = $HOME . '/go/bin/go-langserver'
 let g:ale_python_pyls_config = {'pyls': {'plugins': {'pycodestyle': {'enabled': v:false}}}}
 "let g:ale_completion_tsserver_autoimport = 1
 let g:go_fmt_fail_silently = 1
