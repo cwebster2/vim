@@ -49,6 +49,7 @@ Plug 'majutsushi/tagbar'
 Plug 'plasticboy/vim-markdown'
 "Plug 'jaxbot/github-issues.vim'
 Plug 'junegunn/gv.vim'
+Plug 'tmsvg/pear-tree'
 Plug 'jreybert/vimagit'
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -209,6 +210,9 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+"peartree
+let g:pear_tree_repeatable_expand = 0
+
 "nerdcommenter
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle
@@ -277,6 +281,8 @@ inoremap <silent><expr> <Tab>
   \ pumvisible() ? "\<C-n>" :
   \ <SID>check_back_space() ?  "\<TAB>" :
   \ coc#refresh()
+snoremap <silent><expr> <Tab>
+  \ neosnippet#jumpable() ? "\<Plug>(neosnippet_jump)" : "\<TAB>"
 inoremap <silent><expr> <S-Tab>
   \ pumvisible() ? "\<C-p>" : "\<C-h>"
 "inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
