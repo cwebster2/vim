@@ -275,6 +275,11 @@ nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 nmap <leader>= <Plug>(ale_fix)
 nmap <leader>- :ALEToggleBuffer<cr>
 
+"peartree
+let g:pear_tree_repeatable_expand = 0
+let g:pear_tree_map_special_keys = 0
+imap <BS> <Plug>(PearTreeBackspace)
+" Mappings for CR and Esc are handled in the CoC maps
 
 "coc
 let g:coc_global_extensions='coc-eslint coc-json coc-css coc-python coc-rls coc-tsserver coc-highlight coc-git coc-emmet coc-markdownlint coc-yank coc-neosnippet'
@@ -286,9 +291,12 @@ snoremap <silent><expr> <Tab>
   \ neosnippet#jumpable() ? "\<Plug>(neosnippet_jump)" : "\<TAB>"
 inoremap <silent><expr> <S-Tab>
   \ pumvisible() ? "\<C-p>" : "\<C-h>"
-"inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <silent><expr> <cr>
+  \ pumvisible() ? "\<C-y>" :
+  \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <expr> <Esc>
+  \ pumvisible() ? "\<C-e>" :
+  \ "\<Esc>"
 inoremap <silent><expr> <c-space> coc#refresh()
 
 function! s:check_back_space() abort
