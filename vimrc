@@ -50,6 +50,7 @@ Plug 'plasticboy/vim-markdown'
 "Plug 'jaxbot/github-issues.vim'
 Plug 'junegunn/gv.vim'
 Plug 'tmsvg/pear-tree'
+Plug 'rhysd/git-messenger.vim'
 Plug 'jreybert/vimagit'
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
