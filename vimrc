@@ -407,7 +407,7 @@ nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
+"nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
 "markdown
 let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript',
