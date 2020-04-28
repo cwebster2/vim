@@ -189,10 +189,10 @@ let g:indentLine_char = '▏'
 let g:indentLine_color_gui = '#222222'
 
 "nerdtree
-nnoremap <silent> <leader>d :NERDTreeToggle<CR>
+nnoremap <silent> <leader>d :NERDTreeToggleVCS<CR>
 nnoremap <silent> <leader>D :NERDTreeFind<CR>
 let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]', 'node_modules']
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=0
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeShowHidden=1
 let NERDTreeChDirMode=0
@@ -210,6 +210,23 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
+
+" Check if NERDTree is open or active
+function! s:isNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! s:syncTree()
+  if &modifiable && s:isNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call s:syncTree()
 
 "peartree
 let g:pear_tree_repeatable_expand = 0
