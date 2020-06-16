@@ -140,6 +140,8 @@ nmap <silent><Leader>gc :Gcommit<CR>
 "vim-gitgutter
 let g:gitgutter_map_keys = 0
 set updatetime=200 " faster updates
+let g:gitgutter_override_sign_column_highlight = 0
+highligh clear SignColumn
 highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=green
 highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#2B5B77
 highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red
