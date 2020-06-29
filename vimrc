@@ -46,6 +46,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
 Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 "Plug 'jaxbot/github-issues.vim'
 Plug 'junegunn/gv.vim'
 Plug 'tmsvg/pear-tree'
@@ -412,8 +413,15 @@ nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 "nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
 "markdown
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
+
 let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'typescript',
     \ 'go', 'python', 'py=python', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini']
+
+let g:mkdp_auto_close = 0
 
 ""polyglot
 let g:polyglot_disabled = ['python', 'latex', 'typescript'] " Use python-syntax and vimtex
@@ -497,6 +505,8 @@ nnoremap <C-H> <C-W><C-H>
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+autocmd FocusLost * silent! wa
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
