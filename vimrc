@@ -108,6 +108,7 @@ set nowritebackup
 set cmdheight=2
 set updatetime=300
 set signcolumn=yes
+set inccommand=split
 
 " Persistent undo (can use undos after exiting and restarting)
 if exists("+undofile")
