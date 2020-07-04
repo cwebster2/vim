@@ -209,8 +209,13 @@ let g:netrw_winsize = 25
 "defx
 augroup vimrc_defx
   autocmd!
+  autocmd WinEnter * if &ft == 'defx' && winnr('$') == 1 | q | endif
+  autocmd TabLeave * if &ft == 'defx' | wincmd w | endif
   autocmd FileType defx call s:defx_mappings()                                  "Defx mappings
   autocmd VimEnter * call s:setup_defx()
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | call <sid>defx_open() | endif
+  " Change these to use defx
+  "autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe Defx argc()[0] | bd | wincmd p | ene | exe 'cd '.argv()[0] | endif
 augroup END
 
 nnoremap <silent><Leader>d :call <sid>defx_open()<CR>
@@ -585,9 +590,6 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 autocmd FocusLost * silent! wa
 
 autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufWritePre * :%s/\s+$//e
 
 autocmd Filetype *tex set spell
