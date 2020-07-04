@@ -200,6 +200,9 @@ let NERDTreeQuitOnOpen=0
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeShowHidden=1
 let NERDTreeChDirMode=0
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 "nerdtree git plugin
 let g:NERDTreeIndicatorMapCustom = {
@@ -215,22 +218,34 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+" netrw config, can we work without NERDtree?
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+"augroup ProjectDrawer
+  "autocmd!
+  "autocmd VimEnter * :Vexplore
+"augroup END
+
 " Check if NERDTree is open or active
 function! s:isNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+  "return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+  return exists("g:NERDTree") && g:NERDTree.IsOpen()
 endfunction
 
 " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 " file, and we're not in vimdiff
-function! s:syncTree()
-  if &modifiable && s:isNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
+"function! s:syncTree()
+  "if &modifiable && s:isNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    "NERDTreeFind
+    "wincmd p
+  "endif
+"endfunction
 
 " Highlight currently open buffer in NERDTree
-autocmd BufEnter * call s:syncTree()
+"autocmd BufEnter * call s:syncTree()
 
 "peartree
 let g:pear_tree_repeatable_expand = 0
