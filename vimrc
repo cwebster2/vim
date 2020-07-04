@@ -24,7 +24,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
-Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'scrooloose/nerdcommenter'
@@ -54,11 +53,15 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'jreybert/vimagit'
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/defx.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+Plug 'kristijanhusak/defx-icons'
+Plug 'kristijanhusak/defx-git'
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
@@ -192,32 +195,6 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 let g:indentLine_char = '▏'
 let g:indentLine_color_gui = '#222222'
 
-"nerdtree
-nnoremap <silent> <leader>d :NERDTreeToggleVCS<CR>
-nnoremap <silent> <leader>D :NERDTreeFind<CR>
-let NERDTreeIgnore = ['\.pyc', '__pycache__', '.egg-info[[dir]]', 'pip-wheel-metadata[[dir]]', 'node_modules']
-let NERDTreeQuitOnOpen=0
-let NERDTreeKeepTreeInNewTab=1
-let NERDTreeShowHidden=1
-let NERDTreeChDirMode=0
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
-"nerdtree git plugin
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
-
 " netrw config, can we work without NERDtree?
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -229,23 +206,106 @@ let g:netrw_winsize = 25
   "autocmd VimEnter * :Vexplore
 "augroup END
 
-" Check if NERDTree is open or active
-function! s:isNERDTreeOpen()
-  "return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-  return exists("g:NERDTree") && g:NERDTree.IsOpen()
+"defx
+augroup vimrc_defx
+  autocmd!
+  autocmd FileType defx call s:defx_mappings()                                  "Defx mappings
+  autocmd VimEnter * call s:setup_defx()
+augroup END
+
+nnoremap <silent><Leader>d :call <sid>defx_open()<CR>
+nnoremap <silent><Leader>D :call <sid>defx_open({ 'find_current_file': v:true })<CR>
+let s:default_columns = 'indent:git:icons:filename'
+
+function! s:setup_defx() abort
+  silent! call defx#custom#option('_', {
+        \ 'columns': s:default_columns,
+        \ })
+
+  silent! call defx#custom#column('filename', {
+        \ 'min_width': 80,
+        \ 'max_width': 80,
+        \ })
+
+  silent! call s:defx_open({ 'dir': expand('<afile>') })
 endfunction
 
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-"function! s:syncTree()
-  "if &modifiable && s:isNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    "NERDTreeFind
-    "wincmd p
-  "endif
-"endfunction
+function s:get_project_root() abort
+  let l:git_root = ''
+  let l:path = expand('%:p:h')
+  let l:cmd = systemlist('cd '.l:path.' && git rev-parse --show-toplevel')
+  if !v:shell_error && !empty(l:cmd)
+    let l:git_root = fnamemodify(l:cmd[0], ':p:h')
+  endif
 
-" Highlight currently open buffer in NERDTree
-"autocmd BufEnter * call s:syncTree()
+  if !empty(l:git_root)
+    return l:git_root
+  endif
+
+  return getcwd()
+endfunction
+
+function! s:defx_open(...) abort
+  let l:opts = get(a:, 1, {})
+  let l:is_file = has_key(l:opts, 'dir') && !isdirectory(l:opts.dir)
+
+  if  &filetype ==? 'defx' || l:is_file
+    return
+  endif
+
+  let l:path = s:get_project_root()
+
+  if has_key(l:opts, 'dir') && isdirectory(l:opts.dir)
+    let l:path = l:opts.dir
+  endif
+
+  let l:args = '-winwidth=40 -direction=topleft -split=vertical'
+
+  if has_key(l:opts, 'find_current_file')
+    call execute(printf('Defx %s -search=%s %s', l:args, expand('%:p'), l:path))
+  else
+    call execute(printf('Defx -toggle %s %s', l:args, l:path))
+    call execute('wincmd p')
+  endif
+
+  return execute("norm!\<C-w>=")
+endfunction
+
+function s:defx_toggle_tree() abort
+  if defx#is_directory()
+    return defx#do_action('open_or_close_tree')
+  endif
+  return defx#do_action('drop')
+endfunction
+
+function! s:defx_mappings() abort
+  nnoremap <silent><buffer><expr> o <sid>defx_toggle_tree()
+  nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
+  nnoremap <silent><buffer><expr> <CR> <sid>defx_toggle_tree()
+  nnoremap <silent><buffer><expr> <2-LeftMouse> <sid>defx_toggle_tree()
+  nnoremap <silent><buffer><expr> C defx#is_directory() ? defx#do_action('multi', ['open', 'change_vim_cwd']) : 'C'
+  nnoremap <silent><buffer><expr> s defx#do_action('open', 'botright vsplit')
+  nnoremap <silent><buffer><expr> R defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> U defx#do_action('multi', [['cd', '..'], 'change_vim_cwd'])
+  nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
+  nnoremap <silent><buffer> J :call search('[]')<CR>
+  nnoremap <silent><buffer> K :call search('[]', 'b')<CR>
+  nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> a defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> r defx#do_action('rename')
+  nnoremap <nowait><silent><buffer><expr> c defx#do_action('copy')
+  nnoremap <silent><buffer><expr> x defx#do_action('move')
+  nnoremap <silent><buffer><expr> X defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> p defx#do_action('paste')
+  nnoremap <nowait><silent><buffer><expr> d defx#do_action('remove')
+  nnoremap <silent><buffer><expr> q defx#do_action('quit')
+  nnoremap <silent><buffer><expr> <Leader>n defx#do_action('quit')
+  silent exe 'nnoremap <silent><buffer><expr> tt defx#do_action("toggle_columns", "'.s:default_columns.':size:time")'
+endfunction
+
 
 "peartree
 let g:pear_tree_repeatable_expand = 0
@@ -525,9 +585,9 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 autocmd FocusLost * silent! wa
 
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd BufWritePre * :%s/\s+$//e
 
 autocmd Filetype *tex set spell
