@@ -137,6 +137,9 @@ if has('termguicolors') && &termguicolors
 endif
 colorscheme jellybeans
 
+"devicons
+let g:DevIconsEnableFoldersOpenClose = 1
+
 "vim-fugitive
 nmap <silent><Leader>gw :Gwrite<CR>
 nmap <silent><Leader>gs :Gstatus<CR>
@@ -215,7 +218,7 @@ augroup vimrc_defx
   autocmd VimEnter * call s:setup_defx()
   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | call <sid>defx_open() | endif
   " Change these to use defx
-  "autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe Defx argc()[0] | bd | wincmd p | ene | exe 'cd '.argv()[0] | endif
+  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | bd | exe 'Defx' | endif
 augroup END
 
 nnoremap <silent><Leader>d :call <sid>defx_open()<CR>
