@@ -5,7 +5,7 @@ augroup vimrc_defx
   autocmd FileType defx call s:defx_mappings()                                  "Defx mappings
   autocmd VimEnter * call s:setup_defx()
   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | call <sid>defx_open() | endif
-  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | bd | exe 'Defx' | endif
+  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | bd | exe 'Defx' argv()[0] | endif
 augroup END
 
 nnoremap <silent><Leader>d :call <sid>defx_open()<CR>
