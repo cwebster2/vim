@@ -3,8 +3,6 @@ augroup filetype_go
     autocmd!
     autocmd BufWritePre *.go :GoFmt
     autocmd BufWritePre *.go :GoImports
-    autocmd FileType go nnoremap <Leader>gv <Plug>(go-doc-vertical)
-    autocmd FileType go nmap <leader>gr :w<CR>:vsplit <bar> terminal go run %<CR>
 augroup END
 
 let g:go_highlight_build_constraints = 1
