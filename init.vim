@@ -135,6 +135,7 @@ let g:jellybeans_overrides = {
 if has('termguicolors') && &termguicolors
   let g:jellybeans_overrides['background']['guibg'] = 'none'
 endif
+lef g:jellybeans_use_term_italics = 1
 colorscheme jellybeans
 
 "fzf
