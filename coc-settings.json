@@ -17,11 +17,7 @@
     "<C-c>": "do:exit"
   },
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": [
-    "javascript",
-    "typescript",
-    "javascriptreact"
-  ],
+  "eslint.filetypes": ["javascript", "typescript", "javascriptreact"],
   "suggest.detailField": "abbr",
   "suggest.snippetIndicator": "🌟",
   "suggest.triggerCompletionWait": 100,
@@ -74,9 +70,7 @@
   "languageserver": {
     "golang": {
       "command": "~/go/bin/go-langserver",
-      "filetypes": [
-        "go"
-      ],
+      "filetypes": ["go"],
       "initializationOptions": {
         "gocodeCompletionEnabled": true,
         "diagnosticsEnabled": true,
@@ -85,15 +79,14 @@
     },
     "bash": {
       "command": "bash-language-server",
-      "args": [
-        "start"
-      ],
-      "filetypes": [
-        "sh"
-      ],
-      "ignoredRootPaths": [
-        "~"
-      ]
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
     }
   }
 }
