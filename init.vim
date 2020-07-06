@@ -3,6 +3,7 @@ set shell=/bin/bash
 set nocompatible
 
 let g:python3_host_prog = $HOME . '/miniconda3/bin/python3'
+let g:loaded_netrwPlugin = 1
 
 "plugins
 
@@ -127,6 +128,12 @@ if has('persistent_undo')
   set undoreload=500 " Maximum number lines to save for undo on a buffer reload
 endif
 
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+augroup END
+
 " Colors
 
 let g:jellybeans_overrides = {
@@ -163,17 +170,6 @@ highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B7
 "indentline
 let g:indentLine_char = '▏'
 let g:indentLine_color_gui = '#222222'
-
-" netrw config, can we work without NERDtree?
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
-"augroup ProjectDrawer
-  "autocmd!
-  "autocmd VimEnter * :Vexplore
-"augroup END
 
 "peartree
 let g:pear_tree_repeatable_expand = 0
@@ -235,18 +231,21 @@ nnoremap <C-H> <C-W><C-H>
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-autocmd FocusLost * silent! wa
+augroup vimrc-main
+  autocmd!
+  "save when window loses focus
+  autocmd FocusLost * silent! wa
+  autocmd StdinReadPre * let s:std_in=1
 
-autocmd StdinReadPre * let s:std_in=1
-autocmd BufWritePre * :%s/\s+$//e
+  "strip trailing whitespace
+  autocmd BufWritePre * :%s/\s+$//e
 
-autocmd Filetype *tex set spell
-autocmd Filetype *tex nnoremap <silent> <F2> :silent make\|redraw!\|cw<CR>
-"autocmd BufWritePost *.tex <F2>
-autocmd FileType json syntax match Comment +\/\/.\+$+
+  " starphleet specific
+  au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
 
-" starphleet specific
-au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
+  " For tab management
+  au TabLeave * let g:lasttab = tabpagenr()
+augroup END
 
 "quick buffer swap
 nnoremap <leader>b :e#<CR>
@@ -264,7 +263,6 @@ vnoremap . :normal .<CR>
 cmap w!! w !sudo tee % > /dev/null
 
 " Go to last active tab
-au TabLeave * let g:lasttab = tabpagenr()
 "nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 "vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 

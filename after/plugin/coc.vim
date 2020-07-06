@@ -1,15 +1,53 @@
-let g:coc_global_extensions='coc-eslint coc-json coc-css coc-python coc-rls coc-tsserver coc-highlight coc-git coc-emmet coc-markdownlint coc-yank coc-neosnippet'
-inoremap <silent><expr> <Tab>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ?  "\<TAB>" :
-  \ coc#refresh()
+augroup vimrc_autocomplete
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent! call CocActionAsync('highlight')
+  autocmd CursorHoldI * silent! call CocActionAsync('showSignatureHelp')
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,javascript,json setl formatexpr=CocAction('formatSelected')
+augroup end
+
+hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
+
+let g:coc_global_extensions=[
+  \ 'coc-eslint',
+  \ 'coc-json',
+  \ 'coc-css',
+  \ 'coc-html',
+  \ 'coc-go',
+  \ 'coc-prettier',
+  \ 'coc-jest',
+  \ 'coc-tag',
+  \ 'coc-vimlsp',
+  \ 'coc-spell-checker',
+  \ 'coc-python',
+  \ 'coc-rls',
+  \ 'coc-tsserver',
+  \ 'coc-highlight',
+  \ 'coc-git',
+  \ 'coc-emmet',
+  \ 'coc-markdownlint',
+  \ 'coc-yank',
+  \ 'coc-neosnippet',
+  \ ]
+
+function s:tab_completion() abort
+  if pumvisible()
+    return "\<C-n>"
+  endif
+
+  if s:check_back_space()
+    return "\<TAB>"
+  endif
+
+  return coc#refresh()
+endfunction
+
+inoremap <silent><expr> <Tab> <sid>tab_completion()
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 snoremap <silent><expr> <Tab>
   \ neosnippet#jumpable() ? "\<Plug>(neosnippet_jump)" : "\<TAB>"
-inoremap <silent><expr> <S-Tab>
-  \ pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <cr>
-  \ pumvisible() ? "\<C-y>" :
-  \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 inoremap <expr> <Esc>
   \ pumvisible() ? "\<C-e>" :
   \ "\<Esc>"
@@ -43,9 +81,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -54,13 +89,6 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -107,3 +135,21 @@ nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 "nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
+
+set wildoptions=pum
+set wildignore=*.o,*.obj,*~                                                     "stuff to ignore when tab completing
+set wildignore+=*.git*
+set wildignore+=*.meteor*
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*mypy_cache*
+set wildignore+=*__pycache__*
+set wildignore+=*cache*
+set wildignore+=*logs*
+set wildignore+=*node_modules*
+set wildignore+=**/node_modules/**
+set wildignore+=*DS_Store*
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
