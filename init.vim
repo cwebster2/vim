@@ -20,7 +20,7 @@ Plug 'tpope/vim-sensible'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'cwebster2/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -137,13 +137,14 @@ augroup END
 " Colors
 
 let g:jellybeans_overrides = {
-  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
   \}
 if has('termguicolors') && &termguicolors
   let g:jellybeans_overrides['background']['guibg'] = 'none'
 endif
 lef g:jellybeans_use_term_italics = 1
 colorscheme jellybeans
+
 
 "fzf
 "this needs to be here rather than in after/plugins
