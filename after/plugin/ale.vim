@@ -28,7 +28,7 @@ let g:ale_linters = {
   \ 'zsh': ['shell'],
   \ 'cpp': ['clang', 'cppcheck'],
   \ 'go': ['golangserver'],
-  \ 'rust': ['cargo', 'rls'],
+  \ 'rust': ['cargo', 'rls', 'rustc', 'clippy', 'rustfmt'],
   \ 'javascript': ['eslint', 'tsserver'],
   \ 'typescript': ['eslint', 'tsserver'],
   \ 'python': ['flake8', 'mypy', 'pyls'],

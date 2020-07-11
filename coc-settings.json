@@ -4,7 +4,8 @@
     "javascript",
     "typescript",
     "json",
-    "jsonc"
+    "jsonc",
+    "rust"
   ],
   "diagnostic.displayByAle": true,
   "codeLens.enable": true,
