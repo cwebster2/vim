@@ -28,6 +28,7 @@ let g:coc_global_extensions=[
   \ 'coc-markdownlint',
   \ 'coc-yank',
   \ 'coc-neosnippet',
+  \ 'coc-actions'
   \ ]
 
 function s:tab_completion() abort
@@ -120,7 +121,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>ad  :<C-u>CocList diagnostics<cr>
 " Manage extensions
 nnoremap <silent> <leader>ex  :<C-u>CocList extensions<cr>
 " Show commands

@@ -89,5 +89,12 @@
       "filetypes": ["terraform"],
       "initializationOptions": {}
     }
-  }
+  },
+  "cSpell.userWords": [
+    "Forkulator",
+    "marklar",
+    "moserca",
+    "phleet",
+    "reqwest"
+  ]
 }
