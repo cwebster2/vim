@@ -42,7 +42,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Yggdroot/indentLine'
-Plug 'majutsushi/tagbar'
+Plug 'liuchengxu/vista.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 "Plug 'jaxbot/github-issues.vim'
@@ -267,8 +267,29 @@ cmap w!! w !sudo tee % > /dev/null
 "vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 
 
-"tagbar
-nnoremap <silent> <leader>tb :TagbarToggle<CR>
+"vista
+nnoremap <silent> <leader>tb :Vista!!<CR>
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+set statusline+=%{NearestMethodOrFunction()}
+
+augroup vistavim
+  autocmd!
+  autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+augroup END
+
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
+let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#enable_icon = 1
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+
 
 "other
 nnoremap <leader>nn :set nonumber!<CR>
