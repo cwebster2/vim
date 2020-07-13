@@ -16,6 +16,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-sensible'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
@@ -41,6 +42,7 @@ Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'luochen1990/rainbow'
 Plug 'Yggdroot/indentLine'
 Plug 'liuchengxu/vista.vim'
 Plug 'plasticboy/vim-markdown'
@@ -97,6 +99,7 @@ set splitright
 set splitbelow
 set completeopt=menu,menuone,noselect,noinsert
 set diffopt=filler,internal,algorithm:histogram,indent-heuristic
+set fillchars+=vert:│
 set termguicolors
 syntax on
 set cursorline
