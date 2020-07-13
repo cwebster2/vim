@@ -18,7 +18,7 @@ function! s:setup_defx() abort
         \ })
 
   silent! call defx#custom#column('filename', {
-        \ 'min_width': 80,
+        \ 'min_width': 30,
         \ 'max_width': 80,
         \ })
 

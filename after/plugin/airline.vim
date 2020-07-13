@@ -4,6 +4,7 @@ let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#denite#enabled = 1
+let g:airline#extensions#vista#enabled = 1
 let g:airline#extensions#fugutive#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 let g:airline_detect_paste=1

@@ -33,7 +33,7 @@ let g:fzf_colors = {
 \ 'header': ['fg', 'Comment']
 \ }
 nnoremap <silent> <C-p> :FGFiles<Enter>
-nnoremap <silent> <Leader><C-p> :FFiles<Enter>
+nnoremap <silent> <Leader><C-p> :FLines<Enter>
 nnoremap <silent> <M-x> :FCommands<Enter>
 nnoremap <silent> <M-b> :FBuffers<Enter>
 command! -bang -complete=dir -nargs=* LS

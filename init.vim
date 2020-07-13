@@ -138,7 +138,8 @@ augroup END
 " Colors
 
 let g:jellybeans_overrides = {
-  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
+  \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  \   'VertSplit': { 'ctermbg': 'none', 'guibg': 'none', '256ctermbg': 'none' }
   \}
 if has('termguicolors') && &termguicolors
   let g:jellybeans_overrides['background']['guibg'] = 'none'
@@ -282,6 +283,9 @@ set statusline+=%{NearestMethodOrFunction()}
 augroup vistavim
   autocmd!
   autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+  " Close vim if vista is the last split/tab open
+  autocmd WinEnter * if &ft == 'vista' && winnr('$') == 1 | q | endif
+  autocmd TabLeave * if &ft == 'vista' | wincmd w | endif
 augroup END
 
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
