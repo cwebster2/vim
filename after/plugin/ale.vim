@@ -22,13 +22,13 @@ let b:ale_fixers = {
   \  'python': ['black'],
   \ }
 "gofmt golint go vet
+  "\ 'rust': ['cargo', 'rls', 'rustc', 'clippy', 'rustfmt'],
 let g:ale_linters = {
   \ 'bash': ['language_server', 'shell'],
   \ 'sh': ['shell'],
   \ 'zsh': ['shell'],
   \ 'cpp': ['clang', 'cppcheck'],
   \ 'go': ['golangserver'],
-  \ 'rust': ['cargo', 'rls', 'rustc', 'clippy', 'rustfmt'],
   \ 'javascript': ['eslint', 'tsserver'],
   \ 'typescript': ['eslint', 'tsserver'],
   \ 'python': ['flake8', 'mypy', 'pyls'],
