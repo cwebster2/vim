@@ -54,16 +54,13 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'jreybert/vimagit'
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/denite.nvim'
-  Plug 'Shougo/defx.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'kristijanhusak/defx-icons'
-Plug 'kristijanhusak/defx-git'
 Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 

@@ -64,6 +64,13 @@
   "git.removedSign.text": "▏",
   "git.topRemovedSign.text": "▔",
   "git.changeRemovedSign.text": "▋",
+
+  "explorer.toggle": true,
+
+  "explorer.icon.enableNerdfont": true,
+  "explorer.icon.enableVimDevicons": true,
+  "explorer.file.autoReveal": true,
+
   "emmet.includeLanguages": {
     "vue-html": "html",
     "javascript": "javascriptreact"
@@ -90,11 +97,5 @@
       "initializationOptions": {}
     }
   },
-  "cSpell.userWords": [
-    "Forkulator",
-    "marklar",
-    "moserca",
-    "phleet",
-    "reqwest"
-  ]
+  "cSpell.userWords": ["Forkulator", "marklar", "moserca", "phleet", "reqwest"]
 }

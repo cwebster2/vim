@@ -6,6 +6,18 @@ augroup vimrc_autocomplete
   autocmd FileType typescript,javascript,json setl formatexpr=CocAction('formatSelected')
 augroup end
 
+augroup vimrc_defx
+  autocmd!
+  " these dont work yet
+  autocmd WinEnter * if &ft == '[coc-explorer]' && winnr('$') == 1 | q | endif
+  autocmd TabLeave * if &ft == '[coc-explorer]' | wincmd w | endif
+  " open coc-explorer if vim invoked in directory
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'CocCommand explorer' | endif
+  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | bd | exe 'CocCommand explorer' argv()[0] | endif
+augroup END
+
+nnoremap <silent><Leader>d :CocCommand explorer<CR>
+
 hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
 
 let g:coc_global_extensions=[
@@ -28,7 +40,8 @@ let g:coc_global_extensions=[
   \ 'coc-markdownlint',
   \ 'coc-yank',
   \ 'coc-neosnippet',
-  \ 'coc-actions'
+  \ 'coc-actions',
+  \ 'coc-explorer',
   \ ]
 
 function s:tab_completion() abort
