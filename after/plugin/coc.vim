@@ -1,19 +1,19 @@
 augroup vimrc_autocomplete
+  autocmd!
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent! call CocActionAsync('highlight')
   autocmd CursorHoldI * silent! call CocActionAsync('showSignatureHelp')
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,javascript,json setl formatexpr=CocAction('formatSelected')
-augroup end
 
-augroup vimrc_defx
-  autocmd!
-  " these dont work yet
-  autocmd WinEnter * if &ft == '[coc-explorer]' && winnr('$') == 1 | q | endif
-  autocmd TabLeave * if &ft == '[coc-explorer]' | wincmd w | endif
-  " open coc-explorer if vim invoked in directory
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'CocCommand explorer' | endif
-  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | bd | exe 'CocCommand explorer' argv()[0] | endif
+  " close coc-explorer if it is the only buffer open
+  autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+  autocmd WinEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+  autocmd TabLeave * if (&filetype == 'coc-explorer') | wincmd w | endif
+
+  " open coc-explorer if vim is started with no arg, or arg is a dir
+  "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'CocCommand explorer' | endif
+  "autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | bd | exe 'CocCommand explorer' argv()[0] | endif
 augroup END
 
 nnoremap <silent><Leader>d :CocCommand explorer<CR>
@@ -149,6 +149,7 @@ nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 "nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
+
 
 set wildoptions=pum
 set wildignore=*.o,*.obj,*~                                                     "stuff to ignore when tab completing

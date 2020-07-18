@@ -66,10 +66,14 @@
   "git.changeRemovedSign.text": "▋",
 
   "explorer.toggle": true,
-
+  "explorer.width": 30,
+  "explorer.previewAction.onHover": false,
   "explorer.icon.enableNerdfont": true,
-  "explorer.icon.enableVimDevicons": true,
   "explorer.file.autoReveal": true,
+  "explorer.keyMappings": {
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
+  },
 
   "emmet.includeLanguages": {
     "vue-html": "html",

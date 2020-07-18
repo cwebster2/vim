@@ -45,19 +45,4 @@ let g:airline#extensions#tabline#buffer_idx_format = {
   \ '9': '➒ '
   \}
 
-"hi airline_tablabel ctermfg=231 ctermbg=none guifg=#ffffff guibg=none
-"hi airline_tab    ctermfg=231 ctermbg=none guifg=#bbbbbb guibg=none
-"call airline#highlighter#exec('airline_tabsel', ['#d8dee9', 'none', 189, 'none', ''])
-""hi clear airline_tabsel
-"hi airline_tabsel ctermfg=189 ctermbg=none guifg=blue guibg=none gui=underline cterm=underline
-"hi airline_tabtype ctermfg=231 ctermbg=none guifg=#ffffff guibg=#870000
-"hi airline_tabfill ctermfg=59 ctermbg=none guifg=#4f5b66 guibg=#151515
-"hi airline_tabmod ctermfg=231 ctermbg=none guifg=#ffffff guibg=#437019
-"hi airline_tabmod_unsel ctermfg=215 guifg=#ffb964
-"hi airline_tabhid ctermfg=59 ctermbg=none guifg=#4f5b66 guibg=#151515
-"hi airline_tablabel_right ctermfg=231 ctermbg=none guifg=#ffffff guibg=none
-"hi airline_tab_right ctermfg=59 ctermbg=none guifg=#4f5b66 guibg=none
-"hi airline_tabsel_right ctermfg=189 ctermbg=none guifg=#d8dee9 guibg=none
-"hi airline_tabmod_right ctermfg=231 ctermbg=none guifg=#ffffff guibg=none
-"hi airline_tabhid_right ctermfg=59 ctermbg=none guifg=#4f5b66 guibg=none
-"hi airline_tabmod_unsel_right ctermfg=215 guifg=#ffb964
+set noshowmode

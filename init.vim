@@ -144,6 +144,26 @@ endif
 lef g:jellybeans_use_term_italics = 1
 colorscheme jellybeans
 
+"startify
+let g:startify_session_autoload = 1
+let g:startify_session_delete_buffers = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_fortune_use_unicode = 1
+let g:startify_session_persistence = 1
+
+let g:startify_lists = [
+          \ { 'type': 'files',     'header': ['   Files']                        },
+          \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
+          \ { 'type': 'sessions',  'header': ['   Sessions']                     },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']                    },
+          \ ]
+let g:startify_bookmarks = [
+            \ { 'c': '~/.config/i3/config' },
+            \ { 'k': '~/.config/kitty/kitty.conf' },
+            \ { 'i': '~/.config/nvim/init.vim' },
+            \ { 'z': '~/.zshrc' },
+            \ '~/src',
+            \ ]
 
 "fzf
 "this needs to be here rather than in after/plugins
@@ -173,10 +193,12 @@ let g:indentLine_color_gui = '#222222'
 
 "peartree
 let g:pear_tree_repeatable_expand = 0
-highlight PMenu ctermbg=none guibg=none
 let g:pear_tree_map_special_keys = 0
 imap <BS> <Plug>(PearTreeBackspace)
+
 " Mappings for CR and Esc are handled in the CoC maps
+highlight PMenu ctermbg=Black guibg=#191919
+highlight PMenuSel guifg=#ffffff guibg=#333333
 
 "markdown
 let g:vim_markdown_folding_disabled = 1
