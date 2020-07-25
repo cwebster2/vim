@@ -49,7 +49,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 "Plug 'jaxbot/github-issues.vim'
 Plug 'junegunn/gv.vim'
-Plug 'tmsvg/pear-tree'
 Plug 'rhysd/git-messenger.vim'
 Plug 'jreybert/vimagit'
 if has('nvim')
@@ -191,16 +190,16 @@ highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B7
 let g:indentLine_char = '▏'
 let g:indentLine_color_gui = '#222222'
 
-"peartree
-let g:pear_tree_repeatable_expand = 0
-let g:pear_tree_map_special_keys = 0
-imap <BS> <Plug>(PearTreeBackspace)
-
 " Mappings for CR and Esc are handled in the CoC maps
 highlight PMenu ctermbg=Black guibg=#191919
 highlight PMenuSel guifg=#ffffff guibg=#333333
 
 "markdown
+augroup mkdown
+  autocmd!
+  autocmd FileType markdown let b:coc_pairs_disabled = ['`']
+augroup end
+
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
 let g:tex_conceal = ""

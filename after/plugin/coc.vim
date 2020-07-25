@@ -42,6 +42,7 @@ let g:coc_global_extensions=[
   \ 'coc-neosnippet',
   \ 'coc-actions',
   \ 'coc-explorer',
+  \ 'coc-pairs',
   \ ]
 
 function s:tab_completion() abort
