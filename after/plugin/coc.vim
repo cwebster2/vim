@@ -20,13 +20,13 @@ nnoremap <silent><Leader>d :CocCommand explorer<CR>
 
 hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
 
+" \ 'coc-prettier',
 let g:coc_global_extensions=[
   \ 'coc-eslint',
   \ 'coc-json',
   \ 'coc-css',
   \ 'coc-html',
   \ 'coc-go',
-  \ 'coc-prettier',
   \ 'coc-jest',
   \ 'coc-tag',
   \ 'coc-vimlsp',
