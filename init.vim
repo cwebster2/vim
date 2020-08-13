@@ -51,13 +51,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'junegunn/gv.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'jreybert/vimagit'
-if has('nvim')
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/denite.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 
@@ -234,6 +227,8 @@ let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
 
 "neosnippets
+"imap <expr> <C-j> vsnip#jumpable(1) ? "<Plug>(neosnippet-expand-or-jump)" : "<C-j>"
+"imap <expr> <C-k> vsnip#jumpable(-1) ? "<Plug>(neosnippet-jump-prev)"      : "<C-k>"
 imap <M-k>     <Plug>(neosnippet_expand_or_jump)
 smap <M-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <M-k>     <Plug>(neosnippet_expand_target)
