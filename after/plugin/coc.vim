@@ -61,6 +61,9 @@ inoremap <silent><expr> <Tab> <sid>tab_completion()
 inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+"let g:coc_snippet_next = '<Tab>'
+"let g:coc_snippet_prev = '<S-Tab>'
+
 snoremap <silent><expr> <Tab>
   \ neosnippet#jumpable() ? "\<Plug>(neosnippet_jump)" : "\<TAB>"
 inoremap <expr> <Esc>
