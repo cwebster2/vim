@@ -35,6 +35,7 @@ let g:fzf_colors = {
 nnoremap <silent> <C-p> :FGFiles<Enter>
 nnoremap <silent> <Leader><C-p> :FLines<Enter>
 nnoremap <silent> <M-x> :FCommands<Enter>
-nnoremap <silent> <M-b> :FBuffers<Enter>
+nnoremap <silent> <C-x><C-b> :FBuffers<Enter>
+nnoremap <silent> <C-x><C-f> :FFiles<Enter>
 command! -bang -complete=dir -nargs=* LS
     \ call fzf#run(fzf#wrap('ls', {'source': 'ls', 'dir': <q-args>}, <bang>0))
