@@ -18,7 +18,11 @@
     "<C-c>": "do:exit"
   },
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["javascript", "typescript", "javascriptreact"],
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "javascriptreact"
+  ],
   "suggest.detailField": "abbr",
   "suggest.snippetIndicator": "🌟",
   "suggest.triggerCompletionWait": 100,
@@ -64,17 +68,32 @@
   "git.removedSign.text": "▏",
   "git.topRemovedSign.text": "▔",
   "git.changeRemovedSign.text": "▋",
-
+  "cSpell.enabledLanguageIds": [
+    "asciidoc",
+    "git-commit",
+    "html",
+    "json",
+    "jsonc",
+    "latex",
+    "markdown",
+    "plaintext",
+    "text",
+    "yaml",
+    "yml"
+  ],
   "explorer.toggle": true,
   "explorer.width": 30,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableNerdfont": true,
   "explorer.file.autoReveal": true,
   "explorer.keyMappings": {
-    "<cr>": ["expandable?", "expand", "open"],
+    "<cr>": [
+      "expandable?",
+      "expand",
+      "open"
+    ],
     "v": "open:vsplit"
   },
-
   "emmet.includeLanguages": {
     "vue-html": "html",
     "javascript": "javascriptreact"
@@ -82,7 +101,9 @@
   "languageserver": {
     "golang": {
       "command": "~/go/bin/go-langserver",
-      "filetypes": ["go"],
+      "filetypes": [
+        "go"
+      ],
       "initializationOptions": {
         "gocodeCompletionEnabled": true,
         "diagnosticsEnabled": true,
@@ -91,15 +112,22 @@
     },
     "bash": {
       "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
+      "args": [
+        "start"
+      ],
+      "filetypes": [
+        "sh"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
     },
     "terraform": {
       "command": "terraform-lsp",
-      "filetypes": ["terraform"],
+      "filetypes": [
+        "terraform"
+      ],
       "initializationOptions": {}
     }
-  },
-  "cSpell.userWords": ["Forkulator", "marklar", "moserca", "phleet", "reqwest"]
+  }
 }
