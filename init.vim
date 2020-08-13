@@ -295,7 +295,7 @@ set statusline+=%{NearestMethodOrFunction()}
 
 augroup vistavim
   autocmd!
-  autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+""  autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
   " Close vim if vista is the last split/tab open
   autocmd WinEnter * if &ft == 'vista' && winnr('$') == 1 | q | endif
   autocmd TabLeave * if &ft == 'vista' | wincmd w | endif
