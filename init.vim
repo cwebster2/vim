@@ -53,6 +53,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'jreybert/vimagit'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
+Plug 'unblevable/quick-scope'
 
 call plug#end()
 
@@ -156,6 +157,9 @@ let g:startify_bookmarks = [
             \ { 'z': '~/.zshrc' },
             \ '~/src',
             \ ]
+
+"quick-scope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 "fzf
 "this needs to be here rather than in after/plugins
