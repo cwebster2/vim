@@ -40,8 +40,9 @@ Plug 'chrisbra/Colorizer'  " Highlight CSS colors
 Plug 'vim-latex/vim-latex'
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+"Plug 'Shougo/neosnippet.vim'
+"Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
 Plug 'luochen1990/rainbow'
 Plug 'Yggdroot/indentLine'
 Plug 'liuchengxu/vista.vim'
@@ -251,6 +252,12 @@ nnoremap <C-H> <C-W><C-H>
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap gf :vertical wincmd f<CR>
+inoremap <silent> <TAB> :bnext<CR>
+inoremap <silent> <S-TAB> :bprevious<CR>
+nnoremap <silent> <M-j>    :resize -2<CR>
+nnoremap <silent> <M-k>    :resize +2<CR>
+nnoremap <silent> <M-h>    :vertical resize -2<CR>
+nnoremap <silent> <M-l>    :vertical resize +2<CR>
 
 augroup vimrc-main
   autocmd!

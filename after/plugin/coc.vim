@@ -22,6 +22,7 @@ hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
 
 " \ 'coc-prettier',
 let g:coc_global_extensions=[
+  \ 'coc-snippets',
   \ 'coc-eslint',
   \ 'coc-json',
   \ 'coc-css',
@@ -39,7 +40,6 @@ let g:coc_global_extensions=[
   \ 'coc-emmet',
   \ 'coc-markdownlint',
   \ 'coc-yank',
-  \ 'coc-neosnippet',
   \ 'coc-actions',
   \ 'coc-explorer',
   \ 'coc-pairs',
@@ -65,7 +65,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 "let g:coc_snippet_prev = '<S-Tab>'
 
 snoremap <silent><expr> <Tab>
-  \ neosnippet#jumpable() ? "\<Plug>(neosnippet_jump)" : "\<TAB>"
+  \ neosnippet#jumpable() ? "\<Plug>(snippet-expand-jump)" : "\<TAB>"
 inoremap <expr> <Esc>
   \ pumvisible() ? "\<C-e>" :
   \ "\<Esc>"
@@ -154,6 +154,21 @@ nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 "nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
+" Snippets
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 set wildoptions=pum
 set wildignore=*.o,*.obj,*~                                                     "stuff to ignore when tab completing
