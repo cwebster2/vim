@@ -34,6 +34,7 @@ let g:fzf_colors = {
 \ }
 nnoremap <silent> <C-p> :FGFiles<Enter>
 nnoremap <silent> <Leader><C-p> :FLines<Enter>
+nnoremap <silent> <C-f> :FAg<Enter>
 nnoremap <silent> <M-x> :FCommands<Enter>
 nnoremap <silent> <C-x><C-b> :FBuffers<Enter>
 nnoremap <silent> <C-x><C-f> :FFiles<Enter>
