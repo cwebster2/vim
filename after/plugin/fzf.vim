@@ -6,6 +6,8 @@ let g:fzf_layout = {
 \ 'window': 'silent 18split enew'
 \ }
 
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
 " Set actions manually.
 let g:fzf_action = {
 \ 'ctrl-t': 'tab split',

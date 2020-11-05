@@ -47,7 +47,7 @@ nnoremap <leader>eo :lopen<CR>
 nnoremap <leader>ec :lclose<CR>
 highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
-nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>j <Plug>(ale_next_wrap)
+nmap <silent> <Leader>n <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>e <Plug>(ale_next_wrap)
 nmap <leader>= <Plug>(ale_fix)
 nmap <leader>- :ALEToggleBuffer<cr>
