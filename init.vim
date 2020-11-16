@@ -332,7 +332,7 @@ nnoremap <leader>rr :set norelativenumber!<CR>
 "hi clear SpellBad
 hi clear SpellCap
 "hi SpellBad ctermfg='Red' guifg='Red' gui=underline,bold cterm=underline,bold
-hi SpellCap gui=underline,bold cterm=underline,bold
+hi SpellCap guibg=NONE guisp='Red' gui=undercurl cterm=undercurl,bold
 
 " Put these lines at the very end of your vimrc file.
 
