@@ -4,6 +4,10 @@ set nocompatible
 
 let g:python3_host_prog = $HOME . '/miniconda3/bin/python3'
 let g:loaded_netrwPlugin = 1
+""polyglot
+let g:polyglot_disabled = ['python', 'latex', 'typescript'] " Use python-syntax and vimtex
+let g:jsx_ext_required = 0
+let g:markdown_fenced_languages = ['javascript', 'python', 'clojure', 'ruby']
 
 "plugins
 
@@ -209,10 +213,6 @@ let g:vim_markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'ty
 
 let g:mkdp_auto_close = 0
 
-""polyglot
-let g:polyglot_disabled = ['python', 'latex', 'typescript'] " Use python-syntax and vimtex
-let g:jsx_ext_required = 0
-let g:markdown_fenced_languages = ['javascript', 'python', 'clojure', 'ruby']
 
 "python syntax
 let g:python_highlight_all = 1
