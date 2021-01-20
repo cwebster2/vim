@@ -1,21 +1,24 @@
 local o = vim.o
 local wo = vim.wo
+local bo = vim.bo
 local g = vim.g
 local a = vim.api
 
 g.mapleader = ' '
 g.maplocalleader = ','
 
+o.shell = "/bin/bash"
 o.updatetime = 300
 o.foldlevelstart = 99
 o.termguicolors = true
 o.ignorecase = true
 o.confirm = true
-o.tabstop = 2
-o.shiftwidth = 2
-o.softtabstop = 2
-o.expandtab = true
+bo.tabstop = 2
+bo.shiftwidth = 2
+bo.softtabstop = 2
+bo.expandtab = true
 o.scrolloff = 5
+o.shiftround = true
 o.incsearch = true
 o.splitright = true
 o.splitbelow = true
@@ -34,6 +37,8 @@ o.completeopt = "menuone,noinsert,noselect"
 o.linebreak = true
 o.foldmethod='expr'
 o.foldexpr='nvim_treesitter#foldexpr()'
+o.cmdheight = 2
+wo.signcolumn = "yes"
 wo.number = true
 wo.cursorline = true
 
@@ -46,6 +51,8 @@ g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
 -- require plugins and stuff
 require'plugins'
 require'lsp'.setup()
+
+-- config
 
 g.jellybeans_overrides = {
   background = {
@@ -60,6 +67,26 @@ g.jellybeans_overrides = {
 }
 g.jellybeans_use_term_italics = 1
 
+--quick-scope
+g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
+
+g.fzf_command_prefix = 'F'
+
+g.DevIconsEnableFoldersOpenClose = 1
+
+g.gitgutter_map_keys = 0
+g.gitgutter_override_sign_column_highlight = 0
+g.gitgutter_sign_added = "▎"
+g.gitgutter_sign_modified = "▎"
+g.gitgutter_sign_removed = "▏"
+g.gitgutter_sign_removed_above_and_below = "▔"
+g.gitgutter_sign_removed_first_line = "_"
+g.gitgutter_sign_modified_removed = "▋"
+
+g.indentLine_char = '▏'
+g.indentLine_color_gui = '#222222'
+
+
 a.nvim_exec([[
 
   if has('termguicolors') && &termguicolors
@@ -72,6 +99,8 @@ a.nvim_exec([[
   endif
 
   set clipboard^=unnamedplus,unnamed " Make "yanks"
+  set list listchars=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○
+  set backspace=indent,eol,start
 
   " Persistent undo (can use undos after exiting and restarting)
   if exists("+undofile")
@@ -93,4 +122,36 @@ a.nvim_exec([[
     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
   augroup END
 
+augroup vimrc-main
+  autocmd!
+  "save when window loses focus
+  autocmd FocusLost * silent! wa
+  autocmd StdinReadPre * let s:std_in=1
+
+  "strip trailing whitespace
+  autocmd BufWritePre * :%s/\s+$//e
+
+  " starphleet specific
+  au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
+
+  " For tab management
+  au TabLeave * let g:lasttab = tabpagenr()
+augroup END
+
+highlight clear SignColumn
+highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=green
+highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#2B5B77
+highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red
+highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B77
 ]], '')
+
+--color stuff
+
+--mappings
+function map(mode, key, to, opts)
+  a.nvim_set_keymap(mode, key, to, opts or {})
+end
+
+map('i', '<Tab>', "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", {expr=true, noremap=true})
+map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
+
