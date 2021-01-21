@@ -31,11 +31,12 @@ o.showmode = false
 o.showmatch = true
 o.inccommand = 'split'
 o.shortmess = vim.o.shortmess .. 'c'
-o.smartindent = true
+bo.smartindent = true
 o.textwidth = 80
 o.formatoptions = o.formatoptions:gsub('[cro]','')
 o.colorcolumn = '100'
 o.completeopt = "menuone,noinsert,noselect"
+o.clipboard = "unnamedplus,unnamed"
 o.linebreak = true
 o.foldmethod='expr'
 o.foldexpr='nvim_treesitter#foldexpr()'
@@ -141,10 +142,16 @@ augroup("numbertoggle", function()
    vim.cmd("autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif")
    vim.cmd("autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif")
 end)
+
 --color stuff
+vim.api.nvim_command [[ hi PMenu ctermbg=Black guibg=#191919 ]]
+vim.api.nvim_command [[ hi PMenuSel guifg=#ffffff guibg=#333333 ]]
 
 --mappings
 
 map('i', '<Tab>', "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", {expr=true, noremap=true})
 map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
 
+map('v', '<', '<gv', {noremap=true})
+map('v', '>', '>gv', {noremap=true})
+map('v', '.', ':normal .<CR>', {noremap=true})
