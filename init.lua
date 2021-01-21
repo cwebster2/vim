@@ -3,6 +3,8 @@ local wo = vim.wo
 local bo = vim.bo
 local g = vim.g
 local a = vim.api
+local map = require("utils").map
+local augroup = require("utils").augroup
 
 g.mapleader = ' '
 g.maplocalleader = ','
@@ -49,7 +51,7 @@ g.jsx_ext_required = 0
 g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
 
 -- require plugins and stuff
-require'plugins'
+require'plugins'.setup()
 require'lsp'.setup()
 
 -- config
@@ -116,28 +118,6 @@ a.nvim_exec([[
     set undoreload=500 " Maximum number lines to save for undo on a buffer reload
   endif
 
-  augroup numbertoggle
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
-    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
-  augroup END
-
-augroup vimrc-main
-  autocmd!
-  "save when window loses focus
-  autocmd FocusLost * silent! wa
-  autocmd StdinReadPre * let s:std_in=1
-
-  "strip trailing whitespace
-  autocmd BufWritePre * :%s/\s+$//e
-
-  " starphleet specific
-  au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh
-
-  " For tab management
-  au TabLeave * let g:lasttab = tabpagenr()
-augroup END
-
 highlight clear SignColumn
 highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=green
 highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#2B5B77
@@ -145,12 +125,25 @@ highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red
 highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B77
 ]], '')
 
+augroup("vimrc-main", function()
+  -- save when focus lost
+  vim.cmd("autocmd FocusLost * silent! wa")
+  vim.cmd("autocmd StdinReadPre * let s:std_in=1")
+  -- strip trailing whitespace
+  vim.cmd("autocmd BufWritePre * :%s/\\s+$//e")
+  -- starphleet
+  vim.cmd("au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh")
+  -- tab management
+  vim.cmd("au TabLeave * let g:lasttab = tabpagenr()")
+end)
+
+augroup("numbertoggle", function()
+   vim.cmd("autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif")
+   vim.cmd("autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif")
+end)
 --color stuff
 
 --mappings
-function map(mode, key, to, opts)
-  a.nvim_set_keymap(mode, key, to, opts or {})
-end
 
 map('i', '<Tab>', "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", {expr=true, noremap=true})
 map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
