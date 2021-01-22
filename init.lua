@@ -143,14 +143,14 @@ a.nvim_exec([[
 
 augroup("vimrc-main", function()
   -- save when focus lost
-  vim.cmd("autocmd FocusLost * silent! wa")
-  vim.cmd("autocmd StdinReadPre * let s:std_in=1")
+  vim.cmd [[ autocmd FocusLost * silent! wa ]]
+  vim.cmd [[ autocmd StdinReadPre * let s:std_in=1 ]]
   -- strip trailing whitespace
-  vim.cmd("autocmd BufWritePre * :%s/\\s+$//e")
+  vim.cmd [[ autocmd BufWritePre * :%s/\s\+$//e ]]
   -- starphleet
-  vim.cmd("au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh")
+  vim.cmd [[ au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh ]]
   -- tab management
-  vim.cmd("au TabLeave * let g:lasttab = tabpagenr()")
+  vim.cmd [[ au TabLeave * let g:lasttab = tabpagenr() ]]
 end)
 
 augroup("numbertoggle", function()
