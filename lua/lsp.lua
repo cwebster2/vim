@@ -4,7 +4,7 @@ local nvim_lsp = require "lspconfig"
 local completion = require "completion"
 local map = require("utils").map
 
-local servers = { "pyls", "bashls", "rust_analyzer", "tsserver", "gopls", "terraformls", "dockerls", "jsonls", "texlab", "yamlls", "vimls", "jdtls"}
+local servers = { "pyls", "bashls", "rust_analyzer", "tsserver", "gopls", "terraformls", "dockerls", "jsonls", "texlab", "yamlls", "vimls", "jdtls", "sumneko_lua"}
 
 local on_attach = function(client)
   completion.on_attach(client)

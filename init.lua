@@ -190,4 +190,7 @@ map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
 map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
 map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
 
-
+map('', 'j', '(v:count == 0 ? \'gj\' : \'j\')', {expr=true,noremap=true,silent=true})
+map('', '<Down>', '(v:count == 0 ? \'gj\' : \'<Down>\')', {expr=true,noremap=true,silent=true})
+map('', 'k', '(v:count == 0 ? \'gk\' : \'k\')', {expr=true,noremap=true,silent=true})
+map('', '<Up>', '(v:count == 0 ? \'gk\' : \'<Up>\')', {expr=true,noremap=true,silent=true})
