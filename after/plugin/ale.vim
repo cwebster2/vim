@@ -50,14 +50,15 @@ let g:ale_sign_warning = '⚠'
 "let g:ale_set_quickfix = 1
 "gofmt golint go vet
   "\ 'rust': ['cargo', 'rls', 'rustc', 'clippy', 'rustfmt'],
-nnoremap <leader>n :lnext<CR>
-nnoremap <leader>p :lprevious<CR>
-nnoremap <leader>r :lrewind<CR>
+"
+"nnoremap <leader>n :lnext<CR>
+"nnoremap <leader>p :lprevious<CR>
+"nnoremap <leader>r :lrewind<CR>
 nnoremap <leader>eo :lopen<CR>
 nnoremap <leader>ec :lclose<CR>
 highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
-nmap <silent> <Leader>n <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>e <Plug>(ale_next_wrap)
+"nmap <silent> <Leader>n <Plug>(ale_previous_wrap)
+"nmap <silent> <Leader>e <Plug>(ale_next_wrap)
 nmap <tab>a <Plug>(ale_fix)
 nmap <leader>- :ALEToggleBuffer<cr>

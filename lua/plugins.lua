@@ -44,6 +44,8 @@ function M.setup()
 
   -- visuals
   plug('\'airblade/vim-gitgutter\'')
+  plug('\'kyazdani42/nvim-web-devicons\'')
+  plug('\'ryanoasis/vim-devicons\'')
 
   -- linting
   plug('\'w0rp/ale\'')
@@ -54,9 +56,15 @@ function M.setup()
   plug('\'tpope/vim-fugitive\'')
   plug('\'scrooloose/nerdcommenter\'')
   plug('\'Yggdroot/indentLine\'')
+  plug('\'editorconfig/editorconfig-vim\'')
+  plug('\'ntpeters/vim-better-whitespace\'')
 
+  -- ide stuff
+  plug('\'liuchengxu/vista.vim\'')
+  plug('\'unblevable/quick-scope\'')
+  plug('\'kyazdani42/nvim-tree.lua\'')
+  
   --Plug 'tpope/vim-sensible'
-  --Plug 'editorconfig/editorconfig-vim'
   --Plug 'airblade/vim-rooter'
   --Plug 'mattn/emmet-vim'
   --Plug 'terryma/vim-multiple-cursors'
@@ -70,21 +78,17 @@ function M.setup()
   --Plug 'chrisbra/Colorizer'  " Highlight CSS colors
   --Plug 'vim-latex/vim-latex'
   --Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
-  --Plug 'ntpeters/vim-better-whitespace'
   --Plug 'Shougo/neosnippet.vim'
   --Plug 'Shougo/neosnippet-snippets'
   --Plug 'honza/vim-snippets'
   --Plug 'luochen1990/rainbow'
-  --Plug 'liuchengxu/vista.vim'
   --Plug 'plasticboy/vim-markdown'
   --Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
   --Plug 'jaxbot/github-issues.vim'
   --Plug 'junegunn/gv.vim'
   --Plug 'rhysd/git-messenger.vim'
   --Plug 'jreybert/vimagit'
-  --Plug 'ryanoasis/vim-devicons'
   --Plug 'mhinz/vim-startify'
-  --Plug 'unblevable/quick-scope'
 
   plug_end()
 end

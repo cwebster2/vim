@@ -15,10 +15,6 @@ o.foldlevelstart = 99
 o.termguicolors = true
 o.ignorecase = true
 o.confirm = true
-bo.tabstop = 2
-bo.shiftwidth = 2
-bo.softtabstop = 2
-bo.expandtab = true
 o.scrolloff = 5
 o.shiftround = true
 o.incsearch = true
@@ -29,9 +25,9 @@ o.wildmode = 'full'
 o.hlsearch = true
 o.showmode = false
 o.showmatch = true
+o.matchtime = 5
 o.inccommand = 'split'
 o.shortmess = vim.o.shortmess .. 'c'
-bo.smartindent = true
 o.textwidth = 80
 o.formatoptions = o.formatoptions:gsub('[cro]','')
 o.colorcolumn = '100'
@@ -41,10 +37,34 @@ o.linebreak = true
 o.foldmethod='expr'
 o.foldexpr='nvim_treesitter#foldexpr()'
 o.cmdheight = 2
+o.hidden = true
+o.backspace = "indent,eol,start"
+o.backup = false
+o.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
+o.lazyredraw = true
+o.pastetoggle = "<F11>"
+o.previewheight = 25
+o.ttimeoutlen = 50
+o.viewoptions = "cursor,folds,options,unix,slash"
+o.virtualedit = "onemore"
+o.writebackup = false
+
+bo.autoindent = false
+bo.autoread = true
+bo.tabstop = 2
+bo.shiftwidth = 2
+bo.softtabstop = 2
+bo.expandtab = true
+bo.smartindent = true
+
 wo.signcolumn = "yes"
 wo.number = true
 wo.cursorline = true
+wo.fillchars = "vert:|"
+wo.list = true
+wo.listchars = "tab:▷\\ ,trail:·,extends:◣,precedes:◢,nbsp:○"
 
+-- some globals that need setting before plugins are loaded
 g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
 g.loaded_netrwPlugin = 1
 g.polyglot_disabled = {'python', 'latex', 'typescript'} -- Use python-syntax and vimtex
@@ -54,6 +74,7 @@ g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
 -- require plugins and stuff
 require'plugins'.setup()
 require'lsp'.setup()
+require'nvimtree'.setup()
 
 -- config
 
@@ -101,9 +122,6 @@ a.nvim_exec([[
     filetype plugin indent on
   endif
 
-  set clipboard^=unnamedplus,unnamed " Make "yanks"
-  set list listchars=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○
-  set backspace=indent,eol,start
 
   " Persistent undo (can use undos after exiting and restarting)
   if exists("+undofile")
@@ -119,11 +137,6 @@ a.nvim_exec([[
     set undoreload=500 " Maximum number lines to save for undo on a buffer reload
   endif
 
-highlight clear SignColumn
-highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=green
-highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#2B5B77
-highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red
-highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B77
 ]], '')
 
 augroup("vimrc-main", function()
@@ -146,12 +159,32 @@ end)
 --color stuff
 vim.api.nvim_command [[ hi PMenu ctermbg=Black guibg=#191919 ]]
 vim.api.nvim_command [[ hi PMenuSel guifg=#ffffff guibg=#333333 ]]
+vim.api.nvim_command [[ highlight clear SignColumn ]]
+vim.api.nvim_command [[ highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=green ]]
+vim.api.nvim_command [[ highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#2B5B77 ]]
+vim.api.nvim_command [[ highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red ]]
+vim.api.nvim_command [[ highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B77 ]]
 
 --mappings
 
+-- tab for completion
 map('i', '<Tab>', "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", {expr=true, noremap=true})
 map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
 
+-- visual mode indent keep selection
 map('v', '<', '<gv', {noremap=true})
 map('v', '>', '>gv', {noremap=true})
 map('v', '.', ':normal .<CR>', {noremap=true})
+
+-- fugitive
+map('n', '<Leader>gw', ':Gwrite<CR>', {silent=true})
+map('n', '<Leader>gs', ':Gstatus<CR>', {silent=true})
+map('n', '<Leader>gc', ':Gcommit<CR>', {silent=true})
+
+-- move between splits
+map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
+map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
+map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
+map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
+
+
