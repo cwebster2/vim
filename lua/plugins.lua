@@ -74,7 +74,7 @@ function M.setup()
 
   -- markdown
   plug('plasticboy/vim-markdown')
-  plug('iamcco/markdown-preview.nvim', '{ \'do\': { -> mkdp#util#install() }}')
+  plug('iamcco/markdown-preview.nvim', '{ \'do\': { -> mkdp#util#install() }, \'for\': [\'markdown\', \'vim-plug\']}')
 
   -- snippets
   plug('Shougo/neosnippet.vim')
