@@ -180,6 +180,7 @@ map('v', '.', ':normal .<CR>', {noremap=true})
 map('n', '<Leader>gw', ':Gwrite<CR>', {silent=true})
 map('n', '<Leader>gs', ':Gstatus<CR>', {silent=true})
 map('n', '<Leader>gc', ':Gcommit<CR>', {silent=true})
+map('n', '<Leader>gp', ':GPush<CR>', {silent=true})
 
 -- move between splits
 map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
