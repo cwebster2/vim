@@ -66,7 +66,8 @@ function M.setup()
   plug('\'liuchengxu/vista.vim\'')
   plug('\'unblevable/quick-scope\'')
   plug('\'kyazdani42/nvim-tree.lua\'')
-  
+  plug('\'tmsvg/pear-tree\'')
+
   --Plug 'tpope/vim-sensible'
   --Plug 'airblade/vim-rooter'
   --Plug 'mattn/emmet-vim'

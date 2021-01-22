@@ -111,6 +111,7 @@ g.gitgutter_sign_modified_removed = "▋"
 g.indentLine_char = '▏'
 g.indentLine_color_gui = '#222222'
 
+g.pear_tree_repeatable_expand = 0
 
 a.nvim_exec([[
 
