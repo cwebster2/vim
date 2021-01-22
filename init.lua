@@ -9,61 +9,8 @@ local augroup = require("utils").augroup
 g.mapleader = ' '
 g.maplocalleader = ','
 
-o.shell = "/bin/bash"
-o.updatetime = 300
-o.foldlevelstart = 99
-o.termguicolors = true
-o.ignorecase = true
-o.confirm = true
-o.scrolloff = 5
-o.shiftround = true
-o.incsearch = true
-o.splitright = true
-o.splitbelow = true
-o.wildmenu = true
-o.wildmode = 'full'
-o.hlsearch = true
-o.showmode = false
-o.showmatch = true
-o.matchtime = 5
-o.inccommand = 'split'
-o.shortmess = vim.o.shortmess .. 'c'
-o.textwidth = 80
-o.formatoptions = o.formatoptions:gsub('[cro]','')
-o.colorcolumn = '100'
-o.completeopt = "menuone,noinsert,noselect"
-o.clipboard = "unnamedplus,unnamed"
-o.linebreak = true
-o.foldmethod='expr'
-o.foldexpr='nvim_treesitter#foldexpr()'
-o.cmdheight = 2
-o.hidden = true
-o.backspace = "indent,eol,start"
-o.backup = false
-o.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
-o.lazyredraw = true
-o.pastetoggle = "<F11>"
-o.previewheight = 25
-o.ttimeoutlen = 50
-o.viewoptions = "cursor,folds,options,unix,slash"
-o.virtualedit = "onemore"
-o.writebackup = false
-
-bo.autoindent = false
-bo.autoread = true
-bo.tabstop = 2
-bo.shiftwidth = 2
-bo.softtabstop = 2
-bo.expandtab = true
-bo.smartindent = true
-
-wo.signcolumn = "yes"
-wo.number = true
-wo.cursorline = true
-wo.fillchars = "vert:|"
-wo.list = true
-wo.listchars = "tab:▷\\ ,trail:·,extends:◣,precedes:◢,nbsp:○"
-o.listchars = "tab:▷\\ ,trail:·,extends:◣,precedes:◢,nbsp:○"
+-- set global, window and buffer options
+require'_options'
 
 -- some globals that need setting before plugins are loaded
 g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
@@ -77,21 +24,9 @@ require'plugins'.setup()
 require'lsp'.setup()
 require'nvimtree'.setup()
 require'_vista'
+require'_theme'
 
 -- config
-
-g.jellybeans_overrides = {
-  background = {
-    ctermbg = 'none',
-    ["256ctermbg"] = 'none',
-  },
-  VertSplit = {
-    ctermbg = 'none',
-    guibg = 'none',
-    ["256ctermbg"] = 'none',
-  },
-}
-g.jellybeans_use_term_italics = 1
 
 --quick-scope
 g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
@@ -130,13 +65,11 @@ g.vim_markdown_fenced_languages = {'css', 'javascript', 'js=javascript', 'typesc
 
 g.mkdp_auto_close = 0
 
+g.tex_flavor='latex'
+g.Tex_DefaultTargetFormat='pdf'
+g.Tex_CompileRule_pdf='pdflatex --interaction=nonstopmode $*'
+
 a.nvim_exec([[
-
-  if has('termguicolors') && &termguicolors
-    let g:jellybeans_overrides['background']['guibg'] = 'none'
-  endif
-  colorscheme jellybeans
-
   if has ("autocmd")
     filetype plugin indent on
   endif
@@ -148,7 +81,6 @@ a.nvim_exec([[
     endif
     set undodir=./.vim-undo// undodir+=~/.vim/undo// undofile
   endif
-
 ]], '')
 
 if vim.fn.has('conceal') == 1 then
@@ -183,16 +115,6 @@ augroup("numbertoggle", function()
 end)
 
 --color stuff
-vim.api.nvim_command [[ hi PMenu ctermbg=Black guibg=#191919 ]]
-vim.api.nvim_command [[ hi PMenuSel guifg=#ffffff guibg=#333333 ]]
-vim.api.nvim_command [[ highlight clear SignColumn ]]
-vim.api.nvim_command [[ highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=green ]]
-vim.api.nvim_command [[ highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#2B5B77 ]]
-vim.api.nvim_command [[ highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red ]]
-vim.api.nvim_command [[ highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B77 ]]
-
-vim.api.nvim_command [[ highlight clear SpellCap ]]
-vim.api.nvim_command [[ highlight SpellCap guibg=NONE guisp='Red' gui=undercurl cterm=undercurl,bold ]]
 --mappings
 
 

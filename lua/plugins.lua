@@ -80,20 +80,20 @@ function M.setup()
   plug('Shougo/neosnippet.vim')
   plug('Shougo/neosnippet-snippets')
 
+  plug('vim-latex/vim-latex')
 
+  -- still evaluating if these are needed now
   --Plug 'tpope/vim-sensible'
   --Plug 'airblade/vim-rooter'
   --Plug 'mattn/emmet-vim'
   --Plug 'terryma/vim-multiple-cursors'
   --Plug 'tpope/vim-eunuch'
   --Plug 'tpope/vim-surround'
-  --Plug 'neoclide/coc.nvim', {'branch': 'release'}
   --Plug 'Raimondi/delimitMate'
   --Plug 'sheerun/vim-polyglot'  " syntax files for most languages
   --Plug 'vim-python/python-syntax'  " Improved python syntax
   --Plug 'Vimjas/vim-python-pep8-indent'  " Proper python indenting
   --Plug 'chrisbra/Colorizer'  " Highlight CSS colors
-  --Plug 'vim-latex/vim-latex'
   --Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
   --Plug 'honza/vim-snippets'
   --Plug 'luochen1990/rainbow'
