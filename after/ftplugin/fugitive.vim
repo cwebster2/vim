@@ -1,4 +1,4 @@
 nnoremap <buffer> q <c-w>q
 nnoremap <buffer> C cc
 nnoremap <buffer> D dd
-nnoremap <buffer> PP :GPush<CR>
+nnoremap <buffer> PP :Gpush<CR>
