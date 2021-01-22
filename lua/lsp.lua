@@ -46,6 +46,14 @@ function M.setup()
       enable = true,
       disable = { "ruby" },
     },
+    rainbow = {
+      enable = true,
+      disable = {'bash'},
+    },
+    refactor = {
+      highlight_definitions = { enable = true },
+      --highlight_current_scope = { enable = true },
+    }
   }
 
   for _, lsp in ipairs(servers) do

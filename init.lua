@@ -63,6 +63,7 @@ wo.cursorline = true
 wo.fillchars = "vert:|"
 wo.list = true
 wo.listchars = "tab:▷\\ ,trail:·,extends:◣,precedes:◢,nbsp:○"
+o.listchars = "tab:▷\\ ,trail:·,extends:◣,precedes:◢,nbsp:○"
 
 -- some globals that need setting before plugins are loaded
 g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
