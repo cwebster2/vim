@@ -76,6 +76,7 @@ g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
 require'plugins'.setup()
 require'lsp'.setup()
 require'nvimtree'.setup()
+require'_vista'
 
 -- config
 
@@ -129,18 +130,6 @@ g.vim_markdown_fenced_languages = {'css', 'javascript', 'js=javascript', 'typesc
 
 g.mkdp_auto_close = 0
 
-g.vista_icon_indent = {"╰─▸ ", "├─▸ "}
-g.vista_default_executive = 'nvim_lsp'
-g.vista_fzf_preview = {'right:50%'}
-
-a.nvim_exec([[
-   let g:vista#renderer#enable_icon = 1
-"   let g:vista#renderer#icons = {
-"       \ "function": "\uf794",
-"       \ "variable": "\uf71b",
-"       \  }
-]],'')
-
 a.nvim_exec([[
 
   if has('termguicolors') && &termguicolors
@@ -152,7 +141,6 @@ a.nvim_exec([[
     filetype plugin indent on
   endif
 
-
   " Persistent undo (can use undos after exiting and restarting)
   if exists("+undofile")
     if isdirectory($HOME . '/.vim/undo') == 0
@@ -161,13 +149,18 @@ a.nvim_exec([[
     set undodir=./.vim-undo// undodir+=~/.vim/undo// undofile
   endif
 
-  if has('persistent_undo')
-    set undofile       " So is persistent undo ...
-    set undolevels=250 " Maximum number of changes that can be undone
-    set undoreload=500 " Maximum number lines to save for undo on a buffer reload
-  endif
-
 ]], '')
+
+if vim.fn.has('conceal') == 1 then
+  o.conceallevel = 2
+  o.concealcursor = "niv"
+end
+
+if vim.fn.has('persistent_undo') == 1 then
+  o.undofile = true
+  o.undolevels = 250
+  o.undoreload = 500
+end
 
 augroup("vimrc-main", function()
   -- save when focus lost
@@ -189,12 +182,6 @@ augroup("numbertoggle", function()
    vim.cmd("autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif")
 end)
 
-augroup("vista", function()
-  -- automatically close vim if vista is the last window open
-  vim.cmd [[ autocmd WinEnter * if &ft == 'vista' && winnr('$') == 1 | q | endif ]]
-  vim.cmd [[ autocmd TabLeave * if &ft == 'vista' | wincmd w | endif ]]
-end)
-
 --color stuff
 vim.api.nvim_command [[ hi PMenu ctermbg=Black guibg=#191919 ]]
 vim.api.nvim_command [[ hi PMenuSel guifg=#ffffff guibg=#333333 ]]
@@ -208,10 +195,7 @@ vim.api.nvim_command [[ highlight clear SpellCap ]]
 vim.api.nvim_command [[ highlight SpellCap guibg=NONE guisp='Red' gui=undercurl cterm=undercurl,bold ]]
 --mappings
 
--- tab for completion
-map('i', '<Tab>', "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", {expr=true, noremap=true})
-map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
-map('i', '<c-space>', '<Plug>(completion_trigger', {silent=true})
+
 
 -- visual mode indent keep selection
 map('v', '<', '<gv', {noremap=true})
@@ -241,9 +225,6 @@ map('n', '<Leader>v', '<C-w>v<C-w>w', {})
 
 -- clear search
 map('n', '<Leader>/', ':let @/=""<CR>', {silent=true})
-
--- vista
-map('n', '<Leader>tb', ':Vista!!<CR>', {silent=true})
 
 -- spell
 map ('n', '<F9>', ':set spell!<cr>', {silent=true})

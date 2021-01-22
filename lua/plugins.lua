@@ -76,6 +76,11 @@ function M.setup()
   plug('plasticboy/vim-markdown')
   plug('iamcco/markdown-preview.nvim', '{ \'do\': { -> mkdp#util#install() }}')
 
+  -- snippets
+  plug('Shougo/neosnippet.vim')
+  plug('Shougo/neosnippet-snippets')
+
+
   --Plug 'tpope/vim-sensible'
   --Plug 'airblade/vim-rooter'
   --Plug 'mattn/emmet-vim'
@@ -90,8 +95,6 @@ function M.setup()
   --Plug 'chrisbra/Colorizer'  " Highlight CSS colors
   --Plug 'vim-latex/vim-latex'
   --Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
-  --Plug 'Shougo/neosnippet.vim'
-  --Plug 'Shougo/neosnippet-snippets'
   --Plug 'honza/vim-snippets'
   --Plug 'luochen1990/rainbow'
   --Plug 'jaxbot/github-issues.vim'

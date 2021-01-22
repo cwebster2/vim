@@ -120,13 +120,31 @@ function M.setup()
     }
   )
 
+  vim.g.completion_enable_snippet = "Neosnippet"
+  vim.g.completion_matching_ignore_case = 1
+  vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
+  vim.g.completion_auto_change_source = 1
+  vim.g.completion_trigger_on_delete = 1
+  vim.g.completion_enable_auto_hover = 1
+  vim.g.completion_enable_auto_signature = 1
+  vim.g.completion_enable_auto_paren = 1
+  --vim.g.completion_confirm_key = ""
   vim.g.completion_chain_complete_list = {
     default = {
-      { complete_items = { 'dict', 'path', 'lsp', 'buffers', 'snippet'} },
-      { mode = { '<c-n>' } },
-      { mode = { '<c-p>' } }
+      { complete_items = { 'lsp', 'snippet', 'path', 'buffers', 'tags'} },
+    },
+    string = {
+      { complete_items = { 'path'} },
     },
   }
   end
+  -- tab for completion
+  --map('i', '<Tab>', "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", {expr=true, noremap=true})
+  vim.api.nvim_command [[
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  ]]
+  map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
+  --map('i', '<cr>', "pumvisible() ? complete_info()[\"selected\"] != \"-1\" ? \"\\<Plug>(completion_confirm_completion)\"  : \"\\<c-e>\\<CR>\" :  \"\\<CR>\"", {expr=true})
 
   return M
