@@ -1,10 +1,14 @@
 local M = {}
 
-function plug(plugin)
-  vim.api.nvim_command("Plug "..plugin)
+local function plug(source, options)
+  options = options or ""
+  if (string.len(options) > 0) then
+    options = ", "..options
+  end
+  vim.api.nvim_command("Plug '"..source.."'"..options)
 end
 
-function plug_begin()
+local function plug_begin()
 vim.api.nvim_exec([[
   "plugins
 
@@ -19,7 +23,7 @@ vim.api.nvim_exec([[
 ]], '')
 end
 
-function plug_end()
+local function plug_end()
 vim.api.nvim_exec([[
   call plug#end()
 ]], '')
@@ -29,44 +33,48 @@ function M.setup()
   plug_begin()
 
   -- LSP stuff
-  plug('\'neovim/nvim-lspconfig\'')
-  plug('\'nvim-treesitter/nvim-treesitter\', {\'do\': \':TSUpdate\'}')
-  plug('\'nvim-treesitter/nvim-treesitter-textobjects\'')
-  plug('\'nvim-treesitter/nvim-treesitter-refactor\'')
-  plug('\'romgrk/nvim-treesitter-context\'')
-  plug('\'p00f/nvim-ts-rainbow\'')
-  plug('\'nvim-lua/completion-nvim\'')
-  plug('\'puremourning/vimspector\'')
+  plug('neovim/nvim-lspconfig')
+  plug('nvim-treesitter/nvim-treesitter', '{\'do\': \':TSUpdate\'}')
+  plug('nvim-treesitter/nvim-treesitter-textobjects')
+  plug('nvim-treesitter/nvim-treesitter-refactor')
+  plug('romgrk/nvim-treesitter-context')
+  plug('p00f/nvim-ts-rainbow')
+  plug('nvim-lua/completion-nvim')
+  plug('puremourning/vimspector')
 
   -- colorschemes
-  plug('\'glepnir/zephyr-nvim\'')
-  plug('\'sainnhe/sonokai\'')
-  plug('\'nanotech/jellybeans.vim\'')
-  plug('\'vim-airline/vim-airline\'')
-  plug('\'cwebster2/vim-airline-themes\'')
+  plug('glepnir/zephyr-nvim')
+  plug('sainnhe/sonokai')
+  plug('nanotech/jellybeans.vim')
+  plug('vim-airline/vim-airline')
+  plug('cwebster2/vim-airline-themes')
 
   -- visuals
-  plug('\'airblade/vim-gitgutter\'')
-  plug('\'kyazdani42/nvim-web-devicons\'')
-  plug('\'ryanoasis/vim-devicons\'')
+  plug('airblade/vim-gitgutter')
+  plug('kyazdani42/nvim-web-devicons')
+  plug('ryanoasis/vim-devicons')
 
   -- linting
-  plug('\'w0rp/ale\'')
+  plug('w0rp/ale')
 
   -- language stuff
-  plug('\'junegunn/fzf\', { \'do\': { -> fzf#install() } }')
-  plug('\'junegunn/fzf.vim\'')
-  plug('\'tpope/vim-fugitive\'')
-  plug('\'scrooloose/nerdcommenter\'')
-  plug('\'Yggdroot/indentLine\'')
-  plug('\'editorconfig/editorconfig-vim\'')
-  plug('\'ntpeters/vim-better-whitespace\'')
+  plug('junegunn/fzf', '{ \'do\': { -> fzf#install() } }')
+  plug('junegunn/fzf.vim')
+  plug('tpope/vim-fugitive')
+  plug('scrooloose/nerdcommenter')
+  plug('Yggdroot/indentLine')
+  plug('editorconfig/editorconfig-vim')
+  plug('ntpeters/vim-better-whitespace')
 
   -- ide stuff
-  plug('\'liuchengxu/vista.vim\'')
-  plug('\'unblevable/quick-scope\'')
-  plug('\'kyazdani42/nvim-tree.lua\'')
-  plug('\'tmsvg/pear-tree\'')
+  plug('liuchengxu/vista.vim')
+  plug('unblevable/quick-scope')
+  plug('kyazdani42/nvim-tree.lua')
+  plug('tmsvg/pear-tree')
+
+  -- markdown
+  plug('plasticboy/vim-markdown')
+  plug('iamcco/markdown-preview.nvim', '{ \'do\': { -> mkdp#util#install() }}')
 
   --Plug 'tpope/vim-sensible'
   --Plug 'airblade/vim-rooter'
@@ -86,8 +94,6 @@ function M.setup()
   --Plug 'Shougo/neosnippet-snippets'
   --Plug 'honza/vim-snippets'
   --Plug 'luochen1990/rainbow'
-  --Plug 'plasticboy/vim-markdown'
-  --Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
   --Plug 'jaxbot/github-issues.vim'
   --Plug 'junegunn/gv.vim'
   --Plug 'rhysd/git-messenger.vim'

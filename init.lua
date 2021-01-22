@@ -113,6 +113,34 @@ g.indentLine_color_gui = '#222222'
 
 g.pear_tree_repeatable_expand = 0
 
+g.better_whitespace_ctermcolor='red'
+g.better_whitespace_guicolor='red'
+g.better_whitespace_enabled=1
+g.strip_whitespace_on_save=1
+g.strip_whitespace_confirm=0
+
+g.vim_markdown_folding_disabled = 1
+g.vim_markdown_conceal = 0
+g.tex_conceal = ""
+g.vim_markdown_math = 1
+
+g.vim_markdown_fenced_languages = {'css', 'javascript', 'js=javascript', 'typescript',
+    'go', 'python', 'py=python', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini'}
+
+g.mkdp_auto_close = 0
+
+g.vista_icon_indent = {"╰─▸ ", "├─▸ "}
+g.vista_default_executive = 'nvim_lsp'
+g.vista_fzf_preview = {'right:50%'}
+
+a.nvim_exec([[
+   let g:vista#renderer#enable_icon = 1
+"   let g:vista#renderer#icons = {
+"       \ "function": "\uf794",
+"       \ "variable": "\uf71b",
+"       \  }
+]],'')
+
 a.nvim_exec([[
 
   if has('termguicolors') && &termguicolors
@@ -146,16 +174,25 @@ augroup("vimrc-main", function()
   vim.cmd [[ autocmd FocusLost * silent! wa ]]
   vim.cmd [[ autocmd StdinReadPre * let s:std_in=1 ]]
   -- strip trailing whitespace
-  vim.cmd [[ autocmd BufWritePre * :%s/\s\+$//e ]]
+  -- vim.cmd [[ autocmd BufWritePre * :%s/\s\+$//e ]]
   -- starphleet
   vim.cmd [[ au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh ]]
   -- tab management
   vim.cmd [[ au TabLeave * let g:lasttab = tabpagenr() ]]
+  -- highlight yanks
+  vim.cmd [[ au TextYankPost * silent! lua vim.highlight.on_yank { higroup='Visual', timeout=200 } ]]
+  vim.cmd [[ au FileType markdown setlocal spell]]
 end)
 
 augroup("numbertoggle", function()
    vim.cmd("autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif")
    vim.cmd("autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif")
+end)
+
+augroup("vista", function()
+  -- automatically close vim if vista is the last window open
+  vim.cmd [[ autocmd WinEnter * if &ft == 'vista' && winnr('$') == 1 | q | endif ]]
+  vim.cmd [[ autocmd TabLeave * if &ft == 'vista' | wincmd w | endif ]]
 end)
 
 --color stuff
@@ -167,11 +204,14 @@ vim.api.nvim_command [[ highlight GitGutterChange ctermbg=NONE ctermfg=green gui
 vim.api.nvim_command [[ highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red ]]
 vim.api.nvim_command [[ highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B77 ]]
 
+vim.api.nvim_command [[ highlight clear SpellCap ]]
+vim.api.nvim_command [[ highlight SpellCap guibg=NONE guisp='Red' gui=undercurl cterm=undercurl,bold ]]
 --mappings
 
 -- tab for completion
 map('i', '<Tab>', "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", {expr=true, noremap=true})
 map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
+map('i', '<c-space>', '<Plug>(completion_trigger', {silent=true})
 
 -- visual mode indent keep selection
 map('v', '<', '<gv', {noremap=true})
@@ -190,7 +230,21 @@ map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
 map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
 map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
 
+-- visual line movement
 map('', 'j', '(v:count == 0 ? \'gj\' : \'j\')', {expr=true,noremap=true,silent=true})
 map('', '<Down>', '(v:count == 0 ? \'gj\' : \'<Down>\')', {expr=true,noremap=true,silent=true})
 map('', 'k', '(v:count == 0 ? \'gk\' : \'k\')', {expr=true,noremap=true,silent=true})
 map('', '<Up>', '(v:count == 0 ? \'gk\' : \'<Up>\')', {expr=true,noremap=true,silent=true})
+
+-- quick spilt
+map('n', '<Leader>v', '<C-w>v<C-w>w', {})
+
+-- clear search
+map('n', '<Leader>/', ':let @/=""<CR>', {silent=true})
+
+-- vista
+map('n', '<Leader>tb', ':Vista!!<CR>', {silent=true})
+
+-- spell
+map ('n', '<F9>', ':set spell!<cr>', {silent=true})
+map ('i', '<F9>', '<C-O>:set spell!<cr>', {silent=true})

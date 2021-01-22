@@ -67,6 +67,10 @@ local on_attach = function(client)
   vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
 end
 
+local function custom_codeAction(_, _, action)
+  print(vim.inspect(action))
+end
+
 function M.setup()
   require'nvim-treesitter.configs'.setup {
     ensure_installed = "all",
@@ -101,6 +105,8 @@ function M.setup()
   for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach }, config))
   end
+
+  --vim.lsp.callbacks['textDocument/codeAction'] = custom_codeAction
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
