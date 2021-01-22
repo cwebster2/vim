@@ -3,8 +3,50 @@ local M={}
 local nvim_lsp = require "lspconfig"
 local completion = require "completion"
 local map = require("utils").map
+local home = vim.fn.expand("$HOME")
+local build = home .. "/src/lua-language-server"
+local bin = build .. "/bin/Linux/lua-language-server"
 
-local servers = { "pyls", "bashls", "rust_analyzer", "tsserver", "gopls", "terraformls", "dockerls", "jsonls", "texlab", "yamlls", "vimls", "jdtls", "sumneko_lua"}
+local servers = {
+  pyls = {},
+  bashls = {},
+  rust_analyzer = {},
+  tsserver = {},
+  gopls = {},
+  terraformls = {},
+  dockerls = {},
+  jsonls = {},
+  texlab = {},
+  yamlls = {},
+  vimls = {},
+  jdtls = {},
+  sumneko_lua = {
+    cmd = {bin, "-E", build .. "/main.lua"},
+    settings = {
+      Lua = {
+        runtime = {
+          version = "LuaJIT",
+          path = vim.split(package.path, ";")
+        },
+        completion = {
+          keywordSnippet = "Disable"
+        },
+        diagnostics = {
+          enable = true,
+          globals = {
+            "vim"
+          }
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+          }
+        }
+      }
+    }
+  }
+}
 
 local on_attach = function(client)
   completion.on_attach(client)
@@ -56,8 +98,8 @@ function M.setup()
     }
   }
 
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup { on_attach = on_attach }
+  for server, config in pairs(servers) do
+    nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach }, config))
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
