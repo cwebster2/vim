@@ -55,7 +55,7 @@ wo.number = true
 wo.cursorline = true
 wo.fillchars = "vert:|"
 wo.list = true
-wo.listchars = "tab:▷\\ ,trail:·,extends:◣,precedes:◢,nbsp:○"
+wo.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○"
 o.list = true
-o.listchars = "tab:▷\\ ,trail:·,extends:◣,precedes:◢,nbsp:○"
+o.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○"
 

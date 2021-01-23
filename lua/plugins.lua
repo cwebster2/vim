@@ -81,15 +81,15 @@ function M.setup()
   plug('Shougo/neosnippet-snippets')
 
   plug('vim-latex/vim-latex')
+  plug('airblade/vim-rooter')
+
+  plug('tpope/vim-eunuch')
+  plug('tpope/vim-surround')
 
   -- still evaluating if these are needed now
-  --Plug 'tpope/vim-sensible'
-  --Plug 'airblade/vim-rooter'
   --Plug 'mattn/emmet-vim'
-  --Plug 'terryma/vim-multiple-cursors'
-  --Plug 'tpope/vim-eunuch'
-  --Plug 'tpope/vim-surround'
-  --Plug 'Raimondi/delimitMate'
+  --Plug 'terryma/vim-multiple-cursors' -- need to rebind its c-n key to use it
+  --Plug 'Raimondi/delimitMate' -- closes quotes and stuff
   --Plug 'sheerun/vim-polyglot'  " syntax files for most languages
   --Plug 'vim-python/python-syntax'  " Improved python syntax
   --Plug 'Vimjas/vim-python-pep8-indent'  " Proper python indenting

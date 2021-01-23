@@ -35,7 +35,7 @@ let b:ale_fixers = {
 
 let g:ale_statusline_format = ['E%d', 'W%d', 'K']
 let g:ale_maximum_file_size = 500000
-let g:ale_rust_rls_executable = $HOME . '/.cargo/bin/rls'
+"let g:ale_rust_rls_executable = $HOME . '/bin/rust-analyzer'
 let g:ale_go_langserver_executable  = $HOME . '/go/bin/go-langserver'
 let g:ale_python_pyls_config = {'pyls': {'plugins': {'pycodestyle': {'enabled': v:false}}}}
 "let g:ale_completion_tsserver_autoimport = 1
@@ -56,8 +56,6 @@ let g:ale_sign_warning = '⚠'
 "nnoremap <leader>r :lrewind<CR>
 nnoremap <leader>eo :lopen<CR>
 nnoremap <leader>ec :lclose<CR>
-highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
 "nmap <silent> <Leader>n <Plug>(ale_previous_wrap)
 "nmap <silent> <Leader>e <Plug>(ale_next_wrap)
 nmap <tab>a <Plug>(ale_fix)
