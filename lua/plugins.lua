@@ -53,6 +53,7 @@ function M.setup()
   plug('airblade/vim-gitgutter')
   plug('kyazdani42/nvim-web-devicons')
   plug('ryanoasis/vim-devicons')
+  plug('szw/vim-maximizer')
 
   -- linting
   --plug('w0rp/ale')
@@ -71,6 +72,8 @@ function M.setup()
   plug('unblevable/quick-scope')
   plug('kyazdani42/nvim-tree.lua')
   plug('tmsvg/pear-tree')
+  plug('kassio/neoterm')
+  plug('sbdchd/neoformat')
 
   -- markdown
   plug('plasticboy/vim-markdown')
