@@ -55,7 +55,7 @@ function M.setup()
   plug('ryanoasis/vim-devicons')
 
   -- linting
-  plug('w0rp/ale')
+  --plug('w0rp/ale')
 
   -- language stuff
   plug('junegunn/fzf', '{ \'do\': { -> fzf#install() } }')
