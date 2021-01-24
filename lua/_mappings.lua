@@ -52,5 +52,5 @@ map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
 map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
 map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
 
-map('n', '<Leader>F', ':Neoformat prettier<CR>', {noreap=true})
+map('n', '<Leader>a', ':Neoformat prettier<CR>', {noreap=true})
 

@@ -7,7 +7,7 @@ M.setup = function()
   g.nvim_tree_side = 'left'
   g.nvim_tree_width = 30
   g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' }
-  g.nvim_tree_auto_open = 1
+  g.nvim_tree_auto_open = 0
   g.nvim_tree_auto_close = 1
   g.nvim_tree_quit_on_open = 0
   g.nvim_tree_follow = 1
@@ -75,7 +75,7 @@ M.setup = function()
       },
     }
 
-  map('n', '<Leader>D', ':NvimTreeToggle<CR>', {noremap=true})
+  map('n', '<Leader>F', ':NvimTreeToggle<CR>', {noremap=true})
   --nnoremap <leader>r :NvimTreeRefresh<CR>
   map('n', '<Leader>f', ':NvimTreeFindFile<CR>', {noremap=true})
   -- NvimTreeOpen and NvimTreeClose are also available if you need them

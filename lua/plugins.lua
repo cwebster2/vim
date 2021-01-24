@@ -74,6 +74,7 @@ function M.setup()
   plug('tmsvg/pear-tree')
   plug('kassio/neoterm')
   plug('sbdchd/neoformat')
+  plug('junegunn/gv.vim')
 
   -- markdown
   plug('plasticboy/vim-markdown')
@@ -89,6 +90,8 @@ function M.setup()
   plug('tpope/vim-eunuch')
   plug('tpope/vim-surround')
 
+  plug('mhinz/vim-startify')
+
   -- still evaluating if these are needed now
   --Plug 'mattn/emmet-vim'
   --Plug 'terryma/vim-multiple-cursors' -- need to rebind its c-n key to use it
@@ -99,12 +102,9 @@ function M.setup()
   --Plug 'chrisbra/Colorizer'  " Highlight CSS colors
   --Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
   --Plug 'honza/vim-snippets'
-  --Plug 'luochen1990/rainbow'
   --Plug 'jaxbot/github-issues.vim'
-  --Plug 'junegunn/gv.vim'
   --Plug 'rhysd/git-messenger.vim'
   --Plug 'jreybert/vimagit'
-  --Plug 'mhinz/vim-startify'
 
   plug_end()
 end
