@@ -64,6 +64,7 @@ function M.setup()
   plug('tpope/vim-fugitive')
   plug('scrooloose/nerdcommenter')
   plug('Yggdroot/indentLine')
+  plug('lukas-reineke/indent-blankline.nvim', '{ \'branch\': \'lua\'}')
   plug('editorconfig/editorconfig-vim')
   plug('ntpeters/vim-better-whitespace')
 
