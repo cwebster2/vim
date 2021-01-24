@@ -34,10 +34,10 @@ map ('n', '<F9>', ':set spell!<cr>', {silent=true})
 map ('i', '<F9>', '<C-O>:set spell!<cr>', {silent=true})
 
 -- location list
-map('n', '<Leader>qq', ':lopen<cr>', {})
-map('n', '<Leader>qn', ':lnext<cr>', {})
-map('n', '<Leader>qp', ':lprev<cr>', {})
-map('n', '<Leader>qc', ':lclose<cr>', {})
+map('n', '<Leader>ll', ':lopen<cr>', {})
+map('n', '<Leader>ln', ':lnext<cr>', {})
+map('n', '<Leader>lp', ':lprev<cr>', {})
+map('n', '<Leader>lc', ':lclose<cr>', {})
 
 -- swap to last buffer
 map('n', '<Leader>b', ':e#<CR>', {noremap=true})
