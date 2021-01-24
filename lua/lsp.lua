@@ -66,6 +66,7 @@ local on_attach = function(client)
   vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
   vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
   vim.api.nvim_command("autocmd InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
+  vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
 end
 
 local function custom_codeAction(_, _, action)
@@ -99,7 +100,7 @@ function M.setup()
     },
     refactor = {
       highlight_definitions = { enable = true },
-      --highlight_current_scope = { enable = true },
+      highlight_current_scope = { enable = true },
     }
   }
 
