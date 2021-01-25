@@ -54,14 +54,21 @@ local on_attach = function(client)
   local opts = {noremap = true, silent = true}
   map("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  map("n", "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  --map("n", "gd", "<Cmd>lua require'lspsaga.provider'.preview_definiton()<CR>", opts)
+  --map("n", "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  map("n", "ga", "<cmd>lua require'lspsaga.codeaction'.code_action()<CR>", opts)
   map("n", "gk", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
   map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  map("n", "gh", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
   map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   map("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references()<CR>", opts)
+  --map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   map("n", "<leader>d", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
   map("n", "[g", "<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
   map("n", "]g", "<cmd> lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+  --map("n", "[g", "<cmd> lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
+  --map("n", "]g", "<cmd> lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
   vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
   vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
   vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
@@ -148,5 +155,14 @@ function M.setup()
   ]]
   map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
   --map('i', '<cr>', "pumvisible() ? complete_info()[\"selected\"] != \"-1\" ? \"\\<Plug>(completion_confirm_completion)\"  : \"\\<c-e>\\<CR>\" :  \"\\<CR>\"", {expr=true})
+
+  --saga
+
+  local opts = {
+  }
+
+  local saga = require'lspsaga'
+
+  saga.init_lsp_saga(opts)
 
   return M

@@ -34,6 +34,7 @@ a.nvim_command [[ highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE gui
 a.nvim_command [[ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow ]]
 a.nvim_command [[ highlight ALEInfoSign ctermbg=NONE ctermfg=blue guibg=NONE guifg=blue ]]
 a.nvim_command [[ highlight ALEHintSign ctermbg=NONE ctermfg=green guibg=NONE guifg=green ]]
+a.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
 
 vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "ALEErrorSign"})
 vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "⚠", texthl = "ALEWarningSign"})

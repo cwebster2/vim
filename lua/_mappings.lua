@@ -54,3 +54,12 @@ map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
 
 map('n', '<Leader>a', ':Neoformat prettier<CR>', {noremap=true})
 
+map('n', '<C-p>', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
+map('n', 'ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
+map('n', 'fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
+map('n', 'fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
+map('n', 'fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>", {noremap=true})
+map('n', 'fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
+map('n', 'fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
+map('n', 'fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=true})
+

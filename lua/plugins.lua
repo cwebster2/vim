@@ -33,6 +33,9 @@ function M.setup()
   plug_begin()
 
   -- LSP stuff
+  plug('nvim-lua/plenary.nvim')
+  plug('nvim-lua/popup.nvim')
+  plug('nvim-telescope/telescope.nvim')
   plug('neovim/nvim-lspconfig')
   plug('nvim-treesitter/nvim-treesitter', '{\'do\': \':TSUpdate\'}')
   plug('nvim-treesitter/nvim-treesitter-textobjects')
@@ -41,6 +44,7 @@ function M.setup()
   plug('p00f/nvim-ts-rainbow')
   plug('nvim-lua/completion-nvim')
   plug('puremourning/vimspector')
+  plug('glepnir/lspsaga.nvim')
 
   -- colorschemes
   plug('glepnir/zephyr-nvim')
@@ -59,8 +63,8 @@ function M.setup()
   --plug('w0rp/ale')
 
   -- language stuff
-  plug('junegunn/fzf', '{ \'do\': { -> fzf#install() } }')
-  plug('junegunn/fzf.vim')
+  --plug('junegunn/fzf', '{ \'do\': { -> fzf#install() } }')
+  --plug('junegunn/fzf.vim')
   plug('tpope/vim-fugitive')
   plug('scrooloose/nerdcommenter')
   plug('Yggdroot/indentLine')
@@ -84,6 +88,7 @@ function M.setup()
   -- snippets
   plug('Shougo/neosnippet.vim')
   plug('Shougo/neosnippet-snippets')
+  plug('honza/vim-snippets')
 
   plug('vim-latex/vim-latex')
   plug('airblade/vim-rooter')
@@ -102,7 +107,6 @@ function M.setup()
   --Plug 'Vimjas/vim-python-pep8-indent'  " Proper python indenting
   --Plug 'chrisbra/Colorizer'  " Highlight CSS colors
   --Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
-  --Plug 'honza/vim-snippets'
   --Plug 'jaxbot/github-issues.vim'
   --Plug 'rhysd/git-messenger.vim'
   --Plug 'jreybert/vimagit'

@@ -26,6 +26,7 @@ require'nvimtree'.setup()
 require'_vista'
 require'_theme'
 require'plugin_config'
+require'_telescope'
 
 a.nvim_exec([[
   if has ("autocmd")
