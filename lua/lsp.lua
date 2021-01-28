@@ -12,8 +12,11 @@ local servers = {
   bashls = {},
   rust_analyzer = {},
   tsserver = {},
+  vuels = {},
   gopls = {},
-  terraformls = {},
+  terraformls = {
+    filetypes = {"tf", "terraform"},
+  },
   dockerls = {},
   jsonls = {},
   texlab = {},
