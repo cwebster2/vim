@@ -7,6 +7,24 @@ local home = vim.fn.expand("$HOME")
 local build = home .. "/src/lua-language-server"
 local bin = build .. "/bin/Linux/lua-language-server"
 
+local prettier = require "efm/prettier"
+local eslint = require "efm/eslint"
+local language_formatterts = {
+  typescript = {prettier, eslint},
+  javascript = {prettier, eslint},
+  typescriptreact = {prettier, eslint},
+  javascriptreact = {prettier, eslint},
+  yaml = {prettier},
+  json = {prettier},
+  html = {prettier},
+  scss = {prettier},
+  css = {prettier},
+  markdown = {prettier},
+  lua = {
+    {formatCommand = "lua-format -i", formatStdin = true}
+  }
+}
+
 local servers = {
   pyls = {},
   bashls = {},
@@ -48,6 +66,18 @@ local servers = {
         }
       }
     }
+  },
+  efm = {
+    filetypes = vim.tbl_keys(language_formatterts),
+    root_dir = nvim_lsp.util.root_pattern("package.json","yarn.lock", ".git"),
+    init_options = {
+      documentFormatting = true,
+      codeAction = true
+    },
+    settings = {
+      rootMarkers = {".git/"},
+      languages = language_formatterts
+    }
   }
 }
 
@@ -58,10 +88,11 @@ local on_attach = function(client)
   map("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
   --map("n", "gd", "<Cmd>lua require'lspsaga.provider'.preview_definiton()<CR>", opts)
-  --map("n", "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  map("n", "ga", "<cmd>lua require'lspsaga.codeaction'.code_action()<CR>", opts)
+  map("n", "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  --map("n", "ga", "<cmd>lua require'lspsaga.codeaction'.code_action()<CR>", opts)
   map("n", "gk", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
   map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   map("n", "gh", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
   map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
@@ -77,6 +108,13 @@ local on_attach = function(client)
   vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
   vim.api.nvim_command("autocmd InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
+
+  -- Set some keybinds conditional on server capabilities
+  if client.resolved_capabilities.document_formatting then
+    map("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  elseif client.resolved_capabilities.document_range_formatting then
+    map("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  end
 end
 
 local function custom_codeAction(_, _, action)
@@ -102,7 +140,7 @@ function M.setup()
     },
     highlight = {
       enable = true,
-      disable = { "ruby" },
+      disable = {},
     },
     rainbow = {
       enable = true,
@@ -144,28 +182,29 @@ function M.setup()
   vim.g.completion_chain_complete_list = {
     default = {
       { complete_items = { 'lsp', 'snippet', 'path', 'buffers', 'tags'} },
+      {complete_items = {'path'}, triggered_only = {'/'}},
     },
     string = {
-      { complete_items = { 'path'} },
+      {complete_items = {'path'}, triggered_only = {'/'}},
+      { complete_items = { 'buffers'} },
     },
   }
   end
   -- tab for completion
-  --map('i', '<Tab>', "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", {expr=true, noremap=true})
-  vim.api.nvim_command [[
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  ]]
-  map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
-  --map('i', '<cr>', "pumvisible() ? complete_info()[\"selected\"] != \"-1\" ? \"\\<Plug>(completion_confirm_completion)\"  : \"\\<c-e>\\<CR>\" :  \"\\<CR>\"", {expr=true})
-
+  --vim.api.nvim_command [[
+  --  imap <expr><TAB> neosnippet#jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+  --  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  --  imap <expr><CR> neosnippet#expandable_or_jumpable() ?   "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<CR>" : "\<Plug>(PearTreeExpand)"
+  --]]
+  --map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
+  --
   --saga
 
-  local opts = {
-  }
-
-  local saga = require'lspsaga'
-
-  saga.init_lsp_saga(opts)
+  --local opts = {
+  --}
+  --
+  --local saga = require'lspsaga'
+  --
+  --saga.init_lsp_saga(opts)
 
   return M

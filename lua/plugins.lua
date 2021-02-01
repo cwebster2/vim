@@ -44,7 +44,7 @@ function M.setup()
   plug('p00f/nvim-ts-rainbow')
   plug('nvim-lua/completion-nvim')
   plug('puremourning/vimspector')
-  plug('glepnir/lspsaga.nvim')
+  --plug('glepnir/lspsaga.nvim')
 
   -- colorschemes
   plug('glepnir/zephyr-nvim')
@@ -76,9 +76,10 @@ function M.setup()
   plug('liuchengxu/vista.vim')
   plug('unblevable/quick-scope')
   plug('kyazdani42/nvim-tree.lua')
+  --plug('jiangmiao/auto-pairs')
+  --plug('Raimondi/delimitMate')
   plug('tmsvg/pear-tree')
   plug('kassio/neoterm')
-  plug('sbdchd/neoformat')
   plug('junegunn/gv.vim')
 
   -- markdown
@@ -96,7 +97,7 @@ function M.setup()
   plug('tpope/vim-eunuch')
   plug('tpope/vim-surround')
 
-  plug('mhinz/vim-startify')
+  --plug('mhinz/vim-startify')
 
   -- still evaluating if these are needed now
   --Plug 'mattn/emmet-vim'

@@ -8,6 +8,7 @@ require("telescope").setup {
                 ["<C-x>"] = false,
                 ["<C-s>"] = actions.goto_file_selection_split,
                 ["<CR>"] = actions.goto_file_selection_edit + actions.center,
+                ["<C-p>"] = actions.goto_file_selection_edit + actions.center,
                 -- next | prev
                 ["<C-n>"] = actions.move_selection_next,
                 ["<C-e>"] = actions.move_selection_previous,

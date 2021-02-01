@@ -1,5 +1,13 @@
 local map = require("utils").map
 
+
+vim.api.nvim_command [[
+imap <expr><TAB> neosnippet#jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><CR>  neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+]]
+map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
+
 -- visual mode indent keep selection
 map('v', '<', '<gv', {noremap=true})
 map('v', '>', '>gv', {noremap=true})
@@ -51,8 +59,6 @@ map('i', '<F3>', '<C-o>:MaximizerToggle<CR>', {silent=true})
 map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
 map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
 map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
-
-map('n', '<Leader>a', ':Neoformat prettier<CR>', {noremap=true})
 
 map('n', '<C-p>', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
 map('n', 'ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
