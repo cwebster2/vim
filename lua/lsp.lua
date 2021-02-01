@@ -94,7 +94,7 @@ local on_attach = function(client)
   map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
   map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  map("n", "gh", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
+  --map("n", "gh", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
   map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   map("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references()<CR>", opts)
   --map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
@@ -115,6 +115,11 @@ local on_attach = function(client)
   elseif client.resolved_capabilities.document_range_formatting then
     map("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
+
+  vim.api.nvim_command [[
+    imap <buffer><expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<CR>" : "\<Plug>(PearTreeExpand)"
+  ]]
+
 end
 
 local function custom_codeAction(_, _, action)
@@ -190,14 +195,7 @@ function M.setup()
     },
   }
   end
-  -- tab for completion
-  --vim.api.nvim_command [[
-  --  imap <expr><TAB> neosnippet#jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-  --  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  --  imap <expr><CR> neosnippet#expandable_or_jumpable() ?   "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<CR>" : "\<Plug>(PearTreeExpand)"
-  --]]
-  --map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
-  --
+
   --saga
 
   --local opts = {
