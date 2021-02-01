@@ -18,9 +18,11 @@ g.gitgutter_sign_modified_removed = "▋"
 g.indentLine_char = '▏'
 g.indentLine_color_gui = '#222222'
 
---g.delimitMate_expand_cr = 2
 g.pear_tree_repeatable_expand = 0
 g.pear_tree_map_special_keys = 0
+g.pear_tree_smart_openers = 1
+g.pear_tree_smart_closers = 1
+g.pear_tree_smart_backspace = 1
 
 g.better_whitespace_ctermcolor='red'
 g.better_whitespace_guicolor='red'
