@@ -48,6 +48,11 @@ g.neoterm_default_mod = 'vertical'
 g.neoterm_size = 60
 g.neoterm_autoinsert = 1
 
+vim.api.nvim_command[[
+let test#strategy = "neovim"
+let test#neovim#term_position = "vertical"
+]]
+
 g.startify_session_autoload = 1
 g.startify_session_delete_buffers = 1
 g.startify_change_to_vcs_root = 1

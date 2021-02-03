@@ -70,4 +70,10 @@ map('n', 'fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>", {noremap
 map('n', 'fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
 map('n', 'fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
 map('n', 'fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=true})
+map('n', 'fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
 
+
+map('n', 'tt', "<cmd>TestNearest<CR>", {noremap=true})
+map('n', 'tf', "<cmd>TestFile<CR>", {noremap=true})
+map('n', 'ts', "<cmd>TestSuite<CR>", {noremap=true})
+map('n', 't_', "<cmd>TestLast<CR>", {noremap=true})

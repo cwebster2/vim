@@ -76,11 +76,10 @@ function M.setup()
   plug('liuchengxu/vista.vim')
   plug('unblevable/quick-scope')
   plug('kyazdani42/nvim-tree.lua')
-  --plug('jiangmiao/auto-pairs')
-  --plug('Raimondi/delimitMate')
   plug('tmsvg/pear-tree')
   plug('kassio/neoterm')
   plug('junegunn/gv.vim')
+  plug('janko/vim-test')
 
   -- markdown
   plug('plasticboy/vim-markdown')
@@ -97,7 +96,7 @@ function M.setup()
   plug('tpope/vim-eunuch')
   plug('tpope/vim-surround')
 
-  --plug('mhinz/vim-startify')
+  plug('mhinz/vim-startify')
 
   -- still evaluating if these are needed now
   --Plug 'mattn/emmet-vim'

@@ -1,5 +1,6 @@
 local actions = require("telescope.actions")
 
+
 require("telescope").setup {
     defaults = {
         mappings = {
@@ -65,3 +66,4 @@ require("telescope").setup {
     }
 }
 
+--require('telescope').load_extension('fzy_native')
