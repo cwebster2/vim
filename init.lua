@@ -12,6 +12,11 @@ g.maplocalleader = ','
 -- set global, window and buffer options
 require'_options'
 
+-- if this is being loaded by neovim running in vscode, bail
+if vim.fn.exists('g:vscode') == 1 then
+  do return end
+end
+
 -- some globals that need setting before plugins are loaded
 g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
 g.loaded_netrwPlugin = 1
