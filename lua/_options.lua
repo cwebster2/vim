@@ -2,7 +2,7 @@ local o = vim.o
 local wo = vim.wo
 local bo = vim.bo
 
-o.shell = "/bin/bash"
+o.shell = "/bin/zsh"
 o.updatetime = 300
 o.foldlevelstart = 99
 o.termguicolors = true
@@ -44,12 +44,19 @@ o.virtualedit = "onemore"
 o.writebackup = false
 
 bo.autoindent = false
+o.autoindent = false
 bo.autoread = true
+o.autoread = true
 bo.tabstop = 2
+o.tabstop = 2
 bo.shiftwidth = 2
+o.shiftwidth = 2
 bo.softtabstop = 2
+o.softtabstop = 2
 bo.expandtab = true
+o.expandtab = true
 bo.smartindent = true
+o.smartindent = true
 
 wo.signcolumn = "yes"
 wo.number = true

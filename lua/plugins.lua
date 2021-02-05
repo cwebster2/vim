@@ -80,6 +80,9 @@ function M.setup()
   plug('kassio/neoterm')
   plug('junegunn/gv.vim')
   plug('janko/vim-test')
+  plug('junegunn/fzf', '{ \'do\': { -> fzf#install() } }')
+  plug('junegunn/fzf.vim')
+
 
   -- markdown
   plug('plasticboy/vim-markdown')

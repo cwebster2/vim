@@ -38,12 +38,6 @@ g.vim_markdown_math = 1
 g.vim_markdown_fenced_languages = {'css', 'javascript', 'js=javascript', 'typescript',
     'go', 'python', 'py=python', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini'}
 
-g.mkdp_auto_close = 0
-
-g.tex_flavor='latex'
-g.Tex_DefaultTargetFormat='pdf'
-g.Tex_CompileRule_pdf='pdflatex --interaction=nonstopmode $*'
-
 g.neoterm_default_mod = 'vertical'
 g.neoterm_size = 60
 g.neoterm_autoinsert = 1

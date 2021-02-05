@@ -23,6 +23,8 @@ g.loaded_netrwPlugin = 1
 g.polyglot_disabled = {'python', 'latex', 'typescript'} -- Use python-syntax and vimtex
 g.jsx_ext_required = 0
 g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
+g.mkdp_auto_close = 0
+g.mkdp_auto_open = 1
 
 -- require plugins and stuff
 require'plugins'.setup()
@@ -32,6 +34,7 @@ require'_vista'
 require'_theme'
 require'plugin_config'
 require'_telescope'
+require'_vimspector'
 
 a.nvim_exec([[
   if has ("autocmd")

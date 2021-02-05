@@ -73,6 +73,7 @@ map('n', 'fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=
 map('n', 'fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
 
 
+
 map('n', 'tt', "<cmd>TestNearest<CR>", {noremap=true})
 map('n', 'tf', "<cmd>TestFile<CR>", {noremap=true})
 map('n', 'ts', "<cmd>TestSuite<CR>", {noremap=true})

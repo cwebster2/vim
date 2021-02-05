@@ -37,7 +37,16 @@ local servers = {
   },
   dockerls = {},
   jsonls = {},
-  texlab = {},
+  texlab = {
+    settings = {
+      latex = {
+        build = {
+          executable = "pdflatex",
+          onSave = true;
+        }
+      }
+    }
+  },
   yamlls = {},
   vimls = {},
   jdtls = {},
@@ -107,11 +116,14 @@ local on_attach = function(client)
   --map("n", "[g", "<cmd> lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
   --map("n", "]g", "<cmd> lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
   --vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
-  vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
-  vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
   vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
   vim.api.nvim_command("autocmd InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
+
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
+    vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
+  end
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
@@ -121,7 +133,7 @@ local on_attach = function(client)
   end
 
   vim.api.nvim_command [[
-    imap <buffer><expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<CR>" : "\<Plug>(PearTreeExpand)"
+    imap <buffer><expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<Plug>(PearTreeExpand)"
   ]]
 
 end
@@ -185,9 +197,20 @@ function M.setup()
   vim.g.completion_auto_change_source = 1
   vim.g.completion_trigger_on_delete = 1
   vim.g.completion_enable_auto_hover = 1
+  vim.g.completion_docked_hover = 1
   vim.g.completion_enable_auto_signature = 1
   vim.g.completion_enable_auto_paren = 1
-  --vim.g.completion_confirm_key = ""
+  vim.g.completion_confirm_key = ""
+  vim.g.completion_customize_lsp_label = {
+    Function = ' [function]',
+    Method = ' [method]',
+    Reference = ' [refrence]',
+  }
+  vim.g.completion_items_priority = {
+    Function = 10,
+    Method = 5,
+    Reference = 9
+  }
   vim.g.completion_chain_complete_list = {
     default = {
       { complete_items = { 'lsp', 'snippet', 'path', 'buffers', 'tags'} },
@@ -198,8 +221,36 @@ function M.setup()
       { complete_items = { 'buffers'} },
     },
   }
-  end
 
+  require('vim.lsp.protocol').CompletionItemKind = {
+    '';             -- Text          = 1;
+    '';             -- Method        = 2;
+    'ƒ';             -- Function      = 3;
+    '';             -- Constructor   = 4;
+    'Field';         -- Field         = 5;
+    '';             -- Variable      = 6;
+    '';             -- Class         = 7;
+    'ﰮ';             -- Interface     = 8;
+    '';             -- Module        = 9;
+    '';             -- Property      = 10;
+    '';             -- Unit          = 11;
+    '';             -- Value         = 12;
+    '了';            -- Enum          = 13;
+    '';             -- Keyword       = 14;
+    '﬌';             -- Snippet       = 15;
+    '';             -- Color         = 16;
+    '';             -- File          = 17;
+    'Reference';     -- Reference     = 18;
+    '';             -- Folder        = 19;
+    '';             -- EnumMember    = 20;
+    '';             -- Constant      = 21;
+    '';             -- Struct        = 22;
+    'Event';         -- Event         = 23;
+    'Operator';      -- Operator      = 24;
+    'TypeParameter'; -- TypeParameter = 25;
+  }
+
+  end
   --saga
 
   --local opts = {
