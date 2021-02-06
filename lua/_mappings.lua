@@ -62,7 +62,7 @@ map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
 map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
 map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
 
-map('n', '<C-p>', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
+map('n', 'fp', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
 map('n', 'ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
 map('n', 'fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
 map('n', 'fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
