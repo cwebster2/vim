@@ -32,6 +32,21 @@ _G.stab_complete_i = function()
   end
 end
 
+--    <expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<Plug>(PearTreeExpand)"
+_G.cr_complete_i = function()
+  if vim.fn.pumvisible() == 1 then
+    if vim.fn.complete_info()["selected"] ~= "-1" then
+      return t "<Plug>(completion_confirm_completion)"
+    else
+      return t "<C-e><CR>"
+    end
+  elseif vim.fn.call("neosnippet#expandable_or_jumpable", {}) == 1 then
+    return t "<Plug>(neosnippet_expand_or_jump)"
+  else
+    return t "<Plug>(PearTreeExpand)"
+  end
+end
+
 function M.completion()
   vim.g.completion_enable_snippet = "Neosnippet"
   vim.g.completion_matching_ignore_case = 1
@@ -41,7 +56,7 @@ function M.completion()
   vim.g.completion_enable_auto_hover = 1
   vim.g.completion_enable_auto_signature = 1
   vim.g.completion_enable_auto_paren = 1
-  vim.g.completion_confirm_key = "<C-y>"
+  vim.g.completion_confirm_key = ""
   vim.g.completion_customize_lsp_label = {
     Function = ' [function]',
     Method = ' [method]',
@@ -67,9 +82,13 @@ function M.completion()
   }
 
   -- TODO handle esc so it does not leave text behind
+  vim.g.lexima_no_default_rules = "v:true"
+  --vim.fn.call("lexima#set_default_rules", {})
   vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete_i()", {expr=true})
   vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete_s()", {expr=true})
   vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.stab_complete_i()", {expr=true})
+  vim.api.nvim_set_keymap("i", "<CR>", "v:lua.cr_complete_i()", {expr=true})
+  vim.api.nvim_set_keymap("i", "<BS>", "<Plug>(PearTreeBackspace)", {})
 end
 
 function M.compe()

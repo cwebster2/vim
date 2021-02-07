@@ -131,11 +131,6 @@ local on_attach = function(client)
   elseif client.resolved_capabilities.document_range_formatting then
     map("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
-
-  vim.api.nvim_command [[
-    imap <buffer><expr><CR> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<Plug>(PearTreeExpand)"
-  ]]
-
 end
 
 local function custom_codeAction(_, _, action)

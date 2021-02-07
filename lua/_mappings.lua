@@ -1,10 +1,5 @@
 local map = require("utils").map
 
-
-vim.api.nvim_command [[
-imap <expr><BS> "\<Plug>(PearTreeBackspace)"
-]]
-
 -- visual mode indent keep selection
 map('v', '<', '<gv', {noremap=true})
 map('v', '>', '>gv', {noremap=true})
