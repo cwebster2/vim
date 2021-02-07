@@ -191,36 +191,7 @@ function M.setup()
     }
   )
 
-  vim.g.completion_enable_snippet = "Neosnippet"
-  vim.g.completion_matching_ignore_case = 1
-  vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
-  vim.g.completion_auto_change_source = 1
-  vim.g.completion_trigger_on_delete = 1
-  vim.g.completion_enable_auto_hover = 1
-  vim.g.completion_docked_hover = 1
-  vim.g.completion_enable_auto_signature = 1
-  vim.g.completion_enable_auto_paren = 1
-  vim.g.completion_confirm_key = ""
-  vim.g.completion_customize_lsp_label = {
-    Function = ' [function]',
-    Method = ' [method]',
-    Reference = ' [refrence]',
-  }
-  vim.g.completion_items_priority = {
-    Function = 10,
-    Method = 5,
-    Reference = 9
-  }
-  vim.g.completion_chain_complete_list = {
-    default = {
-      { complete_items = { 'lsp', 'snippet', 'path', 'buffers', 'tags'} },
-      {complete_items = {'path'}, triggered_only = {'/'}},
-    },
-    string = {
-      {complete_items = {'path'}, triggered_only = {'/'}},
-      { complete_items = { 'buffers'} },
-    },
-  }
+  require'_completion'.completion()
 
   require('vim.lsp.protocol').CompletionItemKind = {
     '';             -- Text          = 1;

@@ -43,6 +43,8 @@ function M.setup()
   plug('romgrk/nvim-treesitter-context')
   plug('p00f/nvim-ts-rainbow')
   plug('nvim-lua/completion-nvim')
+  plug('steelsojka/completion-buffers')
+  plug('nvim-treesitter/completion-treesitter')
   plug('puremourning/vimspector')
   --plug('glepnir/lspsaga.nvim')
 

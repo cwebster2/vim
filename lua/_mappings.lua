@@ -1,14 +1,9 @@
 local map = require("utils").map
 
 
---imap <expr><CR>  neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<CR>" : "\<CR>\<Plug>(PearTreeExpand)"
---imap <expr><CR>  pumvisible() ? "\<CR>" : "\<CR>\<Plug>(PearTreeExpand)"
 vim.api.nvim_command [[
-imap <expr><TAB> neosnippet#jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?  "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 imap <expr><BS> "\<Plug>(PearTreeBackspace)"
 ]]
-map('i', '<S-Tab>', "pumvisible() ? \"\\<C-p>\" : \"\\<S-Tab>\"", {expr=true, noremap=true})
 
 -- visual mode indent keep selection
 map('v', '<', '<gv', {noremap=true})
