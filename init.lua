@@ -29,6 +29,9 @@ g.mkdp_auto_open = 1
 -- require plugins and stuff
 require'plugins'.setup()
 require'lsp'.setup()
+local completion_setup = require'_completion'
+completion_setup.completion()
+completion_setup.kinds()
 require'nvimtree'.setup()
 require'_vista'
 require'_theme'
