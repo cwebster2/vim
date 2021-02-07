@@ -32,21 +32,31 @@ end
 function M.setup()
   plug_begin()
 
-  -- LSP stuff
+  -- fuzzy stuff
   plug('nvim-lua/plenary.nvim')
   plug('nvim-lua/popup.nvim')
   plug('nvim-telescope/telescope.nvim')
+  plug('junegunn/fzf', '{ \'do\': { -> fzf#install() } }')
+  plug('junegunn/fzf.vim')
+
+  -- LSP stuff
   plug('neovim/nvim-lspconfig')
   plug('nvim-treesitter/nvim-treesitter', '{\'do\': \':TSUpdate\'}')
   plug('nvim-treesitter/nvim-treesitter-textobjects')
   plug('nvim-treesitter/nvim-treesitter-refactor')
+  plug('nvim-treesitter/completion-treesitter')
   plug('romgrk/nvim-treesitter-context')
   plug('p00f/nvim-ts-rainbow')
+  --plug('glepnir/lspsaga.nvim')
+
+  -- Completion
   plug('nvim-lua/completion-nvim')
   plug('steelsojka/completion-buffers')
-  plug('nvim-treesitter/completion-treesitter')
-  plug('puremourning/vimspector')
-  --plug('glepnir/lspsaga.nvim')
+
+  -- Snippets
+  plug('Shougo/neosnippet.vim')
+  plug('Shougo/neosnippet-snippets')
+  plug('honza/vim-snippets')
 
   -- colorschemes
   plug('glepnir/zephyr-nvim')
@@ -65,8 +75,6 @@ function M.setup()
   --plug('w0rp/ale')
 
   -- language stuff
-  --plug('junegunn/fzf', '{ \'do\': { -> fzf#install() } }')
-  --plug('junegunn/fzf.vim')
   plug('tpope/vim-fugitive')
   plug('scrooloose/nerdcommenter')
   plug('Yggdroot/indentLine')
@@ -82,18 +90,13 @@ function M.setup()
   plug('kassio/neoterm')
   plug('junegunn/gv.vim')
   plug('janko/vim-test')
-  plug('junegunn/fzf', '{ \'do\': { -> fzf#install() } }')
-  plug('junegunn/fzf.vim')
+  plug('puremourning/vimspector')
 
 
   -- markdown
   plug('plasticboy/vim-markdown')
   plug('iamcco/markdown-preview.nvim', '{ \'do\': { -> mkdp#util#install() }, \'for\': [\'markdown\', \'vim-plug\']}')
 
-  -- snippets
-  plug('Shougo/neosnippet.vim')
-  plug('Shougo/neosnippet-snippets')
-  plug('honza/vim-snippets')
 
   plug('vim-latex/vim-latex')
   plug('airblade/vim-rooter')
