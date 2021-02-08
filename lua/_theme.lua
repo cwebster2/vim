@@ -12,101 +12,6 @@ g.jellybeans_overrides = {
     guibg = 'none',
     ["256ctermbg"] = 'none',
   },
-  SignColumn = {
-    ctermbg = 'none',
-    guibg = 'none',
-    ["256ctermbg"] = 'none',
-    ctermfg = 'none',
-    guifg = 'none'
-  },
-  GitGutterAdd = {
-    ctermbg = 'NONE',
-    ctermfg = 'Green',
-    guibg = 'NONE',
-    guifg = '437019'
-  },
-  GitGutterChange = {
-    ctermbg = 'NONE',
-    ctermfg = 'green',
-    guibg = 'NONE',
-    guifg = '2B5B77'
-  },
-  GitGutterDelete = {
-    ctermbg = 'NONE',
-    ctermfg = 'red',
-    guibg = 'NONE',
-    guifg = '700009'
-  },
-  GitGutterChangeDelete = {
-    ctermbg = 'NONE',
-    ctermfg = 'red',
-    guibg = 'NONE',
-    guifg = '2B5B77'
-  },
-  PMenu = {
-    ctermbg = 'black',
-    guibg = '191919'
-  },
-  PMenuSel = {
-    guifg = 'ffffff',
-    guibg = '333333'
-  },
-  SpellCap = {
-    guibg = 'NONE',
-    guisp = '700009',
-    attr =  'undercurl',
-  },
-  SpellBad = {
-    guibg = 'none',
-    attr =  'undercurl',
-  },
-  ALEErrorSign = {
-     ctermbg='NONE',
-     ctermfg='red',
-     guibg='NONE',
-     guifg='FF0000'
-  },
-  ALEWarningSign = {
-
-     ctermbg='NONE',
-     ctermfg='yellow',
-     guibg='NONE',
-     guifg='FFFF00'
-  },
-  ALEInfoSign = {
-
-     ctermbg='NONE',
-     ctermfg='blue',
-     guibg='NONE',
-     guifg='0000FF'
-  },
-  ALEHintSign = {
-
-     ctermbg='NONE',
-     ctermfg='green',
-     guibg='NONE',
-     guifg='00FF00'
-  },
-  LspDiagnosticsUnderlineError = {
-    guifg = 'EB4917',
-    attr = 'undercurl'
-  },
-  LspDiagnosticsUnderlineWarning = {
-    guifg = 'EBA217',
-    attr = 'undercurl'
-  },
-  LspDiagnosticsUnderlineInformation = {
-    guifg = '17D6EB',
-    attr = 'undercurl'
-  },
-  LspDiagnosticsUnderlineHint = {
-    guifg = '17EB7A',
-    attr = 'undercurl'
-  },
-  TSCurrentScope = {
-     ctermbg='NONE',
-     guibg='NONE',
-  }
 }
 g.jellybeans_use_term_italics = 1
 
@@ -117,3 +22,26 @@ vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "⚠", texthl = "ALEWarn
 vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "ALEInfoSign"})
 vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "ALEHintSign"})
 
+a.nvim_exec([[
+augroup colors
+autocmd ColorScheme * highlight PMenu ctermbg=Black guibg=#191919
+autocmd ColorScheme * highlight PMenuSel guifg=#ffffff guibg=#333333
+autocmd ColorScheme * highlight clear SignColumn
+autocmd ColorScheme * highlight GitGutterAdd ctermbg=NONE ctermfg=green guibg=NONE guifg=green
+autocmd ColorScheme * highlight GitGutterChange ctermbg=NONE ctermfg=green guibg=NONE guifg=#2B5B77
+autocmd ColorScheme * highlight GitGutterDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=red
+autocmd ColorScheme * highlight GitGutterChangeDelete ctermbg=NONE ctermfg=red guibg=NONE guifg=#2B5B77
+autocmd ColorScheme * highlight clear SpellCap
+autocmd ColorScheme * highlight clear SpellBad
+autocmd ColorScheme * highlight SpellCap guibg=NONE guisp='Red' gui=undercurl cterm=undercurl,bold
+autocmd ColorScheme * highlight SpellBad guibg=NONE guisp='Red' gui=undercurl guibg=#771c13 cterm=undercurl,bold
+autocmd ColorScheme * highlight ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
+autocmd ColorScheme * highlight ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
+autocmd ColorScheme * highlight ALEInfoSign ctermbg=NONE ctermfg=blue guibg=NONE guifg=blue
+autocmd ColorScheme * highlight ALEHintSign ctermbg=NONE ctermfg=green guibg=NONE guifg=green
+autocmd ColorScheme * highlight TSCurrentScope ctermbg=NONE guibg=NONE
+"autocmd ColorScheme * highlight NvimTreeFolderIcon guibg=blue
+augroup END
+]],
+false
+)

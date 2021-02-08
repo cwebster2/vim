@@ -82,7 +82,7 @@ M.setup = function()
 
 
   -- a list of groups can be found at `:help nvim_tree_highlight`
-  vim.api.nvim_command [[ highlight NvimTreeFolderIcon guibg=blue ]]
+  -- set them in _theme.lua
 end
 
 return M

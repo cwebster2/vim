@@ -12,13 +12,15 @@ execute 'packadd packer.nvim'
 return require('packer').startup {
   function(use)
     use {'wbthomason/packer.nvim', opt = true}
+    use 'nanotech/jellybeans.vim'
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
 
   -- fuzzy stuff
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-telescope/telescope.nvim'
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    }
     use('nvim-telescope/telescope-fzy-native.nvim')
     use('nvim-telescope/telescope-fzf-writer.nvim')
     use('nvim-telescope/telescope-packer.nvim')
@@ -91,7 +93,6 @@ return require('packer').startup {
     use 'tpope/vim-eunuch'
     use 'tpope/vim-surround'
 
-    use 'nanotech/jellybeans.vim'
 
   -- still evaluating if these are needed now
   --Plug 'mattn/emmet-vim'
