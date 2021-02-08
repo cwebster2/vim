@@ -1,7 +1,4 @@
-local a = vim.api
-local g = vim.g
-
-g.jellybeans_overrides = {
+vim.g.jellybeans_overrides = {
   background = {
     ctermbg = 'none',
     ["256ctermbg"] = 'none',
@@ -13,16 +10,18 @@ g.jellybeans_overrides = {
     ["256ctermbg"] = 'none',
   },
 }
-g.jellybeans_use_term_italics = 1
 
-vim.api.nvim_command("colo jellybeans")
+vim.o.background = "dark"
+vim.g.jellybeans_use_term_italics = 1
+
+vim.api.nvim_command("colorscheme jellybeans")
 
 vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "ALEErrorSign"})
 vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "⚠", texthl = "ALEWarningSign"})
 vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "ALEInfoSign"})
 vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "ALEHintSign"})
 
-a.nvim_exec([[
+vim.api.nvim_exec([[
 augroup colors
 autocmd ColorScheme * highlight PMenu ctermbg=Black guibg=#191919
 autocmd ColorScheme * highlight PMenuSel guifg=#ffffff guibg=#333333

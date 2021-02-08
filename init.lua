@@ -1,9 +1,6 @@
 local o = vim.o
-local wo = vim.wo
-local bo = vim.bo
 local g = vim.g
 local a = vim.api
-local map = require("utils").map
 local augroup = require("utils").augroup
 
 g.mapleader = ' '
@@ -32,9 +29,8 @@ require'lsp'.setup()
 local completion_setup = require'_completion'
 completion_setup.completion()
 completion_setup.kinds()
-require'nvimtree'.setup()
-require'_vista'
 require'plugin_config'
+require'_vista'.setup()
 require'_telescope'
 require'_vimspector'
 require'_theme'
@@ -77,6 +73,7 @@ augroup("vimrc-main", function()
   -- highlight yanks
   vim.cmd [[ au TextYankPost * silent! lua vim.highlight.on_yank { higroup='Visual', timeout=200 } ]]
   vim.cmd [[ au FileType markdown setlocal spell]]
+  vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
 end)
 
 augroup("numbertoggle", function()

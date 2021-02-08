@@ -42,6 +42,9 @@ map('n', '<Leader>lc', ':lclose<cr>', {})
 -- swap to last buffer
 map('n', '<Leader>b', ':e#<CR>', {noremap=true})
 
+-- vista
+map('n', '<Leader>tb', ':Vista!!<CR>', {silent=true})
+
 -- maximizer
 map('n', '<F3>', ':MaximizerToggle<CR>', {silent=true})
 map('v', '<F3>', ':MaximizerToggle<CR>', {silent=true})

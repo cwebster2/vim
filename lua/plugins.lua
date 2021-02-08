@@ -19,7 +19,8 @@ return require('packer').startup {
   -- fuzzy stuff
     use {
       'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+      --config = function() require'_telescope' end
     }
     use('nvim-telescope/telescope-fzy-native.nvim')
     use('nvim-telescope/telescope-fzf-writer.nvim')
@@ -49,10 +50,16 @@ return require('packer').startup {
     use 'honza/vim-snippets'
 
   -- colorschemes
-    use 'glepnir/zephyr-nvim'
-    use 'sainnhe/sonokai'
-    use 'vim-airline/vim-airline'
-    use 'cwebster2/vim-airline-themes'
+    --use 'glepnir/zephyr-nvim'
+    --use 'sainnhe/sonokai'
+    use {'vim-airline/vim-airline',
+      requires = {'cwebster2/vim-airline-themes'}
+    }
+    use {
+      'RRethy/vim-hexokinase',
+      run = "make hexokinase",
+      config = function() require'_hexokinase'.setup() end
+    }
 
   -- visuals
     use 'airblade/vim-gitgutter'
@@ -72,22 +79,29 @@ return require('packer').startup {
     use 'ntpeters/vim-better-whitespace'
 
   -- ide stuff
-    use 'liuchengxu/vista.vim'
+    use {'liuchengxu/vista.vim',
+      --config = function() require'_vista'.setup() end, -- this doesnt work here for some reason
+      fn = "Vista",
+      opt = true
+      }
     use 'unblevable/quick-scope'
-    use 'kyazdani42/nvim-tree.lua'
+    use {'kyazdani42/nvim-tree.lua',
+      config = function() require'_nvimtree'.setup() end,
+      opt = true
+    }
     use 'tmsvg/pear-tree'
   --plug('cohama/lexima.vim')
-    use 'kassio/neoterm'
+    use {'kassio/neoterm', opt=true}
     use 'junegunn/gv.vim'
-    use 'janko/vim-test'
-    use 'puremourning/vimspector'
+    use {'janko/vim-test', opt=true}
+    use {'puremourning/vimspector', opt=true}
 
 
   -- markdown
-    use 'plasticboy/vim-markdown'
+    use {'plasticboy/vim-markdown', opt=true}
     use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
 
-    use 'vim-latex/vim-latex'
+    use {'vim-latex/vim-latex', opt=true, ft='tex'}
     use 'airblade/vim-rooter'
 
     use 'tpope/vim-eunuch'
