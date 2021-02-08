@@ -27,17 +27,17 @@ g.mkdp_auto_close = 0
 g.mkdp_auto_open = 1
 
 -- require plugins and stuff
-require'plugins'.setup()
+require'plugins'
 require'lsp'.setup()
 local completion_setup = require'_completion'
 completion_setup.completion()
 completion_setup.kinds()
 require'nvimtree'.setup()
 require'_vista'
-require'_theme'
 require'plugin_config'
 require'_telescope'
 require'_vimspector'
+require'_theme'
 
 a.nvim_exec([[
   if has ("autocmd")
@@ -89,3 +89,7 @@ require'_mappings'
 
 -- we are done setting stuff up
 a.nvim_command("silent! helptags ALL")
+
+--a.nvim_command("profile start profile.log")
+--a.nvim_command("profile func *")
+--a.nvim_command("profile file *")
