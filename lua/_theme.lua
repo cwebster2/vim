@@ -40,6 +40,8 @@ autocmd ColorScheme * highlight ALEInfoSign ctermbg=NONE ctermfg=blue guibg=NONE
 autocmd ColorScheme * highlight ALEHintSign ctermbg=NONE ctermfg=green guibg=NONE guifg=green
 autocmd ColorScheme * highlight TSCurrentScope ctermbg=NONE guibg=NONE
 "autocmd ColorScheme * highlight NvimTreeFolderIcon guibg=blue
+autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline
+autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline
 augroup END
 ]],
 false
