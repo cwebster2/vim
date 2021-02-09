@@ -55,19 +55,25 @@ map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
 map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
 map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
 
-map('n', 'fp', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
-map('n', 'ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
-map('n', 'fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
-map('n', 'fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
-map('n', 'fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>", {noremap=true})
-map('n', 'fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
-map('n', 'fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
-map('n', 'fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=true})
-map('n', 'fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
+-- nvim tree
+map('n', '<Leader>E', ':NvimTreeToggle<CR>', {noremap=true})
+--nnoremap <leader>r :NvimTreeRefresh<CR>
+map('n', '<Leader>e', ':NvimTreeFindFile<CR>', {noremap=true})
+-- NvimTreeOpen and NvimTreeClose are also available if you need them
 
+-- telescope
+map('n', '<Leader>fp', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
+map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
+map('n', '<Leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
+map('n', '<Leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
+map('n', '<Leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>", {noremap=true})
+map('n', '<Leader>fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
+map('n', '<Leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
+map('n', '<Leader>fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=true})
+map('n', '<Leader>fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
 
-
-map('n', 'tt', "<cmd>TestNearest<CR>", {noremap=true})
-map('n', 'tf', "<cmd>TestFile<CR>", {noremap=true})
-map('n', 'ts', "<cmd>TestSuite<CR>", {noremap=true})
-map('n', 't_', "<cmd>TestLast<CR>", {noremap=true})
+-- testing
+map('n', '<Leader>tt', "<cmd>TestNearest<CR>", {noremap=true})
+map('n', '<Leader>tf', "<cmd>TestFile<CR>", {noremap=true})
+map('n', '<Leader>ts', "<cmd>TestSuite<CR>", {noremap=true})
+map('n', '<Leader>t_', "<cmd>TestLast<CR>", {noremap=true})

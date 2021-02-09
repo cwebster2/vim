@@ -13,6 +13,7 @@ return require('packer').startup {
   function(use)
     use {'wbthomason/packer.nvim', opt = true}
     use 'nanotech/jellybeans.vim'
+    use 'glepnir/zephyr-nvim'
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
 
@@ -50,7 +51,6 @@ return require('packer').startup {
     use 'honza/vim-snippets'
 
   -- colorschemes
-    --use 'glepnir/zephyr-nvim'
     --use 'sainnhe/sonokai'
     use {'vim-airline/vim-airline',
       requires = {'cwebster2/vim-airline-themes'}

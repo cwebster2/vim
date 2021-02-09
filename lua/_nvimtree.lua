@@ -75,10 +75,6 @@ M.setup = function()
       },
     }
 
-  map('n', '<Leader>F', ':NvimTreeToggle<CR>', {noremap=true})
-  --nnoremap <leader>r :NvimTreeRefresh<CR>
-  map('n', '<Leader>f', ':NvimTreeFindFile<CR>', {noremap=true})
-  -- NvimTreeOpen and NvimTreeClose are also available if you need them
 
 
   -- a list of groups can be found at `:help nvim_tree_highlight`
