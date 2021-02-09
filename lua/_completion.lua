@@ -4,29 +4,21 @@ local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-_G.tab_complete_i = function()
-  if vim.fn.call("neosnippet#jumpable", {}) == 1 then
-    return t "<Plug>(neosnippet_expand_or_jump)"
-  elseif vim.fn.pumvisible() == 1 then
+_G.tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
+  elseif vim.fn.call("vsnip#jumpable", {1}) == 1 then
+    return t "<Plug>(vsnip-jump-next)"
   else
     return t "<Tab>"
   end
 end
 
-_G.tab_complete_s = function()
-  if vim.fn.call("neosnippet#expandable_or_jumpable", {}) == 1 then
-    return t "<Plug>(neosnippet_expand_or_jump)"
-  elseif vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  else
-    return t "<Tab>"
-  end
-end
-
-_G.stab_complete_i = function()
+_G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
+  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+    return t "<Plug>(vsnip-jump-prev)"
   else
     return t "<S-Tab>"
   end
@@ -39,15 +31,15 @@ _G.cr_complete_i = function()
     else
       return t "<C-e><CR>"
     end
-  elseif vim.fn.call("neosnippet#expandable_or_jumpable", {}) == 1 then
-    return t "<Plug>(neosnippet_expand_or_jump)"
+  elseif vim.fn.call("vsnip#available", {1}) == 1 then
+    return t "<Plug>(vsnip-expand-or-jump)"
   else
     return t "<Plug>(PearTreeExpand)"
   end
 end
 
 function M.completion()
-  vim.g.completion_enable_snippet = "Neosnippet"
+  vim.g.completion_enable_snippet = "vim-vsnip"
   vim.g.completion_matching_ignore_case = 1
   vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
   vim.g.completion_auto_change_source = 1
@@ -83,9 +75,10 @@ function M.completion()
   -- TODO handle esc so it does not leave text behind
   vim.g.lexima_no_default_rules = "v:true"
   --vim.fn.call("lexima#set_default_rules", {})
-  vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete_i()", {expr=true})
-  vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete_s()", {expr=true})
-  vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.stab_complete_i()", {expr=true})
+  vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr=true})
+  vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr=true})
+  vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr=true})
+  vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr=true})
   vim.api.nvim_set_keymap("i", "<CR>", "v:lua.cr_complete_i()", {expr=true})
   vim.api.nvim_set_keymap("i", "<BS>", "<Plug>(PearTreeBackspace)", {})
 end

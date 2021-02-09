@@ -35,19 +35,19 @@ return require('packer').startup {
     use 'neovim/nvim-lspconfig'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'nvim-treesitter/nvim-treesitter-refactor'
+    --use 'nvim-treesitter/nvim-treesitter-refactor'
     use 'nvim-treesitter/completion-treesitter'
-    use 'romgrk/nvim-treesitter-context'
+    --use 'romgrk/nvim-treesitter-context'
     use 'p00f/nvim-ts-rainbow'
-  --plug('glepnir/lspsaga.nvim')
+    --plug('glepnir/lspsaga.nvim')
 
   -- Completion
-    use 'nvim-lua/completion-nvim'
+    use{'nvim-lua/completion-nvim',
+      requires = {'hrsh7th/vim-vsnip','hrsh7th/vim-vsnip-integ'},
+    }
     --use 'steelsojka/completion-buffers'
 
   -- Snippets
-    use 'Shougo/neosnippet.vim'
-    use 'Shougo/neosnippet-snippets'
     use 'honza/vim-snippets'
 
   -- colorschemes
