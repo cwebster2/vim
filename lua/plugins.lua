@@ -21,7 +21,7 @@ return require('packer').startup {
     use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-      --config = function() require'_telescope' end
+      config = function() require'_telescope' end
     }
     use('nvim-telescope/telescope-fzy-native.nvim')
     use('nvim-telescope/telescope-fzf-writer.nvim')
@@ -60,6 +60,7 @@ return require('packer').startup {
       run = "make hexokinase",
       config = function() require'_hexokinase'.setup() end
     }
+    use 'cwebster2/color-overrides.nvim'
 
   -- visuals
     use 'airblade/vim-gitgutter'
@@ -80,26 +81,27 @@ return require('packer').startup {
 
   -- ide stuff
     use {'liuchengxu/vista.vim',
-      --config = function() require'_vista'.setup() end, -- this doesnt work here for some reason
-      fn = "Vista",
+      --config = function() require'_vista'.setup() end,
+      cmd = "Vista",
       opt = true
       }
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',
-      config = function() require'_nvimtree'.setup() end,
-      opt = true
+      --config = function() require'_nvimtree'.setup() end,
+      --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
+      --opt = true
     }
     use 'tmsvg/pear-tree'
   --plug('cohama/lexima.vim')
-    use {'kassio/neoterm', opt=true}
+    use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
-    use {'puremourning/vimspector', opt=true}
+    use {'puremourning/vimspector', opt=true, fn="vimspector#Launch"}
 
 
   -- markdown
     use {'plasticboy/vim-markdown', opt=true}
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', ft = 'markdown'}
 
     use {'vim-latex/vim-latex', opt=true, ft='tex'}
     use 'airblade/vim-rooter'

@@ -31,7 +31,7 @@ completion_setup.completion()
 completion_setup.kinds()
 require'plugin_config'
 require'_vista'.setup()
-require'_telescope'
+require'_nvimtree'.setup()
 require'_vimspector'
 require'_theme'
 
