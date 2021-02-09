@@ -7,8 +7,8 @@ end
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
-  elseif vim.fn.call("vsnip#jumpable", {1}) == 1 then
-    return t "<Plug>(vsnip-jump-next)"
+  elseif vim.fn.call("vsnip#available", {1}) == 1 then
+    return t "<Plug>(vsnip-expand-or-jump-next)"
   else
     return t "<Tab>"
   end
@@ -73,7 +73,7 @@ function M.completion()
   }
 
   -- TODO handle esc so it does not leave text behind
-  vim.g.lexima_no_default_rules = "v:true"
+  --vim.g.lexima_no_default_rules = "v:true"
   --vim.fn.call("lexima#set_default_rules", {})
   vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr=true})
   vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr=true})
@@ -96,20 +96,34 @@ function M.compe()
     max_abbr_width = 100;
     max_kind_width = 100;
     max_menu_width = 100;
+    allow_prefix_unmatch = false;
 
     source = {
       path = true;
-      buffer = true;
+      buffer = {menu = '[BUF]'};
       calc = true;
-      vsnip = true;
-      nvim_lsp = true;
-      nvim_lua = true;
+      vsnip = {menu = '[SNP]'};
+      nvim_lsp = {menu = '[LSP]'};
+      nvim_lua = {menu = '[LUA]'};
       spell = true;
       tags = true;
       snippets_nvim = true;
       treesitter = true;
     };
   }
+  vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr=true})
+  vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr=true})
+  vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr=true})
+  vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr=true})
+  vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm({'keys': '<Plug>(PearTreeExpand)', 'mode':''})", {noremap=true, silent=true, expr=true})
+  vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {noremap=true, silent = true, expr=true})
+  vim.api.nvim_set_keymap("i", "<BS>", "<Plug>(PearTreeBackspace)", {})
+
+  vim.g.vsnip_snippet_dir = vim.fn.stdpath("config").."/snippets"
+  vim.g.vsnip_filetypes = {
+    javascriptreact = {'javascript', 'html'},
+    typescriptreact = {'typescript', 'html'}
+ }
 
 end
 

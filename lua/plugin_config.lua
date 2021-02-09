@@ -32,7 +32,6 @@ g.better_whitespace_enabled=1
 g.strip_whitespace_on_save=1
 g.strip_whitespace_confirm=0
 
-g.vsnip_snippet_dir = vim.fn.expand("~/.config/nvim/snippets")
 g.vim_markdown_folding_disabled = 1
 g.vim_markdown_conceal = 0
 g.tex_conceal = ""

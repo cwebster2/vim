@@ -27,7 +27,7 @@ g.mkdp_auto_open = 1
 require'plugins'
 require'lsp'.setup()
 local completion_setup = require'_completion'
-completion_setup.completion()
+completion_setup.compe()
 completion_setup.kinds()
 require'plugin_config'
 require'_vista'.setup()

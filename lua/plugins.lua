@@ -42,13 +42,13 @@ return require('packer').startup {
     --plug('glepnir/lspsaga.nvim')
 
   -- Completion
-    use{'nvim-lua/completion-nvim',
+    --use{'nvim-lua/completion-nvim',
+    use{'hrsh7th/nvim-compe',
       requires = {'hrsh7th/vim-vsnip','hrsh7th/vim-vsnip-integ'},
     }
     --use 'steelsojka/completion-buffers'
 
   -- Snippets
-    use 'honza/vim-snippets'
 
   -- colorschemes
     --use 'sainnhe/sonokai'

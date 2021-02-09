@@ -1,7 +1,6 @@
 local M={}
 
 local nvim_lsp = require "lspconfig"
-local completion = require "completion"
 local map = require("utils").map
 local home = vim.fn.expand("$HOME")
 local build = home .. "/src/lua-language-server"
@@ -24,6 +23,9 @@ local language_formatterts = {
     {formatCommand = "lua-format -i", formatStdin = true}
   }
 }
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local servers = {
   pyls = {},
@@ -91,7 +93,8 @@ local servers = {
 }
 
 local on_attach = function(client)
-  completion.on_attach(client)
+  --local completion = require "completion"
+  --completion.on_attach(client)
 
   local opts = {noremap = true, silent = true}
   map("n", "gD",        "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -169,7 +172,7 @@ function M.setup()
   }
 
   for server, config in pairs(servers) do
-    nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach }, config))
+    nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = capabilities }, config))
   end
 
   --vim.lsp.callbacks['textDocument/codeAction'] = custom_codeAction
