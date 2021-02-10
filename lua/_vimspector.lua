@@ -5,8 +5,7 @@ fun! GotoWindow(id)
 endfun
 
 " Debugger remaps
-nnoremap <leader>m :MaximizerToggle!<CR>
-nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dd :lua require('telescope').extensions.vimspector.configurations()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
 nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
@@ -26,6 +25,24 @@ nnoremap <leader>d<space> :call vimspector#Continue()<CR>
 nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
+nnoremap <leader>d? :call AddToWatch()<CR>
+func! AddToWatch()
+  let word = expand("<cexpr>")
+  call vimspector#AddToWatch(word)
+endfunction
+
+let g:vimspector_base_dir = expand('$HOME/.config/nvim/vimspector-config')
+nnoremap <M-e> :call vimspector#StepOut()<CR>
+nnoremap <M-i> :call vimspector#StepInto()<CR>
+nnoremap <M-n> :call vimspector#StepOver()<CR>
+
+nnoremap <leader>da :TestNearest -strategy=jest<CR>
+function! JestStrategy(cmd)
+  let testName = matchlist(a:cmd, '\v -t ''(.*)''')[1]
+  call vimspector#LaunchWithSettings( #{ configuration: 'jest', TestName: testName } )
+endfunction
+let g:test#custom_strategies = {'jest': function('JestStrategy')}
 
 " <Plug>VimspectorStop
 " <Plug>VimspectorPause

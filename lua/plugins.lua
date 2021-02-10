@@ -30,6 +30,7 @@ return require('packer').startup {
     use('nvim-telescope/telescope-packer.nvim')
     use('nvim-telescope/telescope-github.nvim')
     use('nvim-telescope/telescope-symbols.nvim')
+    use('nvim-telescope/telescope-vimspector.nvim')
     use {'junegunn/fzf', run = './install --all'}
     use 'junegunn/fzf.vim'
 
@@ -89,16 +90,17 @@ return require('packer').startup {
       }
     use 'unblevable/quick-scope'
     --use {'kyazdani42/nvim-tree.lua',
-    --  --config = function() require'_nvimtree'.setup() end,
-    --  --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
-    --  --opt = true
+      --config = function() require'_nvimtree'.setup() end,
+      --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
+      --opt = true
     --}
     use 'tmsvg/pear-tree'
   --plug('cohama/lexima.vim')
     use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
-    use {'puremourning/vimspector', opt=true, fn="vimspector#Launch"}
+    --use {'puremourning/vimspector', opt=true, fn="vimspector#Launch"}
+    use {'puremourning/vimspector'}
 
 
   -- markdown
