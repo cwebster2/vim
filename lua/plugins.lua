@@ -18,7 +18,7 @@ return require('packer').startup {
     use 'christianchiarulli/nvcode-color-schemes.vim'
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
-
+    --
   -- fuzzy stuff
     use {
       'nvim-telescope/telescope.nvim',
@@ -67,7 +67,7 @@ return require('packer').startup {
   -- visuals
     use 'airblade/vim-gitgutter'
     use 'kyazdani42/nvim-web-devicons'
-    use 'ryanoasis/vim-devicons'
+    --use 'ryanoasis/vim-devicons'
     use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
 
   -- linting
@@ -88,11 +88,11 @@ return require('packer').startup {
       opt = true
       }
     use 'unblevable/quick-scope'
-    use {'kyazdani42/nvim-tree.lua',
-      --config = function() require'_nvimtree'.setup() end,
-      --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
-      --opt = true
-    }
+    --use {'kyazdani42/nvim-tree.lua',
+    --  --config = function() require'_nvimtree'.setup() end,
+    --  --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
+    --  --opt = true
+    --}
     use 'tmsvg/pear-tree'
   --plug('cohama/lexima.vim')
     use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
