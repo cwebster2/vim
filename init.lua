@@ -3,6 +3,11 @@ local g = vim.g
 local a = vim.api
 local augroup = require("utils").augroup
 
+a.nvim_command("set nocompatible")
+--a.nvim_command("profile start profile.log")
+--a.nvim_command("profile func *")
+--a.nvim_command("profile file *")
+
 g.mapleader = ' '
 g.maplocalleader = ','
 
@@ -87,6 +92,3 @@ require'_mappings'
 -- we are done setting stuff up
 a.nvim_command("silent! helptags ALL")
 
---a.nvim_command("profile start profile.log")
---a.nvim_command("profile func *")
---a.nvim_command("profile file *")

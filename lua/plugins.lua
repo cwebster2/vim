@@ -14,6 +14,8 @@ return require('packer').startup {
     use {'wbthomason/packer.nvim', opt = true}
     use 'nanotech/jellybeans.vim'
     use 'glepnir/zephyr-nvim'
+    use 'sainnhe/sonokai'
+    use 'christianchiarulli/nvcode-color-schemes.vim'
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
 
@@ -36,22 +38,22 @@ return require('packer').startup {
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     --use 'nvim-treesitter/nvim-treesitter-refactor'
-    use 'nvim-treesitter/completion-treesitter'
     --use 'romgrk/nvim-treesitter-context'
     use 'p00f/nvim-ts-rainbow'
     --plug('glepnir/lspsaga.nvim')
 
   -- Completion
-    --use{'nvim-lua/completion-nvim',
     use{'hrsh7th/nvim-compe',
-      requires = {'hrsh7th/vim-vsnip','hrsh7th/vim-vsnip-integ'},
+      requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}},
     }
+
+    --use{'nvim-lua/completion-nvim',
     --use 'steelsojka/completion-buffers'
+    --use 'nvim-treesitter/completion-treesitter'
 
   -- Snippets
 
   -- colorschemes
-    --use 'sainnhe/sonokai'
     use {'vim-airline/vim-airline',
       requires = {'cwebster2/vim-airline-themes'}
     }
@@ -66,14 +68,14 @@ return require('packer').startup {
     use 'airblade/vim-gitgutter'
     use 'kyazdani42/nvim-web-devicons'
     use 'ryanoasis/vim-devicons'
-    use 'szw/vim-maximizer'
+    use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
 
   -- linting
   --plug('w0rp/ale')
 
   -- language stuff
-    use 'tpope/vim-fugitive'
-    use 'scrooloose/nerdcommenter'
+    use {'tpope/vim-fugitive', opt=true, cmd="Gstatus"}
+    use {'scrooloose/nerdcommenter'}
     use 'Yggdroot/indentLine'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'editorconfig/editorconfig-vim'
