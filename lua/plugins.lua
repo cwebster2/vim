@@ -41,6 +41,7 @@ return require('packer').startup {
     --use 'nvim-treesitter/nvim-treesitter-refactor'
     --use 'romgrk/nvim-treesitter-context'
     use 'p00f/nvim-ts-rainbow'
+    use 'kosayoda/nvim-lightbulb'
     --plug('glepnir/lspsaga.nvim')
 
   -- Completion

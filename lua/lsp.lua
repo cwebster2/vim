@@ -122,6 +122,7 @@ local on_attach = function(client)
   vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
   vim.api.nvim_command("autocmd InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
+  vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
