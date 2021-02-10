@@ -72,6 +72,8 @@ map('n', '<Leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {
 map('n', '<Leader>fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=true})
 map('n', '<Leader>fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
 map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
+map('n', '<Leader>ghi', "<cmd>lua require('telescope.builtin').extensions.issues()<CR>", {noremap=true})
+map('n', '<Leader>gpr', "<cmd>lua require('telescope.builtin').extensions.pull_request()<CR>", {noremap=true})
 
 -- testing
 map('n', '<Leader>tt', "<cmd>TestNearest<CR>", {noremap=true})
