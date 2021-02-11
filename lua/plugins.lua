@@ -16,6 +16,7 @@ return require('packer').startup {
     use 'glepnir/zephyr-nvim'
     use 'sainnhe/sonokai'
     use 'christianchiarulli/nvcode-color-schemes.vim'
+    use 'bluz71/vim-nightfly-guicolors'
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
     --

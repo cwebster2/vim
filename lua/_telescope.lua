@@ -66,6 +66,7 @@ require("telescope").setup {
     }
 }
 
-require('telescope').load_extension('fzy_native')
+-- the fzy extension changes the behavior of telescope in a way i don't like
+--require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('gh')
 
