@@ -17,6 +17,13 @@ map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
 map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
 map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
 
+--map("n", "<leader>m", "<Cmd>BufferLineCycleNext<CR>", {silent=true,noremap=true})
+--map("n", "<leader>i", "<Cmd>BufferLineCyclePrev<CR>", {silent=true,noremap=true})
+--map("n", "<leader>gb", "<Cmd>BufferLinePick<CR>", {noremap=true})
+map("n", "<leader>m", "<Cmd>BufferPrevious<CR>", {silent=true,noremap=true})
+map("n", "<leader>i", "<Cmd>BufferNext<CR>", {silent=true,noremap=true})
+map("n", "<leader>gb", "<Cmd>BufferPick<CR>", {noremap=true})
+
 -- visual line movement
 map('', 'j', '(v:count == 0 ? \'gj\' : \'j\')', {expr=true,noremap=true,silent=true})
 map('', '<Down>', '(v:count == 0 ? \'gj\' : \'<Down>\')', {expr=true,noremap=true,silent=true})
@@ -71,7 +78,8 @@ map('n', '<Leader>fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {n
 map('n', '<Leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
 map('n', '<Leader>fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=true})
 map('n', '<Leader>fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
-map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
+map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').highlights()<CR>", {noremap=true})
+--map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
 map('n', '<Leader>ghi', "<cmd>lua require('telescope').extensions.gh.issues()<CR>", {noremap=true})
 map('n', '<Leader>gpr', "<cmd>lua require('telescope').extensions.gh.pull_request()<CR>", {noremap=true})
 

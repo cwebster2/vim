@@ -11,6 +11,7 @@ a.nvim_command("set nocompatible")
 g.mapleader = ' '
 g.maplocalleader = ','
 
+
 -- set global, window and buffer options
 require'_options'
 
@@ -38,7 +39,10 @@ require'plugin_config'
 require'_vista'.setup()
 require'_nvimtree'.setup()
 require'_vimspector'
-require'_theme'
+local theme = require'_theme'
+theme.colorscheme_setup()
+theme.overrides_setup()
+require('_galaxyline')
 
 a.nvim_exec([[
   if has ("autocmd")

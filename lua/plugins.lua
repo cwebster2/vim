@@ -57,9 +57,18 @@ return require('packer').startup {
   -- Snippets
 
   -- colorschemes
-    use {'vim-airline/vim-airline',
-      requires = {'cwebster2/vim-airline-themes'}
+    use {
+      'romgrk/barbar.nvim',
+      requires = {{'kyazdani42/nvim-web-devicons', commit='aaffb87'}}
     }
+    use {
+      'glepnir/galaxyline.nvim',
+      branch='main',
+      requires = {{'kyazdani42/nvim-web-devicons', commit='aaffb87'}}
+    }
+    --use {'vim-airline/vim-airline',
+    --  requires = {'cwebster2/vim-airline-themes'}
+    --}
     use {
       'RRethy/vim-hexokinase',
       run = "make hexokinase",
@@ -69,8 +78,6 @@ return require('packer').startup {
 
   -- visuals
     use 'airblade/vim-gitgutter'
-    use 'kyazdani42/nvim-web-devicons'
-    --use 'ryanoasis/vim-devicons'
     use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
 
   -- linting
