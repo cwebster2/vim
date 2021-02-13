@@ -2,7 +2,7 @@ local o = vim.o
 local wo = vim.wo
 local bo = vim.bo
 
-o.shell = "/bin/zsh"
+o.shell = "/bin/bash"
 o.updatetime = 300
 o.foldlevelstart = 99
 o.termguicolors = true

@@ -20,6 +20,7 @@ return require('packer').startup {
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
     use 'kyazdani42/nvim-web-devicons'
+    use {'tpope/vim-fugitive', opt=true, cmd="Gstatus"}
 
   -- fuzzy stuff
     use 'nvim-lua/popup.nvim'
@@ -86,7 +87,6 @@ return require('packer').startup {
   --plug('w0rp/ale')
 
   -- language stuff
-    use {'tpope/vim-fugitive', opt=true, cmd="Gstatus"}
     use {'scrooloose/nerdcommenter'}
     use 'Yggdroot/indentLine'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
@@ -100,11 +100,11 @@ return require('packer').startup {
       opt = true
       }
     use 'unblevable/quick-scope'
-    --use {'kyazdani42/nvim-tree.lua',
+    use {'kyazdani42/nvim-tree.lua',
       --config = function() require'_nvimtree'.setup() end,
       --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
       --opt = true
-    --}
+    }
     use 'tmsvg/pear-tree'
   --plug('cohama/lexima.vim')
     use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
