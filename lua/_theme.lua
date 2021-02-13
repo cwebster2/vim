@@ -6,7 +6,8 @@ local c = {
   red = "red",
   green = "green",
   changed = "#2B5B77",
-  lspvtext = "#555555"
+  lspvtext = "#555555",
+  cursorline = '#1c1c1c',
 }
 
 M.galaxyline_colors = {
@@ -132,6 +133,7 @@ M.overrides_setup = function()
     --BufferInactiveTarget =    {guifg=c.none, guibg=c.none},
     BufferTabpages =    {guifg=c.none, guibg=c.none},
     BufferTabpageFill =    {guifg=c.none, guibg=c.none},
+    StatusLine = {guifg='gray', guibg=c.none, gui='italic'}
   }
 
   -- this sets colors and sets up an autocmd to set them again if colo is changed

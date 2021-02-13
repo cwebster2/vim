@@ -9,6 +9,10 @@ local theme = require'_theme'
 local colors = theme.galaxyline_colors
 local mode_color = theme.mode_color
 
+-- heavily based from the following links
+-- https://github.com/kraftwerk28/dotfiles/blob/master/.config/nvim/lua/cfg/galaxyline.lua
+-- https://github.com/LoydAndrew/nvim/blob/main/evilline.lua
+
 gl.short_line_list = {
     'LuaTree',
     'vista',
@@ -346,24 +350,19 @@ gls.right = {
 ----   }
 ---- }
 --
---gls.short_line_left[1] = {
---  BufferType = {
---    provider = 'FileTypeName',
---    separator = '',
---    condition = has_file_type,
---    separator_highlight = {colors.purple,colors.bg},
---    highlight = {colors.fg,colors.purple}
---  }
---}
---
---
---gls.short_line_right[1] = {
---  BufferIcon = {
---    provider= 'BufferIcon',
---    separator = '',
---    separator = ' ',
---    condition = has_file_type,
---    separator_highlight = {colors.purple,colors.bg},
---    highlight = {colors.fg,colors.purple}
---  }
---}
+gls.short_line_left[1] = {
+  BufferType = {
+    provider = 'FileTypeName',
+    condition = has_file_type,
+    highlight = {colors.gray,colors.line_bg}
+  }
+}
+
+
+gls.short_line_right[1] = {
+  BufferIcon = {
+    provider= 'BufferIcon',
+    condition = has_file_type,
+    highlight = {colors.gray,colors.line_bg}
+  }
+}
