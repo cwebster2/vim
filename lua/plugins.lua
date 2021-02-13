@@ -19,8 +19,11 @@ return require('packer').startup {
     use 'bluz71/vim-nightfly-guicolors'
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
-    --
+    use 'kyazdani42/nvim-web-devicons'
+
   -- fuzzy stuff
+    use 'nvim-lua/popup.nvim'
+    use 'nvim-lua/plenary.nvim'
     use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
@@ -46,6 +49,8 @@ return require('packer').startup {
     --plug('glepnir/lspsaga.nvim')
 
   -- Completion
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
     use{'hrsh7th/nvim-compe',
       requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}},
     }
@@ -59,16 +64,13 @@ return require('packer').startup {
   -- colorschemes
     use {
       'romgrk/barbar.nvim',
-      requires = {{'kyazdani42/nvim-web-devicons', commit='aaffb87'}}
+      requires = {'kyazdani42/nvim-web-devicons'}
     }
     use {
       'glepnir/galaxyline.nvim',
       branch='main',
-      requires = {{'kyazdani42/nvim-web-devicons', commit='aaffb87'}}
+      requires = {'kyazdani42/nvim-web-devicons'}
     }
-    --use {'vim-airline/vim-airline',
-    --  requires = {'cwebster2/vim-airline-themes'}
-    --}
     use {
       'RRethy/vim-hexokinase',
       run = "make hexokinase",

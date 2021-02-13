@@ -31,6 +31,7 @@ g.mkdp_auto_open = 1
 
 -- require plugins and stuff
 require'plugins'
+--require'_plugins_plug'.setup()
 require'lsp'.setup()
 local completion_setup = require'_completion'
 completion_setup.compe()

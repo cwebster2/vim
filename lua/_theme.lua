@@ -145,6 +145,10 @@ M.overrides_setup = function()
   --"autocmd ColorScheme * highlight NvimTreeFolderIcon guibg=blue
 end
 
+vim.g.bufferline = {
+  closable = false
+}
+
 --require'bufferline'.setup{
 --  options = {
 --    always_show_bufferline = true,
