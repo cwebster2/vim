@@ -12,15 +12,8 @@ execute 'packadd packer.nvim'
 return require('packer').startup {
   function(use)
     use {'wbthomason/packer.nvim', opt = true}
-    use 'nanotech/jellybeans.vim'
-    use 'glepnir/zephyr-nvim'
-    use 'sainnhe/sonokai'
-    use 'christianchiarulli/nvcode-color-schemes.vim'
-    use 'bluz71/vim-nightfly-guicolors'
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
-    use 'kyazdani42/nvim-web-devicons'
-    use {'tpope/vim-fugitive', opt=true, cmd="Gstatus"}
 
   -- fuzzy stuff
     use 'nvim-lua/popup.nvim'
@@ -63,6 +56,13 @@ return require('packer').startup {
   -- Snippets
 
   -- colorschemes
+    use 'nanotech/jellybeans.vim'
+    use 'glepnir/zephyr-nvim'
+    use 'sainnhe/sonokai'
+    use 'christianchiarulli/nvcode-color-schemes.vim'
+    use 'bluz71/vim-nightfly-guicolors'
+
+  -- visuals
     use {
       'romgrk/barbar.nvim',
       requires = {'kyazdani42/nvim-web-devicons'}
@@ -78,8 +78,6 @@ return require('packer').startup {
       config = function() require'_hexokinase'.setup() end
     }
     use 'cwebster2/color-overrides.nvim'
-
-  -- visuals
     use 'airblade/vim-gitgutter'
     use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
 
@@ -87,6 +85,7 @@ return require('packer').startup {
   --plug('w0rp/ale')
 
   -- language stuff
+    use {'tpope/vim-fugitive', opt=true, cmd="Gstatus"}
     use {'scrooloose/nerdcommenter'}
     use 'Yggdroot/indentLine'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
@@ -96,8 +95,8 @@ return require('packer').startup {
   -- ide stuff
     use {'liuchengxu/vista.vim',
       --config = function() require'_vista'.setup() end,
-      cmd = "Vista",
-      opt = true
+      --cmd = "Vista",
+      --opt = true
       }
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',
