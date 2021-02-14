@@ -134,7 +134,12 @@ M.overrides_setup = function()
     BufferInactiveTarget =    {guifg='red', guibg=c.none, gui='bold'},
     BufferTabpages =    {guifg=c.none, guibg=c.none},
     BufferTabpageFill =    {guifg=c.none, guibg=c.none},
-    StatusLine = {guifg='gray', guibg=c.none, gui='italic'}
+    StatusLine = {guifg='gray', guibg=c.none, gui='italic'},
+    LspDiagnosticsUnderlineHint = {gui='undercurl', guisp='lightgreen'},
+    LspDiagnosticsUnderlineWarning = {gui='undercurl', guisp='yellow'},
+    LspDiagnosticsUnderlineError = {gui='undercurl', guisp='red'},
+    LspDiagnosticsUnderlineInfo = {gui='undercurl', guisp='blue'},
+
   }
 
   -- this sets colors and sets up an autocmd to set them again if colo is changed
