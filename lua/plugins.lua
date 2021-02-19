@@ -40,11 +40,11 @@ return require('packer').startup {
     --use 'romgrk/nvim-treesitter-context'
     use 'p00f/nvim-ts-rainbow'
     use 'kosayoda/nvim-lightbulb'
-    --plug('glepnir/lspsaga.nvim')
-    use{
-      'RishabhRD/nvim-lsputils',
-      requires = {'RishabhRD/popfix'}
-    }
+    use('glepnir/lspsaga.nvim')
+    --use{
+    --  'RishabhRD/nvim-lsputils',
+    --  requires = {'RishabhRD/popfix'}
+    --}
 
   -- Completion
     use 'hrsh7th/vim-vsnip'

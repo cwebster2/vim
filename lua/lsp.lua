@@ -1,6 +1,7 @@
 local M={}
 
 local nvim_lsp = require "lspconfig"
+local saga = require'lspsaga'
 local map = require("utils").map
 local home = vim.fn.expand("$HOME")
 local build = home .. "/src/lua-language-server"
@@ -98,26 +99,32 @@ local on_attach = function(client)
 
   local opts = {noremap = true, silent = true}
   map("n", "gD",        "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  map("n", "gd",        "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  map("n", "ga",        "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  --map("n", "gd",        "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  --map("n", "ga",        "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   map("n", "gk",        "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  map("n", "K",         "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  map('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  --map("n", "K",         "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  --map('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   map("n", "gi",        "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  --map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   --map("n", "gr",      "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  map("n", "<leader>d", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-  map("n", "[g",        "<cmd> lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  map("n", "]g",        "<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+  --map("n", "<leader>d", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+  --map("n", "[g",        "<cmd> lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+  --map("n", "]g",        "<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 
   map("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references()<CR>", opts)
   --map("n", "ga", "<Cmd>lua require'telescope.builtin'.lsp_code_actions()<CR>", opts)
 
-  --map("n", "ga", "<cmd>lua require'lspsaga.codeaction'.code_action()<CR>", opts)
-  --map("n", "gh", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
-  --map("n", "gd", "<Cmd>lua require'lspsaga.provider'.preview_definiton()<CR>", opts)
-  --map("n", "[g", "<cmd> lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
-  --map("n", "]g", "<cmd> lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
+  map("n", "gh", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)
+  map("n", "ga", "<cmd>lua require('lspsaga.codeaction').code_action()<CR>", opts)
+  map("v", "ga", "<cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>", opts)
+  map("n", "K",         "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
+  map('n', '<C-k>',     "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", opts)
+  map("n", "<leader>r", "<cmd>lua require('lspsaga.rename').rename()<CR>", opts)
+  map("n", "gd",        "<Cmd>lua require'lspsaga.provider'.preview_definition()<CR>", opts)
+  map("n", "<leader>d", "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", opts)
+  map("n", "[g",        "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
+  map("n", "]g",        "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
+
   --vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
   vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
   vim.api.nvim_command("autocmd InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
@@ -133,7 +140,7 @@ local on_attach = function(client)
   if client.resolved_capabilities.document_formatting then
     map("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   elseif client.resolved_capabilities.document_range_formatting then
-    map("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    map("v", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
 end
 
@@ -178,14 +185,14 @@ function M.setup()
 
   --vim.lsp.callbacks['textDocument/codeAction'] = custom_codeAction
 
-  vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-  vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-  vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-  vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-  vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-  vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-  vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-  vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+  --vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+  --vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+  --vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+  --vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+  --vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+  --vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+  --vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+  --vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 
   vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
     if err ~= nil or result == nil then
@@ -211,14 +218,26 @@ function M.setup()
     }
   )
 
-  end
-  --saga
+  saga.init_lsp_saga {
+    use_saga_diagnostic_sign = false,
+    finder_action_keys = {
+      open = 'o',
+      vsplit = 's',
+      split = 'i',
+      quit = {'q','<esc>'},
+      scroll_down = '<C-f>',
+      scroll_up = '<C-b>' -- quit can be a table
+    },
+    code_action_keys = {
+      quit = {'q','<esc>'},
+      exec = '<CR>',
+    },
+    rename_action_keys = {
+      quit = {'<C-c>', '<esc>'},
+      exec = '<CR>',
+    },
+  }
 
-  --local opts = {
-  --}
-  --
-  --local saga = require'lspsaga'
-  --
-  --saga.init_lsp_saga(opts)
+  end
 
   return M

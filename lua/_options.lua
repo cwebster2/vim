@@ -3,6 +3,7 @@ local wo = vim.wo
 local bo = vim.bo
 
 o.shell = "/bin/bash"
+o.guifont = "Hack Nerd Font Mono:h18"
 o.updatetime = 300
 o.foldlevelstart = 99
 o.termguicolors = true
@@ -63,7 +64,7 @@ wo.number = true
 wo.cursorline = true
 wo.fillchars = "vert:│"
 wo.list = true
-wo.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○"
+wo.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○,eol:¬"
 o.list = true
-o.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○"
+o.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○,eol:¬"
 
