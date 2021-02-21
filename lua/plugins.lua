@@ -37,7 +37,7 @@ return require('packer').startup {
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     --use 'nvim-treesitter/nvim-treesitter-refactor'
-    --use 'romgrk/nvim-treesitter-context'
+    use 'romgrk/nvim-treesitter-context'
     use 'p00f/nvim-ts-rainbow'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')

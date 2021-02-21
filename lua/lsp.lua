@@ -127,7 +127,8 @@ local on_attach = function(client)
 
   --vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
   vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
-  vim.api.nvim_command("autocmd InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
+  -- This is causing an out of bounds error, see if this changed in a nightly
+  --vim.api.nvim_command("autocmd InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
   vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
@@ -139,6 +140,7 @@ local on_attach = function(client)
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
     map("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
   elseif client.resolved_capabilities.document_range_formatting then
     map("v", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
