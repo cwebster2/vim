@@ -95,6 +95,7 @@ return require('packer').startup {
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
+    use 'skanehira/gh.vim'
 
   -- ide stuff
     use {'liuchengxu/vista.vim',
