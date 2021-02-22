@@ -69,3 +69,5 @@ g.startify_bookmarks = {
            { ['z'] = '~/.zshrc' },
             '~/src',
            }
+
+g.neovide_transperancy = 0.8

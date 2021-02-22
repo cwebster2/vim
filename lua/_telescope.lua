@@ -7,9 +7,9 @@ require("telescope").setup {
             i = {
                 -- horizontal split
                 ["<C-x>"] = false,
-                ["<C-s>"] = actions.goto_file_selection_split,
-                ["<CR>"] = actions.goto_file_selection_edit + actions.center,
-                ["<C-p>"] = actions.goto_file_selection_edit + actions.center,
+                ["<C-s>"] = actions.select_vertical,
+                ["<CR>"] = actions.select_default + actions.center,
+                ["<C-p>"] = actions.select_default + actions.center,
                 -- next | prev
                 ["<C-n>"] = actions.move_selection_next,
                 ["<C-e>"] = actions.move_selection_previous,
@@ -19,8 +19,8 @@ require("telescope").setup {
             n = {
                 -- horizontal split
                 ["<C-x>"] = false,
-                ["<C-s>"] = actions.goto_file_selection_split,
-                ["<CR>"] = actions.goto_file_selection_edit + actions.center,
+                ["<C-s>"] = actions.select_vertical,
+                ["<CR>"] = actions.select_default + actions.center,
                 -- next | prev
                 ["i"] = false,
                 ["j"] = false,
