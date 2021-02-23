@@ -18,7 +18,7 @@ g.gitgutter_sign_removed_first_line = "_"
 g.gitgutter_sign_modified_removed = "▋"
 
 g.indentLine_char = '▏'
-g.indentLine_color_gui = '#222222'
+g.indent_blankline_char_highlight = 'IndentGuides'
 
 g.pear_tree_repeatable_expand = 0
 g.pear_tree_map_special_keys = 0
