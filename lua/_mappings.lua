@@ -7,9 +7,9 @@ map('v', '.', ':normal .<CR>', {noremap=true})
 
 -- fugitive
 map('n', '<Leader>gw', ':Gwrite<CR>', {silent=true})
-map('n', '<Leader>gs', ':Gstatus<CR>', {silent=true})
-map('n', '<Leader>gc', ':Gcommit<CR>', {silent=true})
-map('n', '<Leader>gp', ':Gpush<CR>', {silent=true})
+map('n', '<Leader>gs', ':vertical Gstatus<CR>', {silent=true})
+map('n', '<Leader>gc', ':Git commit<CR>', {silent=true})
+map('n', '<Leader>gp', ':Git push<CR>', {silent=true})
 
 -- move between splits
 map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
