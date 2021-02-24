@@ -78,6 +78,7 @@ augroup("vimrc-main", function()
   -- vim.cmd [[ autocmd BufWritePre * :%s/\s\+$//e ]]
   -- starphleet
   vim.cmd [[ au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh ]]
+  vim.cmd [[ au BufRead,BufNewFile ~/.zfunc/* set filetype=zsh ]]
   -- tab management
   vim.cmd [[ au TabLeave * let g:lasttab = tabpagenr() ]]
   -- highlight yanks
