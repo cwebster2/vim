@@ -45,7 +45,8 @@ local icons = {
   unix = u 'f17c',
   mac = u 'f179',
   error = '✘',
-  warning = '⚠'
+  warning = '⚠',
+  branch = ' ',
 }
 
 local mode_map = {
@@ -136,6 +137,7 @@ gls.left = {
 {
   GitBranch = {
     provider = 'GitBranch',
+    icon = icons.branch,
     condition = vcs.check_git_workspace,
     highlight = {'#8FBCBB',colors.line_bg},
   }

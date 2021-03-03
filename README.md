@@ -1,6 +1,6 @@
 # My neovim configuration
 
-TODO: Add screenshot
+![image](https://user-images.githubusercontent.com/5762261/109759786-38f6e880-7bb3-11eb-8229-f450fd9c0292.png)
 
 ## Note
 Historically this repo has been compatible with vim8 and neovim, but if you are

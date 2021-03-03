@@ -9,6 +9,8 @@ local c = {
   lspvtext = "#555555",
   cursorline = '#1c1c1c',
   modified = 'DarkGoldenrod2',
+  indentguides = '#222222',
+  whitespace = '#333333',
 }
 
 M.galaxyline_colors = {
@@ -139,7 +141,9 @@ M.overrides_setup = function()
     LspDiagnosticsUnderlineWarning = {gui='undercurl', guisp='yellow'},
     LspDiagnosticsUnderlineError = {gui='undercurl', guisp='red'},
     LspDiagnosticsUnderlineInfo = {gui='undercurl', guisp='blue'},
-
+    IndentGuides = {guibg=c.none, guifg=c.indentguides},
+    Whitespace = {guibg=c.none, guifg=c.whitespace},
+    NonText = {guibg=c.none, guifg=c.whitespace},
   }
 
   -- this sets colors and sets up an autocmd to set them again if colo is changed

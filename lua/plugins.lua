@@ -89,9 +89,8 @@ return require('packer').startup {
   --plug('w0rp/ale')
 
   -- language stuff
-    use {'tpope/vim-fugitive', opt=true, cmd="Gstatus"}
+    use {'tpope/vim-fugitive'}
     use {'scrooloose/nerdcommenter'}
-    use 'Yggdroot/indentLine'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
