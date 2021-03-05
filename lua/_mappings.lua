@@ -4,7 +4,6 @@ local map = require("utils").map
 map('v', '<', '<gv', {noremap=true})
 map('v', '>', '>gv', {noremap=true})
 map('v', '.', ':normal .<CR>', {noremap=true})
-
 -- fugitive
 map('n', '<Leader>gw', ':Gwrite<CR>', {silent=true})
 map('n', '<Leader>gs', ':vertical Gstatus<CR>', {silent=true})
@@ -17,9 +16,10 @@ map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
 map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
 map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
 
---map("n", "<leader>m", "<Cmd>BufferLineCycleNext<CR>", {silent=true,noremap=true})
---map("n", "<leader>i", "<Cmd>BufferLineCyclePrev<CR>", {silent=true,noremap=true})
---map("n", "<leader>gb", "<Cmd>BufferLinePick<CR>", {noremap=true})
+-- map("n", "<leader>m", "<Cmd>BufferLineCycleNext<CR>", {silent=true,noremap=true})
+-- map("n", "<leader>i", "<Cmd>BufferLineCyclePrev<CR>", {silent=true,noremap=true})
+-- map("n", "<leader>gb", "<Cmd>BufferLinePick<CR>", {noremap=true})
+
 map("n", "<leader>m", "<Cmd>BufferPrevious<CR>", {silent=true,noremap=true})
 map("n", "<leader>i", "<Cmd>BufferNext<CR>", {silent=true,noremap=true})
 map("n", "<leader>gb", "<Cmd>BufferPick<CR>", {noremap=true})
@@ -69,8 +69,8 @@ map('n', '<Leader>e', ':NvimTreeFindFile<CR>', {noremap=true})
 -- NvimTreeOpen and NvimTreeClose are also available if you need them
 
 -- telescope
-map('n', '<Leader>fp', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
-map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
+map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
+map('n', '<Leader>fp', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
 map('n', '<Leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
 map('n', '<Leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
 map('n', '<Leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>", {noremap=true})

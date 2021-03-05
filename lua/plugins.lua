@@ -127,6 +127,7 @@ return require('packer').startup {
     use 'tpope/vim-eunuch'
     use 'tpope/vim-surround'
 
+    --use 'fiatjaf/neuron.vim'
 
   -- still evaluating if these are needed now
   --Plug 'mattn/emmet-vim'
@@ -168,3 +169,4 @@ return require('packer').startup {
     },
   }
 }
+

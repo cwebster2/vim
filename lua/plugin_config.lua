@@ -70,4 +70,8 @@ g.startify_bookmarks = {
             '~/src',
            }
 
-g.neovide_transperancy = 0.8
+if vim.fn.exists("g:neovide") == 1 then
+  g.neovide_transparency = 0.8
+end
+
+g.neuron_dir = os.getenv("HOME").."/src/zettel/"

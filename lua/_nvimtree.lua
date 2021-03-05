@@ -29,28 +29,8 @@ M.setup = function()
   -- You can edit keybindings be defining this variable
   -- You don't have to define all keys.
   -- NOTE: the 'edit' key will wrap/unwrap a folder and open a file
-  g.nvim_tree_bindings = {
-      edit =            { '<CR>', 'o' },
-      edit_vsplit =     '<C-v>',
-      edit_split =      '<C-x>',
-      edit_tab =        '<C-t>',
-      close_node =      { '<S-CR>', '<BS>' },
-      toggle_ignored =  'I',
-      toggle_dotfiles = 'H',
-      refresh =         'R',
-      preview =         '<Tab>',
-      cd =              '<C-]>',
-      create =          'a',
-      remove =          'd',
-      rename =          'r',
-      cut =             'x',
-      copy =            'c',
-      paste =           'p',
-      prev_git_item =   '[c',
-      next_git_item =   ']c',
-      dir_up =          '-',
-      close =           'q',
-    }
+  --g.nvim_tree_bindings = {
+    --}
 
   -- Disable default mappings by plugin
   -- Bindings are enable by default, disabled on any non-zero value
