@@ -11,7 +11,7 @@ This is a living configuration and is constantly being tweaked, so use at your
 own peril.  The included plugins, keymaps, colors and configurations are subject
 to change with every commit.
 
-## Requirements 
+## Requirements
 
 - Neovim >= 0.5
 
@@ -25,7 +25,7 @@ The first time you run neovim with this config it will install the packer plugin
 automatically.  You may see errors the first time you run nvim but this is ok and
 just a byproduct of plugins not being installed yet.
 You will need to run the PackerSync command to download and install
-all the configured plugins.  
+all the configured plugins.
 
     <esc>:PackerSync<CR>
 
@@ -105,4 +105,4 @@ a configuration that relies on `eslint_d` and `prettier` being installed globall
 
     npm install -g eslint_d prettier
 
- 
+

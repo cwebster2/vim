@@ -50,6 +50,8 @@ local icons = {
   error = '✘',
   warning = '⚠',
   branch = ' ',
+  git = ' ',
+  lineno = '  ',
 }
 
 local mode_map = {
@@ -115,81 +117,73 @@ end
 
 gls.left = {
   {
-  FirstElement = {
-    provider = function() return ' ' end,
-    highlight = {colors.blue,colors.line_bg}
+    FirstElement = {
+      provider = function() return ' ' end,
+      highlight = {colors.blue,colors.line_bg}
+    },
   },
-},
-{
-  ViMode = {
-    provider = function()
-      -- auto change color according the vim mode
-      highlight("GalaxyViMode", mode_hl(), colors.line_bg )
-      return mode_label() .. " "
-    end,
-    highlight = {mode_hl(), colors.line_bg, 'bold'},
+  {
+    ViMode = {
+      provider = function()
+        -- auto change color according the vim mode
+        highlight("GalaxyViMode", mode_hl(), colors.line_bg )
+        return mode_label() .. " "
+      end,
+      highlight = {mode_hl(), colors.line_bg, 'bold'},
+    },
   },
-},
-{
-  GitIcon = {
-    provider = function() return '  ' end,
-    -- '  ''
-    condition = vcs.check_git_workspace,
-    highlight = {colors.orange,colors.line_bg},
-  }
-},
-{
-  GitBranch = {
-    provider = 'GitBranch',
-    icon = icons.branch,
-    condition = vcs.check_git_workspace,
-    highlight = {'#8FBCBB',colors.line_bg},
-  }
-},
-{
-  Spacer = {
-    provider = function() return ' ' end,
-    highlight = {colors.fg, colors.line_bg}
-  }
-},
-{
-  DiffAdd = {
-    provider = 'DiffAdd',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.green,colors.line_bg},
-  }
-},
-{
-  DiffModified = {
-    provider = 'DiffModified',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.diffchg, colors.line_bg},
-  }
-},
-{
-  DiffRemove = {
-    provider = 'DiffRemove',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.red,colors.line_bg},
-  }
-},
-{
-  FileIcon = {
-    provider = 'FileIcon',
-    condition = buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+  {
+    GitBranch = {
+      provider = 'GitBranch',
+      icon = icons.branch,
+      condition = vcs.check_git_workspace,
+      highlight = {'#8FBCBB',colors.line_bg},
+    }
   },
-},
-{
-  FileName = {
-    provider = {'FileName','FileSize'},
-    condition = buffer_not_empty,
-    highlight = {colors.fg,colors.line_bg,'italic'}
-  }
-},
+  {
+    Spacer = {
+      provider = function() return ' ' end,
+      highlight = {colors.fg, colors.line_bg}
+    }
+  },
+  {
+    DiffAdd = {
+      provider = 'DiffAdd',
+      condition = checkwidth,
+      icon = ' ',
+      highlight = {colors.green,colors.line_bg},
+    }
+  },
+  {
+    DiffModified = {
+      provider = 'DiffModified',
+      condition = checkwidth,
+      icon = ' ',
+      highlight = {colors.diffchg, colors.line_bg},
+    }
+  },
+  {
+    DiffRemove = {
+      provider = 'DiffRemove',
+      condition = checkwidth,
+      icon = ' ',
+      highlight = {colors.red,colors.line_bg},
+    }
+  },
+  {
+    FileIcon = {
+      provider = 'FileIcon',
+      condition = buffer_not_empty,
+      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+    },
+  },
+  {
+    FileName = {
+      provider = {'FileName','FileSize'},
+      condition = buffer_not_empty,
+      highlight = {colors.fg,colors.line_bg,'italic'}
+    }
+  },
 --{
 --  FileStatus = {
 --    provider = function()
@@ -201,22 +195,22 @@ gls.left = {
 --    highlight = {colors.red, colors.line_bg}
 --  }
 --},
-{
-  LeftEnd = {
-    provider = function() return "" end,
-    separator = sep.slant_alt_left,
-    --separator = sep.slant_left,
-    separator_highlight = {colors.line_bg,colors.bg_none},
-    highlight = {colors.line_bg,colors.line_bg}
+  {
+    LeftEnd = {
+      provider = function() return "" end,
+      separator = sep.slant_alt_left,
+      --separator = sep.slant_left,
+      separator_highlight = {colors.line_bg,colors.bg_none},
+      highlight = {colors.line_bg,colors.line_bg}
+    }
+  },
+  {
+    VistaNearest = {
+      provider = extension.vista_nearest,
+      condition = conditions.hide_in_width,
+      highlight = {colors.gray, colors.bg_none}
+    }
   }
-},
-{
-  VistaNearest = {
-    provider = extension.vista_nearest,
-    condition = conditions.hide_in_width,
-    highlight = {colors.gray, colors.bg_none}
-  }
-}
 }
 --gls.left[11] = {
 --    TrailingWhiteSpace = {
@@ -280,7 +274,8 @@ gls.right = {
       end,
       highlight = {colors.fg,colors.line_bg}
     },
-  }, {
+  },
+  {
     DiagnosticWarn = {
       provider = function()
         local n = vim.lsp.diagnostic.get_count(0, 'Warning')
@@ -311,17 +306,7 @@ gls.right = {
   },
   {
     PositionInfo = {
-      provider = {
-        function()
-          return string.format(' %s:%s ', vim.fn.line('.'), vim.fn.col('.'))
-        end,
-      },
-      highlight = {colors.fg, colors.bg_none},
-      condition = buffer_not_empty,
-    },
-  }, {
-    PercentInfo = {
-      provider = fileinfo.current_line_percent,
+      provider = function() return string.format(' %s ', fileinfo.line_column()) end,
       highlight = {colors.fg, colors.bg_none},
       condition = buffer_not_empty,
     },
@@ -334,54 +319,6 @@ gls.right = {
   }
 }
 
---for k, v in pairs(gls.left) do gls.short_line_left[k] = v end
---table.remove(gls.short_line_left, 1)
---
---for k, v in pairs(gls.right) do gls.short_line_right[k] = v end
---table.remove(gls.short_line_right)
---table.remove(gls.short_line_right)
-
---gls.right[1]= {
---  FileFormat = {
---    provider = 'FileFormat',
---    separator = ' ',
---    separator_highlight = {colors.bg,colors.line_bg},
---    highlight = {colors.fg,colors.line_bg,'bold'},
---  }
---}
---gls.right[4] = {
---  LineInfo = {
---    provider = 'LineColumn',
---    separator = ' | ',
---    separator_highlight = {colors.blue,colors.line_bg},
---    highlight = {colors.fg,colors.line_bg},
---  },
---}
---gls.right[5] = {
---  PerCent = {
---    provider = 'LinePercent',
---    separator = ' ',
---    separator_highlight = {colors.line_bg,colors.line_bg},
---    highlight = {colors.cyan,colors.darkblue,'bold'},
---  }
---}
---
----- gls.right[4] = {
-----   ScrollBar = {
-----     provider = 'ScrollBar',
-----     highlight = {colors.blue,colors.purple},
-----   }
----- }
-----
----- gls.right[3] = {
-----   Vista = {
-----     provider = VistaPlugin,
-----     separator = ' ',
-----     separator_highlight = {colors.bg,colors.line_bg},
-----     highlight = {colors.fg,colors.line_bg,'bold'},
-----   }
----- }
---
 gls.short_line_left = {
   {
     BufferType = {
