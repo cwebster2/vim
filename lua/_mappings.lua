@@ -88,3 +88,8 @@ map('n', '<Leader>tt', "<cmd>TestNearest<CR>", {noremap=true})
 map('n', '<Leader>tf', "<cmd>TestFile<CR>", {noremap=true})
 map('n', '<Leader>ts', "<cmd>TestSuite<CR>", {noremap=true})
 map('n', '<Leader>t_', "<cmd>TestLast<CR>", {noremap=true})
+
+-- barbar
+map('n', '<C-s>', '<Cmd>BufferPick<CR>', {noremap=true, silent=true})
+map('n', '<Leader>bd', '<Cmd>BufferOrderByDirectory<CR>', {noremap=true, silent=true})
+map('n', '<Leader>bl', '<Cmd>BufferOrderByLanguage<CR>', {noremap=true, silent=true})

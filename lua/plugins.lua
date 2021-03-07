@@ -127,6 +127,7 @@ return require('packer').startup {
     use 'tpope/vim-eunuch'
     use 'tpope/vim-surround'
 
+    --use 'andweeb/presence.nvim'
     --use 'fiatjaf/neuron.vim'
 
   -- still evaluating if these are needed now
