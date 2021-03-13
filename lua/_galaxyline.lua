@@ -55,25 +55,24 @@ local icons = {
 }
 
 local mode_map = {
-  n = 'NORMAL',
-  i = 'INSERT',
-  c= 'COMMAND',
-  V= 'VISUAL',
-  [''] = 'VISUAL',
-  v ='VISUAL',
+  n = '<N>',
+  i = '<I>',
+  c= '<C>',
+  V= '<V>',
+  [''] = '<V>',
+  v ='<V>',
   --c  = 'COMMAND-LINE',
   ['r?'] = ':CONFIRM',
   rm = '--MORE',
-  R  = 'REPLACE',
+  R  = '<R>',
   Rv = 'VIRTUAL',
-  s  = 'SELECT',
-  S  = 'SELECT',
+  s  = '<S>',
+  S  = '<S>',
   ['r']  = 'HIT-ENTER',
-  [''] = 'SELECT',
-  t  = 'TERMINAL',
+  [''] = '<S>',
+  t  = '<T>',
   ['!']  = 'SHELL',
 }
-local mode_alias = mode_map
 
 local function has_file_type()
     local f_type = vim.bo.filetype
@@ -159,7 +158,7 @@ gls.left = {
       provider = 'DiffModified',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.diffchg, colors.line_bg},
+      highlight = {colors.diffchanged, colors.line_bg},
     }
   },
   {
