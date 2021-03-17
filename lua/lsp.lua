@@ -143,6 +143,7 @@ local on_attach = function(client)
     vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
   elseif client.resolved_capabilities.document_range_formatting then
     map("v", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
   end
 end
 

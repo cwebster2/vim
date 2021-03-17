@@ -32,16 +32,18 @@ local c = {
   orange = '#FF8800',
   purple = '#5d4d7a',
   magenta = '#c678dd',
-  blue = '#51afef';
-  red = '#ec5f67'
+  blue = '#51afef',
+  red = '#ec5f67',
+
+  normalmode = '#99ad6a'
 }
 
 M.galaxyline_colors = c
 
 M.mode_color = {
   --n = 'DarkGoldenrod2',
-  n = '#8197bf',
-  i = 'chartreuse3',
+  n = c.fg_green,
+  i = c.blue,
   v = 'gray',
   [""] = 'gray',
   V = 'gray',
@@ -107,7 +109,7 @@ M.overrides_setup = function()
     VertSplit =             {ctermbg=c.none,                  guibg=c.none},
     PMenu =                 {ctermbg='Black',                 guibg='#191919'},
     PMenuSel =              {                guifg='#ffffff', guibg='#333333'},
-    GitGutterAdd =          {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg=c.green},
+    GitGutterAdd =          {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg='green'},
     GitGutterChange =       {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg=c.diffchanged},
     GitGutterDelete =       {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg=c.red},
     GitGutterChangeDelete = {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg=c.diffchanged},

@@ -132,18 +132,43 @@ gls.left = {
     },
   },
   {
-    GitBranch = {
-      provider = 'GitBranch',
-      icon = icons.branch,
-      condition = vcs.check_git_workspace,
-      highlight = {'#8FBCBB',colors.line_bg},
+    FileSize = {
+      provider = 'FileSize',
+      condition = buffer_not_empty,
+      highlight = {colors.fg,colors.line_bg}
     }
   },
   {
-    Spacer = {
-      provider = function() return ' ' end,
-      highlight = {colors.fg, colors.line_bg}
+    FileIcon = {
+      provider = 'FileIcon',
+      condition = buffer_not_empty,
+      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+    },
+  },
+  {
+    FileName = {
+      provider = 'FileName',
+      condition = buffer_not_empty,
+      highlight = {colors.fg,colors.line_bg,'italic'}
     }
+  },
+--{
+--  FileStatus = {
+--    provider = function()
+--      local status = ""
+--      if vim.bo.readonly then status = status .. ' ' .. icons.locked end
+--      if vim.bo.modified then status = status .. ' ' .. icons.unsaved end
+--      return ' ' .. status .. ' '
+--    end,
+--    highlight = {colors.red, colors.line_bg}
+--  }
+--},
+  {
+    PositionInfo = {
+      provider = function() return string.format(' %s ', fileinfo.line_column()) end,
+      highlight = {colors.fg, colors.line_bg},
+      condition = buffer_not_empty,
+    },
   },
   {
     DiffAdd = {
@@ -169,31 +194,6 @@ gls.left = {
       highlight = {colors.red,colors.line_bg},
     }
   },
-  {
-    FileIcon = {
-      provider = 'FileIcon',
-      condition = buffer_not_empty,
-      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
-    },
-  },
-  {
-    FileName = {
-      provider = {'FileName','FileSize'},
-      condition = buffer_not_empty,
-      highlight = {colors.fg,colors.line_bg,'italic'}
-    }
-  },
---{
---  FileStatus = {
---    provider = function()
---      local status = ""
---      if vim.bo.readonly then status = status .. ' ' .. icons.locked end
---      if vim.bo.modified then status = status .. ' ' .. icons.unsaved end
---      return ' ' .. status .. ' '
---    end,
---    highlight = {colors.red, colors.line_bg}
---  }
---},
   {
     LeftEnd = {
       provider = function() return "" end,
@@ -252,11 +252,10 @@ gls.right = {
         local clients = vim.lsp.buf_get_clients(0)
         local connected = not vim.tbl_isempty(clients)
         if connected then
-          local status = ' ' .. u 'f817' .. ' ( '
+          local status = ''
             for _,client in ipairs(clients) do
-              status = status .. client.name .. ' '
+              status = status .. u 'f817' .. client.name .. ' '
             end
-            status = status .. ') '
           return status
         else
           return ''
@@ -271,7 +270,7 @@ gls.right = {
         end
         return false
       end,
-      highlight = {colors.fg,colors.line_bg}
+      highlight = {colors.blue,colors.line_bg}
     },
   },
   {
@@ -296,19 +295,12 @@ gls.right = {
     },
   },
   {
-    RightEnd2 = {
-      provider = function() return "" end,
-      separator = sep.slant_alt_left,
-      separator_highlight = {colors.line_bg,colors.bg_none},
-      highlight = {colors.line_bg,colors.line_bg}
+    GitBranch = {
+      provider = 'GitBranch',
+      icon = icons.branch,
+      condition = vcs.check_git_workspace,
+      highlight = {colors.yellow ,colors.line_bg},
     }
-  },
-  {
-    PositionInfo = {
-      provider = function() return string.format(' %s ', fileinfo.line_column()) end,
-      highlight = {colors.fg, colors.bg_none},
-      condition = buffer_not_empty,
-    },
   },
   {
     Whitespace = {
@@ -335,7 +327,7 @@ gls.short_line_left = {
   },
   {
     FileName = {
-      provider = {'FileName','FileSize'},
+      provider = 'FileName',
       condition = buffer_not_empty,
       highlight = {colors.fg,colors.line_bg,'italic'}
     }

@@ -23,7 +23,6 @@ end
 -- some globals that need setting before plugins are loaded
 g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
 g.loaded_netrwPlugin = 1
-g.polyglot_disabled = {'python', 'latex', 'typescript'} -- Use python-syntax and vimtex
 g.jsx_ext_required = 0
 g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
 g.mkdp_auto_close = 0
