@@ -1,4 +1,7 @@
 local M = {}
+
+local api = vim.api
+
 -- Key mapping
 function M.map(mode, key, result, opts)
   vim.api.nvim_set_keymap(
@@ -14,11 +17,16 @@ function M.map(mode, key, result, opts)
   )
 end
 
-function M.augroup(group, fn)
-  vim.api.nvim_command("augroup " .. group)
-  vim.api.nvim_command("autocmd!")
-  fn()
-  vim.api.nvim_command("augroup END")
+function M.augroup(group_name, definitions)
+  api.nvim_command('augroup ' .. group_name)
+  api.nvim_command('autocmd!')
+  for _, def in ipairs(definitions) do
+    local command = table.concat({'autocmd', unpack(def)}, ' ')
+    if api.nvim_call_function('exists', {'##' .. def[1]}) ~= 0 then
+      api.nvim_command(command)
+    end
+  end
+  api.nvim_command('augroup END')
 end
 
 function M.get_color(synID, what, mode)

@@ -17,11 +17,11 @@ M.setup = function()
   "       \  }
   ]],'')
 
-  augroup("vista", function()
+  augroup("vista", {
     -- automatically close vim if vista is the last window open
-    vim.cmd [[ autocmd WinEnter * if &ft == 'vista' && winnr('$') == 1 | q | endif ]]
-    vim.cmd [[ autocmd TabLeave * if &ft == 'vista' | wincmd w | endif ]]
-  end)
+    {'WinEnter', '*', 'if &ft == "vista" && winnr("$") == 1 | q | endif'},
+    {'TabLeave', '*', 'if &ft == "vista" | wincmd w | endif'},
+  })
 end
 
 return M
