@@ -140,6 +140,7 @@ gls.left = {
       end,
       --condition = function()
       --  return vim.api.nvim_win_get_option(0, 'spell')
+      --  return vim.api.nvim_win_get_option(0, 'spell')
       --end,
       highlight = {colors.red, colors.line_bg},
       event = 'OptionSet',
