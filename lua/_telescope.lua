@@ -14,7 +14,10 @@ require("telescope").setup {
                 ["<C-n>"] = actions.move_selection_next,
                 ["<C-e>"] = actions.move_selection_previous,
                 -- use esc for exit no normal mode
-                ["<esc>"] = actions.close
+                ["<esc>"] = actions.close,
+                ["<tab>"] = actions.toggle_selection,
+                ["<C-q>"] = actions.send_to_qflist,
+                ["<M-q>"] = actions.send_selected_to_qflist,
             },
             n = {
                 -- horizontal split
