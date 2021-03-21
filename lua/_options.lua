@@ -43,6 +43,7 @@ o.ttimeoutlen = 50
 o.viewoptions = "cursor,folds,options,unix,slash"
 o.virtualedit = "onemore"
 o.writebackup = false
+o.pumblend = 15
 
 bo.autoindent = false
 o.autoindent = false
