@@ -11,10 +11,10 @@ map('n', '<Leader>gc', ':Git commit<CR>', {silent=true})
 map('n', '<Leader>gp', ':Git push<CR>', {silent=true})
 
 -- move between splits
-map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
-map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
-map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
-map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
+--map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
+--map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
+--map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
+--map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
 
 -- map("n", "<leader>m", "<Cmd>BufferLineCycleNext<CR>", {silent=true,noremap=true})
 -- map("n", "<leader>i", "<Cmd>BufferLineCyclePrev<CR>", {silent=true,noremap=true})
