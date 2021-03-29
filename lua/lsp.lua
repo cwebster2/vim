@@ -7,6 +7,7 @@ local home = vim.fn.expand("$HOME")
 local build = home .. "/src/lua-language-server"
 local bin = build .. "/bin/Linux/lua-language-server"
 
+
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
 local language_formatterts = {
@@ -121,6 +122,7 @@ local on_attach = function(client)
   map('n', '<C-k>',     "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", opts)
   map("n", "<leader>r", "<cmd>lua require('lspsaga.rename').rename()<CR>", opts)
   map("n", "gd",        "<Cmd>lua require'lspsaga.provider'.preview_definition()<CR>", opts)
+  --map("n", "gd",        "<Cmd>lua require'telescope.builtin'.lsp_definitions()<CR>", opts)
   map("n", "<leader>d", "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", opts)
   map("n", "[g",        "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
   map("n", "]g",        "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
