@@ -127,8 +127,10 @@ return require('packer').startup {
     use 'tpope/vim-eunuch'
     use 'tpope/vim-surround'
 
-    --use 'andweeb/presence.nvim'
+    use 'andweeb/presence.nvim'
     --use 'fiatjaf/neuron.vim'
+
+    use {'theprimeagen/neovim-irc-ui'}
 
   -- still evaluating if these are needed now
   --Plug 'mattn/emmet-vim'
