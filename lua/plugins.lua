@@ -37,7 +37,10 @@ return require('packer').startup {
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     --use 'nvim-treesitter/nvim-treesitter-refactor'
-    --use 'romgrk/nvim-treesitter-context'
+    --use {
+    --  'romgrk/nvim-treesitter-context',
+    --  requires = {'nvim-treesitter/nvim-treesitter'}
+    --}
     use 'p00f/nvim-ts-rainbow'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
@@ -94,7 +97,6 @@ return require('packer').startup {
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
-    use 'skanehira/gh.vim'
 
   -- ide stuff
     use {'liuchengxu/vista.vim',
@@ -108,6 +110,7 @@ return require('packer').startup {
       --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
       --opt = true
     }
+    use 'pwntester/octo.nvim'
     use 'tmsvg/pear-tree'
   --plug('cohama/lexima.vim')
     use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
@@ -115,7 +118,6 @@ return require('packer').startup {
     use {'janko/vim-test', opt=true}
     --use {'puremourning/vimspector', opt=true, fn="vimspector#Launch"}
     use {'puremourning/vimspector'}
-
 
   -- markdown
     use {'plasticboy/vim-markdown', opt=true}
