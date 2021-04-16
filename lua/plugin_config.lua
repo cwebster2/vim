@@ -8,6 +8,8 @@ g.fzf_command_prefix = 'F'
 
 g.DevIconsEnableFoldersOpenClose = 1
 
+g.polyglot_disabled = { "autoindent", "sensible" }
+
 g.gitgutter_map_keys = 0
 g.gitgutter_override_sign_column_highlight = 0
 g.gitgutter_sign_added = "▎"

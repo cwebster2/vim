@@ -138,7 +138,7 @@ return require('packer').startup {
   --Plug 'mattn/emmet-vim'
   --Plug 'terryma/vim-multiple-cursors' -- need to rebind its c-n key to use it
   --Plug 'Raimondi/delimitMate' -- closes quotes and stuff
-  --Plug 'sheerun/vim-polyglot'  " syntax files for most languages
+  use 'sheerun/vim-polyglot'  -- syntax files for most languages
   --Plug 'vim-python/python-syntax'  " Improved python syntax
   --Plug 'Vimjas/vim-python-pep8-indent'  " Proper python indenting
   --Plug 'chrisbra/Colorizer'  " Highlight CSS colors
