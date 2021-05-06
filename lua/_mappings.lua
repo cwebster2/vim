@@ -99,3 +99,10 @@ map('n', '<Leader>t_', "<cmd>TestLast<CR>", {noremap=true})
 map('n', '<C-s>', '<Cmd>BufferPick<CR>', {noremap=true, silent=true})
 map('n', '<Leader>bd', '<Cmd>BufferOrderByDirectory<CR>', {noremap=true, silent=true})
 map('n', '<Leader>bl', '<Cmd>BufferOrderByLanguage<CR>', {noremap=true, silent=true})
+
+-- trouble
+map('n', '<leader>xx', '<cmd>LspTroubleToggle<cr>', {noremap=true})
+map('n', '<leader>xw', '<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>', {noremap=true})
+map('n', '<leader>xd', '<cmd>LspTroubleToggle lsp_document_diagostics<cr>', {noremap=true})
+map('n', '<leader>xq', '<cmd>LspTroubleToggle quickfix<cr>', {noremap=true})
+map('n', '<leader>xl', '<cmd>LspTroubleToggle loclist<cr>', {noremap=true})

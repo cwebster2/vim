@@ -1,4 +1,5 @@
 local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
 
 
 require("telescope").setup {
@@ -18,6 +19,7 @@ require("telescope").setup {
                 ["<tab>"] = actions.toggle_selection,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<M-q>"] = actions.send_selected_to_qflist,
+                ["<C-t"] = trouble.open_with_trouble,
             },
             n = {
                 -- horizontal split
@@ -30,7 +32,8 @@ require("telescope").setup {
                 ["n"] = actions.move_selection_next,
                 ["e"] = actions.move_selection_previous,
                 -- use esc for exit no normal mode
-                ["<esc>"] = actions.close
+                ["<esc>"] = actions.close,
+                ["<C-t"] = trouble.open_with_trouble,
             },
         },
         vimgrep_arguments = {

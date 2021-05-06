@@ -113,6 +113,7 @@ local on_attach = function(client)
   --map("n", "]g",        "<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 
   map("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references()<CR>", opts)
+  map("n", "gR", "<cmd>LspTroubleToggle lsp_references<cr>", opts)
   --map("n", "ga", "<Cmd>lua require'telescope.builtin'.lsp_code_actions()<CR>", opts)
 
   map("n", "gh", "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", opts)

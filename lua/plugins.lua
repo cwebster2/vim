@@ -48,6 +48,23 @@ return require('packer').startup {
     --  'RishabhRD/nvim-lsputils',
     --  requires = {'RishabhRD/popfix'}
     --}
+    use {
+      "folke/lsp-trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+          action_keys = {
+            previous = "i",
+            next = "e"
+          },
+          auto_open = true,
+          use_lsp_diagnostic_signs = true
+        }
+      end
+    }
 
   -- Completion
     use 'hrsh7th/vim-vsnip'
