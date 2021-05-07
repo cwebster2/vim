@@ -104,6 +104,14 @@ return require('packer').startup {
     use 'cwebster2/color-overrides.nvim'
     use 'airblade/vim-gitgutter'
     use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require("which-key").setup {
+          -- stuff here
+        }
+      end
+    }
 
   -- linting
   --plug('w0rp/ale')
@@ -116,11 +124,12 @@ return require('packer').startup {
     use 'ntpeters/vim-better-whitespace'
 
   -- ide stuff
-    use {'liuchengxu/vista.vim',
+    --use {'liuchengxu/vista.vim',
       --config = function() require'_vista'.setup() end,
       --cmd = "Vista",
       --opt = true
-      }
+    --  }
+    use 'simrat39/symbols-outline.nvim'
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',
       --config = function() require'_nvimtree'.setup() end,

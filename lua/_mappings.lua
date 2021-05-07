@@ -56,7 +56,7 @@ map('n', '<Leader>qc', ':cclose<cr>', {})
 map('n', '<Leader>b', ':e#<CR>', {noremap=true})
 
 -- vista
-map('n', '<Leader>tb', ':Vista!!<CR>', {silent=true})
+map('n', '<Leader>tb', ':SymbolsOutline<CR>', {silent=true})
 
 -- maximizer
 map('n', '<F3>', ':MaximizerToggle<CR>', {silent=true})
