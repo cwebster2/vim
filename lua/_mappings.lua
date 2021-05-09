@@ -1,14 +1,20 @@
 local map = require("utils").map
+local wk = require("which-key")
 
 -- visual mode indent keep selection
 map('v', '<', '<gv', {noremap=true})
 map('v', '>', '>gv', {noremap=true})
 map('v', '.', ':normal .<CR>', {noremap=true})
--- fugitive
-map('n', '<Leader>gw', ':Gwrite<CR>', {silent=true})
-map('n', '<Leader>gs', ':vertical Gstatus<CR>', {silent=true})
-map('n', '<Leader>gc', ':Git commit<CR>', {silent=true})
-map('n', '<Leader>gp', ':Git push<CR>', {silent=true})
+
+wk.register({
+    g = {
+      name = "+git",
+      w = { ":Gwrite<cr>", "Git Write" },
+      s = { ":vertical Gstatus<cr>", "Fugitive" },
+      c = { ":Git commit<cr>", "Commit" },
+      p = { ":Git push", "Push" },
+    }
+  }, { prefix = "<leader>" })
 
 -- move between splits
 --map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
