@@ -7,14 +7,57 @@ map('v', '>', '>gv', {noremap=true})
 map('v', '.', ':normal .<CR>', {noremap=true})
 
 wk.register({
-    g = {
+    ["g"] = {
       name = "+git",
-      w = { ":Gwrite<cr>", "Git Write" },
-      s = { ":vertical Gstatus<cr>", "Fugitive" },
-      c = { ":Git commit<cr>", "Commit" },
-      p = { ":Git push", "Push" },
-    }
+      ["g"] = { ":vertical Gstatus<cr>", "Fugitive" },
+      ["w"] = { ":Gwrite<cr>", "Git Write" },
+      --["c"] = { ":Git commit<cr>", "Commit" },
+      --["p"] = { ":Git push", "Push" },
+      --l = { function() require"util".float_terminal("lazygit") end, "LazyGit" },
+      ["c"] = { "<Cmd>Telescope git_commits<CR>", "commits" },
+      ["b"] = { "<Cmd>Telescope git_branches<CR>", "branches" },
+      ["s"] = { "<Cmd>Telescope git_status<CR>", "status" },
+      --["d"] = { "<cmd>DiffviewOpen<cr>", "DiffView" },
+      --h = { name = "+hunk" }
+      ["i"] = { "<cmd>lua require('telescope').extensions.gh.issues()<CR>", "issues" },
+      ["p"] = { "<cmd>lua require('telescope').extensions.gh.pull_request()<CR>", "pull requests" },
+    },
+    ["b"] = {
+      name = "+buffer",
+      ["g"] = { "<cmd>BufferPich<cr>", "Goto Buffer" },
+    },
+    ["h"] = {
+      name = "+help",
+      t = { "<cmd>:Telescope builtin<cr>", "Telescope" },
+      c = { "<cmd>:Telescope commands<cr>", "Commands" },
+      h = { "<cmd>:Telescope help_tags<cr>", "Help Pages" },
+      m = { "<cmd>:Telescope man_pages<cr>", "Man Pages" },
+      k = { "<cmd>:Telescope keymaps<cr>", "Key Maps" },
+      s = { "<cmd>:Telescope highlights<cr>", "Search Highlight Groups" },
+      --l = { [[<cmd>TSHighlightCapturesUnderCursor<cr>]], "Highlight Groups at cursor" },
+      f = { "<cmd>:Telescope filetypes<cr>", "File Types" },
+      o = { "<cmd>:Telescope vim_options<cr>", "Options" },
+      a = { "<cmd>:Telescope autocommands<cr>", "Auto Commands" },
+      p = {
+        name = "+packer",
+        p = { "<cmd>PackerSync<cr>", "Sync" },
+        s = { "<cmd>PackerStatus<cr>", "Status" },
+        i = { "<cmd>PackerInstall<cr>", "Install" },
+        c = { "<cmd>PackerCompile<cr>", "Compile" }
+      }
+    },
   }, { prefix = "<leader>" })
+
+
+map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
+map('n', '<Leader>fp', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
+map('n', '<Leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
+map('n', '<Leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
+map('n', '<Leader>fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
+map('n', '<Leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
+map('n', '<Leader>fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
+--map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
+
 
 -- move between splits
 --map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
@@ -22,13 +65,9 @@ wk.register({
 --map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
 --map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
 
--- map("n", "<leader>m", "<Cmd>BufferLineCycleNext<CR>", {silent=true,noremap=true})
--- map("n", "<leader>i", "<Cmd>BufferLineCyclePrev<CR>", {silent=true,noremap=true})
--- map("n", "<leader>gb", "<Cmd>BufferLinePick<CR>", {noremap=true})
-
 map("n", "<leader>m", "<Cmd>BufferPrevious<CR>", {silent=true,noremap=true})
 map("n", "<leader>i", "<Cmd>BufferNext<CR>", {silent=true,noremap=true})
-map("n", "<leader>gb", "<Cmd>BufferPick<CR>", {noremap=true})
+--map("n", "<leader>gb", "<Cmd>BufferPick<CR>", {noremap=true})
 
 -- visual line movement
 map('', 'j', '(v:count == 0 ? \'gj\' : \'j\')', {expr=true,noremap=true,silent=true})
@@ -81,19 +120,6 @@ map('n', '<Leader>e', ':NvimTreeFindFile<CR>', {noremap=true})
 -- NvimTreeOpen and NvimTreeClose are also available if you need them
 
 -- telescope
-map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
-map('n', '<Leader>fp', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
-map('n', '<Leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
-map('n', '<Leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
-map('n', '<Leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>", {noremap=true})
-map('n', '<Leader>fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
-map('n', '<Leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
-map('n', '<Leader>fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=true})
-map('n', '<Leader>fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
-map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').highlights()<CR>", {noremap=true})
---map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
-map('n', '<Leader>ghi', "<cmd>lua require('telescope').extensions.gh.issues()<CR>", {noremap=true})
-map('n', '<Leader>gpr', "<cmd>lua require('telescope').extensions.gh.pull_request()<CR>", {noremap=true})
 
 -- testing
 map('n', '<Leader>tt', "<cmd>TestNearest<CR>", {noremap=true})
