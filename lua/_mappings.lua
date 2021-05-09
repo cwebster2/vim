@@ -28,30 +28,40 @@ wk.register({
     },
     ["h"] = {
       name = "+help",
-      t = { "<cmd>:Telescope builtin<cr>", "Telescope" },
-      c = { "<cmd>:Telescope commands<cr>", "Commands" },
-      h = { "<cmd>:Telescope help_tags<cr>", "Help Pages" },
-      m = { "<cmd>:Telescope man_pages<cr>", "Man Pages" },
-      k = { "<cmd>:Telescope keymaps<cr>", "Key Maps" },
-      s = { "<cmd>:Telescope highlights<cr>", "Search Highlight Groups" },
-      --l = { [[<cmd>TSHighlightCapturesUnderCursor<cr>]], "Highlight Groups at cursor" },
-      f = { "<cmd>:Telescope filetypes<cr>", "File Types" },
-      o = { "<cmd>:Telescope vim_options<cr>", "Options" },
-      a = { "<cmd>:Telescope autocommands<cr>", "Auto Commands" },
-      p = {
+      ["t"] = { "<cmd>Telescope builtin<cr>", "Telescope" },
+      ["c"] = { "<cmd>Telescope commands<cr>", "Commands" },
+      ["h"] = { "<cmd>Telescope help_tags<cr>", "Help Pages" },
+      ["m"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+      ["k"] = { "<cmd>Telescope keymaps<cr>", "Key Maps" },
+      ["s"] = { "<cmd>Telescope highlights<cr>", "Search Highlight Groups" },
+      --["l = { [[<cmd>TSHighlightCapturesUnderCursor<cr>]], "Highlight Groups at cursor" },
+      ["f"] = { "<cmd>Telescope filetypes<cr>", "File Types" },
+      ["o"] = { "<cmd>Telescope vim_options<cr>", "Options" },
+      ["a"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" },
+      ["p"] = {
         name = "+packer",
-        p = { "<cmd>PackerSync<cr>", "Sync" },
-        s = { "<cmd>PackerStatus<cr>", "Status" },
-        i = { "<cmd>PackerInstall<cr>", "Install" },
-        c = { "<cmd>PackerCompile<cr>", "Compile" }
+        ["p"] = { "<cmd>PackerSync<cr>", "Sync" },
+        ["s"] = { "<cmd>PackerStatus<cr>", "Status" },
+        ["i"] = { "<cmd>PackerInstall<cr>", "Install" },
+        ["c"] = { "<cmd>PackerCompile<cr>", "Compile" }
       }
     },
+    ["f"] = {
+      name = "+file",
+      ["t"] = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+      ["f"] = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Find Files" },
+      ["g"] = { "<cmd>lua require('telescope.builtin').git_files()<CR>", "Find Git Files" },
+      ["r"] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Recent Files" },
+      ["n"] = { "<cmd>enew<CR>", "New File" },
+    },
+    ["s"] = {
+      name = "+search",
+      ["g"] = { "<cmd>lua require('telescope.builtin').live_grep()<CR>", "Grep" },
+      ["c"] = { '<cmd>let @/=""<cr>', "Clear search highlight" },
+    }
   }, { prefix = "<leader>" })
 
 
-map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
-map('n', '<Leader>fp', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
-map('n', '<Leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
 map('n', '<Leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
 map('n', '<Leader>fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
 map('n', '<Leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
@@ -77,9 +87,6 @@ map('', '<Up>', '(v:count == 0 ? \'gk\' : \'<Up>\')', {expr=true,noremap=true,si
 
 -- quick spilt
 map('n', '<Leader>v', '<C-w>v<C-w>w', {})
-
--- clear search
-map('n', '<Leader>/', ':let @/=""<CR>', {silent=true})
 
 -- spell
 map ('n', '<F9>', ':set spell!<cr>', {silent=true})
@@ -112,14 +119,6 @@ map('i', '<F3>', '<C-o>:MaximizerToggle<CR>', {silent=true})
 map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
 map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
 map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
-
--- nvim tree
-map('n', '<Leader>E', ':NvimTreeToggle<CR>', {noremap=true})
---nnoremap <leader>r :NvimTreeRefresh<CR>
-map('n', '<Leader>e', ':NvimTreeFindFile<CR>', {noremap=true})
--- NvimTreeOpen and NvimTreeClose are also available if you need them
-
--- telescope
 
 -- testing
 map('n', '<Leader>tt', "<cmd>TestNearest<CR>", {noremap=true})
