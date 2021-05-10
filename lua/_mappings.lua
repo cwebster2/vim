@@ -24,7 +24,11 @@ wk.register({
     },
     ["b"] = {
       name = "+buffer",
-      ["g"] = { "<cmd>BufferPich<cr>", "Goto Buffer" },
+      ["g"] = { "<cmd>BufferPick<cr>", "Goto Buffer" },
+      ["p"] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer" },
+      ["n"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
+      ["s"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
+      ["b"] = { ':e#<CR>', "Last Buffer"},
     },
     ["h"] = {
       name = "+help",
@@ -58,14 +62,15 @@ wk.register({
       name = "+search",
       ["g"] = { "<cmd>lua require('telescope.builtin').live_grep()<CR>", "Grep" },
       ["c"] = { '<cmd>let @/=""<cr>', "Clear search highlight" },
-    }
+      ["l"] = { "<cmd>lua require('telescope.builtin').loclist()<CR>", "Loclist" },
+      ["q"] = { "<cmd>lua require('telescope.builtin').quickfix()<CR>","Quickfix" },
+      ["s"] = { "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", "Spelling" },
+    },
+    ["m"] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer" },
+    ["i"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
   }, { prefix = "<leader>" })
 
 
-map('n', '<Leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
-map('n', '<Leader>fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
-map('n', '<Leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
-map('n', '<Leader>fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
 --map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
 
 
@@ -104,8 +109,6 @@ map('n', '<Leader>qn', ':cnext<cr>', {})
 map('n', '<Leader>qp', ':cprev<cr>', {})
 map('n', '<Leader>qc', ':cclose<cr>', {})
 
--- swap to last buffer
-map('n', '<Leader>b', ':e#<CR>', {noremap=true})
 
 -- vista
 map('n', '<Leader>tb', ':SymbolsOutline<CR>', {silent=true})
