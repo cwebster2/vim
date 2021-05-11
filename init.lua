@@ -11,7 +11,6 @@ a.nvim_command("set nocompatible")
 g.mapleader = ' '
 g.maplocalleader = ','
 
-
 -- set global, window and buffer options
 require'_options'
 
