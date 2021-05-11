@@ -44,6 +44,7 @@ o.viewoptions = "cursor,folds,options,unix,slash"
 o.virtualedit = "onemore"
 o.writebackup = false
 o.pumblend = 15
+o.winblend = 15
 
 bo.autoindent = false
 o.autoindent = false
@@ -66,6 +67,7 @@ wo.cursorline = true
 wo.fillchars = "vert:│"
 wo.list = true
 wo.listchars = "tab:▷ ,trail:·,extends:…,precedes:…,conceal:┊,nbsp:○,eol:¬"
+wo.winblend = 30
 o.list = true
 o.listchars = "tab:▷ ,trail:·,extends:…,precedes:…,conceal:┊,nbsp:○,eol:¬"
 

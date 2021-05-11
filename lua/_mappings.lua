@@ -29,6 +29,8 @@ wk.register({
       ["n"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
       ["s"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
       ["b"] = { ':e#<CR>', "Last Buffer"},
+      ["d"] = { '<Cmd>BufferOrderByDirectory<CR>', "Order by Dir" },
+      ["l"] = { '<Cmd>BufferOrderByLanguage<CR>', "Order by Lang" },
     },
     ["h"] = {
       name = "+help",
@@ -66,6 +68,7 @@ wk.register({
       ["q"] = { "<cmd>lua require('telescope.builtin').quickfix()<CR>","Quickfix" },
       ["s"] = { "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", "Spelling" },
     },
+    ["<C-s>"] = { "<Cmd>BufferPick<CR>", "Pick Buffer" },
     ["m"] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer" },
     ["i"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
   }, { prefix = "<leader>" })
@@ -79,10 +82,6 @@ wk.register({
 --map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
 --map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
 --map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
-
-map("n", "<leader>m", "<Cmd>BufferPrevious<CR>", {silent=true,noremap=true})
-map("n", "<leader>i", "<Cmd>BufferNext<CR>", {silent=true,noremap=true})
---map("n", "<leader>gb", "<Cmd>BufferPick<CR>", {noremap=true})
 
 -- visual line movement
 map('', 'j', '(v:count == 0 ? \'gj\' : \'j\')', {expr=true,noremap=true,silent=true})
@@ -130,9 +129,6 @@ map('n', '<Leader>ts', "<cmd>TestSuite<CR>", {noremap=true})
 map('n', '<Leader>t_', "<cmd>TestLast<CR>", {noremap=true})
 
 -- barbar
-map('n', '<C-s>', '<Cmd>BufferPick<CR>', {noremap=true, silent=true})
-map('n', '<Leader>bd', '<Cmd>BufferOrderByDirectory<CR>', {noremap=true, silent=true})
-map('n', '<Leader>bl', '<Cmd>BufferOrderByLanguage<CR>', {noremap=true, silent=true})
 
 -- trouble
 map('n', '<leader>xx', '<cmd>LspTroubleToggle<cr>', {noremap=true})

@@ -107,6 +107,7 @@ M.overrides_setup = function()
   local my_colors = {
     Normal =                {ctermbg=c.none,                  guibg=c.none},
     VertSplit =             {ctermbg=c.none,                  guibg=c.none},
+    WhichKeyFloat =         {ctermbg='Black',                 guibg='#191919', blend=30},
     PMenu =                 {ctermbg='Black',                 guibg='#191919', blend=25},
     PMenuSel =              {                guifg='#ffffff', guibg='#333333'},
     GitGutterAdd =          {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg='green'},
