@@ -44,26 +44,10 @@ return require('packer').startup {
     use 'p00f/nvim-ts-rainbow'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
-    --use{
-    --  'RishabhRD/nvim-lsputils',
-    --  requires = {'RishabhRD/popfix'}
-    --}
     use {
       "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("trouble").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-          action_keys = {
-            previous = "i",
-            next = "e"
-          },
-          auto_open = true,
-          use_lsp_diagnostic_signs = true
-        }
-      end
+      config = function() require("_trouble").setup() end
     }
 
   -- Completion
@@ -104,13 +88,10 @@ return require('packer').startup {
     use 'cwebster2/color-overrides.nvim'
     use 'airblade/vim-gitgutter'
     use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
+
     use {
       "folke/which-key.nvim",
-      config = function()
-        require("which-key").setup {
-          -- stuff here
-        }
-      end
+      config = function() require("which-key").setup() end
     }
 
   -- linting
