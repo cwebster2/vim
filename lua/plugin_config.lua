@@ -6,6 +6,8 @@ g.qs_lazy_highlight = 1
 
 g.fzf_command_prefix = 'F'
 
+g.NERDCreateDefaultMappings = 0
+
 g.DevIconsEnableFoldersOpenClose = 1
 
 g.polyglot_disabled = { "autoindent", "sensible" }

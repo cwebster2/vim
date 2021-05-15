@@ -44,6 +44,7 @@ return require('packer').startup {
     use 'p00f/nvim-ts-rainbow'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
+    use{'ray-x/lsp_signature.nvim'}
     use {
       "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
