@@ -15,6 +15,92 @@ to change with every commit.
 
 - Neovim >= 0.5
 
+## What plugins am I using?
+
+### Plugin Management
+
+ - github.com/wbthomason/packer.nvim
+
+### Colorscheme
+
+ - github.com/nanotech/jellybeans.vim
+ - github.com/cwebster2/color-overrides.nvim
+
+### Status Line
+
+ - github.com/glepnir/galaxyline.nvim
+
+### Tab Bar
+
+ - github.com/romgrk/barbar.nvim
+
+### File Tree
+
+ - github.com/kyazdani42/nvim-tree.lua
+
+### Fuzzy finding
+
+ - github.com/nvim-telescope/telescope.nvim
+ - github.com/nvim-telescope/telescope-fzy-native.nvim
+ - github.com/nvim-telescope/telescope-fzf-writer.nvim
+ - github.com/nvim-telescope/telescope-packer.nvim
+ - github.com/nvim-telescope/telescope-github.nvim
+ - github.com/nvim-telescope/telescope-symbols.nvim
+ - github.com/nvim-telescope/telescope-vimspector.nvim
+ - github.com/junegunn/fzf
+ - github.com/junegunn/fzf.vim
+
+### Language Server Protocol Things
+ - github.com/neovim/nvim-lspconfig
+ - github.com/nvim-treesitter/nvim-treesitter
+ - github.com/nvim-treesitter/nvim-treesitter-textobjects
+ - github.com/p00f/nvim-ts-rainbow
+ - github.com/kosayoda/nvim-lightbulb
+ - github.com/glepnir/lspsaga.nvim
+ - github.com/ray-x/lsp_signature.nvim
+ - github.com/folke/lsp-trouble.nvim
+
+### Completion
+
+ - github.com/hrsh7th/nvim-compe
+ - github.com/hrsh7th/vim-vsnip
+ - github.com/hrsh7th/vim-vsnip-integ
+
+### Symbol Tree
+
+ - github.com/simrat39/symbols-outline.nvim
+
+### Git stuff
+
+ - github.com/tpope/vim-fugitive
+ - github.com/airblade/vim-gitgutter
+ - github.com/pwntester/octo.nvim
+ - github.com/junegunn/gv.vim
+
+### Auto-pairs
+
+ - github.com/tmsvg/pear-tree'
+
+### The rest
+
+ - github.com/RRethy/vim-hexokinase
+ - github.com/szw/vim-maximizer
+ - github.com/lukas-reineke/indent-blankline.nvim
+ - github.com/editorconfig/editorconfig-vim
+ - github.com/ntpeters/vim-better-whitespace
+ - github.com/terrortylor/nvim-comment
+ - github.com/unblevable/quick-scope
+ - github.com/kassio/neoterm
+ - github.com/janko/vim-test
+ - github.com/puremourning/vimspector
+ - github.com/plasticboy/vim-markdown
+ - github.com/iamcco/markdown-preview.nvim
+ - github.com/vim-latex/vim-latex
+ - github.com/airblade/vim-rooter
+ - github.com/tpope/vim-eunuch
+ - github.com/tpope/vim-surround
+
+
 ## Using this configuration
 
 Clone this repo to `~/.config/nvim` e.g.
