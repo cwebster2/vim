@@ -11,7 +11,6 @@ a.nvim_command("set nocompatible")
 g.mapleader = ' '
 g.maplocalleader = ','
 
-
 -- set global, window and buffer options
 require'_options'
 
@@ -23,7 +22,6 @@ end
 -- some globals that need setting before plugins are loaded
 g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
 g.loaded_netrwPlugin = 1
-g.polyglot_disabled = {'python', 'latex', 'typescript'} -- Use python-syntax and vimtex
 g.jsx_ext_required = 0
 g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
 g.mkdp_auto_close = 0
@@ -70,27 +68,27 @@ if vim.fn.has('persistent_undo') == 1 then
   o.undoreload = 500
 end
 
-augroup("vimrc-main", function()
+augroup("vimrc-main", {
   -- save when focus lost
-  vim.cmd [[ autocmd FocusLost * silent! wa ]]
-  vim.cmd [[ autocmd StdinReadPre * let s:std_in=1 ]]
+  {'FocusLost', '*', 'silent! wa'},
+  {'StdinReadPre', '*', 'let s:std_in=1'},
   -- strip trailing whitespace
   -- vim.cmd [[ autocmd BufWritePre * :%s/\s\+$//e ]]
   -- starphleet
-  vim.cmd [[ au BufRead,BufNewFile after_containerize,on_containerize,orders set filetype=sh ]]
-  vim.cmd [[ au BufRead,BufNewFile ~/.zfunc/* set filetype=zsh ]]
+  {'BufRead,BufNewFile', 'after_containerize,on_containerize,orders', 'set filetype=sh'},
+  {'BufRead,BufNewFile', '~/.zfunc/*', 'set filetype=zsh'},
   -- tab management
-  vim.cmd [[ au TabLeave * let g:lasttab = tabpagenr() ]]
+  {'TabLeave', '*', 'let g:lasttab = tabpagenr()'},
   -- highlight yanks
-  vim.cmd [[ au TextYankPost * silent! lua vim.highlight.on_yank { higroup='Visual', timeout=200 } ]]
-  vim.cmd [[ au FileType markdown setlocal spell]]
-  vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
-end)
+  {'TextYankPost', '*', 'silent! lua vim.highlight.on_yank { higroup="Visual", timeout=200 }' },
+  {'FileType', 'markdown', 'setlocal spell'},
+  {'BufWritePost', 'plugins.lua', 'PackerCompile'},
+})
 
-augroup("numbertoggle", function()
-   vim.cmd("autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif")
-   vim.cmd("autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif")
-end)
+augroup("numbertoggle", {
+  {'BufEnter,FocusGained,InsertLeave,WinEnter', '*', 'if &nu | set rnu   | endif'},
+  {'BufLeave,FocusLost,InsertEnter,WinLeave',   '*', 'if &nu | set nornu | endif'},
+})
 
 --mappings
 require'_mappings'

@@ -3,45 +3,47 @@ local M = {}
 
 local c = {
   none = "NONE",
-  red = "red",
-  green = "green",
   changed = "#2B5B77",
   lspvtext = "#555555",
   cursorline = '#1c1c1c',
   modified = 'DarkGoldenrod2',
   indentguides = '#222222',
   whitespace = '#333333',
+  diffadd = 'green',
+  diffdel = 'red',
+  diffchanged = "#2B5B77",
+
+  bg = '#282c34',
+  --line_bg = '#353644',
+  line_bg = '#1c1c1c',
+  fg = '#8FBCBB',
+  fg_green = '#65a380',
+
+  bg_none = "NONE",
+
+  --red = "red",
+  --green = "green",
+  gray = 'gray',
+
+  yellow = '#fabd2f',
+  cyan = '#008080',
+  darkblue = '#081633',
+  green = '#afd700',
+  orange = '#FF8800',
+  purple = '#5d4d7a',
+  magenta = '#c678dd',
+  blue = '#51afef',
+  red = '#ec5f67',
+
+  normalmode = '#99ad6a'
 }
 
-M.galaxyline_colors = {
-    bg = '#282c34',
-    --line_bg = '#353644',
-    line_bg = '#1c1c1c',
-    fg = '#8FBCBB',
-    fg_green = '#65a380',
-
-    bg_none = c.none,
-
-    diffadd = 'green',
-    diffdel = 'red',
-    diffchg = c.changed,
-    gray = 'gray',
-
-    yellow = '#fabd2f',
-    cyan = '#008080',
-    darkblue = '#081633',
-    green = '#afd700',
-    orange = '#FF8800',
-    purple = '#5d4d7a',
-    magenta = '#c678dd',
-    blue = '#51afef';
-    red = '#ec5f67'
-}
+M.galaxyline_colors = c
 
 M.mode_color = {
   --n = 'DarkGoldenrod2',
-  n = '#8197bf',
-  i = 'chartreuse3',
+  n = c.fg_green,
+  i = c.blue,
   v = 'gray',
   [""] = 'gray',
   V = 'gray',
@@ -105,12 +107,13 @@ M.overrides_setup = function()
   local my_colors = {
     Normal =                {ctermbg=c.none,                  guibg=c.none},
     VertSplit =             {ctermbg=c.none,                  guibg=c.none},
-    PMenu =                 {ctermbg='Black',                 guibg='#191919'},
+    WhichKeyFloat =         {ctermbg='Black',                 guibg='#191919', blend=30},
+    PMenu =                 {ctermbg='Black',                 guibg='#191919', blend=25},
     PMenuSel =              {                guifg='#ffffff', guibg='#333333'},
-    GitGutterAdd =          {ctermbg=c.none, ctermfg=c.green, guibg=c.none, guifg=c.green},
-    GitGutterChange =       {ctermbg=c.none, ctermfg=c.green, guibg=c.none, guifg=c.changed},
-    GitGutterDelete =       {ctermbg=c.none, ctermfg=c.red,   guibg=c.none, guifg=c.red},
-    GitGutterChangeDelete = {ctermbg=c.none, ctermfg=c.red,   guibg=c.none, guifg=c.changed},
+    GitGutterAdd =          {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg='green'},
+    GitGutterChange =       {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg=c.diffchanged},
+    GitGutterDelete =       {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg=c.red},
+    GitGutterChangeDelete = {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg=c.diffchanged},
     SpellCap =              {guibg=c.none, guisp='Red', gui='undercurl', cterm='undercurl,bold'},
     SpellBad =              {guisp='Red', gui='undercurl', guibg='#771c13', cterm='undercurl,bold'},
     ALEErrorSign =          {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg='red'},
@@ -130,8 +133,8 @@ M.overrides_setup = function()
     BufferVisibleMod =    {guifg=c.modified, guibg=c.none},
     BufferVisibleSign =    {guifg='white', guibg=c.none},
     BufferVisibleTarget =    {guifg='red', guibg=c.none, gui='bold'},
-    BufferInactive =    {guifg='#9098a0', guibg=c.none},
-    BufferInactiveMod =    {guifg=c.modified, guibg=c.none},
+    BufferInactive =    {guifg='#4C5966', guibg=c.none},
+    BufferInactiveMod =    {guifg='#A59272', guibg=c.none},
     BufferInactiveSign =    {guifg='#606060', guibg=c.none},
     BufferInactiveTarget =    {guifg='red', guibg=c.none, gui='bold'},
     BufferTabpages =    {guifg=c.none, guibg=c.none},

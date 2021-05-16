@@ -11,9 +11,95 @@ This is a living configuration and is constantly being tweaked, so use at your
 own peril.  The included plugins, keymaps, colors and configurations are subject
 to change with every commit.
 
-## Requirements 
+## Requirements
 
 - Neovim >= 0.5
+
+## What plugins am I using?
+
+### Plugin Management
+
+ - https://github.com/wbthomason/packer.nvim
+
+### Colorscheme
+
+ - https://github.com/nanotech/jellybeans.vim
+ - https://github.com/cwebster2/color-overrides.nvim
+
+### Status Line
+
+ - https://github.com/glepnir/galaxyline.nvim
+
+### Tab Bar
+
+ - https://github.com/romgrk/barbar.nvim
+
+### File Tree
+
+ - https://github.com/kyazdani42/nvim-tree.lua
+
+### Fuzzy finding
+
+ - https://github.com/nvim-telescope/telescope.nvim
+ - https://github.com/nvim-telescope/telescope-fzy-native.nvim
+ - https://github.com/nvim-telescope/telescope-fzf-writer.nvim
+ - https://github.com/nvim-telescope/telescope-packer.nvim
+ - https://github.com/nvim-telescope/telescope-github.nvim
+ - https://github.com/nvim-telescope/telescope-symbols.nvim
+ - https://github.com/nvim-telescope/telescope-vimspector.nvim
+ - https://github.com/junegunn/fzf
+ - https://github.com/junegunn/fzf.vim
+
+### Language Server Protocol Things
+ - https://github.com/neovim/nvim-lspconfig
+ - https://github.com/nvim-treesitter/nvim-treesitter
+ - https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+ - https://github.com/p00f/nvim-ts-rainbow
+ - https://github.com/kosayoda/nvim-lightbulb
+ - https://github.com/glepnir/lspsaga.nvim
+ - https://github.com/ray-x/lsp_signature.nvim
+ - https://github.com/folke/lsp-trouble.nvim
+
+### Completion
+
+ - https://github.com/hrsh7th/nvim-compe
+ - https://github.com/hrsh7th/vim-vsnip
+ - https://github.com/hrsh7th/vim-vsnip-integ
+
+### Symbol Tree
+
+ - https://github.com/simrat39/symbols-outline.nvim
+
+### Git stuff
+
+ - https://github.com/tpope/vim-fugitive
+ - https://github.com/airblade/vim-gitgutter
+ - https://github.com/pwntester/octo.nvim
+ - https://github.com/junegunn/gv.vim
+
+### Auto-pairs
+
+ - https://github.com/tmsvg/pear-tree'
+
+### The rest
+
+ - https://github.com/RRethy/vim-hexokinase
+ - https://github.com/szw/vim-maximizer
+ - https://github.com/lukas-reineke/indent-blankline.nvim
+ - https://github.com/editorconfig/editorconfig-vim
+ - https://github.com/ntpeters/vim-better-whitespace
+ - https://github.com/terrortylor/nvim-comment
+ - https://github.com/unblevable/quick-scope
+ - https://github.com/kassio/neoterm
+ - https://github.com/janko/vim-test
+ - https://github.com/puremourning/vimspector
+ - https://github.com/plasticboy/vim-markdown
+ - https://github.com/iamcco/markdown-preview.nvim
+ - https://github.com/vim-latex/vim-latex
+ - https://github.com/airblade/vim-rooter
+ - https://github.com/tpope/vim-eunuch
+ - https://github.com/tpope/vim-surround
+
 
 ## Using this configuration
 
@@ -25,7 +111,7 @@ The first time you run neovim with this config it will install the packer plugin
 automatically.  You may see errors the first time you run nvim but this is ok and
 just a byproduct of plugins not being installed yet.
 You will need to run the PackerSync command to download and install
-all the configured plugins.  
+all the configured plugins.
 
     <esc>:PackerSync<CR>
 
@@ -105,4 +191,4 @@ a configuration that relies on `eslint_d` and `prettier` being installed globall
 
     npm install -g eslint_d prettier
 
- 
+

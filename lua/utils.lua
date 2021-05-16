@@ -1,24 +1,36 @@
 local M = {}
+
+local api = vim.api
+
 -- Key mapping
 function M.map(mode, key, result, opts)
-  vim.fn.nvim_set_keymap(
-    mode,
-    key,
-    result,
-    {
-      noremap = true,
-      silent = opts.silent or false,
-      expr = opts.expr or false,
-      script = opts.script or false
-    }
-  )
+  map_opts = {
+    noremap = true,
+    silent = opts.silent or false,
+    expr = opts.expr or false,
+    script = opts.script or false
+  }
+  if not opts.buffer then
+    vim.api.nvim_set_keymap(mode, key, result, map_opts)
+  else
+    local buffer = opts.buffer
+    if buffer == true then
+      buffer = 0
+    end
+    vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
+  end
 end
 
-function M.augroup(group, fn)
-  vim.api.nvim_command("augroup " .. group)
-  vim.api.nvim_command("autocmd!")
-  fn()
-  vim.api.nvim_command("augroup END")
+function M.augroup(group_name, definitions)
+  api.nvim_command('augroup ' .. group_name)
+  api.nvim_command('autocmd!')
+  for _, def in ipairs(definitions) do
+    local command = table.concat({'autocmd', unpack(def)}, ' ')
+    if api.nvim_call_function('exists', {'##' .. def[1]}) ~= 0 then
+      api.nvim_command(command)
+    end
+  end
+  api.nvim_command('augroup END')
 end
 
 function M.get_color(synID, what, mode)

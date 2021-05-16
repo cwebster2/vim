@@ -1,4 +1,5 @@
 local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
 
 
 require("telescope").setup {
@@ -14,7 +15,11 @@ require("telescope").setup {
                 ["<C-n>"] = actions.move_selection_next,
                 ["<C-e>"] = actions.move_selection_previous,
                 -- use esc for exit no normal mode
-                ["<esc>"] = actions.close
+                ["<esc>"] = actions.close,
+                ["<tab>"] = actions.toggle_selection,
+                ["<C-q>"] = actions.send_to_qflist,
+                ["<M-q>"] = actions.send_selected_to_qflist,
+                ["<C-t"] = trouble.open_with_trouble,
             },
             n = {
                 -- horizontal split
@@ -27,7 +32,8 @@ require("telescope").setup {
                 ["n"] = actions.move_selection_next,
                 ["e"] = actions.move_selection_previous,
                 -- use esc for exit no normal mode
-                ["<esc>"] = actions.close
+                ["<esc>"] = actions.close,
+                ["<C-t"] = trouble.open_with_trouble,
             },
         },
         vimgrep_arguments = {
@@ -46,7 +52,9 @@ require("telescope").setup {
         sorting_strategy = "ascending",
         layout_strategy = "horizontal",
         layout_defaults = {},
+        --file_sorter = require "telescope.sorters".get_fzy_sorter,
         file_sorter = require "telescope.sorters".get_fuzzy_file,
+        --file_sorter = require "telescope.sorters".fuzzy_with_index_bias,
         file_ignore_patterns = {".git", ".node_modules"},
         generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
         shorten_path = true,
@@ -68,5 +76,5 @@ require("telescope").setup {
 
 -- the fzy extension changes the behavior of telescope in a way i don't like
 --require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('gh')
+require('telescope').load_extension('octo')
 

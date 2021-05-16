@@ -1,28 +1,97 @@
 local map = require("utils").map
+local wk = require("which-key")
 
 -- visual mode indent keep selection
 map('v', '<', '<gv', {noremap=true})
 map('v', '>', '>gv', {noremap=true})
 map('v', '.', ':normal .<CR>', {noremap=true})
 
--- fugitive
-map('n', '<Leader>gw', ':Gwrite<CR>', {silent=true})
-map('n', '<Leader>gs', ':vertical Gstatus<CR>', {silent=true})
-map('n', '<Leader>gc', ':Git commit<CR>', {silent=true})
-map('n', '<Leader>gp', ':Git push<CR>', {silent=true})
+wk.register({
+    ["g"] = {
+      name = "+git",
+      ["g"] = { ":vertical Gstatus<cr>", "Fugitive" },
+      ["w"] = { ":Gwrite<cr>", "Git Write" },
+      --["c"] = { ":Git commit<cr>", "Commit" },
+      --["p"] = { ":Git push", "Push" },
+      --l = { function() require"util".float_terminal("lazygit") end, "LazyGit" },
+      ["c"] = { "<Cmd>Telescope git_commits<CR>", "commits" },
+      ["b"] = { "<Cmd>Telescope git_branches<CR>", "branches" },
+      ["s"] = { "<Cmd>Telescope git_status<CR>", "status" },
+      --["d"] = { "<cmd>DiffviewOpen<cr>", "DiffView" },
+      --h = { name = "+hunk" }
+      ["i"] = { "<cmd>lua require('telescope').extensions.gh.issues()<CR>", "issues" },
+      ["p"] = { "<cmd>lua require('telescope').extensions.gh.pull_request()<CR>", "pull requests" },
+    },
+    ["b"] = {
+      name = "+buffer",
+      ["g"] = { "<cmd>BufferPick<cr>", "Goto Buffer" },
+      ["p"] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer" },
+      ["n"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
+      ["s"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
+      ["b"] = { ':e#<CR>', "Last Buffer"},
+      ["d"] = { '<Cmd>BufferOrderByDirectory<CR>', "Order by Dir" },
+      ["l"] = { '<Cmd>BufferOrderByLanguage<CR>', "Order by Lang" },
+    },
+    ["h"] = {
+      name = "+help",
+      ["t"] = { "<cmd>Telescope builtin<cr>", "Telescope" },
+      ["c"] = { "<cmd>Telescope commands<cr>", "Commands" },
+      ["h"] = { "<cmd>Telescope help_tags<cr>", "Help Pages" },
+      ["m"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+      ["k"] = { "<cmd>Telescope keymaps<cr>", "Key Maps" },
+      ["s"] = { "<cmd>Telescope highlights<cr>", "Search Highlight Groups" },
+      --["l = { [[<cmd>TSHighlightCapturesUnderCursor<cr>]], "Highlight Groups at cursor" },
+      ["f"] = { "<cmd>Telescope filetypes<cr>", "File Types" },
+      ["o"] = { "<cmd>Telescope vim_options<cr>", "Options" },
+      ["a"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" },
+      ["p"] = {
+        name = "+packer",
+        ["p"] = { "<cmd>PackerSync<cr>", "Sync" },
+        ["s"] = { "<cmd>PackerStatus<cr>", "Status" },
+        ["i"] = { "<cmd>PackerInstall<cr>", "Install" },
+        ["c"] = { "<cmd>PackerCompile<cr>", "Compile" }
+      }
+    },
+    ["f"] = {
+      name = "+file",
+      ["t"] = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+      ["f"] = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Find Files" },
+      ["g"] = { "<cmd>lua require('telescope.builtin').git_files()<CR>", "Find Git Files" },
+      ["r"] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Recent Files" },
+      ["n"] = { "<cmd>enew<CR>", "New File" },
+    },
+    ["s"] = {
+      name = "+search",
+      ["g"] = { "<cmd>lua require('telescope.builtin').live_grep()<CR>", "Grep" },
+      ["c"] = { '<cmd>let @/=""<cr>', "Clear search highlight" },
+      ["l"] = { "<cmd>lua require('telescope.builtin').loclist()<CR>", "Loclist" },
+      ["q"] = { "<cmd>lua require('telescope.builtin').quickfix()<CR>","Quickfix" },
+      ["s"] = { "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", "Spelling" },
+    },
+    ["<C-s>"] = { "<Cmd>BufferPick<CR>", "Pick Buffer" },
+    ["m"] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer" },
+    ["i"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
+  }, { prefix = "<leader>" })
+
+wk.register({
+  ["g"] = {
+    name = "+goto",
+    ["c"] = { "Comment" },
+  },
+  ["<C-_>"] = { "<cmd>CommentToggle<cr>", "Comment Line" }
+}, {})
+
+wk.register({
+  ["<C-_>"] = { ":'<,'>CommentToggle<cr>", "Comment Line" }
+}, { mode = "v" })
+
+--map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
 
 -- move between splits
-map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
-map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
-map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
-map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
-
---map("n", "<leader>m", "<Cmd>BufferLineCycleNext<CR>", {silent=true,noremap=true})
---map("n", "<leader>i", "<Cmd>BufferLineCyclePrev<CR>", {silent=true,noremap=true})
---map("n", "<leader>gb", "<Cmd>BufferLinePick<CR>", {noremap=true})
-map("n", "<leader>m", "<Cmd>BufferPrevious<CR>", {silent=true,noremap=true})
-map("n", "<leader>i", "<Cmd>BufferNext<CR>", {silent=true,noremap=true})
-map("n", "<leader>gb", "<Cmd>BufferPick<CR>", {noremap=true})
+--map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
+--map('n', '<C-n>', '<C-w><C-j>', {noremap=true})
+--map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
+--map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
 
 -- visual line movement
 map('', 'j', '(v:count == 0 ? \'gj\' : \'j\')', {expr=true,noremap=true,silent=true})
@@ -33,24 +102,24 @@ map('', '<Up>', '(v:count == 0 ? \'gk\' : \'<Up>\')', {expr=true,noremap=true,si
 -- quick spilt
 map('n', '<Leader>v', '<C-w>v<C-w>w', {})
 
--- clear search
-map('n', '<Leader>/', ':let @/=""<CR>', {silent=true})
-
 -- spell
 map ('n', '<F9>', ':set spell!<cr>', {silent=true})
 map ('i', '<F9>', '<C-O>:set spell!<cr>', {silent=true})
 
 -- location list
 map('n', '<Leader>ll', ':lopen<cr>', {})
-map('n', '<Leader>ln', ':lnext<cr>', {})
-map('n', '<Leader>lp', ':lprev<cr>', {})
+map('n', '<Leader>j', ':lnext<cr>', {})
+map('n', '<Leader>k', ':lprev<cr>', {})
 map('n', '<Leader>lc', ':lclose<cr>', {})
 
--- swap to last buffer
-map('n', '<Leader>b', ':e#<CR>', {noremap=true})
+-- quick list
+map('n', '<Leader>ql', ':copen<cr>', {})
+map('n', '<Leader>qn', ':cnext<cr>', {})
+map('n', '<Leader>qp', ':cprev<cr>', {})
+map('n', '<Leader>qc', ':cclose<cr>', {})
 
 -- vista
-map('n', '<Leader>tb', ':Vista!!<CR>', {silent=true})
+map('n', '<Leader>tb', ':SymbolsOutline<CR>', {silent=true})
 
 -- maximizer
 map('n', '<F3>', ':MaximizerToggle<CR>', {silent=true})
@@ -62,29 +131,15 @@ map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
 map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
 map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
 
--- nvim tree
-map('n', '<Leader>E', ':NvimTreeToggle<CR>', {noremap=true})
---nnoremap <leader>r :NvimTreeRefresh<CR>
-map('n', '<Leader>e', ':NvimTreeFindFile<CR>', {noremap=true})
--- NvimTreeOpen and NvimTreeClose are also available if you need them
-
--- telescope
-map('n', '<Leader>fp', "<cmd>lua require('telescope.builtin').git_files()<CR>", {noremap=true})
-map('n', '<Leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>", {noremap=true})
-map('n', '<Leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<CR>", {noremap=true})
-map('n', '<Leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>", {noremap=true})
-map('n', '<Leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>", {noremap=true})
-map('n', '<Leader>fl', "<cmd>lua require('telescope.builtin').loclist()<CR>", {noremap=true})
-map('n', '<Leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<CR>", {noremap=true})
-map('n', '<Leader>fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {noremap=true})
-map('n', '<Leader>fs', "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", {noremap=true})
-map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').highlights()<CR>", {noremap=true})
---map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
-map('n', '<Leader>ghi', "<cmd>lua require('telescope').extensions.gh.issues()<CR>", {noremap=true})
-map('n', '<Leader>gpr', "<cmd>lua require('telescope').extensions.gh.pull_request()<CR>", {noremap=true})
-
 -- testing
 map('n', '<Leader>tt', "<cmd>TestNearest<CR>", {noremap=true})
 map('n', '<Leader>tf', "<cmd>TestFile<CR>", {noremap=true})
 map('n', '<Leader>ts', "<cmd>TestSuite<CR>", {noremap=true})
 map('n', '<Leader>t_', "<cmd>TestLast<CR>", {noremap=true})
+
+-- trouble
+map('n', '<leader>xx', '<cmd>LspTroubleToggle<cr>', {noremap=true})
+map('n', '<leader>xw', '<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>', {noremap=true})
+map('n', '<leader>xd', '<cmd>LspTroubleToggle lsp_document_diagostics<cr>', {noremap=true})
+map('n', '<leader>xq', '<cmd>LspTroubleToggle quickfix<cr>', {noremap=true})
+map('n', '<leader>xl', '<cmd>LspTroubleToggle loclist<cr>', {noremap=true})

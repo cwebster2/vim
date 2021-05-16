@@ -6,7 +6,13 @@ g.qs_lazy_highlight = 1
 
 g.fzf_command_prefix = 'F'
 
+require("nvim_comment").setup({
+  comment_empty = false,
+})
+
 g.DevIconsEnableFoldersOpenClose = 1
+
+g.polyglot_disabled = { "autoindent", "sensible" }
 
 g.gitgutter_map_keys = 0
 g.gitgutter_override_sign_column_highlight = 0
@@ -31,6 +37,7 @@ g.better_whitespace_guicolor='red'
 g.better_whitespace_enabled=1
 g.strip_whitespace_on_save=1
 g.strip_whitespace_confirm=0
+g.better_whitespace_operator='_s'
 
 g.vim_markdown_folding_disabled = 1
 g.vim_markdown_conceal = 0
@@ -70,4 +77,8 @@ g.startify_bookmarks = {
             '~/src',
            }
 
-g.neovide_transperancy = 0.8
+if vim.fn.exists("g:neovide") == 1 then
+  g.neovide_transparency = 0.8
+end
+
+g.neuron_dir = os.getenv("HOME").."/src/zettel/"
