@@ -100,7 +100,6 @@ return require('packer').startup {
 
   -- language stuff
     use {'tpope/vim-fugitive'}
-    use {'scrooloose/nerdcommenter'}
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
@@ -111,6 +110,7 @@ return require('packer').startup {
       --cmd = "Vista",
       --opt = true
     --  }
+    use "terrortylor/nvim-comment"
     use 'simrat39/symbols-outline.nvim'
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',

@@ -73,9 +73,19 @@ wk.register({
     ["i"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
   }, { prefix = "<leader>" })
 
+wk.register({
+  ["g"] = {
+    name = "+goto",
+    ["c"] = { "Comment" },
+  },
+  ["<C-_>"] = { "<cmd>CommentToggle<cr>", "Comment Line" }
+}, {})
+
+wk.register({
+  ["<C-_>"] = { ":'<,'>CommentToggle<cr>", "Comment Line" }
+}, { mode = "v" })
 
 --map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
-
 
 -- move between splits
 --map('n', '<C-m>', '<C-w><C-h>', {noremap=true})
@@ -108,7 +118,6 @@ map('n', '<Leader>qn', ':cnext<cr>', {})
 map('n', '<Leader>qp', ':cprev<cr>', {})
 map('n', '<Leader>qc', ':cclose<cr>', {})
 
-
 -- vista
 map('n', '<Leader>tb', ':SymbolsOutline<CR>', {silent=true})
 
@@ -127,8 +136,6 @@ map('n', '<Leader>tt', "<cmd>TestNearest<CR>", {noremap=true})
 map('n', '<Leader>tf', "<cmd>TestFile<CR>", {noremap=true})
 map('n', '<Leader>ts', "<cmd>TestSuite<CR>", {noremap=true})
 map('n', '<Leader>t_', "<cmd>TestLast<CR>", {noremap=true})
-
--- barbar
 
 -- trouble
 map('n', '<leader>xx', '<cmd>LspTroubleToggle<cr>', {noremap=true})

@@ -6,7 +6,9 @@ g.qs_lazy_highlight = 1
 
 g.fzf_command_prefix = 'F'
 
-g.NERDCreateDefaultMappings = 0
+require("nvim_comment").setup({
+  comment_empty = false,
+})
 
 g.DevIconsEnableFoldersOpenClose = 1
 
