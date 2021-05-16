@@ -19,86 +19,86 @@ to change with every commit.
 
 ### Plugin Management
 
- - github.com/wbthomason/packer.nvim
+ - https://github.com/wbthomason/packer.nvim
 
 ### Colorscheme
 
- - github.com/nanotech/jellybeans.vim
- - github.com/cwebster2/color-overrides.nvim
+ - https://github.com/nanotech/jellybeans.vim
+ - https://github.com/cwebster2/color-overrides.nvim
 
 ### Status Line
 
- - github.com/glepnir/galaxyline.nvim
+ - https://github.com/glepnir/galaxyline.nvim
 
 ### Tab Bar
 
- - github.com/romgrk/barbar.nvim
+ - https://github.com/romgrk/barbar.nvim
 
 ### File Tree
 
- - github.com/kyazdani42/nvim-tree.lua
+ - https://github.com/kyazdani42/nvim-tree.lua
 
 ### Fuzzy finding
 
- - github.com/nvim-telescope/telescope.nvim
- - github.com/nvim-telescope/telescope-fzy-native.nvim
- - github.com/nvim-telescope/telescope-fzf-writer.nvim
- - github.com/nvim-telescope/telescope-packer.nvim
- - github.com/nvim-telescope/telescope-github.nvim
- - github.com/nvim-telescope/telescope-symbols.nvim
- - github.com/nvim-telescope/telescope-vimspector.nvim
- - github.com/junegunn/fzf
- - github.com/junegunn/fzf.vim
+ - https://github.com/nvim-telescope/telescope.nvim
+ - https://github.com/nvim-telescope/telescope-fzy-native.nvim
+ - https://github.com/nvim-telescope/telescope-fzf-writer.nvim
+ - https://github.com/nvim-telescope/telescope-packer.nvim
+ - https://github.com/nvim-telescope/telescope-github.nvim
+ - https://github.com/nvim-telescope/telescope-symbols.nvim
+ - https://github.com/nvim-telescope/telescope-vimspector.nvim
+ - https://github.com/junegunn/fzf
+ - https://github.com/junegunn/fzf.vim
 
 ### Language Server Protocol Things
- - github.com/neovim/nvim-lspconfig
- - github.com/nvim-treesitter/nvim-treesitter
- - github.com/nvim-treesitter/nvim-treesitter-textobjects
- - github.com/p00f/nvim-ts-rainbow
- - github.com/kosayoda/nvim-lightbulb
- - github.com/glepnir/lspsaga.nvim
- - github.com/ray-x/lsp_signature.nvim
- - github.com/folke/lsp-trouble.nvim
+ - https://github.com/neovim/nvim-lspconfig
+ - https://github.com/nvim-treesitter/nvim-treesitter
+ - https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+ - https://github.com/p00f/nvim-ts-rainbow
+ - https://github.com/kosayoda/nvim-lightbulb
+ - https://github.com/glepnir/lspsaga.nvim
+ - https://github.com/ray-x/lsp_signature.nvim
+ - https://github.com/folke/lsp-trouble.nvim
 
 ### Completion
 
- - github.com/hrsh7th/nvim-compe
- - github.com/hrsh7th/vim-vsnip
- - github.com/hrsh7th/vim-vsnip-integ
+ - https://github.com/hrsh7th/nvim-compe
+ - https://github.com/hrsh7th/vim-vsnip
+ - https://github.com/hrsh7th/vim-vsnip-integ
 
 ### Symbol Tree
 
- - github.com/simrat39/symbols-outline.nvim
+ - https://github.com/simrat39/symbols-outline.nvim
 
 ### Git stuff
 
- - github.com/tpope/vim-fugitive
- - github.com/airblade/vim-gitgutter
- - github.com/pwntester/octo.nvim
- - github.com/junegunn/gv.vim
+ - https://github.com/tpope/vim-fugitive
+ - https://github.com/airblade/vim-gitgutter
+ - https://github.com/pwntester/octo.nvim
+ - https://github.com/junegunn/gv.vim
 
 ### Auto-pairs
 
- - github.com/tmsvg/pear-tree'
+ - https://github.com/tmsvg/pear-tree'
 
 ### The rest
 
- - github.com/RRethy/vim-hexokinase
- - github.com/szw/vim-maximizer
- - github.com/lukas-reineke/indent-blankline.nvim
- - github.com/editorconfig/editorconfig-vim
- - github.com/ntpeters/vim-better-whitespace
- - github.com/terrortylor/nvim-comment
- - github.com/unblevable/quick-scope
- - github.com/kassio/neoterm
- - github.com/janko/vim-test
- - github.com/puremourning/vimspector
- - github.com/plasticboy/vim-markdown
- - github.com/iamcco/markdown-preview.nvim
- - github.com/vim-latex/vim-latex
- - github.com/airblade/vim-rooter
- - github.com/tpope/vim-eunuch
- - github.com/tpope/vim-surround
+ - https://github.com/RRethy/vim-hexokinase
+ - https://github.com/szw/vim-maximizer
+ - https://github.com/lukas-reineke/indent-blankline.nvim
+ - https://github.com/editorconfig/editorconfig-vim
+ - https://github.com/ntpeters/vim-better-whitespace
+ - https://github.com/terrortylor/nvim-comment
+ - https://github.com/unblevable/quick-scope
+ - https://github.com/kassio/neoterm
+ - https://github.com/janko/vim-test
+ - https://github.com/puremourning/vimspector
+ - https://github.com/plasticboy/vim-markdown
+ - https://github.com/iamcco/markdown-preview.nvim
+ - https://github.com/vim-latex/vim-latex
+ - https://github.com/airblade/vim-rooter
+ - https://github.com/tpope/vim-eunuch
+ - https://github.com/tpope/vim-surround
 
 
 ## Using this configuration
