@@ -82,3 +82,8 @@ if vim.fn.exists("g:neovide") == 1 then
 end
 
 g.neuron_dir = os.getenv("HOME").."/src/zettel/"
+
+require("presence"):setup({
+  editing_text = "Editing [REDACTED]",
+  workspace_text = "[REDACTED]",
+})

@@ -30,7 +30,7 @@ g.mkdp_auto_open = 1
 -- require plugins and stuff
 require'plugins'
 --mappings
-require'_mappings'
+require('_mappings').init_keymap()
 --require'_plugins_plug'.setup()
 require'lsp'.setup()
 local completion_setup = require'_completion'
@@ -44,6 +44,7 @@ local theme = require'_theme'
 theme.colorscheme_setup()
 theme.overrides_setup()
 require('_galaxyline')
+require('_mappings').setup_ft_mappings()
 
 a.nvim_exec([[
   if has ("autocmd")

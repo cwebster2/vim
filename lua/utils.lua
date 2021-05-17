@@ -1,10 +1,11 @@
 local M = {}
 
 local api = vim.api
+local bit = require("bit")
 
 -- Key mapping
 function M.map(mode, key, result, opts)
-  map_opts = {
+  local map_opts = {
     noremap = true,
     silent = opts.silent or false,
     expr = opts.expr or false,

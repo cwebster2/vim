@@ -100,6 +100,11 @@ return require('packer').startup {
 
   -- language stuff
     use {'tpope/vim-fugitive'}
+    --use {
+    --  'TimUntersberger/neogit',
+    --  requires = 'nvim-lua/plenary.nvim',
+    --  config = function() require('_neogit').setup() end,
+    --}
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
