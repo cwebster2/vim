@@ -219,8 +219,8 @@ gls.left = {
     }
   },
   {
-    VistaNearest = {
-      provider = extension.vista_nearest,
+    TSStatus = {
+      provider = function() return require("nvim-treesitter").statusline(90) end,
       condition = conditions.hide_in_width,
       highlight = {colors.gray, colors.bg_none}
     }
