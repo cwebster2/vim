@@ -232,6 +232,7 @@ M.setup_ft_mappings = function()
 
   augroup("globalftmaps", {
       {'FileType', 'markdown', 'lua registerMappingsMD()'},
+      {'FileType', 'fugitive', 'lua registerMappingsFugitive()'},
     }
   )
 
@@ -245,8 +246,21 @@ M.setup_ft_mappings = function()
         ["p"] = { "<cmd>MarkdownPreview<cr>", "Preview", buffer = buf }
       }
     })
+
   end
 
+  _G.registerMappingsFugitive = function()
+    local wk = require("which-key")
+    local buf = vim.api.nvim_get_current_buf()
+
+    wk.register({
+      ["q"] = { "<c-w>q", "Close Fugitive", buffer = buf },
+      ["C"] = { "cc", "Git Commit", buffer = buf },
+      ["D"] = { "dd", "D", buffer = buf },
+      ["PP"] = { "<cmd>Git push<cr>", "Git Push", buffer = buf },
+    })
+
+  end
 end
 
 return M
