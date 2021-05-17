@@ -250,5 +250,3 @@ M.setup_ft_mappings = function()
 end
 
 return M
-
-
