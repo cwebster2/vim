@@ -92,7 +92,7 @@ return require('packer').startup {
 
     use {
       "folke/which-key.nvim",
-      config = function() require("which-key").setup() end
+      config = function() require("_whichkey").setup() end
     }
 
   -- linting

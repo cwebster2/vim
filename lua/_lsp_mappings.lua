@@ -26,7 +26,7 @@ function M.setup(client, bufnr)
     },
     x = {
       s = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Search Document Diagnostics" },
-      w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" }
+      W = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" }
     }
   }
 

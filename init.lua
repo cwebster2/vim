@@ -29,6 +29,8 @@ g.mkdp_auto_open = 1
 
 -- require plugins and stuff
 require'plugins'
+--mappings
+require'_mappings'
 --require'_plugins_plug'.setup()
 require'lsp'.setup()
 local completion_setup = require'_completion'
@@ -90,8 +92,6 @@ augroup("numbertoggle", {
   {'BufLeave,FocusLost,InsertEnter,WinLeave',   '*', 'if &nu | set nornu | endif'},
 })
 
---mappings
-require'_mappings'
 
 -- we are done setting stuff up
 a.nvim_command("silent! helptags ALL")

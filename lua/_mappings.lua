@@ -75,11 +75,10 @@ local leader_map = {
 local normal_map = {
   ["g"] = {
     name = "+goto",
-    ["c"] = { "Comment" },
   },
   ["<C-_>"] = { "<cmd>CommentToggle<cr>", "Comment Line" },
   ["<C-s>"] = { "<Cmd>BufferPick<CR>", "Pick Buffer" },
-  ["<C-p>"] = { "<Cmd>FGFiles<CR>", "Git Files" },
+  --["<C-p>"] = { "<Cmd>FGFiles<CR>", "Git Files" },
 }
 
 local visual_map = {
@@ -87,7 +86,7 @@ local visual_map = {
 }
 
 wk.register(leader_map, { prefix = "<leader>" })
-wk.register(normal_map, {})
+wk.register(normal_map)
 wk.register(visual_map, { mode = "v" })
 
 --map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
