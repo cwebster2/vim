@@ -144,6 +144,7 @@ M.overrides_setup = function()
     LspDiagnosticsUnderlineWarning = {gui='undercurl', guisp='yellow'},
     LspDiagnosticsUnderlineError = {gui='undercurl', guisp='red'},
     LspDiagnosticsUnderlineInfo = {gui='undercurl', guisp='blue'},
+    LspDiagnosticsDefaultError = {guifg='gray'},
     IndentGuides = {guibg=c.none, guifg=c.indentguides},
     Whitespace = {guibg=c.none, guifg=c.whitespace},
     NonText = {guibg=c.none, guifg=c.whitespace},
