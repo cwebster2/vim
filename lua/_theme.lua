@@ -147,6 +147,8 @@ M.overrides_setup = function()
     IndentGuides = {guibg=c.none, guifg=c.indentguides},
     Whitespace = {guibg=c.none, guifg=c.whitespace},
     NonText = {guibg=c.none, guifg=c.whitespace},
+    NvimTreeRootFolder = {guifg='green'},
+    NvimTreeGitDirty = {guifg=c.diffdel}
   }
 
   -- this sets colors and sets up an autocmd to set them again if colo is changed
