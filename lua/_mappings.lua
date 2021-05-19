@@ -154,6 +154,25 @@ M.init_keymap = function()
   map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
   map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
 
+  -- Toggle to disable mouse mode and indentlines for easier paste
+  ToggleMouse = function()
+    if vim.o.mouse == 'a' then
+      vim.cmd[[IndentBlanklineDisable]]
+      vim.wo.signcolumn='no'
+      vim.o.mouse = 'v'
+      vim.wo.number = false
+      vim.wo.relativenumber = false
+      print("Mouse disabled")
+    else
+      vim.cmd[[IndentBlanklineEnable]]
+      vim.wo.signcolumn='yes'
+      vim.o.mouse = 'a'
+      vim.wo.number = true
+      print("Mouse enabled")
+    end
+  end
+
+  vim.api.nvim_set_keymap('n', '<F10>', '<cmd>lua ToggleMouse()<cr>', { noremap = true })
 end
 
 M.lsp_setup = function(client, bufnr)

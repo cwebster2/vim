@@ -45,6 +45,7 @@ o.virtualedit = "onemore"
 o.writebackup = false
 o.pumblend = 15
 o.winblend = 15
+o.mouse = 'a'
 
 bo.autoindent = false
 o.autoindent = false
