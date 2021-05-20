@@ -96,7 +96,8 @@ function M.compe()
     max_abbr_width = 100;
     max_kind_width = 100;
     max_menu_width = 100;
-    allow_prefix_unmatch = false;
+    documentation = true;
+    --allow_prefix_unmatch = false;
 
     source = {
       path = true;
@@ -108,6 +109,7 @@ function M.compe()
       spell = true;
       tags = true;
       snippets_nvim = true;
+      utilsnips = true;
       treesitter = true;
     };
   }

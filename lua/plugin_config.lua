@@ -25,6 +25,8 @@ g.gitgutter_sign_modified_removed = "▋"
 
 g.indentLine_char = '▏'
 g.indent_blankline_char_highlight = 'IndentGuides'
+g.indent_blankline_use_treesitter = true
+g.indent_blankline_show_current_context = true
 
 g.pear_tree_repeatable_expand = 0
 g.pear_tree_map_special_keys = 0
