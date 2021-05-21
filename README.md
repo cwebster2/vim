@@ -50,11 +50,16 @@ to change with every commit.
  - https://github.com/junegunn/fzf
  - https://github.com/junegunn/fzf.vim
 
-### Language Server Protocol Things
- - https://github.com/neovim/nvim-lspconfig
+### Syntax
  - https://github.com/nvim-treesitter/nvim-treesitter
  - https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+ - https://github.com/nvim-treesitter/nvim-treesitter-refactor
+ - https://github.com/nvim-treesitter/nvim-treesitter-context
  - https://github.com/p00f/nvim-ts-rainbow
+ - https://github.com/sheerun/vim-polyglot
+
+### Language Server Protocol Things
+ - https://github.com/neovim/nvim-lspconfig
  - https://github.com/kosayoda/nvim-lightbulb
  - https://github.com/glepnir/lspsaga.nvim
  - https://github.com/ray-x/lsp_signature.nvim
@@ -79,17 +84,24 @@ to change with every commit.
 
 ### Auto-pairs
 
- - https://github.com/tmsvg/pear-tree'
+ - https://github.com/tmsvg/pear-tree
+
+### Keymap management
+
+ - https://github.com/folke/which-key.nvim
+
+### Visual aids
+
+ - https://github.com/lukas-reineke/indent-blankline.nvim
+ - https://github.com/ntpeters/vim-better-whitespace
+ - https://github.com/unblevable/quick-scope
+ - https://github.com/RRethy/vim-hexokinase
+ - https://github.com/szw/vim-maximizer
 
 ### The rest
 
- - https://github.com/RRethy/vim-hexokinase
- - https://github.com/szw/vim-maximizer
- - https://github.com/lukas-reineke/indent-blankline.nvim
  - https://github.com/editorconfig/editorconfig-vim
- - https://github.com/ntpeters/vim-better-whitespace
  - https://github.com/terrortylor/nvim-comment
- - https://github.com/unblevable/quick-scope
  - https://github.com/kassio/neoterm
  - https://github.com/janko/vim-test
  - https://github.com/puremourning/vimspector
