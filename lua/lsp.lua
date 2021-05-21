@@ -35,6 +35,26 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
+-- Heplers for lua lsp setup
+local lua_library = {}
+local lua_path = vim.split(package.path, ";")
+table.insert(lua_path, "lua/?.lua")
+table.insert(lua_path, "lua/?/init.lua")
+
+local function add(lib)
+  for _, p in pairs(vim.fn.expand(lib, false, true)) do
+    p = vim.loop.fs_realpath(p)
+    lua_library[p] = true
+  end
+end
+
+add("$VIMRUNTIME")
+add("~/.config/nvim")
+add("~/.local/share/nvim/site/pack/packer/opt/*")
+add("~/.local/share/nvim/site/pack/packer/start/*")
+
+-- end helpers for lua lsp setup
+
 local servers = {
   pyls = {},
   bashls = {},
@@ -62,14 +82,20 @@ local servers = {
   jdtls = {},
   sumneko_lua = {
     cmd = {bin, "-E", build .. "/main.lua"},
+    on_new_config = function(config, root)
+      local libs = vim.tbl_deep_extend("force", {}, lua_library)
+      libs[root] = nil
+      config.settings.Lua.workspace.library = libs
+    end,
     settings = {
       Lua = {
         runtime = {
           version = "LuaJIT",
-          path = vim.split(package.path, ";")
+          path = lua_path
         },
         completion = {
-          keywordSnippet = "Disable"
+          --keywordSnippet = "Disable"
+          callSnippet = "Both"
         },
         diagnostics = {
           enable = true,
@@ -78,11 +104,11 @@ local servers = {
           }
         },
         workspace = {
-          library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
-          }
-        }
+          library = lua_library,
+          maxPreload = 2000,
+          preloadFileSize = 150
+        },
+        telemetry = {enable = false},
       }
     }
   },

@@ -25,7 +25,8 @@ gl.short_line_list = {
     'fugitive',
     'fugitiveblame',
     'plug',
-    'NvimTree'
+    'NvimTree',
+    'OUTLINE'
 }
 
 VistaPlugin = extension.vista_nearest
