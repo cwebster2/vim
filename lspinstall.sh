@@ -1,4 +1,4 @@
-
+#!/usr/bin/env bash
 unameOut="$(uname -s)"
 case "${unameOut}" in
     Linux*)     machine=Linux; mcode=linux;;
@@ -41,7 +41,7 @@ install_lsp_terraform() {
 
 install_lsp_servers_cargo() {
   echo
-  echo "Installing language servers"
+  echo "Installing rust and tex language servers"
   echo
   (
     echo "Fetching the rust analyzer language server"
@@ -112,7 +112,10 @@ install_lsp_servers() {
     install_lsp_servers_python
     install_lsp_servers_lua
 
+    echo
+    echo
     echo "Language servers installed"
+    echo
     cd "${HOME}"
   )
 }
