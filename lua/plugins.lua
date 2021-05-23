@@ -34,6 +34,9 @@ return require('packer').startup {
 
   -- LSP stuff
     use 'neovim/nvim-lspconfig'
+    use 'folke/lua-dev.nvim'
+
+  -- Syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/nvim-treesitter-refactor'

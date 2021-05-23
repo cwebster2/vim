@@ -2,10 +2,6 @@ local M={}
 
 local nvim_lsp = require "lspconfig"
 local saga = require'lspsaga'
-local home = vim.fn.expand("$HOME")
-local build = home .. "/src/lua-language-server"
-local bin = build .. "/bin/Linux/lua-language-server"
-
 
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
@@ -36,23 +32,18 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 -- Heplers for lua lsp setup
-local lua_library = {}
-local lua_path = vim.split(package.path, ";")
-table.insert(lua_path, "lua/?.lua")
-table.insert(lua_path, "lua/?/init.lua")
-
-local function add(lib)
-  for _, p in pairs(vim.fn.expand(lib, false, true)) do
-    p = vim.loop.fs_realpath(p)
-    lua_library[p] = true
+local function lua_cmd()
+  local home = vim.fn.expand("$HOME")
+  local build = home .. "/src/lua-language-server"
+  local bin_location = ""
+  if jit.os == 'OSX' then
+    bin_location = 'macOS'
+  elseif jit.os == 'Linux' then
+    bin_location = 'Linux'
   end
+  local bin = build .. "/bin/" .. bin_location .. "/lua-language-server"
+  return {bin, "-E", build .. "/main.lua"}
 end
-
-add("$VIMRUNTIME")
-add("~/.config/nvim")
-add("~/.local/share/nvim/site/pack/packer/opt/*")
-add("~/.local/share/nvim/site/pack/packer/start/*")
-
 -- end helpers for lua lsp setup
 
 local servers = {
@@ -61,6 +52,7 @@ local servers = {
   rust_analyzer = {},
   tsserver = {},
   vuels = {},
+  svelte = {},
   gopls = {},
   terraformls = {
     filetypes = {"tf", "terraform"},
@@ -80,38 +72,11 @@ local servers = {
   yamlls = {},
   vimls = {},
   jdtls = {},
-  sumneko_lua = {
-    cmd = {bin, "-E", build .. "/main.lua"},
-    on_new_config = function(config, root)
-      local libs = vim.tbl_deep_extend("force", {}, lua_library)
-      libs[root] = nil
-      config.settings.Lua.workspace.library = libs
-    end,
-    settings = {
-      Lua = {
-        runtime = {
-          version = "LuaJIT",
-          path = lua_path
-        },
-        completion = {
-          --keywordSnippet = "Disable"
-          callSnippet = "Both"
-        },
-        diagnostics = {
-          enable = true,
-          globals = {
-            "vim"
-          }
-        },
-        workspace = {
-          library = lua_library,
-          maxPreload = 2000,
-          preloadFileSize = 150
-        },
-        telemetry = {enable = false},
-      }
-    }
-  },
+  sumneko_lua = require("lua-dev").setup({
+    lspconfig = {
+      cmd = lua_cmd(),
+    },
+  }),
   efm = {
     filetypes = vim.tbl_keys(language_formatterts),
     root_dir = nvim_lsp.util.root_pattern("package.json","yarn.lock", ".git"),
