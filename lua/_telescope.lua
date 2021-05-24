@@ -52,8 +52,8 @@ require("telescope").setup {
         sorting_strategy = "ascending",
         layout_strategy = "horizontal",
         layout_defaults = {},
-        --file_sorter = require "telescope.sorters".get_fzy_sorter,
-        file_sorter = require "telescope.sorters".get_fuzzy_file,
+        file_sorter = require "telescope.sorters".get_fzy_sorter,
+        --file_sorter = require "telescope.sorters".get_fuzzy_file,
         --file_sorter = require "telescope.sorters".fuzzy_with_index_bias,
         file_ignore_patterns = {".git", ".node_modules"},
         generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
@@ -71,10 +71,16 @@ require("telescope").setup {
         file_previewer = require "telescope.previewers".vim_buffer_cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
         grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
         qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
+    },
+    extensions = {
+        fzy_native = {
+          override_generic_sorter = false,
+          override_file_sorter = true,
+        }
     }
 }
 
 -- the fzy extension changes the behavior of telescope in a way i don't like
---require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('octo')
 
