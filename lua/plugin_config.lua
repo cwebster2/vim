@@ -27,6 +27,34 @@ g.indentLine_char = '▏'
 g.indent_blankline_char_highlight = 'IndentGuides'
 g.indent_blankline_use_treesitter = true
 g.indent_blankline_show_current_context = true
+g.indent_blankline_filetype_exclude = {
+  "help",
+  "vimwiki",
+  "startify",
+  "man",
+  "git",
+  "packer",
+  "gitmessengerpopup",
+  "diagnosticpopup",
+  "markdown",
+  "lspinfo"
+}
+g.indent_blankline_context_patterns = {
+  "class",
+  "function",
+  "method",
+  "^if",
+  "while",
+  "for",
+  "with",
+  "func_literal",
+  "block",
+  "try",
+  "except",
+  "argument_list",
+  "object",
+  "dictionary"
+}
 
 g.pear_tree_repeatable_expand = 0
 g.pear_tree_map_special_keys = 0

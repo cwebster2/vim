@@ -55,7 +55,7 @@ require("telescope").setup {
         file_sorter = require "telescope.sorters".get_fzy_sorter,
         --file_sorter = require "telescope.sorters".get_fuzzy_file,
         --file_sorter = require "telescope.sorters".fuzzy_with_index_bias,
-        file_ignore_patterns = {".git", ".node_modules"},
+        file_ignore_patterns = {".git", "node_modules"},
         generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
         shorten_path = true,
         winblend = 0,
@@ -67,10 +67,10 @@ require("telescope").setup {
         borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
         color_devicons = true,
         use_less = true,
-        set_env = {["COLORTERM"] = "truecolor"}, -- default { }, currently unsupported for shells like cmd.exe / powershell.exe
-        file_previewer = require "telescope.previewers".vim_buffer_cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
-        grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
-        qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
+        set_env = {["COLORTERM"] = "truecolor"},
+        file_previewer = require "telescope.previewers".vim_buffer_cat.new,
+        grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new,
+        qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
     },
     extensions = {
         fzy_native = {
