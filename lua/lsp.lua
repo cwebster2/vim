@@ -6,7 +6,7 @@ local saga = require'lspsaga'
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
 local hadolint = require "efm/hadolint"
-local language_formatterts = {
+local language_formatters = {
   typescript = {prettier, eslint},
   javascript = {prettier, eslint},
   typescriptreact = {prettier, eslint},
@@ -59,7 +59,7 @@ local servers = {
   terraformls = {
     filetypes = {"tf", "terraform"},
   },
-  dockerls = {},
+  --dockerls = {},
   jsonls = {},
   texlab = {
     settings = {
@@ -80,15 +80,17 @@ local servers = {
     },
   }),
   efm = {
-    filetypes = vim.tbl_keys(language_formatterts),
-    root_dir = nvim_lsp.util.root_pattern("package.json","yarn.lock", ".git"),
+    filetypes = vim.tbl_keys(language_formatters),
     init_options = {
       documentFormatting = true,
-      codeAction = true
+      codeAction = true,
+      completion = true,
+      documentSymbol = true,
+      hover = true,
     },
     settings = {
       rootMarkers = {".git/"},
-      languages = language_formatterts
+      languages = language_formatters
     }
   }
 }

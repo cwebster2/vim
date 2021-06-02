@@ -1,5 +1,6 @@
 return {
-  lintCommand = "docker run --rm -i hadolint/hadolint",
+  lintCommand = "docker run --rm -i hadolint/hadolint hadolint --no-color -",
+  lintIgnoreExitCode = true,
   lintStdin = true,
-  lintFormar = '%f:%l:%c %m'
+  lintFormats = {"%f:%l %m","%f:%l:%c: %m"},
 }
