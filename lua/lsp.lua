@@ -5,6 +5,7 @@ local saga = require'lspsaga'
 
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
+local hadolint = require "efm/hadolint"
 local language_formatterts = {
   typescript = {prettier, eslint},
   javascript = {prettier, eslint},
@@ -18,7 +19,8 @@ local language_formatterts = {
   markdown = {prettier},
   lua = {
     {formatCommand = "lua-format -i", formatStdin = true}
-  }
+  },
+  dockerfile = {hadolint},
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

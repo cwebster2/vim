@@ -19,8 +19,7 @@ install_lsp_servers_npm() {
       typescript-language-server \
       vim-language-server \
       vls \
-      svelte-language-server \
-      eslint_d
+      svelte-language-server
   )
 }
 
@@ -100,6 +99,16 @@ install_lsp_servers_lua() {
       ./3rd/luamake/luamake rebuild
   )
 }
+
+install_lsp_linters() {
+  echo
+  echo "Installing linters for efm"
+  echo
+  (
+      npm install -g prettier eslint_d
+      docker pull hadolint/hadolint
+  )
+}
 install_lsp_servers() {
   echo
   echo "Installing language servers"
@@ -111,6 +120,7 @@ install_lsp_servers() {
     install_lsp_servers_go
     install_lsp_servers_python
     install_lsp_servers_lua
+    install_lsp_linters
 
     echo
     echo
@@ -121,7 +131,7 @@ install_lsp_servers() {
 }
 
 usage() {
-  echo "all, node, rust, python, golang, terraform, lua"
+  echo "all, node, rust, python, golang, terraform, lua, lint"
 }
 main() {
   local cmd=$1
@@ -145,6 +155,8 @@ main() {
     install_lsp_terraform
   elif [[ $cmd == "lua" ]]; then
     install_lsp_servers_lua
+  elif [[ $cmd == "lint" ]]; then
+    install_lsp_linters
   else
     usage
   fi
