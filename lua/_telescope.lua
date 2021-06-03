@@ -83,4 +83,5 @@ require("telescope").setup {
 -- the fzy extension changes the behavior of telescope in a way i don't like
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('octo')
+require('telescope').load_extension('githubcoauthors')
 

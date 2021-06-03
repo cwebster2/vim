@@ -29,6 +29,7 @@ return require('packer').startup {
     use('nvim-telescope/telescope-github.nvim')
     use('nvim-telescope/telescope-symbols.nvim')
     use('nvim-telescope/telescope-vimspector.nvim')
+    use('cwebster2/github-coauthors.nvim')
     use {'junegunn/fzf', run = './install --all'}
     use 'junegunn/fzf.vim'
 

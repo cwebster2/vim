@@ -20,6 +20,7 @@ M.init_keymap = function()
       --h = { name = "+hunk" }
       ["i"] = { "<cmd>lua require('telescope').extensions.gh.issues()<CR>", "issues" },
       ["p"] = { "<cmd>lua require('telescope').extensions.gh.pull_request()<CR>", "pull requests" },
+      ["a"] = { "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", "coauthors" },
     },
     ["b"] = {
       name = "+buffer",
