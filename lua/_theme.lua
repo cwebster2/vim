@@ -115,7 +115,7 @@ M.overrides_setup = function()
     Folded =                {ctermbg=c.none,                  guibg=c.none},
     SpecialKey =            {ctermbg=c.none,                  guibg=c.none},
     SignColumn =            {ctermbg=c.none,                  guibg=c.none},
-    EndOfBuffer =           {ctermbg=c.none,                  guibg=c.none},
+    EndOfBuffer =           {ctermbg=c.none, guifg='#222222', guibg=c.none},
     WhichKeyFloat =         {ctermbg='Black',                 guibg='#191919', blend=30},
     PMenu =                 {ctermbg='Black',                 guibg='#191919', blend=25},
     PMenuSel =              {                guifg='#ffffff', guibg='#333333'},

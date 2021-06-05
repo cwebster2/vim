@@ -1,74 +1,80 @@
-local o = vim.o
-local wo = vim.wo
-local bo = vim.bo
+local opt = vim.opt
 
-o.shell = "/bin/bash"
-o.guifont = "Hack Nerd Font Mono:h18"
-o.updatetime = 300
-o.foldlevelstart = 99
-o.termguicolors = true
-o.ignorecase = true
-o.smartcase = true
-o.confirm = true
-o.scrolloff = 5
-o.shiftround = true
-o.incsearch = true
-o.splitright = true
-o.splitbelow = true
-o.wildmenu = true
-o.wildmode = 'full'
-o.hlsearch = true
-o.showmode = false
-o.showmatch = true
-o.matchtime = 5
-o.inccommand = 'split'
-o.shortmess = vim.o.shortmess .. 'c'
-o.textwidth = 80
-o.formatoptions = o.formatoptions:gsub('[cro]','')
-o.colorcolumn = '100'
-o.completeopt = "menu,menuone,noselect"
-o.clipboard = "unnamedplus,unnamed"
-o.linebreak = true
-o.foldmethod='expr'
-o.foldexpr='nvim_treesitter#foldexpr()'
-o.cmdheight = 2
-o.hidden = true
-o.backspace = "indent,eol,start"
-o.backup = false
-o.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
-o.lazyredraw = true
-o.pastetoggle = "<F11>"
-o.previewheight = 25
-o.ttimeoutlen = 50
-o.viewoptions = "cursor,folds,options,unix,slash"
-o.virtualedit = "onemore"
-o.writebackup = false
-o.pumblend = 15
-o.winblend = 15
-o.mouse = 'a'
-
-bo.autoindent = false
-o.autoindent = false
-bo.autoread = true
-o.autoread = true
-bo.tabstop = 2
-o.tabstop = 2
-bo.shiftwidth = 2
-o.shiftwidth = 2
-bo.softtabstop = 2
-o.softtabstop = 2
-bo.expandtab = true
-o.expandtab = true
-bo.smartindent = true
-o.smartindent = true
-
-wo.signcolumn = "yes"
-wo.number = true
-wo.cursorline = true
-wo.fillchars = "vert:│"
-wo.list = true
-wo.listchars = "tab:▷ ,trail:·,extends:…,precedes:…,conceal:┊,nbsp:○,eol:¬"
-wo.winblend = 30
-o.list = true
-o.listchars = "tab:▷ ,trail:·,extends:…,precedes:…,conceal:┊,nbsp:○,eol:¬"
-
+opt.autoindent = false
+opt.autoread = true
+opt.backspace = "indent,eol,start"
+opt.backup = false
+opt.clipboard = "unnamedplus,unnamed"
+opt.cmdheight = 2
+opt.colorcolumn = '100'
+opt.completeopt = "menu,menuone,noselect"
+opt.confirm = true
+opt.cursorline = true
+opt.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
+opt.expandtab = true
+opt.fillchars = {
+  eob = "~",
+  vert ="│",
+}
+opt.foldexpr='nvim_treesitter#foldexpr()'
+opt.foldlevelstart = 99
+opt.foldmethod='expr'
+opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
+  - "a" -- Auto formatting is BAD.
+  - "t" -- Don't auto format my code. I got linters for that.
+  + "c" -- In general, I like it when comments respect textwidth
+  + "q" -- Allow formatting comments w/ gq
+  - "o" -- O and o, don't continue comments
+  + "r" -- But do continue when pressing enter.
+  + "n" -- Indent past the formatlistpat, not underneath it.
+  + "j" -- Auto-remove comments if possible.
+  - "2" -- I'm not in gradeschool anymore
+opt.guifont = "Hack Nerd Font Mono:h18"
+opt.hidden = true
+opt.hlsearch = true
+opt.ignorecase = true
+opt.inccommand = 'split'
+opt.incsearch = true
+opt.lazyredraw = true
+opt.linebreak = true
+opt.list = true
+opt.listchars = {
+  tab="▷ ",
+  trail="·",
+  extends="…",
+  precedes="…",
+  conceal="┊",
+  nbsp="○",
+  eol="¬",
+}
+opt.matchtime = 5
+opt.mouse = 'a'
+opt.number = true
+opt.pastetoggle = "<F11>"
+opt.previewheight = 25
+opt.pumblend = 15
+opt.scrolloff = 5
+opt.shell = "/bin/bash"
+opt.shiftround = true
+opt.shiftwidth = 2
+opt.shortmess = vim.o.shortmess .. 'c'
+opt.showmatch = true
+opt.showmode = false
+opt.signcolumn = "yes"
+opt.smartcase = true
+opt.smartindent = true
+opt.softtabstop = 2
+opt.splitbelow = true
+opt.splitright = true
+opt.tabstop = 2
+opt.termguicolors = true
+opt.textwidth = 80
+opt.ttimeoutlen = 50
+opt.updatetime = 300
+opt.viewoptions = "cursor,folds,options,unix,slash"
+opt.virtualedit = "onemore"
+opt.wildmenu = true
+opt.wildmode = 'full'
+opt.winblend = 15
+opt.winblend = 30
+opt.writebackup = false

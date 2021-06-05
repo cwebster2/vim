@@ -2,6 +2,7 @@ local M={}
 
 local nvim_lsp = require "lspconfig"
 local saga = require'lspsaga'
+local lsp_signature = require("lsp_signature")
 
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
@@ -95,17 +96,20 @@ local servers = {
   }
 }
 
-local on_attach = function(client)
-  --local completion = require "completion"
-  --completion.on_attach(client)
-  require "lsp_signature".on_attach({
-    bind = true,
-    handler_opts = {
-      border = "single"
-    }
-  })
+local lsp_signature_config = {
+  bind = true,
+  doc_lines = 0,
+  floating_window = true,
+  hint_enable = true,
+  handler_opts = {
+    border = "single"
+  }
+}
 
-  local bufnr = vim.api.nvim_get_current_buf()
+local on_attach = function(client, bufnr)
+
+  lsp_signature.on_attach(lsp_signature_config)
+
   require("_mappings").lsp_setup(client, bufnr)
 
   --vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
