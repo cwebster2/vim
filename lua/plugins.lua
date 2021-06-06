@@ -33,13 +33,10 @@ return require('packer').startup {
     use {'junegunn/fzf', run = './install --all'}
     use 'junegunn/fzf.vim'
 
-  -- LSP stuff
-    use 'neovim/nvim-lspconfig'
-    use 'nvim-lua/lsp-status.nvim'
-    use 'folke/lua-dev.nvim'
-
   -- Syntax
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
+      config = function() require("_syntax").setup() end
+    }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/nvim-treesitter-refactor'
     use {
@@ -48,7 +45,10 @@ return require('packer').startup {
     }
     use 'p00f/nvim-ts-rainbow'
 
-
+  -- LSP stuff
+    use 'neovim/nvim-lspconfig'
+    use 'nvim-lua/lsp-status.nvim'
+    use 'folke/lua-dev.nvim'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
     use{'ray-x/lsp_signature.nvim'}
