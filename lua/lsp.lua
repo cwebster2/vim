@@ -111,12 +111,14 @@ local lsp_signature_config = {
 local on_attach = function(client, bufnr)
 
   lsp_signature.on_attach(lsp_signature_config)
-  lsp_status.on_attach(client, bufnr)
+  lsp_status.on_attach(client)
 
   require("_mappings").lsp_setup(client, bufnr)
 
   --vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
-  vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
+  --
+--  vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
+
   -- This is causing an out of bounds error, see if this changed in a nightly
   -- vim.api.nvim_command("autocmd BufWrite,BufEnter,InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]

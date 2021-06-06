@@ -1,11 +1,33 @@
 local M = {}
 
 local g = vim.g
-local map = require("utils").map
+
+local tree_width = 30
+
+local open = function()
+  require("bufferline.state").set_offset(tree_width+1, 'Workspace')
+  require("nvim-tree").find_file(true)
+end
+
+local close = function()
+  require("bufferline.state").set_offset(0)
+  require("nvim-tree").close()
+end
+
+local state = fales
+M.toggle_tree = function()
+  if state then
+    state = false
+    close()
+  else
+    state = true
+    open()
+  end
+end
 
 M.setup = function()
   g.nvim_tree_side = 'left'
-  g.nvim_tree_width = 30
+  g.nvim_tree_width = tree_width
   g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' }
   g.nvim_tree_auto_ignore_ft = { 'startify', 'neogit' }
   g.nvim_tree_auto_open = 1

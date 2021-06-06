@@ -22,6 +22,14 @@ function M.map(mode, key, result, opts)
   end
 end
 
+function M.has(value)
+  return vim.fn.has(value) == 1
+end
+
+function M.exists(value)
+  return vim.fn.exists(value) == 1
+end
+
 function M.augroup(group_name, definitions)
   api.nvim_command('augroup ' .. group_name)
   api.nvim_command('autocmd!')
