@@ -1,4 +1,5 @@
 local opt = vim.opt
+local augroup = require("utils").augroup
 
 opt.autoindent = false
 opt.autoread = true
@@ -102,3 +103,6 @@ if has('persistent_undo') then
   opt.undoreload = 500
 end
 
+augroup("ftspelloptions", {
+  {"FileType", "gitcommit", "set spell"},
+})
