@@ -37,7 +37,6 @@ local completion_setup = require'_completion'
 completion_setup.compe()
 completion_setup.kinds()
 require'plugin_config'
-require'_vista'.setup()
 require'_nvimtree'.setup()
 require'_vimspector'
 local theme = require'_theme'
@@ -50,26 +49,7 @@ a.nvim_exec([[
   if has ("autocmd")
     filetype plugin indent on
   endif
-
-  " Persistent undo (can use undos after exiting and restarting)
-  if exists("+undofile")
-    if isdirectory($HOME . '/.vim/undo') == 0
-      :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-    endif
-    set undodir=./.vim-undo// undodir+=~/.vim/undo// undofile
-  endif
 ]], '')
-
-if vim.fn.has('conceal') == 1 then
-  o.conceallevel = 2
-  o.concealcursor = "niv"
-end
-
-if vim.fn.has('persistent_undo') == 1 then
-  o.undofile = true
-  o.undolevels = 250
-  o.undoreload = 500
-end
 
 augroup("vimrc-main", {
   -- save when focus lost

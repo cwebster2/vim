@@ -78,3 +78,27 @@ opt.wildmode = 'full'
 opt.winblend = 15
 opt.winblend = 30
 opt.writebackup = false
+
+local function has(value)
+  return vim.fn.has(value) == 1
+end
+
+if has('conceal') then
+  opt.conceallevel = 2
+  opt.concealcursor = "niv"
+end
+
+if vim.fn.exists("+undofile") == 1 then
+  if vim.fn.isdirectory(vim.fn.expand("$HOME").."/.config/nvim/undo") == 0 then
+      vim.api.nvim_commnd[[:silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1]]
+  end
+  opt.undodir = "./.vim-undo//,~/.config/nvim/undo//"
+  opt.undofile = true
+end
+
+if has('persistent_undo') then
+  opt.undofile = true
+  opt.undolevels = 250
+  opt.undoreload = 500
+end
+

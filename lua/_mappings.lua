@@ -20,7 +20,6 @@ M.init_keymap = function()
       --h = { name = "+hunk" }
       ["i"] = { "<cmd>lua require('telescope').extensions.gh.issues()<CR>", "issues" },
       ["p"] = { "<cmd>lua require('telescope').extensions.gh.pull_request()<CR>", "pull requests" },
-      ["a"] = { "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", "coauthors" },
     },
     ["b"] = {
       name = "+buffer",
@@ -251,8 +250,21 @@ M.setup_ft_mappings = function()
   augroup("globalftmaps", {
       {'FileType', 'markdown', 'lua registerMappingsMD()'},
       {'FileType', 'fugitive', 'lua registerMappingsFugitive()'},
+      {'FileType', 'gitcommit', 'lua registerMappingsCommitMsg()'},
     }
   )
+
+  _G.registerMappingsCommitMsg = function()
+    local wk = require("which-key")
+    local buf = vim.api.nvim_get_current_buf()
+
+    wk.register({
+      ["g"] = {
+        name = "+git",
+        ["a"] = { "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", "coauthors" },
+      }
+    }, { buffer = buf, prefix = "<leader>" })
+  end
 
   _G.registerMappingsMD = function()
     local wk = require("which-key")
