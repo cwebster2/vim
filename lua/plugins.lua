@@ -44,6 +44,7 @@ return require('packer').startup {
       requires = {'nvim-treesitter/nvim-treesitter'}
     }
     use 'p00f/nvim-ts-rainbow'
+    use 'windwp/nvim-ts-autotag'
 
   -- LSP stuff
     use 'neovim/nvim-lspconfig'
