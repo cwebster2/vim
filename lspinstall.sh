@@ -19,6 +19,7 @@ install_lsp_servers_npm() {
       typescript-language-server \
       vim-language-server \
       vls \
+      pyright \
       svelte-language-server
   )
 }

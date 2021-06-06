@@ -35,6 +35,7 @@ return require('packer').startup {
 
   -- LSP stuff
     use 'neovim/nvim-lspconfig'
+    use 'nvim-lua/lsp-status.nvim'
     use 'folke/lua-dev.nvim'
 
   -- Syntax
@@ -46,6 +47,8 @@ return require('packer').startup {
       requires = {'nvim-treesitter/nvim-treesitter'}
     }
     use 'p00f/nvim-ts-rainbow'
+
+
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
     use{'ray-x/lsp_signature.nvim'}
