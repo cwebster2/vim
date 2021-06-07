@@ -21,7 +21,7 @@ return require('packer').startup {
     use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-      config = function() require'_telescope' end
+      config = "require('_telescope')",
     }
     use('nvim-telescope/telescope-fzy-native.nvim')
     use('nvim-telescope/telescope-fzf-writer.nvim')
@@ -35,7 +35,7 @@ return require('packer').startup {
 
   -- Syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
-      config = function() require("_syntax").setup() end
+      config = "require('_syntax').setup()"
     }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/nvim-treesitter-refactor'
@@ -56,7 +56,7 @@ return require('packer').startup {
     use {
       "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = function() require("_trouble").setup() end
+      config = "require('_trouble').setup()",
     }
 
   -- Completion
@@ -92,7 +92,7 @@ return require('packer').startup {
     use {
       'RRethy/vim-hexokinase',
       run = "make hexokinase",
-      config = function() require'_hexokinase'.setup() end
+      config = "require'_hexokinase'.setup()",
     }
     use 'cwebster2/color-overrides.nvim'
     use 'airblade/vim-gitgutter'
@@ -100,19 +100,19 @@ return require('packer').startup {
 
     use {
       "folke/which-key.nvim",
-      config = function() require("_whichkey").setup() end
+      config = "require('_whichkey').setup()",
     }
 
   -- linting
   --plug('w0rp/ale')
 
   -- language stuff
-    use {'tpope/vim-fugitive'}
-    --use {
-    --  'TimUntersberger/neogit',
-    --  requires = 'nvim-lua/plenary.nvim',
-    --  config = function() require('_neogit').setup() end,
-    --}
+    -- use {'tpope/vim-fugitive'}
+    use {
+      'TimUntersberger/neogit',
+      requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
+      config = "require('_neogit').setup()",
+    }
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
