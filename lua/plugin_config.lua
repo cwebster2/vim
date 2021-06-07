@@ -116,4 +116,6 @@ g.neuron_dir = os.getenv("HOME").."/src/zettel/"
 require("presence"):setup({
   editing_text = "Editing [REDACTED]",
   workspace_text = "[REDACTED]",
+  file_explorer_text = "Browsing [REDACTED]",
+  reading_text = "Reading [REDACTED]",
 })
