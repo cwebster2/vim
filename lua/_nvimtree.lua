@@ -18,6 +18,7 @@ M.setup = function()
   g.nvim_tree_tab_open = 1
   g.nvim_tree_width_allow_resize  = 1
   g.nvim_tree_disable_netrw = 1
+  g.nvim_tree_update_cwd = 0
   g.nvim_tree_show_icons = {
       git = 1,
       folders = 1,

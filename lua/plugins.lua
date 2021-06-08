@@ -129,7 +129,7 @@ return require('packer').startup {
     use 'simrat39/symbols-outline.nvim'
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',
-      commit = 'f1f1488',
+      -- commit = 'f1f1488',
       --config = function() require'_nvimtree'.setup() end,
       --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
       --opt = true
