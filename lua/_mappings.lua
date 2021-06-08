@@ -53,8 +53,8 @@ M.init_keymap = function()
     },
     ["f"] = {
       name = "+file",
-      --["t"] = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
-      ["t"] = { "<cmd>lua require('_nvimtree').toggle_tree()<cr>", "NvimTree" },
+      ["t"] = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+      --["t"] = { "<cmd>lua require('_nvimtree').toggle_tree()<cr>", "NvimTree" },
       ["f"] = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Find Files" },
       ["g"] = { "<cmd>lua require('telescope.builtin').git_files()<CR>", "Find Git Files" },
       ["r"] = { "<cmd>lua require('telescope.builtin').oldfiles()<CR>", "Recent Files" },
