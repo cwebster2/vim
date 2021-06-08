@@ -81,8 +81,10 @@ return require('packer').startup {
 
   -- visuals
     use {
-      'romgrk/barbar.nvim',
-      requires = {'kyazdani42/nvim-web-devicons'}
+      -- 'romgrk/barbar.nvim',
+      'akinsho/nvim-bufferline.lua',
+      requires = {'kyazdani42/nvim-web-devicons'},
+      config = "require('_bufferline').setup()",
     }
     use {
       'glepnir/galaxyline.nvim',

@@ -135,6 +135,7 @@ M.overrides_setup = function()
     QuickScopeSecondary =   {guifg='#5fffff', gui='underline'},
     LspDiagnosticsVirtualTextHint = {guifg=c.lspvtext},
     TSKeyword           =   {guifg='#8197bf', gui='italic'},
+    BufferlineBufferSelected = {guifg='#000000', guibg='#f0f0f0', gui='underline'},
     BufferCurrent =    {guifg='#e8e8d3', guibg=c.none},
     BufferCurrentMod=    {guifg=c.modified, guibg=c.none},
     BufferCurrentSign =    {guifg='#799d6a', guibg=c.none},
@@ -164,26 +165,13 @@ M.overrides_setup = function()
   require'color-overrides'.set_overrides(my_clear_colors, my_colors)
 
   vim.cmd[["highlight! BufferTabpageFil guibg=none]]
+  vim.cmd[["highlight! BufferlineBufferSelected gui=underline]]
   --"autocmd ColorScheme * highlight NvimTreeFolderIcon guibg=blue
 end
 
-vim.g.bufferline = {
-  closable = false
-}
+-- vim.g.bufferline = {
+--   closable = false
+-- }
 
---require'bufferline'.setup{
---  options = {
---    always_show_bufferline = true,
---    numbers = "ordinal",
---    diagnostics = "nvim_lsp",
---    separator_style = "thin",
---    sort_by = "directory",
---    show_buffer_close_icons = false,
---    diagnostics_indicator = function(count, level)
---      local icon = level:match("error") and " " or ""
---      return " " .. icon .. count
---    end,
---  }
---}
 return M
 

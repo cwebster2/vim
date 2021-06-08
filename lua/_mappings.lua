@@ -23,13 +23,13 @@ M.init_keymap = function()
     },
     ["b"] = {
       name = "+buffer",
-      ["g"] = { "<cmd>BufferPick<cr>", "Goto Buffer" },
-      ["p"] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer" },
-      ["n"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
+      ["g"] = { "<cmd>BufferLinePick<cr>", "Goto Buffer" },
+      ["p"] = { "<Cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
+      ["n"] = { "<Cmd>BufferLineCycleNext<CR>", "Next Buffer" },
       ["s"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
       ["b"] = { ':e#<CR>', "Last Buffer"},
-      ["d"] = { '<Cmd>BufferOrderByDirectory<CR>', "Order by Dir" },
-      ["l"] = { '<Cmd>BufferOrderByLanguage<CR>', "Order by Lang" },
+      ["d"] = { '<Cmd>BufferLineSortByDirectory<CR>', "Order by Dir" },
+      ["l"] = { '<Cmd>BufferLineSortByDirectory<CR>', "Order by Lang" },
     },
     ["h"] = {
       name = "+help",
@@ -83,8 +83,8 @@ M.init_keymap = function()
       ["s"] = { "<cmd>TestSuite<CR>", "Suite" },
       ["_"] = { "<cmd>TestLast<CR>", "Last" },
     },
-    ["m"] = { "<Cmd>BufferPrevious<CR>", "Previous Buffer" },
-    ["i"] = { "<Cmd>BufferNext<CR>", "Next Buffer" },
+    ["m"] = { "<Cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
+    ["i"] = { "<Cmd>BufferLineCycleNext<CR>", "Next Buffer" },
   }
 
   local normal_map = {

@@ -5,16 +5,16 @@ local g = vim.g
 local tree_width = 30
 
 local open = function()
-  require("bufferline.state").set_offset(tree_width+1, 'Workspace')
+--  require("bufferline.state").set_offset(tree_width+1, 'Workspace')
   require("nvim-tree").find_file(true)
 end
 
 local close = function()
-  require("bufferline.state").set_offset(0)
+ -- require("bufferline.state").set_offset(0)
   require("nvim-tree").close()
 end
 
-local state = fales
+local state = false
 M.toggle_tree = function()
   if state then
     state = false

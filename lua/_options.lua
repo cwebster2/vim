@@ -93,7 +93,7 @@ if vim.fn.exists("+undofile") == 1 then
   if vim.fn.isdirectory(vim.fn.expand("$HOME").."/.config/nvim/undo") == 0 then
       vim.api.nvim_commnd[[:silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1]]
   end
-  opt.undodir = "./.vim-undo//,~/.config/nvim/undo//"
+  opt.undodir = "./.vim-undo//,"..vim.fn.expand("$HOME").."/.config/nvim/undo//"
   opt.undofile = true
 end
 

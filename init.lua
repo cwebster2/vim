@@ -73,7 +73,6 @@ augroup("numbertoggle", {
   {'BufLeave,FocusLost,InsertEnter,WinLeave',   '*', 'if &nu | set nornu | endif'},
 })
 
-
 -- we are done setting stuff up
 a.nvim_command("silent! helptags ALL")
 
