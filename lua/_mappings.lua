@@ -54,6 +54,7 @@ M.init_keymap = function()
     ["f"] = {
       name = "+file",
       ["t"] = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+      ["s"] = { ":SymbolsOutline<CR>", "Symbols" },
       --["t"] = { "<cmd>lua require('_nvimtree').toggle_tree()<cr>", "NvimTree" },
       ["f"] = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Find Files" },
       ["g"] = { "<cmd>lua require('telescope.builtin').git_files()<CR>", "Find Git Files" },
@@ -104,7 +105,6 @@ M.init_keymap = function()
   wk.register(normal_map)
   wk.register(visual_map, { mode = "v" })
 
-  map('n', '<Leader>tb', ':SymbolsOutline<CR>', {silent=true})
 
   -- testing
   --map('n', '<Leader>fo', "<cmd>lua require('telescope.builtin').colorscheme()<CR>", {noremap=true})
