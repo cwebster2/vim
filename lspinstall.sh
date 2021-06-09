@@ -7,6 +7,12 @@ case "${unameOut}" in
 esac
 
 install_lsp_servers_npm() {
+
+  if [[ ! -x $(command -v npm) ]]; then
+    echo "npm not found, not skipping npm based lsp servers"
+    return
+  fi
+
   echo
   echo "Installing bash, docker, json, yaml, ts/js, and vimscript language servers"
   echo
@@ -29,7 +35,7 @@ install_lsp_terraform() {
   echo "Installing terraform language server"
   echo
   (
-    TFLSVER=${TFLSVER:-0.12.1}
+    TFLSVER=${TFLSVER:-0.17.1}
     TFLSARCH=${TFLSARCH:-amd64}
     TFLSOS=${TFLSOS:-$mcode}
     curl -fLo "${HOME}"/bin/terraform-ls.zip "https://releases.hashicorp.com/terraform-ls/${TFLSVER}/terraform-ls_${TFLSVER}_${TFLSOS}_${TFLSARCH}.zip"
@@ -40,6 +46,12 @@ install_lsp_terraform() {
 }
 
 install_lsp_servers_cargo() {
+
+  if [[ ! -x $(command -v rustup) ]]; then
+    echo "Rustup not found, not skipping cargo based lsp servers"
+    return
+  fi
+
   echo
   echo "Installing rust and tex language servers"
   echo
@@ -55,6 +67,12 @@ install_lsp_servers_cargo() {
 }
 
 install_lsp_servers_go() {
+
+  if [[ ! -x $(command -v go) ]]; then
+    echo "go not found, not skipping go based lsp servers"
+    return
+  fi
+
   echo
   echo "Installing language servers"
   echo
@@ -72,6 +90,12 @@ install_lsp_servers_go() {
 }
 
 install_lsp_servers_python() {
+
+  if [[ ! -x $(command -v pip) ]]; then
+    echo "pip not found, not skipping pip based lsp servers"
+    return
+  fi
+
   echo
   echo "Installing the python language server"
   echo
