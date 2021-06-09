@@ -119,6 +119,7 @@ M.overrides_setup = function()
     WhichKeyFloat =         {ctermbg='Black',                 guibg='#191919', blend=30},
     PMenu =                 {ctermbg='Black',                 guibg='#191919', blend=25},
     PMenuSel =              {                guifg='#ffffff', guibg='#333333'},
+    CursorLine =            { guibg='#191919', blend=50 },
     IndentBlankLineContextChar = {guibg=c.none, guifg=c.indentguidescurrent, gui='nocombine'},
     GitGutterAdd =          {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg='green'},
     GitGutterChange =       {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg=c.diffchanged},
