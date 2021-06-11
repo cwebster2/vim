@@ -56,8 +56,28 @@ function M.setup()
       -- sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
       --   -- add custom logic
       --   return buffer_a.modified > buffer_b.modified
-      -- end
-    }
+      -- end,
+    },
+    -- highlights = {
+    --   buffer_selected = {
+    --     --guifg = '#e8e8d3',
+    --     --guibg = 'NONE',
+    --     --guisp = '#e8e8d3',
+    --     gui = 'underline,italic,bold'
+    --   },
+    --   modified_selected = {
+    --     gui = 'underline,italic,bold'
+    --   },
+    --   warning_selected = {
+    --     gui = 'underline,italic,bold'
+    --   },
+    --   error_selected = {
+    --     gui = 'underline,italic,bold'
+    --   },
+    --   info_selected = {
+    --     gui = 'underline,italic,bold'
+    --   },
+    -- }
   }
 end
 
