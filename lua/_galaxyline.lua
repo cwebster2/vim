@@ -219,13 +219,13 @@ gls.left = {
       highlight = {colors.line_bg,colors.line_bg}
     }
   },
-  {
-    LSPStatus = {
-      --provider = function() return require("lsp-status").status() end,
-      provider = function() return "TODO" end
-      --condition = function () return vim.lsp.buf_get_clients() > 0 end
-    }
-  }
+  -- {
+  --   LSPStatus = {
+  --     --provider = function() return require("lsp-status").status() end,
+  --     provider = function() return "TODO" end
+  --     --condition = function () return vim.lsp.buf_get_clients() > 0 end
+  --   }
+  -- }
   -- {
   --   TSStatus = {
   --     provider = function() return require("nvim-treesitter").statusline(50) end,
