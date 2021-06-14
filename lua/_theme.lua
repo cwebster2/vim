@@ -99,7 +99,7 @@ end
 
 M.overrides_setup = function()
   vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "ALEErrorSign"})
-  vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "⚠", texthl = "ALEWarningSign"})
+  vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "ALEWarningSign"})
   vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "ALEInfoSign"})
   vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "ALEHintSign"})
 

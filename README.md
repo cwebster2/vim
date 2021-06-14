@@ -77,8 +77,8 @@ to change with every commit.
 
 ### Git stuff
 
- - https://github.com/tpope/vim-fugitive
- - https://github.com/airblade/vim-gitgutter
+ - https://github.com/TimUntersberger/neogit
+ - https://github.com/lewis6991/gitsigns.nvim
  - https://github.com/pwntester/octo.nvim
  - https://github.com/junegunn/gv.vim
  - https://github.com/cwebster2/github-coauthors.nvim

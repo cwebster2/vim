@@ -165,17 +165,15 @@ gls.left = {
       highlight = {colors.fg,colors.line_bg}
     }
   },
---{
---  FileStatus = {
---    provider = function()
---      local status = ""
---      if vim.bo.readonly then status = status .. ' ' .. icons.locked end
---      if vim.bo.modified then status = status .. ' ' .. icons.unsaved end
---      return ' ' .. status .. ' '
---    end,
---    highlight = {colors.red, colors.line_bg}
---  }
---},
+  {
+    current_dir = {
+        provider = function()
+            local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+            return "  " .. dir_name .. " "
+        end,
+        highlight = {colors.fg, colors.line_bg},
+    }
+  },
   {
     DiffAdd = {
       provider = 'DiffAdd',
@@ -201,19 +199,36 @@ gls.left = {
     }
   },
   {
+    DiagnosticError = {
+      provider = "DiagnosticError",
+      icon = " ✘ ",
+      highlight = {colors.red, colors.line_bg}
+    }
+  },
+  {
+    DiagnosticWarn = {
+      provider = "DiagnosticWarn",
+      icon = "  ",
+      highlight = {colors.yellow, colors.line_bg}
+    }
+  },
+  {
     LeftEnd = {
       provider = function() return "" end,
-      separator = sep.slant_alt_left,
-      --separator = sep.slant_left,
+      -- separator = sep.slant_alt_left,
+      separator = sep.slant_left,
       separator_highlight = {colors.line_bg,colors.bg_none},
       highlight = {colors.line_bg,colors.line_bg}
     }
   },
+
+
   -- {
   --   LSPStatus = {
-  --     --provider = function() return require("lsp-status").status() end,
-  --     provider = function() return "TODO" end
-  --     --condition = function () return vim.lsp.buf_get_clients() > 0 end
+  --     provider = function() return require("lsp-status").status() end,
+  --     -- provider = function() return "TODO" end
+  --     -- condition = function () return vim.lsp.buf_get_clients() > 0 end,
+  --     highlight = {colors.gray, colors.bg_none}
   --   }
   -- }
   -- {
@@ -284,27 +299,6 @@ gls.right = {
         return false
       end,
       highlight = {colors.blue,colors.line_bg}
-    },
-  },
-  {
-    DiagnosticWarn = {
-      provider = function()
-        local n = vim.lsp.diagnostic.get_count(0, 'Warning')
-        if n == 0 then return '' end
-        return string.format(' %s %d ', icons.warning, n)
-      end,
-      condition = conditions.check_active_lsp,
-      highlight = {'yellow', colors.line_bg},
-    },
-    DiagnosticError = {
-      --provider = diagnostic.get_diagnostic_error,
-      provider = function()
-        local n = vim.lsp.diagnostic.get_count(0, 'Error')
-        if n == 0 then return '' end
-        return string.format(' %s %d ', icons.error, n)
-      end,
-      condition = conditions.check_active_lsp,
-      highlight = {'red', colors.line_bg},
     },
   },
   {
