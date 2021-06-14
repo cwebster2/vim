@@ -14,15 +14,6 @@ g.DevIconsEnableFoldersOpenClose = 1
 
 g.polyglot_disabled = { "autoindent", "sensible" }
 
-g.gitgutter_map_keys = 0
-g.gitgutter_override_sign_column_highlight = 0
-g.gitgutter_sign_added = "▎"
-g.gitgutter_sign_modified = "▎"
-g.gitgutter_sign_removed = "▏"
-g.gitgutter_sign_removed_above_and_below = "▔"
-g.gitgutter_sign_removed_first_line = "_"
-g.gitgutter_sign_modified_removed = "▋"
-
 g.indentLine_char = '▏'
 g.indent_blankline_char_highlight = 'IndentGuides'
 g.indent_blankline_use_treesitter = true

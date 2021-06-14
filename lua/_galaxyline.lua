@@ -17,7 +17,6 @@ local mode_color = theme.mode_color
 
 gl.short_line_list = {
     'LuaTree',
-    'vista',
     'dbui',
     'startify',
     'term',
@@ -28,8 +27,6 @@ gl.short_line_list = {
     'NvimTree',
     'OUTLINE'
 }
-
-VistaPlugin = extension.vista_nearest
 
 local sep = {
   slant_left = ' ',
@@ -148,13 +145,6 @@ gls.left = {
     },
   },
   {
-    FileSize = {
-      provider = 'FileSize',
-      condition = buffer_not_empty,
-      highlight = {colors.fg,colors.line_bg}
-    }
-  },
-  {
     FileIcon = {
       provider = 'FileIcon',
       condition = buffer_not_empty,
@@ -168,6 +158,13 @@ gls.left = {
       highlight = {colors.fg,colors.line_bg,'italic'}
     }
   },
+  {
+    FileSize = {
+      provider = 'FileSize',
+      condition = buffer_not_empty,
+      highlight = {colors.fg,colors.line_bg}
+    }
+  },
 --{
 --  FileStatus = {
 --    provider = function()
@@ -179,13 +176,6 @@ gls.left = {
 --    highlight = {colors.red, colors.line_bg}
 --  }
 --},
-  {
-    PositionInfo = {
-      provider = function() return string.format(' %s ', fileinfo.line_column()) end,
-      highlight = {colors.fg, colors.line_bg},
-      condition = buffer_not_empty,
-    },
-  },
   {
     DiffAdd = {
       provider = 'DiffAdd',
@@ -324,6 +314,13 @@ gls.right = {
       condition = vcs.check_git_workspace,
       highlight = {colors.yellow ,colors.line_bg},
     }
+  },
+  {
+    PositionInfo = {
+      provider = function() return string.format('%s', fileinfo.line_column()) end,
+      highlight = {colors.fg, colors.line_bg},
+      condition = buffer_not_empty,
+    },
   },
   {
     Whitespace = {

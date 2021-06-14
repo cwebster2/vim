@@ -17,7 +17,7 @@ M.init_keymap = function()
       ["b"] = { "<Cmd>Telescope git_branches<CR>", "branches" },
       ["s"] = { "<Cmd>Telescope git_status<CR>", "status" },
       --["d"] = { "<cmd>DiffviewOpen<cr>", "DiffView" },
-      --h = { name = "+hunk" }
+      ["h"] = { name = "+hunk" },
       ["i"] = { "<cmd>lua require('telescope').extensions.gh.issues()<CR>", "issues" },
       ["p"] = { "<cmd>lua require('telescope').extensions.gh.pull_request()<CR>", "pull requests" },
     },

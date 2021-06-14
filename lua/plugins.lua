@@ -97,7 +97,11 @@ return require('packer').startup {
       config = "require'_hexokinase'.setup()",
     }
     use 'cwebster2/color-overrides.nvim'
-    use 'airblade/vim-gitgutter'
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = {'nvim-lua/plenary.nvim'},
+      config = "require('_gitsigns').setup()",
+    }
     use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
 
     use {
