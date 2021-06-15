@@ -112,17 +112,17 @@ gls.left = {
   {
     FirstElement = {
       provider = function() return ' ' end,
-      highlight = {colors.blue,colors.line_bg}
+      highlight = {colors.blue,colors.none}
     },
   },
   {
     ViMode = {
       provider = function()
         -- auto change color according the vim mode
-        highlight("GalaxyViMode", mode_hl(), colors.line_bg, "bold" )
+        highlight("GalaxyViMode", mode_hl(), colors.none, "bold" )
         return mode_label() .. " "
       end,
-      highlight = {mode_hl(), colors.line_bg, 'bold'},
+      highlight = {mode_hl(), colors.none, 'bold'},
     },
   },
   {
@@ -132,7 +132,7 @@ gls.left = {
           return ' SPELL '
         end
       end,
-      highlight = {colors.red, colors.line_bg},
+      highlight = {colors.red, colors.none},
       event = 'OptionSet',
     },
   },
@@ -140,21 +140,21 @@ gls.left = {
     FileIcon = {
       provider = 'FileIcon',
       condition = buffer_not_empty,
-      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.none},
     },
   },
   {
     FileName = {
       provider = 'FileName',
       condition = buffer_not_empty,
-      highlight = {colors.fg,colors.line_bg,'italic'}
+      highlight = {colors.fg,colors.none,'italic'}
     }
   },
   {
     FileSize = {
       provider = 'FileSize',
       condition = buffer_not_empty,
-      highlight = {colors.changed, colors.line_bg}
+      highlight = {colors.changed, colors.none}
     }
   },
   {
@@ -163,7 +163,7 @@ gls.left = {
             local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
             return "  " .. dir_name .. " "
         end,
-        highlight = {colors.blue, colors.line_bg},
+        highlight = {colors.blue, colors.none},
     }
   },
   {
@@ -171,7 +171,7 @@ gls.left = {
       provider = 'DiffAdd',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.green,colors.line_bg},
+      highlight = {colors.green,colors.none},
     }
   },
   {
@@ -179,7 +179,7 @@ gls.left = {
       provider = 'DiffModified',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.diffchanged, colors.line_bg},
+      highlight = {colors.diffchanged, colors.none},
     }
   },
   {
@@ -187,32 +187,32 @@ gls.left = {
       provider = 'DiffRemove',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.red,colors.line_bg},
+      highlight = {colors.red,colors.none},
     }
   },
   {
     DiagnosticError = {
       provider = "DiagnosticError",
       icon = " ✘ ",
-      highlight = {colors.red, colors.line_bg}
+      highlight = {colors.red, colors.none}
     }
   },
   {
     DiagnosticWarn = {
       provider = "DiagnosticWarn",
       icon = "  ",
-      highlight = {colors.yellow, colors.line_bg}
+      highlight = {colors.yellow, colors.none}
     }
   },
-  {
-    LeftEnd = {
-      provider = function() return "" end,
-      -- separator = sep.slant_alt_left,
-      separator = sep.slant_left,
-      separator_highlight = {colors.line_bg,colors.bg_none},
-      highlight = {colors.line_bg,colors.line_bg}
-    }
-  },
+  -- {
+  --   LeftEnd = {
+  --     provider = function() return "" end,
+  --     -- separator = sep.slant_alt_left,
+  --     separator = sep.slant_left,
+  --     separator_highlight = {colors.line_bg,colors.bg_none},
+  --     highlight = {colors.line_bg,colors.none}
+  --   }
+  -- },
 
 
   -- {
@@ -244,7 +244,7 @@ gls.right = {
     FileType = {
       provider = function()
         local icon = icons[vim.bo.fileformat] or ''
-        return string.format('%s %s', icon, vim.bo.filetype)
+        return string.format('%s %s ', icon, vim.bo.filetype)
       end,
       condition = conditions.hide_in_width and buffer_not_empty,
       highlight = {colors.gray,colors.bg_none}
@@ -258,20 +258,20 @@ gls.right = {
         if encoding == "utf-8" then
           return ''
         end
-        return encoding
+        return encoding..' '
       end,
      condition = conditions.hide_in_width,
       highlight = {colors.gray,colors.bg_none}
    }
  },
- {
-    RightEnd = {
-      provider = function() return "" end,
-      separator = sep.slant_alt_right,
-      separator_highlight = {colors.line_bg,colors.bg_none},
-      highlight = {colors.line_bg,colors.line_bg}
-    }
-  },
+ -- {
+ --    RightEnd = {
+ --      provider = function() return "" end,
+ --      separator = sep.slant_alt_right,
+ --      separator_highlight = {colors.line_bg,colors.bg_none},
+ --      highlight = {colors.line_bg,colors.none}
+ --    }
+ --  },
   {
     LspStatus = {
       provider = function()
@@ -296,7 +296,7 @@ gls.right = {
         end
         return false
       end,
-      highlight = {colors.blue,colors.line_bg}
+      highlight = {colors.blue,colors.none}
     },
   },
   {
@@ -304,13 +304,13 @@ gls.right = {
       provider = 'GitBranch',
       icon = icons.branch,
       condition = vcs.check_git_workspace,
-      highlight = {colors.yellow ,colors.line_bg},
+      highlight = {colors.yellow ,colors.none},
     }
   },
   {
     PositionInfo = {
       provider = function() return string.format('%s', fileinfo.line_column()) end,
-      highlight = {colors.fg, colors.line_bg},
+      highlight = {colors.fg, colors.none},
       condition = buffer_not_empty,
     },
   },
