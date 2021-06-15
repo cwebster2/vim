@@ -49,7 +49,7 @@ local icons = {
   warning = '⚠',
   branch = ' ',
   git = ' ',
-  lineno = '  ',
+  lineno = ' ',
 }
 
 local mode_map = {
@@ -94,10 +94,6 @@ local function buffer_not_empty()
   return false
 end
 
-local function diagnostic_exists()
-  return vim.tbl_isempty(vim.lsp.buf_get_clients(0))
-end
-
 local function wide_enough()
   local squeeze_width = vim.fn.winwidth(0)
   if squeeze_width > 80 then return true end
@@ -123,7 +119,7 @@ gls.left = {
     ViMode = {
       provider = function()
         -- auto change color according the vim mode
-        highlight("GalaxyViMode", mode_hl(), colors.line_bg )
+        highlight("GalaxyViMode", mode_hl(), colors.line_bg, "bold" )
         return mode_label() .. " "
       end,
       highlight = {mode_hl(), colors.line_bg, 'bold'},
@@ -136,10 +132,6 @@ gls.left = {
           return ' SPELL '
         end
       end,
-      --condition = function()
-      --  return vim.api.nvim_win_get_option(0, 'spell')
-      --  return vim.api.nvim_win_get_option(0, 'spell')
-      --end,
       highlight = {colors.red, colors.line_bg},
       event = 'OptionSet',
     },
@@ -162,7 +154,7 @@ gls.left = {
     FileSize = {
       provider = 'FileSize',
       condition = buffer_not_empty,
-      highlight = {colors.fg,colors.line_bg}
+      highlight = {colors.changed, colors.line_bg}
     }
   },
   {
@@ -171,7 +163,7 @@ gls.left = {
             local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
             return "  " .. dir_name .. " "
         end,
-        highlight = {colors.fg, colors.line_bg},
+        highlight = {colors.blue, colors.line_bg},
     }
   },
   {
@@ -251,17 +243,23 @@ gls.right = {
   {
     FileType = {
       provider = function()
-        if not buffer_not_empty() then return '' end
         local icon = icons[vim.bo.fileformat] or ''
-        return string.format(' %s %s ', icon, vim.bo.filetype)
+        return string.format('%s %s', icon, vim.bo.filetype)
       end,
-      condition = conditions.hide_in_width,
+      condition = conditions.hide_in_width and buffer_not_empty,
       highlight = {colors.gray,colors.bg_none}
     },
  },
  {
    FileEncoding = {
-     provider = function() return string.lower(fileinfo.get_file_encode()) end,
+     provider = function()
+        local encoding = string.lower(fileinfo.get_file_encode())
+        encoding = encoding:gsub("^%s*(.-)%s*$", "%1")
+        if encoding == "utf-8" then
+          return ''
+        end
+        return encoding
+      end,
      condition = conditions.hide_in_width,
       highlight = {colors.gray,colors.bg_none}
    }
