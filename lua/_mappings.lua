@@ -151,9 +151,9 @@ M.init_keymap = function()
   map('i', '<F3>', '<C-o>:MaximizerToggle<CR>', {silent=true})
 
   -- neotermm
-  map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
-  map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
-  map('t', '<c-q>', '<c-\\><c-n>:Ttoggle<CR>', {noremap=true})
+  -- map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
+  -- map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
+  map('t', '<c-w>', '<c-\\><c-n><c-w>', {noremap=true})
 
   -- Toggle to disable mouse mode and indentlines for easier paste
   ToggleMouse = function()

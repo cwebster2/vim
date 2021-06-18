@@ -140,8 +140,11 @@ return require('packer').startup {
     }
     use 'pwntester/octo.nvim'
     use 'tmsvg/pear-tree'
-  --plug('cohama/lexima.vim')
-    use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
+    -- plug('cohama/lexima.vim')
+    -- use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
+    use {'akinsho/nvim-toggleterm.lua',
+      config = 'require("_neoterm").setup()',
+    }
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
     --use {'puremourning/vimspector', opt=true, fn="vimspector#Launch"}

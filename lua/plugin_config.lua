@@ -84,11 +84,6 @@ g.vim_markdown_math = 1
 g.vim_markdown_fenced_languages = {'css', 'javascript', 'js=javascript', 'typescript',
     'go', 'python', 'py=python', 'c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini'}
 
-g.neoterm_default_mod = 'vertical'
-g.neoterm_size = 60
-g.neoterm_autoinsert = 1
-g.neoterm_shell = '/bin/zsh'
-
 vim.api.nvim_command[[
 let test#strategy = "neovim"
 let test#neovim#term_position = "vertical"
