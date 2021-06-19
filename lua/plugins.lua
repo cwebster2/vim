@@ -59,18 +59,14 @@ return require('packer').startup {
       config = "require('_trouble').setup()",
     }
 
-  -- Completion
+  -- Snippets
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
+
+  -- Completion
     use{'hrsh7th/nvim-compe',
       requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}},
     }
-
-    --use{'nvim-lua/completion-nvim',
-    --use 'steelsojka/completion-buffers'
-    --use 'nvim-treesitter/completion-treesitter'
-
-  -- Snippets
 
   -- colorschemes
     use 'nanotech/jellybeans.vim'
@@ -113,7 +109,6 @@ return require('packer').startup {
   --plug('w0rp/ale')
 
   -- language stuff
-    -- use {'tpope/vim-fugitive'}
     use {
       'TimUntersberger/neogit',
       requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
@@ -147,7 +142,6 @@ return require('packer').startup {
     }
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
-    --use {'puremourning/vimspector', opt=true, fn="vimspector#Launch"}
     use {'puremourning/vimspector'}
 
   -- markdown
@@ -161,7 +155,9 @@ return require('packer').startup {
     use 'tpope/vim-surround'
 
     use 'andweeb/presence.nvim'
-    --use 'fiatjaf/neuron.vim'
+    use {'oberblastmeister/neuron.nvim',
+      config = 'require("_neuron").setup()'
+    }
 
     use {'theprimeagen/neovim-irc-ui'}
 

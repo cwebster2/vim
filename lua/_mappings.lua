@@ -91,6 +91,18 @@ M.init_keymap = function()
   local normal_map = {
     ["g"] = {
       name = "+goto",
+      ["z"] = {
+        name = "+zettle",
+        n = { "New" },
+        z = { "Find/create" },
+        Z = { "Insert ID" },
+        b = { "Backlinks" },
+        B = { "Id of backlink" },
+        t = { "Find/insert tags" },
+        s = { "Start server" },
+        ["]"] = { "Next Link" },
+        ["["] = { "Prev Link" },
+      },
     },
     ["<C-_>"] = { "<cmd>CommentToggle<cr>", "Comment Line" },
     -- ["<C-s>"] = { "<Cmd>BufferPick<CR>", "Pick Buffer" },
@@ -151,8 +163,6 @@ M.init_keymap = function()
   map('i', '<F3>', '<C-o>:MaximizerToggle<CR>', {silent=true})
 
   -- neotermm
-  -- map('n', '<c-q>', ':Ttoggle<CR>', {noremap=true})
-  -- map('i', '<c-q>', '<esc>:Ttoggle<CR>', {noremap=true})
   map('t', '<c-w>', '<c-\\><c-n><c-w>', {noremap=true})
 
   -- Toggle to disable mouse mode and indentlines for easier paste
