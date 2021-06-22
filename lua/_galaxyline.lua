@@ -216,12 +216,12 @@ gls.left = {
 
 
   -- {
-  --   LSPStatus = {
-  --     provider = function() return require("lsp-status").status() end,
-  --     -- provider = function() return "TODO" end
-  --     -- condition = function () return vim.lsp.buf_get_clients() > 0 end,
-  --     highlight = {colors.gray, colors.bg_none}
-  --   }
+    -- LSPStatus = {
+      -- provider = function() return require("lsp_status").status() end,
+      -- provider = function() return "TODO" end
+      -- condition = function () return vim.lsp.buf_get_clients() > 0 end,
+      -- highlight = {colors.gray, colors.bg_none}
+    -- }
   -- }
   -- {
   --   TSStatus = {

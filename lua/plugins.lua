@@ -48,7 +48,7 @@ return require('packer').startup {
 
   -- LSP stuff
     use 'neovim/nvim-lspconfig'
-    use 'nvim-lua/lsp-status.nvim'
+    -- use 'doums/lsp_status'
     use 'folke/lua-dev.nvim'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')

@@ -3,7 +3,7 @@ local M={}
 local nvim_lsp = require "lspconfig"
 local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
-local lsp_status = require("lsp-status")
+-- local lsp_status = require("lsp_status")
 
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
@@ -25,6 +25,13 @@ local language_formatters = {
   dockerfile = {hadolint},
 }
 
+-- lsp_status.setup {
+--   spinner = {'⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'},
+--   interval = 80, -- spinner frame rate in ms
+--   redraw_rate = 100, -- max refresh rate of statusline in ms
+-- }
+
+-- turn on `window/workDoneProgress` capability
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -34,7 +41,9 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   }
 }
-capabilities.window.workDoneProgress = true
+-- capabilities.window.workDoneProgress = true
+-- lsp_status.init_capabilities(capabilities)
+-- capabilities = vim.tbl_extend('keep', capabilities, lsp_status.capabilities)
 
 -- Heplers for lua lsp setup
 local function lua_cmd()
@@ -111,7 +120,7 @@ local lsp_signature_config = {
 local on_attach = function(client, bufnr)
 
   lsp_signature.on_attach(lsp_signature_config)
-  lsp_status.on_attach(client)
+  -- lsp_status.on_attach(client, bufnr)
 
   require("_mappings").lsp_setup(client, bufnr)
 
@@ -136,10 +145,6 @@ local function custom_codeAction(_, _, action)
 end
 
 function M.setup()
-  lsp_status.register_progress()
-  lsp_status.config({
-    diagnostics = false,
-  })
 
   for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = capabilities }, config))
