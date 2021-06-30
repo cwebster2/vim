@@ -58,8 +58,7 @@ install_lsp_servers_cargo() {
   (
     echo "Fetching the rust analyzer language server"
     rustup component add rust-src
-    curl -fLo "${HOME}"/bin/rust-analyzer "https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux"
-    chmod 755 "${HOME}"/bin/rust-analyzer
+    rustup +nightly component add rust-analyzer-preview
 
     echo "Building the tex language server"
     cargo install --git https://github.com/latex-lsp/texlab.git --locked

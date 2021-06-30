@@ -115,6 +115,9 @@ return require('packer').startup {
       config = "require('_neogit').setup()",
     }
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use {'simrat39/rust-tools.nvim',
+      config = "require('_rust-tools').setup()"
+    }
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
 
