@@ -167,6 +167,14 @@ gls.left = {
     }
   },
   {
+    GitBranch = {
+      provider = 'GitBranch',
+      icon = icons.branch,
+      condition = vcs.check_git_workspace,
+      highlight = {colors.yellow ,colors.none},
+    }
+  },
+  {
     DiffAdd = {
       provider = 'DiffAdd',
       condition = checkwidth,
@@ -298,14 +306,6 @@ gls.right = {
       end,
       highlight = {colors.blue,colors.none}
     },
-  },
-  {
-    GitBranch = {
-      provider = 'GitBranch',
-      icon = icons.branch,
-      condition = vcs.check_git_workspace,
-      highlight = {colors.yellow ,colors.none},
-    }
   },
   {
     PositionInfo = {
