@@ -51,7 +51,14 @@ require("telescope").setup {
         selection_strategy = "reset",
         sorting_strategy = "ascending",
         layout_strategy = "horizontal",
-        layout_defaults = {},
+        layout_config = {
+          horizontal = {
+            mirror = false,
+          },
+          vertical = {
+            mirror = false,
+          },
+        },
         file_sorter = require "telescope.sorters".get_fzy_sorter,
         --file_sorter = require "telescope.sorters".get_fuzzy_file,
         --file_sorter = require "telescope.sorters".fuzzy_with_index_bias,

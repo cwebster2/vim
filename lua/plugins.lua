@@ -1,17 +1,18 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  execute 'packadd packer.nvim'
 end
 
 execute 'packadd packer.nvim'
 
 return require('packer').startup {
   function(use)
-    use {'wbthomason/packer.nvim', opt = true}
+    use {'wbthomason/packer.nvim'}
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
 
@@ -48,7 +49,7 @@ return require('packer').startup {
 
   -- LSP stuff
     use 'neovim/nvim-lspconfig'
-    -- use 'doums/lsp_status'
+    use 'nvim-lua/lsp-status.nvim'
     use 'folke/lua-dev.nvim'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
@@ -114,7 +115,7 @@ return require('packer').startup {
       requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
       config = "require('_neogit').setup()",
     }
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use {'lukas-reineke/indent-blankline.nvim'}
     use {'simrat39/rust-tools.nvim',
       config = "require('_rust-tools').setup()"
     }
@@ -158,9 +159,9 @@ return require('packer').startup {
     use 'tpope/vim-surround'
 
     use 'andweeb/presence.nvim'
-    use {'oberblastmeister/neuron.nvim',
-      config = 'require("_neuron").setup()'
-    }
+    -- use {'oberblastmeister/neuron.nvim',
+    --   config = 'require("_neuron").setup()'
+    -- }
 
     use {'theprimeagen/neovim-irc-ui'}
 

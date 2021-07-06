@@ -50,6 +50,7 @@ local icons = {
   branch = ' ',
   git = ' ',
   lineno = ' ',
+  func = u '1d453',
 }
 
 local mode_map = {
@@ -153,7 +154,7 @@ gls.left = {
   {
     FileSize = {
       provider = 'FileSize',
-      condition = buffer_not_empty,
+      condition = buffer_not_empty and checkwidth,
       highlight = {colors.changed, colors.none}
     }
   },
@@ -223,14 +224,29 @@ gls.left = {
   -- },
 
 
+  {
+    LSPStatusCurrentFunc = {
+      provider = function()
+        return icons.func .. (vim.b.lsp_current_function or "")
+      end,
+      -- condition = function ()
+      --   return next(vim.lsp.buf_get_clients()) ~= nil
+      -- end,
+      highlight = {colors.gray, colors.bg_none}
+    }
+  },
   -- {
-    -- LSPStatus = {
-      -- provider = function() return require("lsp_status").status() end,
-      -- provider = function() return "TODO" end
-      -- condition = function () return vim.lsp.buf_get_clients() > 0 end,
-      -- highlight = {colors.gray, colors.bg_none}
-    -- }
-  -- }
+  --   LSPStatus = {
+  --     provider = function()
+  --       return table.concat(require("lsp-status").messages(), ", ")
+  --     end,
+  --     -- condition = function ()
+  --     --   return next(vim.lsp.buf_get_clients()) ~= nil
+  --     -- end,
+  --     highlight = {colors.gray, colors.bg_none}
+  --   }
+  -- },
+
   -- {
   --   TSStatus = {
   --     provider = function() return require("nvim-treesitter").statusline(50) end,
