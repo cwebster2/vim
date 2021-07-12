@@ -50,7 +50,7 @@ local icons = {
   branch = ' ',
   git = ' ',
   lineno = ' ',
-  func = u '1d453',
+  func = ' '..u '1d453',
 }
 
 local mode_map = {
@@ -227,7 +227,10 @@ gls.left = {
   {
     LSPStatusCurrentFunc = {
       provider = function()
-        return icons.func .. (vim.b.lsp_current_function or "")
+        return " " .. icons.func .. " " .. (vim.b.lsp_current_function or "")
+      end,
+      condition = function()
+        return vim.b.lsp_current_function ~= ""
       end,
       -- condition = function ()
       --   return next(vim.lsp.buf_get_clients()) ~= nil
