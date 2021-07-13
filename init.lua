@@ -37,7 +37,7 @@ completion_setup.compe()
 completion_setup.kinds()
 require'plugin_config'
 require'_nvimtree'.setup()
-require'_vimspector'
+require'_dap'
 local theme = require'_theme'
 theme.colorscheme_setup()
 theme.overrides_setup()

@@ -29,7 +29,8 @@ return require('packer').startup {
     use('nvim-telescope/telescope-packer.nvim')
     use('nvim-telescope/telescope-github.nvim')
     use('nvim-telescope/telescope-symbols.nvim')
-    use('nvim-telescope/telescope-vimspector.nvim')
+    -- use('nvim-telescope/telescope-vimspector.nvim')
+    use 'nvim-telescope/telescope-dap.nvim'
     use('cwebster2/github-coauthors.nvim')
     use {'junegunn/fzf', run = './install --all'}
     use 'junegunn/fzf.vim'
@@ -146,7 +147,10 @@ return require('packer').startup {
     }
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
-    use {'puremourning/vimspector'}
+    -- use {'puremourning/vimspector'}
+    use 'mfussenegger/nvim-dap'
+    use 'theHamsta/nvim-dap-virtual-text'
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
   -- markdown
     use {'plasticboy/vim-markdown', opt=true}
