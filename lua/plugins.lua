@@ -148,7 +148,9 @@ return require('packer').startup {
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
     -- use {'puremourning/vimspector'}
-    use 'mfussenegger/nvim-dap'
+    use {'mfussenegger/nvim-dap',
+      config = 'require("_dap").setup()'
+    }
     use 'theHamsta/nvim-dap-virtual-text'
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
