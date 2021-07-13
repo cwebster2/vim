@@ -69,7 +69,10 @@ require("telescope").setup {
         --file_sorter = require "telescope.sorters".fuzzy_with_index_bias,
         file_ignore_patterns = {".git", "node_modules"},
         generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
-        path_display = "shorten",
+        path_display = {
+          "shorten",
+          "absolute"
+        },
         winblend = 5,
         border = {},
         borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
