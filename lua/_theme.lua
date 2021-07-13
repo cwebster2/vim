@@ -8,7 +8,8 @@ local c = {
   cursorline = '#1c1c1c',
   modified = 'DarkGoldenrod2',
   indentguides = '#222222',
-  whitespace = '#333333',
+  indentguidescurrent = '#555555',
+  whitespace = '#555555',
   diffadd = 'green',
   diffdel = 'red',
   diffchanged = "#2B5B77",
@@ -98,7 +99,7 @@ end
 
 M.overrides_setup = function()
   vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "ALEErrorSign"})
-  vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "⚠", texthl = "ALEWarningSign"})
+  vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "ALEWarningSign"})
   vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "ALEInfoSign"})
   vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "ALEHintSign"})
 
@@ -107,13 +108,22 @@ M.overrides_setup = function()
   local my_colors = {
     Normal =                {ctermbg=c.none,                  guibg=c.none},
     VertSplit =             {ctermbg=c.none,                  guibg=c.none},
+    IndentGuides =          {ctermbg=c.none, guibg=c.none, guifg=c.indentguides},
+    Whitespace =            {ctermbg=c.none, guibg=c.none, guifg=c.whitespace},
+    NonText =               {ctermbg=c.none, guibg=c.none, guifg=c.whitespace},
+    LineNr =                {ctermbg=c.none,                  guibg=c.none},
+    Folded =                {ctermbg=c.none,                  guibg=c.none},
+    SpecialKey =            {ctermbg=c.none,                  guibg=c.none},
+    SignColumn =            {ctermbg=c.none,                  guibg=c.none},
+    EndOfBuffer =           {ctermbg=c.none, guifg='#222222', guibg=c.none},
     WhichKeyFloat =         {ctermbg='Black',                 guibg='#191919', blend=30},
     PMenu =                 {ctermbg='Black',                 guibg='#191919', blend=25},
     PMenuSel =              {                guifg='#ffffff', guibg='#333333'},
-    GitGutterAdd =          {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg='green'},
-    GitGutterChange =       {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg=c.diffchanged},
-    GitGutterDelete =       {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg=c.red},
-    GitGutterChangeDelete = {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg=c.diffchanged},
+    CursorLine =            { guibg='#111111', blend=50 },
+    IndentBlankLineContextChar = {guibg=c.none, guifg=c.indentguidescurrent, gui='nocombine'},
+    GitSignsAdd =           {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg='green'},
+    GitSignsChange =        {ctermbg=c.none, ctermfg='green', guibg=c.none, guifg=c.diffchanged},
+    GitSignsDelete =        {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg=c.red},
     SpellCap =              {guibg=c.none, guisp='Red', gui='undercurl', cterm='undercurl,bold'},
     SpellBad =              {guisp='Red', gui='undercurl', guibg='#771c13', cterm='undercurl,bold'},
     ALEErrorSign =          {ctermbg=c.none, ctermfg='red',   guibg=c.none, guifg='red'},
@@ -125,28 +135,14 @@ M.overrides_setup = function()
     QuickScopeSecondary =   {guifg='#5fffff', gui='underline'},
     LspDiagnosticsVirtualTextHint = {guifg=c.lspvtext},
     TSKeyword           =   {guifg='#8197bf', gui='italic'},
-    BufferCurrent =    {guifg='#e8e8d3', guibg=c.none},
-    BufferCurrentMod=    {guifg=c.modified, guibg=c.none},
-    BufferCurrentSign =    {guifg='#799d6a', guibg=c.none},
-    BufferCurrentTarget =    {guifg='red', guibg=c.none, gui='bold'},
-    BufferVisible =    {guifg='white', guibg=c.none},
-    BufferVisibleMod =    {guifg=c.modified, guibg=c.none},
-    BufferVisibleSign =    {guifg='white', guibg=c.none},
-    BufferVisibleTarget =    {guifg='red', guibg=c.none, gui='bold'},
-    BufferInactive =    {guifg='#4C5966', guibg=c.none},
-    BufferInactiveMod =    {guifg='#A59272', guibg=c.none},
-    BufferInactiveSign =    {guifg='#606060', guibg=c.none},
-    BufferInactiveTarget =    {guifg='red', guibg=c.none, gui='bold'},
-    BufferTabpages =    {guifg=c.none, guibg=c.none},
-    BufferTabpageFill =    {guifg=c.none, guibg=c.none},
     StatusLine = {guifg='gray', guibg=c.none, gui='italic'},
     LspDiagnosticsUnderlineHint = {gui='undercurl', guisp='lightgreen'},
     LspDiagnosticsUnderlineWarning = {gui='undercurl', guisp='yellow'},
     LspDiagnosticsUnderlineError = {gui='undercurl', guisp='red'},
     LspDiagnosticsUnderlineInfo = {gui='undercurl', guisp='blue'},
-    IndentGuides = {guibg=c.none, guifg=c.indentguides},
-    Whitespace = {guibg=c.none, guifg=c.whitespace},
-    NonText = {guibg=c.none, guifg=c.whitespace},
+    LspDiagnosticsDefaultError = {guifg='gray'},
+    NvimTreeRootFolder = {guifg='green'},
+    NvimTreeGitDirty = {guifg=c.diffdel}
   }
 
   -- this sets colors and sets up an autocmd to set them again if colo is changed
@@ -154,26 +150,13 @@ M.overrides_setup = function()
   require'color-overrides'.set_overrides(my_clear_colors, my_colors)
 
   vim.cmd[["highlight! BufferTabpageFil guibg=none]]
+  vim.cmd[["highlight! BufferlineBufferSelected gui=underline]]
   --"autocmd ColorScheme * highlight NvimTreeFolderIcon guibg=blue
 end
 
-vim.g.bufferline = {
-  closable = false
-}
+-- vim.g.bufferline = {
+--   closable = false
+-- }
 
---require'bufferline'.setup{
---  options = {
---    always_show_bufferline = true,
---    numbers = "ordinal",
---    diagnostics = "nvim_lsp",
---    separator_style = "thin",
---    sort_by = "directory",
---    show_buffer_close_icons = false,
---    diagnostics_indicator = function(count, level)
---      local icon = level:match("error") and " " or ""
---      return " " .. icon .. count
---    end,
---  }
---}
 return M
 

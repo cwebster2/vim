@@ -2,15 +2,13 @@ local M={}
 
 local nvim_lsp = require "lspconfig"
 local saga = require'lspsaga'
-local map = require("utils").map
-local home = vim.fn.expand("$HOME")
-local build = home .. "/src/lua-language-server"
-local bin = build .. "/bin/Linux/lua-language-server"
-
+local lsp_signature = require("lsp_signature")
+local lsp_status = require("lsp-status")
 
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
-local language_formatterts = {
+local hadolint = require "efm/hadolint"
+local language_formatters = {
   typescript = {prettier, eslint},
   javascript = {prettier, eslint},
   typescriptreact = {prettier, eslint},
@@ -23,23 +21,70 @@ local language_formatterts = {
   markdown = {prettier},
   lua = {
     {formatCommand = "lua-format -i", formatStdin = true}
-  }
+  },
+  dockerfile = {hadolint},
 }
+
+lsp_status.config {
+  select_symbol = function(cursor_pos, symbol)
+    if symbol.valueRange then
+      local value_range = {
+        ["start"] = {
+          character = 0,
+          line = vim.fn.byte2line(symbol.valueRange[1])
+        },
+        ["end"] = {
+          character = 0,
+          line = vim.fn.byte2line(symbol.valueRange[2])
+        }
+      }
+
+      return require("lsp-status.util").in_range(cursor_pos, value_range)
+    end
+  end,
+  diagnostic = false,
+}
+lsp_status.register_progress()
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+-- turn on `window/workDoneProgress` capability
+capabilities = vim.tbl_extend('keep', capabilities, lsp_status.capabilities)
+
+-- Heplers for lua lsp setup
+local function lua_cmd()
+  local home = vim.fn.expand("$HOME")
+  local build = home .. "/src/lua-language-server"
+  local bin_location = ""
+  if jit.os == 'OSX' then
+    bin_location = 'macOS'
+  elseif jit.os == 'Linux' then
+    bin_location = 'Linux'
+  end
+  local bin = build .. "/bin/" .. bin_location .. "/lua-language-server"
+  return {bin, "-E", build .. "/main.lua"}
+end
+-- end helpers for lua lsp setup
 
 local servers = {
-  pyls = {},
+  pyright = {},
   bashls = {},
   rust_analyzer = {},
   tsserver = {},
   vuels = {},
+  svelte = {},
   gopls = {},
   terraformls = {
     filetypes = {"tf", "terraform"},
   },
-  dockerls = {},
+  --dockerls = {},
   jsonls = {},
   texlab = {
     settings = {
@@ -54,63 +99,50 @@ local servers = {
   yamlls = {},
   vimls = {},
   jdtls = {},
-  sumneko_lua = {
-    cmd = {bin, "-E", build .. "/main.lua"},
-    settings = {
-      Lua = {
-        runtime = {
-          version = "LuaJIT",
-          path = vim.split(package.path, ";")
-        },
-        completion = {
-          keywordSnippet = "Disable"
-        },
-        diagnostics = {
-          enable = true,
-          globals = {
-            "vim"
-          }
-        },
-        workspace = {
-          library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
-          }
-        }
-      }
-    }
-  },
+  sumneko_lua = require("lua-dev").setup({
+    lspconfig = {
+      cmd = lua_cmd(),
+    },
+  }),
   efm = {
-    filetypes = vim.tbl_keys(language_formatterts),
-    root_dir = nvim_lsp.util.root_pattern("package.json","yarn.lock", ".git"),
+    filetypes = vim.tbl_keys(language_formatters),
     init_options = {
       documentFormatting = true,
-      codeAction = true
+      codeAction = true,
+      completion = true,
+      documentSymbol = true,
+      hover = true,
     },
     settings = {
       rootMarkers = {".git/"},
-      languages = language_formatterts
+      languages = language_formatters
     }
   }
 }
 
-local on_attach = function(client)
-  --local completion = require "completion"
-  --completion.on_attach(client)
-  require "lsp_signature".on_attach({
-    bind = true,
-    handler_opts = {
-      border = "single"
-    }
-  })
+local lsp_signature_config = {
+  bind = true,
+  doc_lines = 0,
+  floating_window = true,
+  hint_enable = true,
+  handler_opts = {
+    border = "single"
+  }
+}
 
-  local bufnr = 0
-  require("_lsp_mappings").setup(client, bufnr)
+local on_attach = function(client, bufnr)
+
+  lsp_signature.on_attach(lsp_signature_config)
+  lsp_status.on_attach(client)
+
+  require("_mappings").lsp_setup(client, bufnr)
 
   --vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
-  vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
+  --
+--  vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
+
   -- This is causing an out of bounds error, see if this changed in a nightly
-  vim.api.nvim_command("autocmd BufWrite,BufEnter,InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
+  -- vim.api.nvim_command("autocmd BufWrite,BufEnter,InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
   vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
@@ -126,36 +158,6 @@ local function custom_codeAction(_, _, action)
 end
 
 function M.setup()
-  require'nvim-treesitter.configs'.setup {
-    ensure_installed = "all",
-    textobjects = {
-      select = {
-        enable = true,
-        keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
-          ["ab"] = "@block.outer",
-          ["ib"] = "@block.inner",
-        },
-      },
-    },
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = true,
-      disable = {},
-    },
-    rainbow = {
-      enable = true,
-      disable = {'bash'},
-    },
-    refactor = {
-      highlight_definitions = { enable = true },
-      highlight_current_scope = { enable = true },
-    }
-  }
 
   for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = capabilities }, config))

@@ -1,4 +1,3 @@
-local o = vim.o
 local g = vim.g
 local a = vim.api
 local augroup = require("utils").augroup
@@ -29,44 +28,27 @@ g.mkdp_auto_open = 1
 
 -- require plugins and stuff
 require'plugins'
+--mappings
+require('_mappings').init_keymap()
 --require'_plugins_plug'.setup()
 require'lsp'.setup()
 local completion_setup = require'_completion'
 completion_setup.compe()
 completion_setup.kinds()
 require'plugin_config'
-require'_vista'.setup()
 require'_nvimtree'.setup()
 require'_vimspector'
 local theme = require'_theme'
 theme.colorscheme_setup()
 theme.overrides_setup()
 require('_galaxyline')
+require('_mappings').setup_ft_mappings()
 
 a.nvim_exec([[
   if has ("autocmd")
     filetype plugin indent on
   endif
-
-  " Persistent undo (can use undos after exiting and restarting)
-  if exists("+undofile")
-    if isdirectory($HOME . '/.vim/undo') == 0
-      :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-    endif
-    set undodir=./.vim-undo// undodir+=~/.vim/undo// undofile
-  endif
 ]], '')
-
-if vim.fn.has('conceal') == 1 then
-  o.conceallevel = 2
-  o.concealcursor = "niv"
-end
-
-if vim.fn.has('persistent_undo') == 1 then
-  o.undofile = true
-  o.undolevels = 250
-  o.undoreload = 500
-end
 
 augroup("vimrc-main", {
   -- save when focus lost
@@ -89,9 +71,6 @@ augroup("numbertoggle", {
   {'BufEnter,FocusGained,InsertLeave,WinEnter', '*', 'if &nu | set rnu   | endif'},
   {'BufLeave,FocusLost,InsertEnter,WinLeave',   '*', 'if &nu | set nornu | endif'},
 })
-
---mappings
-require'_mappings'
 
 -- we are done setting stuff up
 a.nvim_command("silent! helptags ALL")

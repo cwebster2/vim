@@ -17,7 +17,6 @@ local mode_color = theme.mode_color
 
 gl.short_line_list = {
     'LuaTree',
-    'vista',
     'dbui',
     'startify',
     'term',
@@ -25,10 +24,9 @@ gl.short_line_list = {
     'fugitive',
     'fugitiveblame',
     'plug',
-    'NvimTree'
+    'NvimTree',
+    'OUTLINE'
 }
-
-VistaPlugin = extension.vista_nearest
 
 local sep = {
   slant_left = ' ',
@@ -51,7 +49,8 @@ local icons = {
   warning = '⚠',
   branch = ' ',
   git = ' ',
-  lineno = '  ',
+  lineno = ' ',
+  func = ' '..u '1d453',
 }
 
 local mode_map = {
@@ -96,10 +95,6 @@ local function buffer_not_empty()
   return false
 end
 
-local function diagnostic_exists()
-  return vim.tbl_isempty(vim.lsp.buf_get_clients(0))
-end
-
 local function wide_enough()
   local squeeze_width = vim.fn.winwidth(0)
   if squeeze_width > 80 then return true end
@@ -118,17 +113,17 @@ gls.left = {
   {
     FirstElement = {
       provider = function() return ' ' end,
-      highlight = {colors.blue,colors.line_bg}
+      highlight = {colors.blue,colors.none}
     },
   },
   {
     ViMode = {
       provider = function()
         -- auto change color according the vim mode
-        highlight("GalaxyViMode", mode_hl(), colors.line_bg )
+        highlight("GalaxyViMode", mode_hl(), colors.none, "bold" )
         return mode_label() .. " "
       end,
-      highlight = {mode_hl(), colors.line_bg, 'bold'},
+      highlight = {mode_hl(), colors.none, 'bold'},
     },
   },
   {
@@ -138,59 +133,54 @@ gls.left = {
           return ' SPELL '
         end
       end,
-      --condition = function()
-      --  return vim.api.nvim_win_get_option(0, 'spell')
-      --  return vim.api.nvim_win_get_option(0, 'spell')
-      --end,
-      highlight = {colors.red, colors.line_bg},
+      highlight = {colors.red, colors.none},
       event = 'OptionSet',
     },
-  },
-  {
-    FileSize = {
-      provider = 'FileSize',
-      condition = buffer_not_empty,
-      highlight = {colors.fg,colors.line_bg}
-    }
   },
   {
     FileIcon = {
       provider = 'FileIcon',
       condition = buffer_not_empty,
-      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.none},
     },
   },
   {
     FileName = {
       provider = 'FileName',
       condition = buffer_not_empty,
-      highlight = {colors.fg,colors.line_bg,'italic'}
+      highlight = {colors.fg,colors.none,'italic'}
     }
   },
---{
---  FileStatus = {
---    provider = function()
---      local status = ""
---      if vim.bo.readonly then status = status .. ' ' .. icons.locked end
---      if vim.bo.modified then status = status .. ' ' .. icons.unsaved end
---      return ' ' .. status .. ' '
---    end,
---    highlight = {colors.red, colors.line_bg}
---  }
---},
   {
-    PositionInfo = {
-      provider = function() return string.format(' %s ', fileinfo.line_column()) end,
-      highlight = {colors.fg, colors.line_bg},
-      condition = buffer_not_empty,
-    },
+    FileSize = {
+      provider = 'FileSize',
+      condition = buffer_not_empty and checkwidth,
+      highlight = {colors.changed, colors.none}
+    }
+  },
+  {
+    current_dir = {
+        provider = function()
+            local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+            return "  " .. dir_name .. " "
+        end,
+        highlight = {colors.blue, colors.none},
+    }
+  },
+  {
+    GitBranch = {
+      provider = 'GitBranch',
+      icon = icons.branch,
+      condition = vcs.check_git_workspace,
+      highlight = {colors.yellow ,colors.none},
+    }
   },
   {
     DiffAdd = {
       provider = 'DiffAdd',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.green,colors.line_bg},
+      highlight = {colors.green,colors.none},
     }
   },
   {
@@ -198,7 +188,7 @@ gls.left = {
       provider = 'DiffModified',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.diffchanged, colors.line_bg},
+      highlight = {colors.diffchanged, colors.none},
     }
   },
   {
@@ -206,25 +196,67 @@ gls.left = {
       provider = 'DiffRemove',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.red,colors.line_bg},
+      highlight = {colors.red,colors.none},
     }
   },
   {
-    LeftEnd = {
-      provider = function() return "" end,
-      separator = sep.slant_alt_left,
-      --separator = sep.slant_left,
-      separator_highlight = {colors.line_bg,colors.bg_none},
-      highlight = {colors.line_bg,colors.line_bg}
+    DiagnosticError = {
+      provider = "DiagnosticError",
+      icon = " ✘ ",
+      highlight = {colors.red, colors.none}
     }
   },
   {
-    VistaNearest = {
-      provider = extension.vista_nearest,
-      condition = conditions.hide_in_width,
+    DiagnosticWarn = {
+      provider = "DiagnosticWarn",
+      icon = "  ",
+      highlight = {colors.yellow, colors.none}
+    }
+  },
+  -- {
+  --   LeftEnd = {
+  --     provider = function() return "" end,
+  --     -- separator = sep.slant_alt_left,
+  --     separator = sep.slant_left,
+  --     separator_highlight = {colors.line_bg,colors.bg_none},
+  --     highlight = {colors.line_bg,colors.none}
+  --   }
+  -- },
+
+
+  {
+    LSPStatusCurrentFunc = {
+      provider = function()
+        return " " .. icons.func .. " " .. (vim.b.lsp_current_function or "")
+      end,
+      condition = function()
+        return vim.b.lsp_current_function ~= ""
+      end,
+      -- condition = function ()
+      --   return next(vim.lsp.buf_get_clients()) ~= nil
+      -- end,
       highlight = {colors.gray, colors.bg_none}
     }
-  }
+  },
+  -- {
+  --   LSPStatus = {
+  --     provider = function()
+  --       return table.concat(require("lsp-status").messages(), ", ")
+  --     end,
+  --     -- condition = function ()
+  --     --   return next(vim.lsp.buf_get_clients()) ~= nil
+  --     -- end,
+  --     highlight = {colors.gray, colors.bg_none}
+  --   }
+  -- },
+
+  -- {
+  --   TSStatus = {
+  --     provider = function() return require("nvim-treesitter").statusline(50) end,
+  --     condition = conditions.hide_in_width,
+  --     highlight = {colors.gray, colors.bg_none}
+  --   }
+  -- }
 }
 --gls.left[11] = {
 --    TrailingWhiteSpace = {
@@ -238,29 +270,35 @@ gls.right = {
   {
     FileType = {
       provider = function()
-        if not buffer_not_empty() then return '' end
         local icon = icons[vim.bo.fileformat] or ''
-        return string.format(' %s %s ', icon, vim.bo.filetype)
+        return string.format('%s %s ', icon, vim.bo.filetype)
       end,
-      condition = conditions.hide_in_width,
+      condition = conditions.hide_in_width and buffer_not_empty,
       highlight = {colors.gray,colors.bg_none}
     },
  },
  {
    FileEncoding = {
-     provider = function() return string.lower(fileinfo.get_file_encode()) end,
+     provider = function()
+        local encoding = string.lower(fileinfo.get_file_encode())
+        encoding = encoding:gsub("^%s*(.-)%s*$", "%1")
+        if encoding == "utf-8" then
+          return ''
+        end
+        return encoding..' '
+      end,
      condition = conditions.hide_in_width,
       highlight = {colors.gray,colors.bg_none}
    }
  },
- {
-    RightEnd = {
-      provider = function() return "" end,
-      separator = sep.slant_alt_right,
-      separator_highlight = {colors.line_bg,colors.bg_none},
-      highlight = {colors.line_bg,colors.line_bg}
-    }
-  },
+ -- {
+ --    RightEnd = {
+ --      provider = function() return "" end,
+ --      separator = sep.slant_alt_right,
+ --      separator_highlight = {colors.line_bg,colors.bg_none},
+ --      highlight = {colors.line_bg,colors.none}
+ --    }
+ --  },
   {
     LspStatus = {
       provider = function()
@@ -285,37 +323,15 @@ gls.right = {
         end
         return false
       end,
-      highlight = {colors.blue,colors.line_bg}
+      highlight = {colors.blue,colors.none}
     },
   },
   {
-    DiagnosticWarn = {
-      provider = function()
-        local n = vim.lsp.diagnostic.get_count(0, 'Warning')
-        if n == 0 then return '' end
-        return string.format(' %s %d ', icons.warning, n)
-      end,
-      condition = conditions.check_active_lsp,
-      highlight = {'yellow', colors.line_bg},
+    PositionInfo = {
+      provider = function() return string.format('%s', fileinfo.line_column()) end,
+      highlight = {colors.fg, colors.none},
+      condition = buffer_not_empty,
     },
-    DiagnosticError = {
-      --provider = diagnostic.get_diagnostic_error,
-      provider = function()
-        local n = vim.lsp.diagnostic.get_count(0, 'Error')
-        if n == 0 then return '' end
-        return string.format(' %s %d ', icons.error, n)
-      end,
-      condition = conditions.check_active_lsp,
-      highlight = {'red', colors.line_bg},
-    },
-  },
-  {
-    GitBranch = {
-      provider = 'GitBranch',
-      icon = icons.branch,
-      condition = vcs.check_git_workspace,
-      highlight = {colors.yellow ,colors.line_bg},
-    }
   },
   {
     Whitespace = {

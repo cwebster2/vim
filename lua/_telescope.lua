@@ -45,36 +45,54 @@ require("telescope").setup {
             "--column",
             "--smart-case"
         },
-        prompt_position = "bottom",
         prompt_prefix = ">",
+        selection_carat = ">",
+        entry_prefix = " ",
         initial_mode = "insert",
         selection_strategy = "reset",
         sorting_strategy = "ascending",
         layout_strategy = "horizontal",
-        layout_defaults = {},
-        --file_sorter = require "telescope.sorters".get_fzy_sorter,
+        layout_config = {
+          horizontal = {
+            mirror = false,
+          },
+          vertical = {
+            mirror = false,
+          },
+          -- width = 0.75,
+          -- height = 1,
+          -- preview_cutoff = 120,
+          -- prompt_position = "bottom",
+        },
+        -- file_sorter = require "telescope.sorters".get_fzy_sorter,
         file_sorter = require "telescope.sorters".get_fuzzy_file,
         --file_sorter = require "telescope.sorters".fuzzy_with_index_bias,
-        file_ignore_patterns = {".git", ".node_modules"},
+        file_ignore_patterns = {".git", "node_modules"},
         generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
-        shorten_path = true,
-        winblend = 0,
-        width = 0.75,
-        preview_cutoff = 120,
-        results_height = 1,
-        results_width = 0.8,
+        path_display = {
+          "shorten",
+          "absolute"
+        },
+        winblend = 5,
         border = {},
         borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
         color_devicons = true,
         use_less = true,
-        set_env = {["COLORTERM"] = "truecolor"}, -- default { }, currently unsupported for shells like cmd.exe / powershell.exe
-        file_previewer = require "telescope.previewers".vim_buffer_cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
-        grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
-        qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
+        set_env = {["COLORTERM"] = "truecolor"},
+        file_previewer = require "telescope.previewers".vim_buffer_cat.new,
+        grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new,
+        qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
+    },
+    extensions = {
+        fzy_native = {
+          override_generic_sorter = false,
+          override_file_sorter = true,
+        }
     }
 }
 
 -- the fzy extension changes the behavior of telescope in a way i don't like
---require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('octo')
+require('telescope').load_extension('githubcoauthors')
 

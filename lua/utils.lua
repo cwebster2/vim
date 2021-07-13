@@ -1,10 +1,11 @@
 local M = {}
 
 local api = vim.api
+local bit = require("bit")
 
 -- Key mapping
 function M.map(mode, key, result, opts)
-  map_opts = {
+  local map_opts = {
     noremap = true,
     silent = opts.silent or false,
     expr = opts.expr or false,
@@ -19,6 +20,14 @@ function M.map(mode, key, result, opts)
     end
     vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
   end
+end
+
+function M.has(value)
+  return vim.fn.has(value) == 1
+end
+
+function M.exists(value)
+  return vim.fn.exists(value) == 1
 end
 
 function M.augroup(group_name, definitions)

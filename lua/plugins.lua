@@ -1,17 +1,18 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  execute 'packadd packer.nvim'
 end
 
 execute 'packadd packer.nvim'
 
 return require('packer').startup {
   function(use)
-    use {'wbthomason/packer.nvim', opt = true}
+    use {'wbthomason/packer.nvim'}
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
 
@@ -21,7 +22,7 @@ return require('packer').startup {
     use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-      config = function() require'_telescope' end
+      config = "require('_telescope')",
     }
     use('nvim-telescope/telescope-fzy-native.nvim')
     use('nvim-telescope/telescope-fzf-writer.nvim')
@@ -29,40 +30,44 @@ return require('packer').startup {
     use('nvim-telescope/telescope-github.nvim')
     use('nvim-telescope/telescope-symbols.nvim')
     use('nvim-telescope/telescope-vimspector.nvim')
+    use('cwebster2/github-coauthors.nvim')
     use {'junegunn/fzf', run = './install --all'}
     use 'junegunn/fzf.vim'
 
+  -- Syntax
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
+      config = "require('_syntax').setup()"
+    }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'nvim-treesitter/nvim-treesitter-refactor'
+    use {
+      'romgrk/nvim-treesitter-context',
+      requires = {'nvim-treesitter/nvim-treesitter'}
+    }
+    use 'p00f/nvim-ts-rainbow'
+    use 'windwp/nvim-ts-autotag'
+
   -- LSP stuff
     use 'neovim/nvim-lspconfig'
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    --use 'nvim-treesitter/nvim-treesitter-refactor'
-    --use {
-    --  'romgrk/nvim-treesitter-context',
-    --  requires = {'nvim-treesitter/nvim-treesitter'}
-    --}
-    use 'p00f/nvim-ts-rainbow'
+    use 'nvim-lua/lsp-status.nvim'
+    use 'folke/lua-dev.nvim'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
     use{'ray-x/lsp_signature.nvim'}
     use {
       "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = function() require("_trouble").setup() end
+      config = "require('_trouble').setup()",
     }
 
-  -- Completion
+  -- Snippets
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
+
+  -- Completion
     use{'hrsh7th/nvim-compe',
       requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}},
     }
-
-    --use{'nvim-lua/completion-nvim',
-    --use 'steelsojka/completion-buffers'
-    --use 'nvim-treesitter/completion-treesitter'
-
-  -- Snippets
 
   -- colorschemes
     use 'nanotech/jellybeans.vim'
@@ -73,8 +78,10 @@ return require('packer').startup {
 
   -- visuals
     use {
-      'romgrk/barbar.nvim',
-      requires = {'kyazdani42/nvim-web-devicons'}
+      -- 'romgrk/barbar.nvim',
+      'akinsho/nvim-bufferline.lua',
+      requires = {'kyazdani42/nvim-web-devicons'},
+      config = "require('_bufferline').setup()",
     }
     use {
       'glepnir/galaxyline.nvim',
@@ -84,23 +91,34 @@ return require('packer').startup {
     use {
       'RRethy/vim-hexokinase',
       run = "make hexokinase",
-      config = function() require'_hexokinase'.setup() end
+      config = "require'_hexokinase'.setup()",
     }
     use 'cwebster2/color-overrides.nvim'
-    use 'airblade/vim-gitgutter'
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = {'nvim-lua/plenary.nvim'},
+      config = "require('_gitsigns').setup()",
+    }
     use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
 
     use {
       "folke/which-key.nvim",
-      config = function() require("which-key").setup() end
+      config = "require('_whichkey').setup()",
     }
 
   -- linting
   --plug('w0rp/ale')
 
   -- language stuff
-    use {'tpope/vim-fugitive'}
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use {
+      'TimUntersberger/neogit',
+      requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
+      config = "require('_neogit').setup()",
+    }
+    use {'lukas-reineke/indent-blankline.nvim'}
+    use {'simrat39/rust-tools.nvim',
+      config = "require('_rust-tools').setup()"
+    }
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
 
@@ -114,17 +132,20 @@ return require('packer').startup {
     use 'simrat39/symbols-outline.nvim'
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',
+      -- commit = 'f1f1488',
       --config = function() require'_nvimtree'.setup() end,
       --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
       --opt = true
     }
     use 'pwntester/octo.nvim'
     use 'tmsvg/pear-tree'
-  --plug('cohama/lexima.vim')
-    use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
+    -- plug('cohama/lexima.vim')
+    -- use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
+    use {'akinsho/nvim-toggleterm.lua',
+      config = 'require("_neoterm").setup()',
+    }
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
-    --use {'puremourning/vimspector', opt=true, fn="vimspector#Launch"}
     use {'puremourning/vimspector'}
 
   -- markdown
@@ -138,7 +159,9 @@ return require('packer').startup {
     use 'tpope/vim-surround'
 
     use 'andweeb/presence.nvim'
-    --use 'fiatjaf/neuron.vim'
+    -- use {'oberblastmeister/neuron.nvim',
+    --   config = 'require("_neuron").setup()'
+    -- }
 
     use {'theprimeagen/neovim-irc-ui'}
 

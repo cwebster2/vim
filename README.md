@@ -3,9 +3,9 @@
 ![image](https://user-images.githubusercontent.com/5762261/109759786-38f6e880-7bb3-11eb-8229-f450fd9c0292.png)
 
 ## Note
-Historically this repo has been compatible with vim8 and neovim, but if you are
+Historically this configuration has been compatible with vim8 and neovim, but if you are
 reading this now, the configuration has been ported to lua and compatibility
-with vim has been dropped.  The last vim-compatible commit has been tagged vim.
+with vim has been dropped.  The last vim-compatible commit has been tagged `vim`.
 
 This is a living configuration and is constantly being tweaked, so use at your
 own peril.  The included plugins, keymaps, colors and configurations are subject
@@ -32,7 +32,7 @@ to change with every commit.
 
 ### Tab Bar
 
- - https://github.com/romgrk/barbar.nvim
+ - https://github.com/akinsho/nvim-bufferline.lua
 
 ### File Tree
 
@@ -50,11 +50,16 @@ to change with every commit.
  - https://github.com/junegunn/fzf
  - https://github.com/junegunn/fzf.vim
 
-### Language Server Protocol Things
- - https://github.com/neovim/nvim-lspconfig
+### Syntax
  - https://github.com/nvim-treesitter/nvim-treesitter
  - https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+ - https://github.com/nvim-treesitter/nvim-treesitter-refactor
+ - https://github.com/nvim-treesitter/nvim-treesitter-context
  - https://github.com/p00f/nvim-ts-rainbow
+ - https://github.com/sheerun/vim-polyglot
+
+### Language Server Protocol Things
+ - https://github.com/neovim/nvim-lspconfig
  - https://github.com/kosayoda/nvim-lightbulb
  - https://github.com/glepnir/lspsaga.nvim
  - https://github.com/ray-x/lsp_signature.nvim
@@ -72,24 +77,32 @@ to change with every commit.
 
 ### Git stuff
 
- - https://github.com/tpope/vim-fugitive
- - https://github.com/airblade/vim-gitgutter
+ - https://github.com/TimUntersberger/neogit
+ - https://github.com/lewis6991/gitsigns.nvim
  - https://github.com/pwntester/octo.nvim
  - https://github.com/junegunn/gv.vim
+ - https://github.com/cwebster2/github-coauthors.nvim
 
 ### Auto-pairs
 
- - https://github.com/tmsvg/pear-tree'
+ - https://github.com/tmsvg/pear-tree
+
+### Keymap management
+
+ - https://github.com/folke/which-key.nvim
+
+### Visual aids
+
+ - https://github.com/lukas-reineke/indent-blankline.nvim
+ - https://github.com/ntpeters/vim-better-whitespace
+ - https://github.com/unblevable/quick-scope
+ - https://github.com/RRethy/vim-hexokinase
+ - https://github.com/szw/vim-maximizer
 
 ### The rest
 
- - https://github.com/RRethy/vim-hexokinase
- - https://github.com/szw/vim-maximizer
- - https://github.com/lukas-reineke/indent-blankline.nvim
  - https://github.com/editorconfig/editorconfig-vim
- - https://github.com/ntpeters/vim-better-whitespace
  - https://github.com/terrortylor/nvim-comment
- - https://github.com/unblevable/quick-scope
  - https://github.com/kassio/neoterm
  - https://github.com/janko/vim-test
  - https://github.com/puremourning/vimspector
@@ -118,77 +131,13 @@ all the configured plugins.
 Exit and re-enter nvim to make sure everything is initialized properly.
 
 This configuration makes use of the builtin nvim lsp client and configures a number
-of language servers.  I have a script to install these and it looks like
+of language servers.  I have a script to install these and you can call it to install everything as:
 
 ```bash
-install_lsp_servers() {
-  echo
-  echo "Installing language servers"
-  echo
-  (
-    echo "Fetching the terraform language server"
-    TFLSVER=${TFLSVER:-0.12.1}
-    TFLSARCH=${TFLSARCH:-amd64}
-    curl -fLo "${HOME}"/bin/terraform-ls.zip "https://releases.hashicorp.com/terraform-ls/${TFLSVER}/terraform-ls_${TFLSVER}_linux_${TFLSARCH}.zip"
-    unzip "${HOME}"/bin/terraform-ls.zip -d "${HOME}"/bin
-    rm "${HOME}"/bin/terraform-ls.zip
-    chmod 755 "${HOME}"/bin/terraform-ls
-
-    echo "Fetching the rust analyzer language server"
-    rustup component add rust-src
-    curl -fLo "${HOME}"/bin/rust-analyzer "https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux"
-    chmod 755 "${HOME}"/bin/rust-analyzer
-
-    echo "Building the tex language server"
-    cargo install --git https://github.com/latex-lsp/texlab.git --locked
-
-    echo "Installing the python language server"
-    pip install --quiet python-language-server
-
-    echo "Installing bash, docker, json, yaml, ts/js, and vimscript language servers"
-    npm install --silent -g \
-      bash-language-server \
-      dockerfile-language-server-nodejs \
-      vscode-json-languageserver \
-      yaml-language-server \
-      typescript-language-server \
-      vim-language-server \
-      vls
-
-    echo "Installing efm general purpose ls"
-    go get github.com/mattn/efm-langserver
-
-    echo "Building the lua language server"
-    (
-      sudo apt-get -y install ninja-build
-      mkdir -p "${HOME}"/src
-      cd "${HOME}"/src
-      git clone https://github.com/sumneko/lua-language-server
-      cd lua-language-server
-      git submodule update --init --recursive
-      cd 3rd/luamake
-      ninja -f ninja/linux.ninja
-      cd ../..
-      ./3rd/luamake/luamake rebuild
-    )
-
-    echo "Installing the go language server"
-    (
-      set -x
-      set +e
-      GO111MODULE=on go get golang.org/x/tools/gopls@latest
-    )
-
-    echo "Language servers installed"
-    cd "${HOME}"
-  )
-}
+./lspinstall.sh all
 ```
 
-You can suit this to your needs bet using it as is assumes you have working node, python, golang, and rust environments.
-The installer for the lua language server further requires ninja and a working C environment.  The efm language server has
-a configuration that relies on `eslint_d` and `prettier` being installed globally.  If you don't have these,
-
-    npm install -g eslint_d prettier
+You can suit this to your needs but to install everything you will need working node, python, golang, and rust environments.
+The installer for the lua language server further requires ninja and a working C environment.
 
 

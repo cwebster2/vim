@@ -1,13 +1,12 @@
 local M = {}
 
 local g = vim.g
-local map = require("utils").map
 
 M.setup = function()
   g.nvim_tree_side = 'left'
   g.nvim_tree_width = 30
   g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' }
-  g.nvim_tree_auto_ignore_ft = { 'startify' }
+  g.nvim_tree_auto_ignore_ft = { 'startify', 'neogit' }
   g.nvim_tree_auto_open = 1
   g.nvim_tree_auto_close = 1
   g.nvim_tree_quit_on_open = 0
@@ -19,6 +18,7 @@ M.setup = function()
   g.nvim_tree_tab_open = 1
   g.nvim_tree_width_allow_resize  = 1
   g.nvim_tree_disable_netrw = 1
+  g.nvim_tree_update_cwd = 0
   g.nvim_tree_show_icons = {
       git = 1,
       folders = 1,

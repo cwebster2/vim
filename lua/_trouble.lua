@@ -9,7 +9,8 @@ M.setup = function()
       previous = "e",
       next = "n"
     },
-    auto_open = true,
+    auto_open = false,
+    auto_close = false,
     use_lsp_diagnostic_signs = true
   }
 end
