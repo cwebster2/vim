@@ -2,7 +2,7 @@
 set -euo pipefail
 
 install_node_dap() {
-  pushd "${HOME}" 2>/dev/jull
+  pushd "${HOME}" 2>/dev/null
   npm -g install gulp
   mkdir -p src
   cd src
