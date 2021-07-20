@@ -135,7 +135,9 @@ M.init_keymap = function()
 -- nnoremap <S-j> :lua require'dap'.step_over()<CR>
 
   local visual_map = {
-    ["<C-_>"] = { ":'<,'>CommentToggle<cr>", "Comment Lines" }
+    ["<C-_>"] = { ":'<,'>CommentToggle<cr>", "Comment Lines" },
+    ["J"] = { "<cmd>m '>+1<CR>gv=gv", "Move down"},
+    ["K"] = { "<cmd>m '<-2<CR>gv=gv", "Move up"},
   }
 -- vnoremap <leader>di :lua require'dap.ui.variables'.visual_hover()<CR>
 

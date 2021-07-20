@@ -76,7 +76,8 @@ end
 local servers = {
   pyright = {},
   bashls = {},
-  rust_analyzer = {},
+  -- rust-tools configures this
+  -- rust_analyzer = {},
   tsserver = {},
   vuels = {},
   svelte = {},
@@ -155,6 +156,11 @@ end
 
 local function custom_codeAction(_, _, action)
   print(vim.inspect(action))
+end
+
+function M.get_server_config()
+  local config = { on_attach = on_attach, capabilities = capabilities }
+  return config
 end
 
 function M.setup()
