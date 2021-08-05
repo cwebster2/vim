@@ -20,6 +20,7 @@ opt.fillchars = {
 opt.foldexpr='nvim_treesitter#foldexpr()'
 opt.foldlevelstart = 99
 opt.foldmethod='expr'
+opt.foldenable=false
 opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "a" -- Auto formatting is BAD.
   - "t" -- Don't auto format my code. I got linters for that.
