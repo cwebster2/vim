@@ -18,6 +18,7 @@ install_lsp_servers_npm() {
   echo
   (
     npm install --silent -g \
+      vscode-langservers-extracted \
       bash-language-server \
       dockerfile-language-server-nodejs \
       vscode-json-languageserver \
