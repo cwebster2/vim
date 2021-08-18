@@ -67,6 +67,7 @@ M.mode_color = {
 
 M.colorscheme_setup = function(scheme)
   scheme = scheme or "jellybeans"
+  -- scheme = scheme or "nightfox"
 
   vim.api.nvim_command [[syntax on]]
   if vim.fn.has('termguicolors') == 1 then

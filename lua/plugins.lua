@@ -77,6 +77,7 @@ return require('packer').startup {
     use 'sainnhe/sonokai'
     use 'christianchiarulli/nvcode-color-schemes.vim'
     use 'bluz71/vim-nightfly-guicolors'
+    use 'EdenEast/nightfox.nvim'
 
   -- visuals
     use {
