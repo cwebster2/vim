@@ -34,7 +34,7 @@ function M.setup()
       interval = 1000
     },
     current_line_blame = true,
-    current_line_blame_opts = { 
+    current_line_blame_opts = {
       delay = 1000,
       virt_text_pos = 'eol'
     },
