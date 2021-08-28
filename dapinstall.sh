@@ -6,8 +6,11 @@ install_node_dap() {
   npm -g install gulp
   mkdir -p src
   cd src
-  git clone https://github.com/microsoft/vscode-node-debug2.git
+  if [ ! -d vscode-node-debug2 ]; then
+    git clone https://github.com/microsoft/vscode-node-debug2.git
+  fi
   cd vscode-node-debug2
+  git pull
   npm install
   gulp build
   popd 2>/dev/null

@@ -39,7 +39,8 @@ install_lsp_terraform() {
     TFLSVER=${TFLSVER:-0.17.1}
     TFLSARCH=${TFLSARCH:-amd64}
     TFLSOS=${TFLSOS:-$mcode}
-    curl -fLo "${HOME}"/bin/terraform-ls.zip "https://releases.hashicorp.com/terraform-ls/${TFLSVER}/terraform-ls_${TFLSVER}_${TFLSOS}_${TFLSARCH}.zip"
+    curl -sfLo "${HOME}"/bin/terraform-ls.zip "https://releases.hashicorp.com/terraform-ls/${TFLSVER}/terraform-ls_${TFLSVER}_${TFLSOS}_${TFLSARCH}.zip"
+    rm "$HOME"/bin/terraform-ls
     unzip "${HOME}"/bin/terraform-ls.zip -d "${HOME}"/bin
     rm "${HOME}"/bin/terraform-ls.zip
     chmod 755 "${HOME}"/bin/terraform-ls
