@@ -180,7 +180,7 @@ gls.left = {
       provider = 'DiffAdd',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.green,colors.none},
+      highlight = {colors.diff.add, colors.none},
     }
   },
   {
@@ -188,7 +188,7 @@ gls.left = {
       provider = 'DiffModified',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.diffchanged, colors.none},
+      highlight = {colors.diff.change, colors.none},
     }
   },
   {
@@ -196,7 +196,7 @@ gls.left = {
       provider = 'DiffRemove',
       condition = checkwidth,
       icon = ' ',
-      highlight = {colors.red,colors.none},
+      highlight = {colors.diff.remove,colors.none},
     }
   },
   {

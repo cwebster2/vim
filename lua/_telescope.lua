@@ -70,7 +70,7 @@ require("telescope").setup {
         file_ignore_patterns = {".git", "node_modules"},
         generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
         path_display = {
-          "shorten",
+          -- "shorten",
           "absolute"
         },
         winblend = 5,
@@ -95,4 +95,5 @@ require("telescope").setup {
 require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('octo')
 require('telescope').load_extension('githubcoauthors')
+require('telescope').load_extension('dap')
 

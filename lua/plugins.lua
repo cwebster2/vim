@@ -17,8 +17,6 @@ return require('packer').startup {
     use 'mhinz/vim-startify'
 
   -- fuzzy stuff
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
     use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
@@ -29,7 +27,8 @@ return require('packer').startup {
     use('nvim-telescope/telescope-packer.nvim')
     use('nvim-telescope/telescope-github.nvim')
     use('nvim-telescope/telescope-symbols.nvim')
-    use('nvim-telescope/telescope-vimspector.nvim')
+    -- use('nvim-telescope/telescope-vimspector.nvim')
+    use 'nvim-telescope/telescope-dap.nvim'
     use('cwebster2/github-coauthors.nvim')
     use {'junegunn/fzf', run = './install --all'}
     use 'junegunn/fzf.vim'
@@ -38,6 +37,7 @@ return require('packer').startup {
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
       config = "require('_syntax').setup()"
     }
+    use 'nvim-treesitter/playground'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/nvim-treesitter-refactor'
     use {
@@ -60,10 +60,6 @@ return require('packer').startup {
       config = "require('_trouble').setup()",
     }
 
-  -- Snippets
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
-
   -- Completion
     use{'hrsh7th/nvim-compe',
       requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}},
@@ -71,10 +67,10 @@ return require('packer').startup {
 
   -- colorschemes
     use 'nanotech/jellybeans.vim'
+    use {'Pocco81/Catppuccino.nvim'}
     use 'glepnir/zephyr-nvim'
     use 'sainnhe/sonokai'
-    use 'christianchiarulli/nvcode-color-schemes.vim'
-    use 'bluz71/vim-nightfly-guicolors'
+    use 'EdenEast/nightfox.nvim'
 
   -- visuals
     use {
@@ -146,7 +142,12 @@ return require('packer').startup {
     }
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
-    use {'puremourning/vimspector'}
+    -- use {'puremourning/vimspector'}
+    use {'mfussenegger/nvim-dap',
+      config = 'require("_dap").setup()'
+    }
+    use 'theHamsta/nvim-dap-virtual-text'
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
   -- markdown
     use {'plasticboy/vim-markdown', opt=true}

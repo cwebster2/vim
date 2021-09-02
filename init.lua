@@ -37,9 +37,8 @@ completion_setup.compe()
 completion_setup.kinds()
 require'plugin_config'
 require'_nvimtree'.setup()
-require'_vimspector'
 local theme = require'_theme'
-theme.colorscheme_setup()
+theme.colorscheme_setup("catppuccino")
 theme.overrides_setup()
 require('_galaxyline')
 require('_mappings').setup_ft_mappings()

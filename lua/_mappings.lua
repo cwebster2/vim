@@ -39,10 +39,11 @@ M.init_keymap = function()
       ["m"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
       ["k"] = { "<cmd>Telescope keymaps<cr>", "Key Maps" },
       ["s"] = { "<cmd>Telescope highlights<cr>", "Search Highlight Groups" },
-      --["l = { [[<cmd>TSHighlightCapturesUnderCursor<cr>]], "Highlight Groups at cursor" },
+      ["l"] = { [[<cmd>TSHighlightCapturesUnderCursor<cr>]], "Highlight Groups at cursor" },
       ["f"] = { "<cmd>Telescope filetypes<cr>", "File Types" },
       ["o"] = { "<cmd>Telescope vim_options<cr>", "Options" },
       ["a"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" },
+      ["i"] = { "<cmd>echo \"hi<\" . synIDattr(synID(line(\".\"),col(\".\"),1),\"name\") . '> trans<' . synIDattr(synID(line(\".\"),col(\".\"),0),\"name\") . \"> lo<\" . synIDattr(synIDtrans(synID(line(\".\"),col(\".\"),1)),\"name\") . \">\"<CR> ", "Highlight Under Cursos"},
       ["p"] = {
         name = "+packer",
         ["p"] = { "<cmd>PackerSync<cr>", "Sync" },
@@ -84,9 +85,31 @@ M.init_keymap = function()
       ["s"] = { "<cmd>TestSuite<CR>", "Suite" },
       ["_"] = { "<cmd>TestLast<CR>", "Last" },
     },
+    ["d"] = {
+      name = "+debug",
+      ["d"] = { "JestStrategy"},
+      ["h"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Breakpoint" },
+      ["s"] = { "<cmd>lua require'dap'.stop()<CR>", "Stop" },
+      ["n"] = { "<cmd>lua require'dap'.continue()<CR>", "Cont" },
+      ["k"] = { "<cmd>lua require'dap'.up()<CR>", "Up" },
+      ["j"] = { "<cmd>lua require'dap'.down()<CR>", "Down" },
+      ["_"] = { "<cmd>lua require'dap'.disconnect();require'dap'.stop();require'dap'.run_last()<CR>", "Disco" },
+      ["r"] = { "<cmd>lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l", "REPL" },
+      -- ["i"] = { "<cmd>lua require'dap.ui.variables'.hover()<CR>", "" },
+      -- ["?"] = { "<cmd>lua require'dap.ui.variables'.scopes()<CR>", "" },
+      ["e"] = { "<cmd>lua require'dap'.set_exception_breakpoints({'all'})<CR>", "Enable BPs" },
+      ["a"] = { "<cmd>lua require'debugHelper'.attach()<CR>", "Attack" },
+      ["A"] = { "<cmd>lua require'debugHelper'.attachToRemote()<CR>", "Att Remote" },
+      ["i"] = { "<cmd>lua require'dap.ui.widgets'.hover()<CR>", "UI" },
+      ["?"] = { "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>", "Scopes" },
+      ["f"] = { "<cmd>Telescope dap frames<CR>", "Frames" },
+      ["c"] = { "<cmd>Telescope dap commands<CR>", "Commands" },
+      ["b"] = { "<cmd>Telescope dap list_breakpoints<CR>", "List BPs" },
+    },
     ["m"] = { "<Cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
     ["i"] = { "<Cmd>BufferLineCycleNext<CR>", "Next Buffer" },
   }
+
 
   local normal_map = {
     ["g"] = {
@@ -108,10 +131,16 @@ M.init_keymap = function()
     -- ["<C-s>"] = { "<Cmd>BufferPick<CR>", "Pick Buffer" },
     --["<C-p>"] = { "<Cmd>FGFiles<CR>", "Git Files" },
   }
+-- nnoremap <S-k> :lua require'dap'.step_out()<CR>
+-- nnoremap <S-l> :lua require'dap'.step_into()<CR>
+-- nnoremap <S-j> :lua require'dap'.step_over()<CR>
 
   local visual_map = {
-    ["<C-_>"] = { ":'<,'>CommentToggle<cr>", "Comment Lines" }
+    ["<C-_>"] = { ":'<,'>CommentToggle<cr>", "Comment Lines" },
+    ["J"] = { "<cmd>m '>+1<CR>gv=gv", "Move down"},
+    ["K"] = { "<cmd>m '<-2<CR>gv=gv", "Move up"},
   }
+-- vnoremap <leader>di :lua require'dap.ui.variables'.visual_hover()<CR>
 
   wk.register(leader_map, { prefix = "<leader>" })
   wk.register(normal_map)

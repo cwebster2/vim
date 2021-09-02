@@ -7,7 +7,7 @@ opt.backspace = "indent,eol,start"
 opt.backup = false
 opt.clipboard = "unnamedplus,unnamed"
 opt.cmdheight = 2
-opt.colorcolumn = '100'
+opt.colorcolumn = '0'
 opt.completeopt = "menu,menuone,noselect"
 opt.confirm = true
 opt.cursorline = true
@@ -20,6 +20,7 @@ opt.fillchars = {
 opt.foldexpr='nvim_treesitter#foldexpr()'
 opt.foldlevelstart = 99
 opt.foldmethod='expr'
+opt.foldenable=false
 opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "a" -- Auto formatting is BAD.
   - "t" -- Don't auto format my code. I got linters for that.
@@ -75,7 +76,7 @@ opt.updatetime = 300
 opt.viewoptions = "cursor,folds,options,unix,slash"
 opt.virtualedit = "onemore"
 opt.wildmenu = true
-opt.wildmode = 'full'
+opt.wildmode = 'longest,full'
 opt.winblend = 15
 opt.winblend = 30
 opt.writebackup = false
