@@ -5,6 +5,7 @@ local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
 local lsp_status = require("lsp-status")
 
+-- EFM linting
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
 local hadolint = require "efm/hadolint"
@@ -140,7 +141,6 @@ local on_attach = function(client, bufnr)
 
   --vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
   --
---  vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
 
   -- This is causing an out of bounds error, see if this changed in a nightly
   -- vim.api.nvim_command("autocmd BufWrite,BufEnter,InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
@@ -150,6 +150,7 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
     vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
+    vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
   end
 
 end

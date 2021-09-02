@@ -17,8 +17,6 @@ return require('packer').startup {
     use 'mhinz/vim-startify'
 
   -- fuzzy stuff
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
     use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
@@ -62,10 +60,6 @@ return require('packer').startup {
       config = "require('_trouble').setup()",
     }
 
-  -- Snippets
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
-
   -- Completion
     use{'hrsh7th/nvim-compe',
       requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}},
@@ -73,10 +67,9 @@ return require('packer').startup {
 
   -- colorschemes
     use 'nanotech/jellybeans.vim'
+    use {'Pocco81/Catppuccino.nvim'}
     use 'glepnir/zephyr-nvim'
     use 'sainnhe/sonokai'
-    use 'christianchiarulli/nvcode-color-schemes.vim'
-    use 'bluz71/vim-nightfly-guicolors'
     use 'EdenEast/nightfox.nvim'
 
   -- visuals
