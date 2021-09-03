@@ -15,7 +15,7 @@ colors.neogit = {
   addbg = "#012800",
   delbg = "#340001",
 }
- -- colors.fg = cp_util.lighten(colors.fg, 0.1)
+colors.fg = cp_util.lighten(colors.fg, 0.75)
 
 M.galaxyline_colors = colors
 
