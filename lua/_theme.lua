@@ -1,5 +1,6 @@
 local vim = vim
 local cp_api = require("catppuccino.api.colors")
+local cp_util = require("catppuccino.utils.util")
 local M = {}
 local catppuccino_theme = "dark_catppuccino"
 
@@ -14,6 +15,7 @@ colors.neogit = {
   addbg = "#012800",
   delbg = "#340001",
 }
+colors.fg = cp_util.lighten(colors.fg, 0.75)
 
 M.galaxyline_colors = colors
 
@@ -124,6 +126,7 @@ M.colorscheme_setup = function(scheme)
           delete = colors.diff.delete,
           remove = colors.diff.remove,
         },
+        fg = colors.fg
       },{
         NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg },
         NeogitDiffAddHighlight = { bg = colors.neogit.addbg },
