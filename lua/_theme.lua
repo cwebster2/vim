@@ -125,8 +125,8 @@ M.colorscheme_setup = function(scheme)
         },
         fg = colors.fg
       },{
-        NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg },
-        NeogitDiffAddHighlight = { bg = colors.neogit.addbg },
+        NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg, fg=colors.fg },
+        NeogitDiffAddHighlight = { bg = colors.neogit.addbg, fg=colors.fg },
         NeogitDiffContextHighlight = { bg = colors.none },
         -- ColorColumn = { fg = colors.none }
       })
