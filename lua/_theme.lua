@@ -103,7 +103,10 @@ M.colorscheme_setup = function(scheme)
           show_root = true,
         },
         which_key = true,
-        indent_blankline = true,
+        indent_blankline = {
+          enabled = true,
+          colored_indent_levels = false,
+        },
         dashboard = false,
         neogit = true,
         vim_sneak = false,
