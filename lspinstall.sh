@@ -24,6 +24,7 @@ install_lsp_servers_npm() {
       vscode-json-languageserver \
       yaml-language-server \
       typescript-language-server \
+      typescript \
       vim-language-server \
       vls \
       pyright \
@@ -131,7 +132,7 @@ install_lsp_linters() {
   echo "Installing linters for efm"
   echo
   (
-      npm install -g prettier eslint_d
+      npm install -g prettier eslint_d @fsouza/prettierd
       docker pull hadolint/hadolint
   )
 }
