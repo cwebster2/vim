@@ -12,10 +12,6 @@ local colors = theme.galaxyline_colors
 local mode_color = theme.mode_color
 local gps = require("nvim-gps")
 
--- heavily based from the following links
--- https://github.com/kraftwerk28/dotfiles/blob/master/.config/nvim/lua/cfg/galaxyline.lua
--- https://github.com/LoydAndrew/nvim/blob/main/evilline.lua
-
 gl.short_line_list = {
     'LuaTree',
     'dbui',
@@ -171,16 +167,22 @@ gls.left = {
   {
     GitBranch = {
       provider = 'GitBranch',
-      icon = icons.branch,
+      icon = icons.branch .. " ",
       condition = vcs.check_git_workspace,
       highlight = {colors.yellow ,colors.none},
+    }
+  },
+  {
+    spacer = {
+      provider = function() return " " end,
+      condition = buffer_not_empty and checkwidth,
     }
   },
   {
     DiffAdd = {
       provider = 'DiffAdd',
       condition = checkwidth,
-      icon = '   ',
+      icon = ' ',
       highlight = {colors.diff.add, colors.none},
     }
   },
@@ -229,7 +231,7 @@ gls.left = {
     NvimGPS = {
       provider = function() return gps.get_location() end,
       condition = function() return gps.is_available() end,
-      highlight = {colors.gray, colors.bg_none}
+      highlight = {colors.fg_gutter, colors.bg_none}
     }
   },
 }
