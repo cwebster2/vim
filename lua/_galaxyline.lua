@@ -48,7 +48,7 @@ local icons = {
   mac = u 'f179',
   error = '✘',
   warning = '⚠',
-  branch = ' ',
+  branch = '',
   git = ' ',
   lineno = ' ',
   func = ' '..u '1d453',
@@ -180,7 +180,7 @@ gls.left = {
     DiffAdd = {
       provider = 'DiffAdd',
       condition = checkwidth,
-      icon = ' ',
+      icon = '   ',
       highlight = {colors.diff.add, colors.none},
     }
   },
@@ -232,26 +232,8 @@ gls.left = {
       highlight = {colors.gray, colors.bg_none}
     }
   },
-  -- {
-  --   LSPStatus = {
-  --     provider = function()
-  --       return table.concat(require("lsp-status").messages(), ", ")
-  --     end,
-  --     -- condition = function ()
-  --     --   return next(vim.lsp.buf_get_clients()) ~= nil
-  --     -- end,
-  --     highlight = {colors.gray, colors.bg_none}
-  --   }
-  -- },
-
-  -- {
-  --   TSStatus = {
-  --     provider = function() return require("nvim-treesitter").statusline(50) end,
-  --     condition = conditions.hide_in_width,
-  --     highlight = {colors.gray, colors.bg_none}
-  --   }
-  -- }
 }
+
 --gls.left[11] = {
 --    TrailingWhiteSpace = {
 --     provider = TrailingWhiteSpace,
@@ -326,6 +308,12 @@ gls.right = {
       highlight = {colors.fg, colors.none},
       condition = buffer_not_empty,
     },
+  },
+  {
+    PositionVis = {
+      provider = "ScrollBar",
+      highlight = {colors.gray}
+    }
   },
   {
     Whitespace = {
