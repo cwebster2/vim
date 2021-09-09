@@ -10,6 +10,7 @@ local u = require'utils'.u
 local theme = require'_theme'
 local colors = theme.galaxyline_colors
 local mode_color = theme.mode_color
+local gps = require("nvim-gps")
 
 -- heavily based from the following links
 -- https://github.com/kraftwerk28/dotfiles/blob/master/.config/nvim/lua/cfg/galaxyline.lua
@@ -225,16 +226,9 @@ gls.left = {
 
 
   {
-    LSPStatusCurrentFunc = {
-      provider = function()
-        return " " .. icons.func .. " " .. (vim.b.lsp_current_function or "")
-      end,
-      condition = function()
-        return vim.b.lsp_current_function ~= ""
-      end,
-      -- condition = function ()
-      --   return next(vim.lsp.buf_get_clients()) ~= nil
-      -- end,
+    NvimGPS = {
+      provider = function() return gps.get_location() end,
+      condition = function() return gps.is_available() end,
       highlight = {colors.gray, colors.bg_none}
     }
   },

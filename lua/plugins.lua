@@ -46,10 +46,14 @@ return require('packer').startup {
     }
     use 'p00f/nvim-ts-rainbow'
     use 'windwp/nvim-ts-autotag'
+    use {
+      'SmiteshP/nvim-gps',
+      requires = {'nvim-treesitter/nvim-treesitter'},
+      config = "require('_nvimgps').setup()",
+    }
 
   -- LSP stuff
     use 'neovim/nvim-lspconfig'
-    use 'nvim-lua/lsp-status.nvim'
     use 'folke/lua-dev.nvim'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
