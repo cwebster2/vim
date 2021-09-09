@@ -3,7 +3,6 @@ local M={}
 local nvim_lsp = require "lspconfig"
 local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
-local lsp_status = require("lsp-status")
 
 -- EFM linting
 local prettier = require "efm/prettier"
@@ -26,27 +25,6 @@ local language_formatters = {
   dockerfile = {hadolint},
 }
 
-lsp_status.config {
-  select_symbol = function(cursor_pos, symbol)
-    if symbol.valueRange then
-      local value_range = {
-        ["start"] = {
-          character = 0,
-          line = vim.fn.byte2line(symbol.valueRange[1])
-        },
-        ["end"] = {
-          character = 0,
-          line = vim.fn.byte2line(symbol.valueRange[2])
-        }
-      }
-
-      return require("lsp-status.util").in_range(cursor_pos, value_range)
-    end
-  end,
-  diagnostic = false,
-}
-lsp_status.register_progress()
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -57,7 +35,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 -- turn on `window/workDoneProgress` capability
-capabilities = vim.tbl_extend('keep', capabilities, lsp_status.capabilities)
 
 -- Heplers for lua lsp setup
 local function lua_cmd()
@@ -119,7 +96,15 @@ local servers = {
       rootMarkers = {".git/"},
       languages = language_formatters
     }
-  }
+  },
+  -- coffeescript = {
+  --   cmd = { bin_name, '--stdio' },
+  --   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  --   root_dir = function(fname)
+  --     return util.root_pattern 'tsconfig.json'(fname)
+  --       or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
+  --   end,
+  -- }
 }
 
 local lsp_signature_config = {
@@ -135,7 +120,6 @@ local lsp_signature_config = {
 local on_attach = function(client, bufnr)
 
   lsp_signature.on_attach(lsp_signature_config)
-  lsp_status.on_attach(client)
 
   require("_mappings").lsp_setup(client, bufnr)
 
