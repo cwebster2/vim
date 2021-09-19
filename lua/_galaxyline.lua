@@ -166,7 +166,7 @@ gls.left = {
   },
   {
     GitBranch = {
-      provider = 'GitBranch',
+      provider = function() return vim.b.gitsigns_head end,
       icon = icons.branch .. " ",
       condition = vcs.check_git_workspace,
       highlight = {colors.yellow ,colors.none},
