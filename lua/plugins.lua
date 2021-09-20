@@ -84,7 +84,7 @@ return require('packer').startup {
       config = "require('_bufferline').setup()",
     }
     use {
-      'glepnir/galaxyline.nvim',
+      'NTBBloodbath/galaxyline.nvim',
       branch='main',
       requires = {'kyazdani42/nvim-web-devicons'}
     }

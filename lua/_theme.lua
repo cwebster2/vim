@@ -131,6 +131,7 @@ M.colorscheme_setup = function(scheme)
         NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg, fg=colors.fg },
         NeogitDiffAddHighlight = { bg = colors.neogit.addbg, fg=colors.fg },
         NeogitDiffContextHighlight = { bg = colors.none },
+        GalaxyLineFillSection = { bg = colors.none },
         -- ColorColumn = { fg = colors.none }
       })
     catppuccino.load()

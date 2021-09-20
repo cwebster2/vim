@@ -1,16 +1,17 @@
 local gl = require('galaxyline')
 local gls = gl.section
-local whitespace = require('galaxyline.provider_whitespace')
-local extension = require('galaxyline.provider_extensions')
-local fileinfo = require 'galaxyline.provider_fileinfo'
-local diagnostic = require('galaxyline.provider_diagnostic')
+local whitespace = require('galaxyline.providers.whitespace')
+local extension = require('galaxyline.providers.extensions')
+local fileinfo = require 'galaxyline.providers.fileinfo'
+local diagnostic = require('galaxyline.providers.diagnostic')
 local conditions = require('galaxyline.condition')
-local vcs = require('galaxyline.provider_vcs')
+local vcs = require('galaxyline.providers.vcs')
 local u = require'utils'.u
 local theme = require'_theme'
 local colors = theme.galaxyline_colors
 local mode_color = theme.mode_color
 local gps = require("nvim-gps")
+
 
 gl.short_line_list = {
     'LuaTree',
@@ -138,7 +139,7 @@ gls.left = {
     FileIcon = {
       provider = 'FileIcon',
       condition = buffer_not_empty,
-      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.none},
+      highlight = {fileinfo.get_file_icon_color,colors.none},
     },
   },
   {
@@ -225,13 +226,15 @@ gls.left = {
   --     highlight = {colors.line_bg,colors.none}
   --   }
   -- },
+}
 
-
+gls.mid = {
   {
     NvimGPS = {
       provider = function() return gps.get_location() end,
       condition = function() return gps.is_available() end,
-      highlight = {colors.fg_gutter, colors.bg_none}
+      highlight = {colors.fg_gutter, colors.bg_none},
+      separator_highlight = {colors.fg_gutter, colors.bg_none}
     }
   },
 }
@@ -337,7 +340,7 @@ gls.short_line_left = {
     FileIcon = {
       provider = 'FileIcon',
       condition = buffer_not_empty,
-      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+      highlight = {fileinfo.get_file_icon_color,colors.line_bg},
     },
   },
   {
