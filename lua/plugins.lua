@@ -15,6 +15,7 @@ return require('packer').startup {
     use {'wbthomason/packer.nvim'}
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
+    use  { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
   -- fuzzy stuff
     use {
@@ -64,8 +65,22 @@ return require('packer').startup {
     }
 
   -- Completion
-    use{'hrsh7th/nvim-compe',
-      requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}},
+    use {
+      "hrsh7th/nvim-cmp",
+      config = function()
+        require('lsp').setup()
+        require("_completion").setup()
+      end,
+      requires = {
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "Saecki/crates.nvim",
+        "f3fora/cmp-spell"
+      },
     }
 
   -- colorschemes
@@ -98,7 +113,9 @@ return require('packer').startup {
 
     use {
       "folke/which-key.nvim",
-      config = "require('_whichkey').setup()",
+      config = function()
+        require('_whichkey').setup()
+      end,
     }
 
   -- language stuff
@@ -120,7 +137,7 @@ return require('packer').startup {
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',
       -- commit = 'f1f1488',
-      --config = function() require'_nvimtree'.setup() end,
+      config = function() require'_nvimtree'.setup() end,
       --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
       --opt = true
     }

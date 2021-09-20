@@ -28,15 +28,8 @@ g.mkdp_auto_open = 1
 
 -- require plugins and stuff
 require'plugins'
---mappings
 require('_mappings').init_keymap()
---require'_plugins_plug'.setup()
-require'lsp'.setup()
-local completion_setup = require'_completion'
-completion_setup.compe()
-completion_setup.kinds()
 require'plugin_config'
-require'_nvimtree'.setup()
 local theme = require'_theme'
 theme.colorscheme_setup("catppuccino")
 theme.overrides_setup()
