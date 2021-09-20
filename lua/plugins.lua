@@ -27,7 +27,6 @@ return require('packer').startup {
     use('nvim-telescope/telescope-packer.nvim')
     use('nvim-telescope/telescope-github.nvim')
     use('nvim-telescope/telescope-symbols.nvim')
-    -- use('nvim-telescope/telescope-vimspector.nvim')
     use 'nvim-telescope/telescope-dap.nvim'
     use('cwebster2/github-coauthors.nvim')
     use {'junegunn/fzf', run = './install --all'}
@@ -72,13 +71,10 @@ return require('packer').startup {
   -- colorschemes
     use 'nanotech/jellybeans.vim'
     use {'Pocco81/Catppuccino.nvim'}
-    use 'glepnir/zephyr-nvim'
-    use 'sainnhe/sonokai'
     use 'EdenEast/nightfox.nvim'
 
   -- visuals
     use {
-      -- 'romgrk/barbar.nvim',
       'akinsho/nvim-bufferline.lua',
       requires = {'kyazdani42/nvim-web-devicons'},
       config = "require('_bufferline').setup()",
@@ -93,7 +89,6 @@ return require('packer').startup {
       run = "make hexokinase",
       config = "require'_hexokinase'.setup()",
     }
-    use 'cwebster2/color-overrides.nvim'
     use {
       'lewis6991/gitsigns.nvim',
       requires = {'nvim-lua/plenary.nvim'},
@@ -105,9 +100,6 @@ return require('packer').startup {
       "folke/which-key.nvim",
       config = "require('_whichkey').setup()",
     }
-
-  -- linting
-  --plug('w0rp/ale')
 
   -- language stuff
     use {
@@ -123,11 +115,6 @@ return require('packer').startup {
     use 'ntpeters/vim-better-whitespace'
 
   -- ide stuff
-    --use {'liuchengxu/vista.vim',
-      --config = function() require'_vista'.setup() end,
-      --cmd = "Vista",
-      --opt = true
-    --  }
     use "terrortylor/nvim-comment"
     use 'simrat39/symbols-outline.nvim'
     use 'unblevable/quick-scope'
@@ -139,14 +126,11 @@ return require('packer').startup {
     }
     use 'pwntester/octo.nvim'
     use 'tmsvg/pear-tree'
-    -- plug('cohama/lexima.vim')
-    -- use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
     use {'akinsho/nvim-toggleterm.lua',
       config = 'require("_neoterm").setup()',
     }
     use 'junegunn/gv.vim'
     use {'janko/vim-test', opt=true}
-    -- use {'puremourning/vimspector'}
     use {'mfussenegger/nvim-dap',
       config = 'require("_dap").setup()'
     }
