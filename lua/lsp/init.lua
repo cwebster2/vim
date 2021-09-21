@@ -2,30 +2,9 @@ local M={}
 
 local nvim_lsp = require "lspconfig"
 local lsp = vim.lsp
-local handlers = lsp.handlers
 local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
 
--- EFM linting
-local prettier = require "lsp.efm.prettier"
-local eslint = require "lsp.efm.eslint"
-local hadolint = require "lsp.efm.hadolint"
-local language_formatters = {
-  typescript = {prettier, eslint},
-  javascript = {prettier, eslint},
-  typescriptreact = {prettier, eslint},
-  javascriptreact = {prettier, eslint},
-  yaml = {prettier},
-  json = {prettier},
-  html = {prettier},
-  scss = {prettier},
-  css = {prettier},
-  markdown = {prettier},
-  lua = {
-    {formatCommand = "lua-format -i", formatStdin = true}
-  },
-  dockerfile = {hadolint},
-}
 
 local function get_capabilities()
   local capabilities = lsp.protocol.make_client_capabilities()
@@ -41,77 +20,6 @@ local function get_capabilities()
   -- turn on `window/workDoneProgress` capability
   return capabilities
 end
-
--- Heplers for lua lsp setup
-local function lua_cmd()
-  local home = vim.fn.expand("$HOME")
-  local build = home .. "/src/lua-language-server"
-  local bin_location = ""
-  if jit.os == 'OSX' then
-    bin_location = 'macOS'
-  elseif jit.os == 'Linux' then
-    bin_location = 'Linux'
-  end
-  local bin = build .. "/bin/" .. bin_location .. "/lua-language-server"
-  return {bin, "-E", build .. "/main.lua"}
-end
--- end helpers for lua lsp setup
-
-local servers = {
-  pyright = {},
-  bashls = {},
-  -- rust-tools configures this
-  -- rust_analyzer = {},
-  tsserver = {},
-  vuels = {},
-  svelte = {},
-  gopls = {},
-  terraformls = {
-    filetypes = {"tf", "terraform"},
-  },
-  --dockerls = {},
-  jsonls = {},
-  texlab = {
-    settings = {
-      latex = {
-        build = {
-          executable = "pdflatex",
-          onSave = true;
-        }
-      }
-    }
-  },
-  yamlls = {},
-  vimls = {},
-  jdtls = {},
-  sumneko_lua = require("lua-dev").setup({
-    lspconfig = {
-      cmd = lua_cmd(),
-    },
-  }),
-  efm = {
-    filetypes = vim.tbl_keys(language_formatters),
-    init_options = {
-      documentFormatting = true,
-      codeAction = true,
-      completion = true,
-      documentSymbol = true,
-      hover = true,
-    },
-    settings = {
-      rootMarkers = {".git/"},
-      languages = language_formatters
-    }
-  },
-  -- coffeescript = {
-  --   cmd = { bin_name, '--stdio' },
-  --   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
-  --   root_dir = function(fname)
-  --     return util.root_pattern 'tsconfig.json'(fname)
-  --       or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
-  --   end,
-  -- }
-}
 
 local lsp_signature_config = {
   bind = true,
@@ -156,48 +64,15 @@ end
 
 function M.setup()
 
+  local servers = require("lsp.config").servers
+
   for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = get_capabilities() }, config))
   end
 
   --lsp.callbacks['textDocument/codeAction'] = custom_codeAction
 
-  --handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-  --handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-  --handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-  --handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-  --handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-  --handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-  --handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-  --handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
-
-  handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then
-        return
-    end
-    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-        local view = vim.fn.winsaveview()
-        lsp.util.apply_text_edits(result, bufnr)
-        vim.fn.winrestview(view)
-        vim.api.nvim_command("noautocmd :update")
-    end
-  end
-
-  handlers["textDocument/publishDiagnostics"] = lsp.with(
-    lsp.diagnostic.on_publish_diagnostics, {
-      underline = true,
-      virtual_text = {
-        spacing = 4,
-        prefix = '←',
-      },
-      signs = true,
-      update_in_insert = false,
-    }
-  )
-
-  local pop_opts = { border = "rounded", max_width = 80 }
-  handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)
-  handlers["textDocument/signature_help"] = lsp.with(handlers.signature_help, pop_opts)
+  require("lsp.handlers").setup()
 
   saga.init_lsp_saga {
     use_saga_diagnostic_sign = false,
