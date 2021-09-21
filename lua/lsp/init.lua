@@ -7,9 +7,9 @@ local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
 
 -- EFM linting
-local prettier = require "efm/prettier"
-local eslint = require "efm/eslint"
-local hadolint = require "efm/hadolint"
+local prettier = require "lsp.efm.prettier"
+local eslint = require "lsp.efm.eslint"
+local hadolint = require "lsp.efm.hadolint"
 local language_formatters = {
   typescript = {prettier, eslint},
   javascript = {prettier, eslint},
@@ -27,16 +27,20 @@ local language_formatters = {
   dockerfile = {hadolint},
 }
 
-local capabilities = lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
+local function get_capabilities()
+  local capabilities = lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      'documentation',
+      'detail',
+      'additionalTextEdits',
+    }
   }
-}
--- turn on `window/workDoneProgress` capability
+  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+  -- turn on `window/workDoneProgress` capability
+  return capabilities
+end
 
 -- Heplers for lua lsp setup
 local function lua_cmd()
@@ -146,14 +150,14 @@ local function custom_codeAction(_, _, action)
 end
 
 function M.get_server_config()
-  local config = { on_attach = on_attach, capabilities = capabilities }
+  local config = { on_attach = on_attach, capabilities = get_capabilities() }
   return config
 end
 
 function M.setup()
 
   for server, config in pairs(servers) do
-    nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = capabilities }, config))
+    nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = get_capabilities() }, config))
   end
 
   --lsp.callbacks['textDocument/codeAction'] = custom_codeAction
