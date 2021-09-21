@@ -57,6 +57,7 @@ return require('packer').startup {
     use 'folke/lua-dev.nvim'
     use 'kosayoda/nvim-lightbulb'
     use('glepnir/lspsaga.nvim')
+    use {'nvim-lua/lsp-status.nvim'}
     use{'ray-x/lsp_signature.nvim'}
     use {
       "folke/lsp-trouble.nvim",

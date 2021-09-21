@@ -3,6 +3,7 @@ local M = {}
 local prettier = require "lsp.efm.prettier"
 local eslint = require "lsp.efm.eslint"
 local hadolint = require "lsp.efm.hadolint"
+local lsp_status = require "lsp-status"
 
 local language_formatters = {
   typescript = {prettier, eslint},
@@ -48,6 +49,9 @@ M.servers = {
   },
   --dockerls = {},
   jsonls = {},
+  clangd = {
+    handlers = lsp_status.extensions.clangd.setup(),
+  },
   texlab = {
     settings = {
       latex = {

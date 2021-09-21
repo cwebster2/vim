@@ -4,20 +4,20 @@ local lsp = vim.lsp
 local handlers = lsp.handlers
 
 function M.setup()
-  local ok, lsputil = pcall(require, "lsputil")
-  if ok then
-    local codeAction = require("lsputil.codeAction")
-    local locations = require("lsputil.locations")
-    local symbols = require("lsputil.symbols")
-    handlers['textDocument/codeAction'] = codeAction.code_action_handler
-    handlers['textDocument/references'] = locations.references_handler
-    handlers['textDocument/definition'] = locations.definition_handler
-    handlers['textDocument/declaration'] = locations.declaration_handler
-    handlers['textDocument/typeDefinition'] = locations.typeDefinition_handler
-    handlers['textDocument/implementation'] = locations.implementation_handler
-    handlers['textDocument/documentSymbol'] = symbols.document_handler
-    handlers['workspace/symbol'] = symbols.workspace_handler
-  end
+  -- local ok, lsputil = pcall(require, "lsputil")
+  -- if ok then
+  --   local codeAction = require("lsputil.codeAction")
+  --   local locations = require("lsputil.locations")
+  --   local symbols = require("lsputil.symbols")
+  --   handlers['textDocument/codeAction'] = codeAction.code_action_handler
+  --   handlers['textDocument/references'] = locations.references_handler
+  --   handlers['textDocument/definition'] = locations.definition_handler
+  --   handlers['textDocument/declaration'] = locations.declaration_handler
+  --   handlers['textDocument/typeDefinition'] = locations.typeDefinition_handler
+  --   handlers['textDocument/implementation'] = locations.implementation_handler
+  --   handlers['textDocument/documentSymbol'] = symbols.document_handler
+  --   handlers['workspace/symbol'] = symbols.workspace_handler
+  -- end
 
   handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
     if err ~= nil or result == nil then

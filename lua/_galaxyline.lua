@@ -11,6 +11,8 @@ local theme = require'_theme'
 local colors = theme.galaxyline_colors
 local mode_color = theme.mode_color
 local gps = require("nvim-gps")
+local lsp_status = require("lsp-status")
+local lsp = vim.lsp
 
 
 gl.short_line_list = {
@@ -248,6 +250,15 @@ gls.mid = {
 --}
 
 gls.right = {
+  {
+    LspStatusStatus = {
+      provider = function()
+        return lsp_status.status()
+      end,
+      condition = conditions.hide_in_width and buffer_not_empty,
+      highlight = {colors.blue}
+    }
+  },
   {
     FileType = {
       provider = function()

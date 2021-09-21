@@ -4,6 +4,7 @@ local nvim_lsp = require "lspconfig"
 local lsp = vim.lsp
 local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
+local lsp_status = require("lsp-status")
 
 
 local function get_capabilities()
@@ -17,9 +18,35 @@ local function get_capabilities()
     }
   }
   capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-  -- turn on `window/workDoneProgress` capability
+  capabilities.window = capabilities.window or {}
+  capabilities.window.workDoneProgress = true
+
   return capabilities
 end
+
+lsp_status.config {
+  select_symbol = function(cursor_pos, symbol)
+    if symbol.valueRange then
+      local value_range = {
+        ["start"] = {
+          character = 0,
+          line = vim.fn.byte2line(symbol.valueRange[1])
+        },
+        ["end"] = {
+          character = 0,
+          line = vim.fn.byte2line(symbol.valueRange[2])
+        }
+      }
+
+      return require("lsp-status.util").in_range(cursor_pos, value_range)
+    end
+  end,
+  diagnostics = false,
+  current_function = false,
+  status_symbol = '',
+}
+lsp_status.register_progress()
+
 
 local lsp_signature_config = {
   bind = true,
@@ -34,6 +61,7 @@ local lsp_signature_config = {
 local on_attach = function(client, bufnr)
 
   lsp_signature.on_attach(lsp_signature_config)
+  lsp_status.on_attach(client)
 
   require("_mappings").lsp_setup(client, bufnr)
 
