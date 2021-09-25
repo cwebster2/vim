@@ -80,6 +80,7 @@ M.init_keymap = function()
     },
     ["t"] = {
       name = "+testing",
+      ["r"] = { "<Plug>RestNvim<CR>", "REST request"},
       ["t"] = { "<cmd>TestNearest<CR>", "Nearest" },
       ["f"] = { "<cmd>TestFile<CR>", "File" },
       ["s"] = { "<cmd>TestSuite<CR>", "Suite" },
