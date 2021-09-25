@@ -129,6 +129,11 @@ return require('packer').startup {
     use {'simrat39/rust-tools.nvim',
       config = "require('_rust-tools').setup()"
     }
+    use {
+      'NTBBloodbath/rest.nvim',
+      requires = {'nvim-lua/plenary.nvim'},
+      config = "require('_rest').setup()"
+    }
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
 
@@ -147,8 +152,21 @@ return require('packer').startup {
     use {'akinsho/nvim-toggleterm.lua',
       config = 'require("_neoterm").setup()',
     }
+    use {
+      "ThePrimeagen/refactoring.nvim",
+      requires = {
+        {"nvim-lua/plenary.nvim"},
+        {"nvim-treesitter/nvim-treesitter"}
+      }
+      -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
+    }
+
     use 'junegunn/gv.vim'
+
+  -- testing
     use {'janko/vim-test', opt=true}
+
+  -- debugging
     use {'mfussenegger/nvim-dap',
       config = 'require("_dap").setup()'
     }

@@ -37,6 +37,7 @@ end
 
 M.servers = {
   pyright = {},
+  html = {},
   bashls = {},
   -- rust-tools configures this
   -- rust_analyzer = {},
