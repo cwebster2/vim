@@ -56,7 +56,7 @@ return require('packer').startup {
     use 'neovim/nvim-lspconfig'
     use 'folke/lua-dev.nvim'
     use 'kosayoda/nvim-lightbulb'
-    use('glepnir/lspsaga.nvim')
+    use('tami5/lspsaga.nvim')
     use {'nvim-lua/lsp-status.nvim'}
     use{'ray-x/lsp_signature.nvim'}
     use {
