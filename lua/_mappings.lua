@@ -80,6 +80,7 @@ M.init_keymap = function()
     },
     ["t"] = {
       name = "+testing",
+      ["r"] = { "<Plug>RestNvim<CR>", "REST request"},
       ["t"] = { "<cmd>TestNearest<CR>", "Nearest" },
       ["f"] = { "<cmd>TestFile<CR>", "File" },
       ["s"] = { "<cmd>TestSuite<CR>", "Suite" },
@@ -225,7 +226,7 @@ M.lsp_setup = function(client, bufnr)
       name = "+code",
       ["r"] = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
       ["a"] = { "<cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Code Action" },
-      ["d"] = { "<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", "Line Diagnostics"},
+      ["d"] = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false,border='rounded'})<CR>", "Line Diagnostics"},
       ["l"] = {
         name = "+lsp",
         i = { "<cmd>LspInfo<cr>", "Lsp Info" },
@@ -261,7 +262,7 @@ M.lsp_setup = function(client, bufnr)
     R = { "<cmd>LspTrouble lsp_references<cr>", "Trouble References" },
     D = { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", "Peek Definition" },
     d = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
-    s = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", "Signature Help" },
+    s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
     I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
     -- I = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "Goto Declaration" },
     t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
@@ -269,9 +270,9 @@ M.lsp_setup = function(client, bufnr)
     ["h"] = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", "Lsp Finder" },
   }
 
-  map("n", "K", "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
-  map("n", "[d", "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", opts)
-  map("n", "]d", "<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", opts)
+  map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
+  map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then

@@ -1,5 +1,6 @@
 local vim = vim
 local cp_api = require("catppuccino.api.colors")
+local cp_util = require("catppuccino.utils.util")
 local M = {}
 local catppuccino_theme = "dark_catppuccino"
 
@@ -14,6 +15,7 @@ colors.neogit = {
   addbg = "#012800",
   delbg = "#340001",
 }
+colors.fg = cp_util.lighten(colors.fg, 0.75)
 
 M.galaxyline_colors = colors
 
@@ -101,7 +103,10 @@ M.colorscheme_setup = function(scheme)
           show_root = true,
         },
         which_key = true,
-        indent_blankline = true,
+        indent_blankline = {
+          enabled = true,
+          colored_indent_levels = false,
+        },
         dashboard = false,
         neogit = true,
         vim_sneak = false,
@@ -121,23 +126,22 @@ M.colorscheme_setup = function(scheme)
           delete = colors.diff.delete,
           remove = colors.diff.remove,
         },
+        fg = colors.fg
       },{
-        NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg },
-        NeogitDiffAddHighlight = { bg = colors.neogit.addbg },
+        NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg, fg=colors.fg },
+        NeogitDiffAddHighlight = { bg = colors.neogit.addbg, fg=colors.fg },
         NeogitDiffContextHighlight = { bg = colors.none },
+        GalaxyLineFillSection = { bg = colors.none },
         -- ColorColumn = { fg = colors.none }
       })
     catppuccino.load()
   else
     vim.api.nvim_command("colorscheme "..scheme)
   end
+
 end
 
 M.overrides_setup = function()
-  vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "LspDiagnosticsError"})
-  vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsWarning"})
-  vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsInformation"})
-  vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "LspDiagnosticHint"})
   vim.cmd[["highlight! BufferTabpageFil guibg=none]]
   vim.cmd[["highlight! BufferlineBufferSelected gui=underline]]
   --"autocmd ColorScheme * highlight NvimTreeFolderIcon guibg=blue

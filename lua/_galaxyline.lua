@@ -1,19 +1,19 @@
 local gl = require('galaxyline')
 local gls = gl.section
-local whitespace = require('galaxyline.provider_whitespace')
-local extension = require('galaxyline.provider_extensions')
-local fileinfo = require 'galaxyline.provider_fileinfo'
-local diagnostic = require('galaxyline.provider_diagnostic')
+local whitespace = require('galaxyline.providers.whitespace')
+local extension = require('galaxyline.providers.extensions')
+local fileinfo = require 'galaxyline.providers.fileinfo'
+local diagnostic = require('galaxyline.providers.diagnostic')
 local conditions = require('galaxyline.condition')
-local vcs = require('galaxyline.provider_vcs')
+local vcs = require('galaxyline.providers.vcs')
 local u = require'utils'.u
 local theme = require'_theme'
 local colors = theme.galaxyline_colors
 local mode_color = theme.mode_color
+local gps = require("nvim-gps")
+local lsp_status = require("lsp-status")
+local lsp = vim.lsp
 
--- heavily based from the following links
--- https://github.com/kraftwerk28/dotfiles/blob/master/.config/nvim/lua/cfg/galaxyline.lua
--- https://github.com/LoydAndrew/nvim/blob/main/evilline.lua
 
 gl.short_line_list = {
     'LuaTree',
@@ -47,7 +47,7 @@ local icons = {
   mac = u 'f179',
   error = '✘',
   warning = '⚠',
-  branch = ' ',
+  branch = '',
   git = ' ',
   lineno = ' ',
   func = ' '..u '1d453',
@@ -141,7 +141,7 @@ gls.left = {
     FileIcon = {
       provider = 'FileIcon',
       condition = buffer_not_empty,
-      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.none},
+      highlight = {fileinfo.get_file_icon_color,colors.none},
     },
   },
   {
@@ -169,10 +169,16 @@ gls.left = {
   },
   {
     GitBranch = {
-      provider = 'GitBranch',
-      icon = icons.branch,
+      provider = function() return vim.b.gitsigns_head end,
+      icon = icons.branch .. " ",
       condition = vcs.check_git_workspace,
       highlight = {colors.yellow ,colors.none},
+    }
+  },
+  {
+    spacer = {
+      provider = function() return " " end,
+      condition = buffer_not_empty and checkwidth,
     }
   },
   {
@@ -222,42 +228,19 @@ gls.left = {
   --     highlight = {colors.line_bg,colors.none}
   --   }
   -- },
+}
 
-
+gls.mid = {
   {
-    LSPStatusCurrentFunc = {
-      provider = function()
-        return " " .. icons.func .. " " .. (vim.b.lsp_current_function or "")
-      end,
-      condition = function()
-        return vim.b.lsp_current_function ~= ""
-      end,
-      -- condition = function ()
-      --   return next(vim.lsp.buf_get_clients()) ~= nil
-      -- end,
-      highlight = {colors.gray, colors.bg_none}
+    NvimGPS = {
+      provider = function() return gps.get_location() end,
+      condition = function() return gps.is_available() end,
+      highlight = {colors.fg_gutter, colors.bg_none},
+      separator_highlight = {colors.fg_gutter, colors.bg_none}
     }
   },
-  -- {
-  --   LSPStatus = {
-  --     provider = function()
-  --       return table.concat(require("lsp-status").messages(), ", ")
-  --     end,
-  --     -- condition = function ()
-  --     --   return next(vim.lsp.buf_get_clients()) ~= nil
-  --     -- end,
-  --     highlight = {colors.gray, colors.bg_none}
-  --   }
-  -- },
-
-  -- {
-  --   TSStatus = {
-  --     provider = function() return require("nvim-treesitter").statusline(50) end,
-  --     condition = conditions.hide_in_width,
-  --     highlight = {colors.gray, colors.bg_none}
-  --   }
-  -- }
 }
+
 --gls.left[11] = {
 --    TrailingWhiteSpace = {
 --     provider = TrailingWhiteSpace,
@@ -267,6 +250,15 @@ gls.left = {
 --}
 
 gls.right = {
+  {
+    LspStatusStatus = {
+      provider = function()
+        return lsp_status.status()
+      end,
+      condition = conditions.hide_in_width and buffer_not_empty,
+      highlight = {colors.blue}
+    }
+  },
   {
     FileType = {
       provider = function()
@@ -334,6 +326,12 @@ gls.right = {
     },
   },
   {
+    PositionVis = {
+      provider = "ScrollBar",
+      highlight = {colors.gray}
+    }
+  },
+  {
     Whitespace = {
       provider = whitespace,
       condition = conditions.hide_in_width
@@ -353,7 +351,7 @@ gls.short_line_left = {
     FileIcon = {
       provider = 'FileIcon',
       condition = buffer_not_empty,
-      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+      highlight = {fileinfo.get_file_icon_color,colors.line_bg},
     },
   },
   {

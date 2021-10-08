@@ -4,132 +4,128 @@ local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-local check_back_space = function()
+local check_backspace = function()
     local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
 end
 
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
+local is_emmet_active = function() return false end
 
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
-  else
-    return t "<S-Tab>"
-  end
-end
+function M.setup()
+  local cmp = require("cmp")
+  local luasnip = require("luasnip")
 
-_G.cr_complete_i = function()
-  if vim.fn.pumvisible() == 1 then
-    if vim.fn.complete_info()["selected"] ~= "-1" then
-      return t "<Plug>(completion_confirm_completion)"
-    else
-      return t "<C-e><CR>"
-    end
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
-  else
-    return t "<Plug>(PearTreeExpand)"
-  end
-end
-
-function M.compe()
-  require'compe'.setup {
-    enabled = true;
-    autocomplete = true;
-    debug = false;
-    min_length = 1;
-    preselect = 'enable';
-    throttle_time = 80;
-    source_timeout = 200;
-    incomplete_delay = 400;
-    max_abbr_width = 100;
-    max_kind_width = 100;
-    max_menu_width = 100;
+  cmp.setup {
+    formatting = {
+      format = function(entry, vim_item)
+        local icons = M.icons
+        vim_item.kind = icons[vim_item.kind]
+        vim_item.menu = ({
+          nvim_lsp = "(LSP)",
+          emoji = "(Emoji)",
+          path = "(Path)",
+          calc = "(Calc)",
+          vsnip = "(Snippet)",
+          luasnip = "(Snippet)",
+          buffer = "(Buffer)",
+          spell = "(Spell)",
+        })[entry.source.name]
+        vim_item.dup = ({
+          buffer = 1,
+          path = 1,
+          nvim_lsp = 0,
+        })[entry.source.name] or 0
+        return vim_item
+      end,
+    },
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body)
+      end,
+    },
     documentation = {
-      border = "none", -- the border option is the same as `|help nvim_open_win|`
-      winhighlight = "CompeDocumentation", -- highlight group used for the documentation window
-      max_width = 120,
-      min_width = 40,
-      max_height = math.floor(vim.o.lines * 0.3),
-      min_height = 1,
-    };
-    --allow_prefix_unmatch = false;
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
+    sources = {
+      { name = "nvim_lsp" },
+      { name = "path" },
+      { name = "luasnip" },
+      { name = "nvim_lua" },
+      { name = "buffer" },
+      { name = "calc" },
+      { name = "emoji" },
+      { name = "treesitter" },
+      { name = "crates" },
+      { name = "spell" },
+    },
+    mapping = {
+      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<Tab>"] = cmp.mapping(function()
+        if vim.fn.pumvisible() == 1 then
+          vim.fn.feedkeys(t "<down>", "n")
+        elseif luasnip.expand_or_jumpable() then
+          vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
+        elseif check_backspace() then
+          vim.fn.feedkeys(t "<Tab>", "n")
+        elseif is_emmet_active() then
+          return vim.fn["cmp#complete"]()
+        else
+          vim.fn.feedkeys(t "<Tab>", "n")
+        end
+      end, {
+        "i",
+        "s",
+      }),
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if vim.fn.pumvisible() == 1 then
+          vim.fn.feedkeys(t "<up>", "n")
+        elseif luasnip.jumpable(-1) then
+          vim.fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
+        else
+          fallback()
+        end
+      end, {
+        "i",
+        "s",
+      }),
 
-    source = {
-      path = true;
-      buffer = {menu = '[BUF]'};
-      calc = true;
-      vsnip = {menu = '[SNP]'};
-      nvim_lsp = {menu = '[LSP]'};
-      nvim_lua = {menu = '[LUA]'};
-      spell = true;
-      tags = true;
-      snippets_nvim = true;
-      utilsnips = true;
-      treesitter = true;
-    };
-  }
-  vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr=true})
-  vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr=true})
-  vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr=true})
-  vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr=true})
-  vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm({'keys': '<Plug>(PearTreeExpand)', 'mode':''})", {noremap=true, silent=true, expr=true})
-  vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {noremap=true, silent = true, expr=true})
-  vim.api.nvim_set_keymap("i", "<BS>", "<Plug>(PearTreeBackspace)", {})
-
-  vim.g.vsnip_snippet_dir = vim.fn.stdpath("config").."/snippets"
-  vim.g.vsnip_filetypes = {
-    javascriptreact = {'javascript', 'html'},
-    typescriptreact = {'typescript', 'html'}
- }
-
-end
-
-function M.kinds()
-  require('vim.lsp.protocol').CompletionItemKind = {
-    ' Text';        -- = 1
-    'ƒ Method';      -- = 2;
-    ' Function';    -- = 3;
-    ' Constructor'; -- = 4;
-    'Field';         -- = 5;
-    ' Variable';    -- = 6;
-    ' Class';       -- = 7;
-    'ﰮ Interface';   -- = 8;
-    ' Module';      -- = 9;
-    ' Property';    -- = 10;
-    ' Unit';        -- = 11;
-    ' Value';       -- = 12;
-    '了Enum';        -- = 13;
-    ' Keyword';     -- = 14;
-    '﬌ Snippet';     -- = 15;
-    ' Color';       -- = 16;
-    ' File';        -- = 17;
-    'Reference';     -- = 18;
-    ' Folder';      -- = 19;
-    ' EnumMember';  -- = 20;
-    ' Constant';    -- = 21;
-    ' Struct';      -- = 22;
-    'Event';         -- = 23;
-    'Operator';      -- = 24;
-    'TypeParameter'; -- = 25;
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-e>"] = cmp.mapping.close(),
+      ["<CR>"] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
+    },
   }
 end
+
+M.icons = {
+  Class = " ",
+  Color = " ",
+  Constant = "ﲀ ",
+  Constructor = " ",
+  Enum = "練",
+  EnumMember = " ",
+  Event = " ",
+  Field = " ",
+  File = "",
+  Folder = " ",
+  Function = " ",
+  Interface = "ﰮ ",
+  Keyword = " ",
+  Method = " ",
+  Module = " ",
+  Operator = "",
+  Property = " ",
+  Reference = " ",
+  Snippet = " ",
+  Struct = " ",
+  Text = " ",
+  TypeParameter = " ",
+  Unit = "塞",
+  Value = " ",
+  Variable = " ",
+}
 
 return M

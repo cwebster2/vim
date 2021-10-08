@@ -15,6 +15,7 @@ return require('packer').startup {
     use {'wbthomason/packer.nvim'}
     use 'dstein64/vim-startuptime'
     use 'mhinz/vim-startify'
+    use  { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
   -- fuzzy stuff
     use {
@@ -27,7 +28,6 @@ return require('packer').startup {
     use('nvim-telescope/telescope-packer.nvim')
     use('nvim-telescope/telescope-github.nvim')
     use('nvim-telescope/telescope-symbols.nvim')
-    -- use('nvim-telescope/telescope-vimspector.nvim')
     use 'nvim-telescope/telescope-dap.nvim'
     use('cwebster2/github-coauthors.nvim')
     use {'junegunn/fzf', run = './install --all'}
@@ -46,13 +46,18 @@ return require('packer').startup {
     }
     use 'p00f/nvim-ts-rainbow'
     use 'windwp/nvim-ts-autotag'
+    use {
+      'SmiteshP/nvim-gps',
+      requires = {'nvim-treesitter/nvim-treesitter'},
+      config = "require('_nvimgps').setup()",
+    }
 
   -- LSP stuff
     use 'neovim/nvim-lspconfig'
-    use 'nvim-lua/lsp-status.nvim'
     use 'folke/lua-dev.nvim'
     use 'kosayoda/nvim-lightbulb'
-    use('glepnir/lspsaga.nvim')
+    use('tami5/lspsaga.nvim')
+    use {'nvim-lua/lsp-status.nvim'}
     use{'ray-x/lsp_signature.nvim'}
     use {
       "folke/lsp-trouble.nvim",
@@ -61,26 +66,37 @@ return require('packer').startup {
     }
 
   -- Completion
-    use{'hrsh7th/nvim-compe',
-      requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}},
+    use {
+      "hrsh7th/nvim-cmp",
+      config = function()
+        require('lsp').setup()
+        require("_completion").setup()
+      end,
+      requires = {
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "Saecki/crates.nvim",
+        "f3fora/cmp-spell"
+      },
     }
 
   -- colorschemes
     use 'nanotech/jellybeans.vim'
     use {'Pocco81/Catppuccino.nvim'}
-    use 'glepnir/zephyr-nvim'
-    use 'sainnhe/sonokai'
     use 'EdenEast/nightfox.nvim'
 
   -- visuals
     use {
-      -- 'romgrk/barbar.nvim',
       'akinsho/nvim-bufferline.lua',
       requires = {'kyazdani42/nvim-web-devicons'},
       config = "require('_bufferline').setup()",
     }
     use {
-      'glepnir/galaxyline.nvim',
+      'NTBBloodbath/galaxyline.nvim',
       branch='main',
       requires = {'kyazdani42/nvim-web-devicons'}
     }
@@ -89,7 +105,6 @@ return require('packer').startup {
       run = "make hexokinase",
       config = "require'_hexokinase'.setup()",
     }
-    use 'cwebster2/color-overrides.nvim'
     use {
       'lewis6991/gitsigns.nvim',
       requires = {'nvim-lua/plenary.nvim'},
@@ -99,11 +114,10 @@ return require('packer').startup {
 
     use {
       "folke/which-key.nvim",
-      config = "require('_whichkey').setup()",
+      config = function()
+        require('_whichkey').setup()
+      end,
     }
-
-  -- linting
-  --plug('w0rp/ale')
 
   -- language stuff
     use {
@@ -115,34 +129,44 @@ return require('packer').startup {
     use {'simrat39/rust-tools.nvim',
       config = "require('_rust-tools').setup()"
     }
+    use {
+      'NTBBloodbath/rest.nvim',
+      requires = {'nvim-lua/plenary.nvim'},
+      config = "require('_rest').setup()"
+    }
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
 
   -- ide stuff
-    --use {'liuchengxu/vista.vim',
-      --config = function() require'_vista'.setup() end,
-      --cmd = "Vista",
-      --opt = true
-    --  }
     use "terrortylor/nvim-comment"
     use 'simrat39/symbols-outline.nvim'
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',
       -- commit = 'f1f1488',
-      --config = function() require'_nvimtree'.setup() end,
+      config = function() require'_nvimtree'.setup() end,
       --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
       --opt = true
     }
     use 'pwntester/octo.nvim'
     use 'tmsvg/pear-tree'
-    -- plug('cohama/lexima.vim')
-    -- use {'kassio/neoterm', opt=true, cmd="Ttoggle"}
     use {'akinsho/nvim-toggleterm.lua',
       config = 'require("_neoterm").setup()',
     }
+    use {
+      "ThePrimeagen/refactoring.nvim",
+      requires = {
+        {"nvim-lua/plenary.nvim"},
+        {"nvim-treesitter/nvim-treesitter"}
+      }
+      -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
+    }
+
     use 'junegunn/gv.vim'
+
+  -- testing
     use {'janko/vim-test', opt=true}
-    -- use {'puremourning/vimspector'}
+
+  -- debugging
     use {'mfussenegger/nvim-dap',
       config = 'require("_dap").setup()'
     }
