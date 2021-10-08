@@ -138,13 +138,10 @@ M.colorscheme_setup = function(scheme)
   else
     vim.api.nvim_command("colorscheme "..scheme)
   end
+
 end
 
 M.overrides_setup = function()
-  vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "LspDiagnosticsError"})
-  vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsWarning"})
-  vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsInformation"})
-  vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "LspDiagnosticHint"})
   vim.cmd[["highlight! BufferTabpageFil guibg=none]]
   vim.cmd[["highlight! BufferlineBufferSelected gui=underline]]
   --"autocmd ColorScheme * highlight NvimTreeFolderIcon guibg=blue
