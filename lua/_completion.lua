@@ -11,6 +11,15 @@ end
 
 local is_emmet_active = function() return false end
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
 function M.setup()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
@@ -61,27 +70,25 @@ function M.setup()
     mapping = {
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<Tab>"] = cmp.mapping(function()
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(t "<down>", "n")
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
-          vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
-        elseif check_backspace() then
-          vim.fn.feedkeys(t "<Tab>", "n")
-        elseif is_emmet_active() then
-          return vim.fn["cmp#complete"]()
+          feedkey(t "<Plug>luasnip-expand-or-jump", "")
+        elseif has_words_before() then
+          cmp.complete()
         else
-          vim.fn.feedkeys(t "<Tab>", "n")
+          fallback()
         end
       end, {
         "i",
         "s",
       }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(t "<up>", "n")
+        if cmp.visible() then
+          cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
-          vim.fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
+          feedkey(t "<Plug>luasnip-jump-prev", "")
         else
           fallback()
         end
