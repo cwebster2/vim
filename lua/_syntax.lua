@@ -41,7 +41,7 @@ function M.setup()
     },
     refactor = {
       highlight_definitions = { enable = true },
-      highlight_current_scope = { enable = true },
+      highlight_current_scope = { enable = false },
     },
     autotag = {
       enable = true
