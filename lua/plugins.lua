@@ -122,6 +122,7 @@ return require('packer').startup {
   -- language stuff
     use {
       'TimUntersberger/neogit',
+      commit = 'e507909',
       requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
       config = "require('_neogit').setup()",
     }
