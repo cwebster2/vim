@@ -161,6 +161,7 @@ return require('packer').startup {
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
     }
 
+    use 'github/copilot.vim'
     use 'junegunn/gv.vim'
 
   -- testing

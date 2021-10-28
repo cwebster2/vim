@@ -44,7 +44,6 @@ M.setup = function()
     },
     hijack_cursor       = false,
     update_cwd          = false,
-    lsp_diagnostics     = true,
     update_focused_file = {
       enable      = true,
       update_cwd  = false,
@@ -54,7 +53,15 @@ M.setup = function()
       cmd  = nil,
       args = {}
     },
-
+  diagnostics = {
+    enable = true,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "✘",
+    }
+  },
     view = {
       width = 30,
       height = 30,
