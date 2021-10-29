@@ -1,5 +1,5 @@
 local opt = vim.opt
-local augroup = require("utils").augroup
+local augroup = require("cwebster.utils").augroup
 
 opt.autoindent = false
 opt.autoread = true

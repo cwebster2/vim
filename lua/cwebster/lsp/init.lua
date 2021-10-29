@@ -63,7 +63,7 @@ local on_attach = function(client, bufnr)
   lsp_signature.on_attach(lsp_signature_config)
   lsp_status.on_attach(client)
 
-  require("_mappings").lsp_setup(client, bufnr)
+  require("cwebster.mappings").lsp_setup(client, bufnr)
 
   --vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
   --
@@ -92,7 +92,7 @@ end
 
 function M.setup()
 
-  local servers = require("lsp.config").servers
+  local servers = require("cwebster.lsp.config").servers
 
   for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = get_capabilities() }, config))
@@ -100,7 +100,7 @@ function M.setup()
 
   --lsp.callbacks['textDocument/codeAction'] = custom_codeAction
 
-  require("lsp.handlers").setup()
+  require("cwebster.lsp.handlers").setup()
 
 
   vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "LspDiagnosticsError"})

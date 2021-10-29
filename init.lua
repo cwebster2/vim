@@ -1,6 +1,6 @@
 local g = vim.g
 local a = vim.api
-local augroup = require("utils").augroup
+local augroup = require("cwebster.utils").augroup
 
 a.nvim_command("set nocompatible")
 --a.nvim_command("profile start profile.log")
@@ -11,7 +11,7 @@ g.mapleader = ' '
 g.maplocalleader = ','
 
 -- set global, window and buffer options
-require'_options'
+require'cwebster.options'
 
 -- if this is being loaded by neovim running in vscode, bail
 if vim.fn.exists('g:vscode') == 1 then
@@ -27,14 +27,14 @@ g.mkdp_auto_close = 0
 g.mkdp_auto_open = 1
 
 -- require plugins and stuff
-require'plugins'
-require('_mappings').init_keymap()
-require'plugin_config'
-local theme = require'_theme'
+require'cwebster.plugins'
+require('cwebster.mappings').init_keymap()
+require'cwebster.plugin_config'
+local theme = require'cwebster.theme'
 theme.colorscheme_setup("catppuccino")
 theme.overrides_setup()
-require('_galaxyline')
-require('_mappings').setup_ft_mappings()
+require('cwebster.galaxyline')
+require('cwebster.mappings').setup_ft_mappings()
 
 a.nvim_exec([[
   if has ("autocmd")

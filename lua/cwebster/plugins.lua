@@ -21,7 +21,7 @@ return require('packer').startup {
     use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-      config = "require('_telescope')",
+      config = "require('cwebster.telescope')",
     }
     use('nvim-telescope/telescope-fzy-native.nvim')
     use('nvim-telescope/telescope-fzf-writer.nvim')
@@ -35,7 +35,7 @@ return require('packer').startup {
 
   -- Syntax
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
-      config = "require('_syntax').setup()"
+      config = "require('cwebster.syntax').setup()"
     }
     use 'nvim-treesitter/playground'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -49,7 +49,7 @@ return require('packer').startup {
     use {
       'SmiteshP/nvim-gps',
       requires = {'nvim-treesitter/nvim-treesitter'},
-      config = "require('_nvimgps').setup()",
+      config = "require('cwebster.nvimgps').setup()",
     }
 
   -- LSP stuff
@@ -62,15 +62,15 @@ return require('packer').startup {
     use {
       "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = "require('_trouble').setup()",
+      config = "require('cwebster.trouble').setup()",
     }
 
   -- Completion
     use {
       "hrsh7th/nvim-cmp",
       config = function()
-        require('lsp').setup()
-        require("_completion").setup()
+        require('cwebster.lsp').setup()
+        require("cwebster.completion").setup()
       end,
       requires = {
         "L3MON4D3/LuaSnip",
@@ -93,7 +93,7 @@ return require('packer').startup {
     use {
       'akinsho/nvim-bufferline.lua',
       requires = {'kyazdani42/nvim-web-devicons'},
-      config = "require('_bufferline').setup()",
+      config = "require('cwebster.bufferline').setup()",
     }
     use {
       'NTBBloodbath/galaxyline.nvim',
@@ -103,19 +103,19 @@ return require('packer').startup {
     use {
       'RRethy/vim-hexokinase',
       run = "make hexokinase",
-      config = "require'_hexokinase'.setup()",
+      config = "require'cwebster.hexokinase'.setup()",
     }
     use {
       'lewis6991/gitsigns.nvim',
       requires = {'nvim-lua/plenary.nvim'},
-      config = "require('_gitsigns').setup()",
+      config = "require('cwebster.gitsigns').setup()",
     }
     use {'szw/vim-maximizer', opt=true, cmd="MaximizerToggle"}
 
     use {
       "folke/which-key.nvim",
       config = function()
-        require('_whichkey').setup()
+        require('cwebster.whichkey').setup()
       end,
     }
 
@@ -124,16 +124,16 @@ return require('packer').startup {
       'TimUntersberger/neogit',
       commit = 'e507909',
       requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
-      config = "require('_neogit').setup()",
+      config = "require('cwebster.neogit').setup()",
     }
     use {'lukas-reineke/indent-blankline.nvim'}
     use {'simrat39/rust-tools.nvim',
-      config = "require('_rust-tools').setup()"
+      config = "require('cwebster.rust-tools').setup()"
     }
     use {
       'NTBBloodbath/rest.nvim',
       requires = {'nvim-lua/plenary.nvim'},
-      config = "require('_rest').setup()"
+      config = "require('cwebster.rest').setup()"
     }
     use 'editorconfig/editorconfig-vim'
     use 'ntpeters/vim-better-whitespace'
@@ -144,14 +144,14 @@ return require('packer').startup {
     use 'unblevable/quick-scope'
     use {'kyazdani42/nvim-tree.lua',
       -- commit = 'f1f1488',
-      config = function() require'_nvimtree'.setup() end,
+      config = function() require'cwebster.nvimtree'.setup() end,
       --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
       --opt = true
     }
     use 'pwntester/octo.nvim'
     use 'tmsvg/pear-tree'
     use {'akinsho/nvim-toggleterm.lua',
-      config = 'require("_neoterm").setup()',
+      config = 'require("cwebster.neoterm").setup()',
     }
     use {
       "ThePrimeagen/refactoring.nvim",
@@ -170,7 +170,7 @@ return require('packer').startup {
 
   -- debugging
     use {'mfussenegger/nvim-dap',
-      config = 'require("_dap").setup()'
+      config = 'require("cwebster.dap").setup()'
     }
     use 'theHamsta/nvim-dap-virtual-text'
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }

@@ -44,7 +44,7 @@ M.setup = function()
       triggers = "auto", -- automatically setup triggers
       -- triggers = {"<leader>"} -- or specifiy a list manually
   }
-  -- require'_mappings'
+  -- require'cwebster.mappings'
 end
 
 return M

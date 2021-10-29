@@ -1,8 +1,8 @@
 local M = {}
 
-local prettier = require "lsp.efm.prettier"
-local eslint = require "lsp.efm.eslint"
-local hadolint = require "lsp.efm.hadolint"
+local prettier = require "cwebster.lsp.efm.prettier"
+local eslint = require "cwebster.lsp.efm.eslint"
+local hadolint = require "cwebster.lsp.efm.hadolint"
 local lsp_status = require "lsp-status"
 
 local language_formatters = {

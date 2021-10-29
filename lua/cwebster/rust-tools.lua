@@ -40,7 +40,7 @@ function M.setup()
     -- all the opts to send to nvim-lspconfig
     -- these override the defaults set by rust-tools.nvim
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    server = require('lsp').get_server_config()
+    server = require('cwebster.lsp').get_server_config()
   })
 end
 
