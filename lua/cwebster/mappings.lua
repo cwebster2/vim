@@ -1,15 +1,7 @@
-local map = require("utils").map
-local augroup = require("utils").augroup
+local map = require("cwebster.utils").map
+local augroup = require("cwebster.utils").augroup
 
 local M = {}
-
-_G.scratchBuffer = function()
-  -- make a scratch buffer in a spli
-  vim.cmd("vsplit")
-  local win = vim.api.nvim_get_current_win()
-  local buf = vim.api.nvim_create_buf(true, true)
-  vim.api.nvim_win_set_buf(win, buf)
-end
 
 M.init_keymap = function()
   local wk = require("which-key")
@@ -38,7 +30,7 @@ M.init_keymap = function()
       ["b"] = { ':e#<CR>', "Last Buffer"},
       ["d"] = { '<Cmd>BufferLineSortByDirectory<CR>', "Order by Dir" },
       ["l"] = { '<Cmd>BufferLineSortByDirectory<CR>', "Order by Lang" },
-      ["v"] = { '<Cmd>lua scratchBuffer()<CR>', "Scrach buffer in vert split"},
+      ["v"] = { '<Cmd>lua require("cwebster.utils").scratchBuffer("vsplit")<CR>', "Scrach buffer in vert split"},
     },
     ["h"] = {
       name = "+help",

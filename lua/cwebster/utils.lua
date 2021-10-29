@@ -66,4 +66,13 @@ function M.u(code)
   end
   return table.concat(t)
 end
+
+function M.scratchBuffer(splitcmd)
+  -- make a scratch buffer in a spli
+  vim.cmd(splitcmd)
+  local win = vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_create_buf(true, true)
+  vim.api.nvim_win_set_buf(win, buf)
+end
+
 return M

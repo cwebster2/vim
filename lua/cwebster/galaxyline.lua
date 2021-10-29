@@ -233,7 +233,7 @@ gls.left = {
 gls.mid = {
   {
     NvimGPS = {
-      provider = function() return gps.get_location() end,
+      provider = function() return "" end, --gps.get_location() end,
       condition = function() return gps.is_available() end,
       highlight = {colors.fg_gutter, colors.bg_none},
       separator_highlight = {colors.fg_gutter, colors.bg_none}
