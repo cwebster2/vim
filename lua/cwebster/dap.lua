@@ -23,7 +23,9 @@ function M.setup()
   vim.fn.sign_define('DapBreakpoint', {text='🟥', texthl='', linehl='', numhl=''})
   vim.fn.sign_define('DapStopped', {text='⭐️', texthl='', linehl='', numhl=''})
 
-  vim.g.dap_virtual_text = true
+  require("nvim-dap-virtual-text").setup{
+    enabled = true,
+  }
 
   vim.api.nvim_exec([[
   " Debugger remaps

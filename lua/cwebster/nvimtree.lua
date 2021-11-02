@@ -3,9 +3,7 @@ local M = {}
 local g = vim.g
 
 M.setup = function()
-  g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' }
   g.nvim_tree_indent_markers = 1
-  g.nvim_tree_hide_dotfiles = 1
   g.nvim_tree_git_hl = 1
   g.nvim_tree_root_folder_modifier = ':~'
   g.nvim_tree_show_icons = {
@@ -53,15 +51,19 @@ M.setup = function()
       cmd  = nil,
       args = {}
     },
-  diagnostics = {
-    enable = true,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "✘",
-    }
-  },
+    diagnostics = {
+      enable = true,
+      icons = {
+        hint = "",
+        info = "",
+        warning = "",
+        error = "✘",
+      }
+    },
+    filters = {
+      custom = { '.git', 'node_modules', '.cache' },
+      dotfiles = true,
+    },
     view = {
       width = 30,
       height = 30,
