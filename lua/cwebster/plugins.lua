@@ -187,9 +187,9 @@ return require("packer").startup {
         ft = "markdown"
     }
 
-    use { "vim-latex/vim-latex", 
-        opt=true, 
-        ft="tex" 
+    use { "vim-latex/vim-latex",
+        opt=true,
+        ft="tex"
     }
     use { "airblade/vim-rooter" }
 
