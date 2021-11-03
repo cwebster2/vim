@@ -166,7 +166,9 @@ return require("packer").startup {
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
     }
 
-    use { "github/copilot.vim" }
+    use { "github/copilot.vim",
+      setup = "require('cwebster.copilot').setup()"
+    }
     use { "junegunn/gv.vim" }
 
   -- testing
