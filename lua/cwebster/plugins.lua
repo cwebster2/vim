@@ -20,8 +20,11 @@ return require("packer").startup {
   -- fuzzy stuff
     use {
       "nvim-telescope/telescope.nvim",
-      requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
-      config = "require("cwebster.telescope")",
+      requires = {
+        {"nvim-lua/popup.nvim"},
+        {"nvim-lua/plenary.nvim"}
+      },
+      config = "require('cwebster.telescope')",
     }
     use { "nvim-telescope/telescope-fzy-native.nvim" }
     use { "nvim-telescope/telescope-fzf-writer.nvim" }
@@ -36,7 +39,7 @@ return require("packer").startup {
   -- Syntax
     use { "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
-      config = "require("cwebster.syntax").setup()"
+      config = "require('cwebster.syntax').setup()"
     }
     use { "nvim-treesitter/playground" }
     use { "nvim-treesitter/nvim-treesitter-textobjects" }
@@ -50,7 +53,7 @@ return require("packer").startup {
     use {
       "SmiteshP/nvim-gps",
       requires = {"nvim-treesitter/nvim-treesitter"},
-      config = "require("cwebster.nvimgps").setup()",
+      config = "require('cwebster.nvimgps').setup()",
     }
 
   -- LSP stuff
@@ -58,17 +61,15 @@ return require("packer").startup {
     use { "folke/lua-dev.nvim" }
     use { "kosayoda/nvim-lightbulb" }
     use { "tami5/lspsaga.nvim" }
-    use {"nvim-lua/lsp-status.nvim" }
-    use{"ray-x/lsp_signature.nvim" }
-    use {
-      "folke/lsp-trouble.nvim",
+    use { "nvim-lua/lsp-status.nvim" }
+    use { "ray-x/lsp_signature.nvim" }
+    use { "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = "require("cwebster.trouble").setup()",
+      config = "require('cwebster.trouble').setup()",
     }
 
   -- Completion
-    use {
-      "hrsh7th/nvim-cmp",
+    use { "hrsh7th/nvim-cmp",
       config = function()
         require("cwebster.lsp").setup()
         require("cwebster.completion").setup()
@@ -87,14 +88,16 @@ return require("packer").startup {
 
   -- colorschemes
     use { "nanotech/jellybeans.vim" }
-    use { "Pocco81/Catppuccino.nvim" }
+    use { "Pocco81/Catppuccino.nvim",
+      branch = "dev-remaster"
+    }
     use { "EdenEast/nightfox.nvim" }
 
   -- visuals
     use {
       "akinsho/nvim-bufferline.lua",
       requires = {"kyazdani42/nvim-web-devicons"},
-      config = "require("cwebster.bufferline").setup()",
+      config = "require('cwebster.bufferline').setup()",
     }
     use {
       "NTBBloodbath/galaxyline.nvim",
@@ -104,12 +107,12 @@ return require("packer").startup {
     use {
       "RRethy/vim-hexokinase",
       run = "make hexokinase",
-      config = "require"cwebster.hexokinase".setup()",
+      config = "require('cwebster.hexokinase').setup()",
     }
     use {
       "lewis6991/gitsigns.nvim",
       requires = {"nvim-lua/plenary.nvim"},
-      config = "require("cwebster.gitsigns").setup()",
+      config = "require('cwebster.gitsigns').setup()",
     }
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
 
@@ -125,19 +128,19 @@ return require("packer").startup {
       "TimUntersberger/neogit",
       commit = "e507909",
       requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
-      config = "require("cwebster.neogit").setup()",
+      config = "require('cwebster.neogit').setup()",
     }
     use { "lukas-reineke/indent-blankline.nvim" }
     use { "simrat39/rust-tools.nvim",
-      config = "require("cwebster.rust-tools").setup()"
+      config = "require('cwebster.rust-tools').setup()"
     }
     use {
       "NTBBloodbath/rest.nvim",
       requires = {"nvim-lua/plenary.nvim"},
-      config = "require("cwebster.rest").setup()"
+      config = "require('cwebster.rest').setup()"
     }
-    use { "editorconfig/editorconfig-vim"
-    use { "ntpeters/vim-better-whitespace"
+    use { "editorconfig/editorconfig-vim" }
+    use { "ntpeters/vim-better-whitespace" }
 
   -- ide stuff
     use { "terrortylor/nvim-comment" }
@@ -145,14 +148,14 @@ return require("packer").startup {
     use { "unblevable/quick-scope" }
     use { "kyazdani42/nvim-tree.lua",
       -- commit = "f1f1488",
-      config = function() require"cwebster.nvimtree".setup() end,
+      config = function() require("cwebster.nvimtree").setup() end,
       --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
       --opt = true
     }
     use { "pwntester/octo.nvim" }
     use { "tmsvg/pear-tree" }
     use {"akinsho/nvim-toggleterm.lua",
-      config = "require("cwebster.neoterm").setup()",
+      config = "require('cwebster.neoterm').setup()",
     }
     use {
       "ThePrimeagen/refactoring.nvim",
@@ -173,7 +176,7 @@ return require("packer").startup {
 
   -- debugging
     use { "mfussenegger/nvim-dap",
-      config = "require("cwebster.dap").setup()"
+      config = "require('cwebster.dap').setup()"
     }
     use { "theHamsta/nvim-dap-virtual-text" }
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
@@ -207,6 +210,7 @@ return require("packer").startup {
   --Plug "mattn/emmet-vim"
   --Plug "terryma/vim-multiple-cursors" -- need to rebind its c-n key to use it
   --Plug "Raimondi/delimitMate" -- closes quotes and stuff
+    --ses quotes and stuff
   use { "sheerun/vim-polyglot" }  -- syntax files for most languages
   --Plug "vim-python/python-syntax"  " Improved python syntax
   --Plug "Vimjas/vim-python-pep8-indent"  " Proper python indenting
