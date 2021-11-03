@@ -132,15 +132,10 @@ M.colorscheme_setup = function(scheme)
     local catppuccino = require("katppuccino")
     catppuccino.setup(catppuccino_options)
     catppuccino.remap({
-      --   diff = {
-      --     add = colors.diff.add,
-      --     change = colors.diff.change,
-      --     delete = colors.diff.delete,
-      --     remove = colors.diff.remove,
-      --   },
       --   fg = colors.fg
-      -- },{
-      -- TODO fix diff colors
+		    GitSignsAdd = { fg = colors.diff.add, bg = colors.none },
+		    GitSignsChange = { fg = colors.diff.change, bg = colors.none },
+		    GitSignsDelete = { fg = colors.diff.delete, bg = colors.none },
         NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg, fg=colors.fg },
         NeogitDiffAddHighlight = { bg = colors.neogit.addbg, fg=colors.fg },
         NeogitDiffContextHighlight = { bg = colors.none },
