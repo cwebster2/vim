@@ -155,7 +155,7 @@ gls.left = {
     FileSize = {
       provider = 'FileSize',
       condition = buffer_not_empty and checkwidth,
-      highlight = {colors.changed, colors.none}
+      highlight = {colors.diff.change, colors.none}
     }
   },
   {
@@ -235,8 +235,8 @@ gls.mid = {
     NvimGPS = {
       provider = function() return "" end, --gps.get_location() end,
       condition = function() return gps.is_available() end,
-      highlight = {colors.fg_gutter, colors.bg_none},
-      separator_highlight = {colors.fg_gutter, colors.bg_none}
+      highlight = {colors.fg_gutter, colors.none},
+      separator_highlight = {colors.fg_gutter, colors.none}
     }
   },
 }

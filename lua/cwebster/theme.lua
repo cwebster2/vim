@@ -1,10 +1,10 @@
 local vim = vim
-local cp_api = require("catppuccino.api.colors")
-local cp_util = require("catppuccino.utils.util")
+local cp_api = require("katppuccino.api.colors")
+local cp_util = require("katppuccino.utils.util")
 local M = {}
-local catppuccino_theme = "dark_catppuccino"
+local catppuccino_theme = "dark_katppuccino"
 
-local err, colors = cp_api.get_colors(catppuccino_theme)
+local colors = cp_api.get_colors()
 colors.diff = {
   add = 'green',
   change = "#2B5B77",
@@ -15,7 +15,14 @@ colors.neogit = {
   addbg = "#012800",
   delbg = "#340001",
 }
-colors.fg = cp_util.lighten(colors.fg, 0.75)
+colors.fg = cp_util.lighten(colors.katppuccino0, 0.75)
+colors.fg_gutter = colors.katppuccino12
+colors.blue = colors.katppuccino3
+colors.green = colors.katppuccino7
+colors.none = "NONE"
+colors.red = colors.katppuccino6
+colors.yellow = colors.katppuccino8
+colors.gray = colors.katppuccino12
 
 M.galaxyline_colors = colors
 
@@ -87,12 +94,18 @@ M.colorscheme_setup = function(scheme)
         treesitter = true,
         native_lsp = {
           enabled = true,
-          styles = {
+          virtual_text = {
             errors = "italic",
             hints = "italic",
             warnings = "italic",
-            information = "italic"
-          }
+            information = "italic",
+          },
+          underlines = {
+            errors = "underline",
+            hints = "underline",
+            warnings = "underline",
+            information = "underline",
+          },
         },
         lsp_trouble = true,
         lsp_saga = true,
@@ -110,31 +123,31 @@ M.colorscheme_setup = function(scheme)
         dashboard = false,
         neogit = true,
         vim_sneak = false,
-        fern = false,
         bufferline = true,
         markdown = true,
     }
   }
 
   if scheme == "catppuccino" then
-    local catppuccino = require("catppuccino")
+    local catppuccino = require("katppuccino")
     catppuccino.setup(catppuccino_options)
     catppuccino.remap({
-        diff = {
-          add = colors.diff.add,
-          change = colors.diff.change,
-          delete = colors.diff.delete,
-          remove = colors.diff.remove,
-        },
-        fg = colors.fg
-      },{
+      --   diff = {
+      --     add = colors.diff.add,
+      --     change = colors.diff.change,
+      --     delete = colors.diff.delete,
+      --     remove = colors.diff.remove,
+      --   },
+      --   fg = colors.fg
+      -- },{
+      -- TODO fix diff colors
         NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg, fg=colors.fg },
         NeogitDiffAddHighlight = { bg = colors.neogit.addbg, fg=colors.fg },
         NeogitDiffContextHighlight = { bg = colors.none },
         GalaxyLineFillSection = { bg = colors.none },
         -- ColorColumn = { fg = colors.none }
       })
-    catppuccino.load()
+    vim.api.nvim_command("colorscheme katppuccino")
   else
     vim.api.nvim_command("colorscheme "..scheme)
   end
