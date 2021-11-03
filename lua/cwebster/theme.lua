@@ -61,14 +61,6 @@ M.colorscheme_setup = function(scheme)
 
   vim.o.background = "dark"
 
-  vim.g.jellybeans_use_term_italics = 1
-  vim.g.jellybeans_overrides = {
-    background = {
-      ctermbg = 'none',
-      guibg = 'none'
-    },
-  }
-
   vim.g.sonokai_style = 'shusia'
   vim.g.sonokai_transparent_background = 1
   vim.g.sonokai_enable_italic = 1
@@ -128,6 +120,27 @@ M.colorscheme_setup = function(scheme)
     }
   }
 
+  local nightfox_options = {
+    fox = "nightfox",
+    transparent = true,
+    alt_nc = false,
+    terminal_colors = true,
+    styles = {
+      comments = "italic",
+      functions = "italic",
+      keywords = "italic",
+      strings = "NONE",
+      variables = "NONE",
+    },
+    inverse = {
+      match_paren = false,
+      visual = false,
+      search = false,
+    },
+    colors = {},
+    hlgroups = {},
+  }
+
   if scheme == "catppuccino" then
     local catppuccino = require("katppuccino")
     catppuccino.setup(catppuccino_options)
@@ -142,7 +155,11 @@ M.colorscheme_setup = function(scheme)
         GalaxyLineFillSection = { bg = colors.none },
         -- ColorColumn = { fg = colors.none }
       })
-    vim.api.nvim_command("colorscheme katppuccino")
+    catppuccino.load("katppuccino")
+  elseif scheme == "nightfox" then
+    local nightfox = require("nightfox")
+    nightfox.setup(nightfox_options)
+    nightfox.load()
   else
     vim.api.nvim_command("colorscheme "..scheme)
   end
