@@ -31,7 +31,7 @@ require'cwebster.plugins'
 require('cwebster.mappings').init_keymap()
 require'cwebster.plugin_config'
 local theme = require'cwebster.theme'
-theme.colorscheme_setup("catppuccino")
+theme.colorscheme_setup()
 -- theme.colorscheme_setup("nightfox")
 theme.overrides_setup()
 require('cwebster.galaxyline')

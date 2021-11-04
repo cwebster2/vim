@@ -51,8 +51,7 @@ M.mode_color = {
 }
 
 M.colorscheme_setup = function(scheme)
-  scheme = scheme or "jellybeans"
-  -- scheme = scheme or "nightfox"
+  scheme = scheme or "katppuccino"
 
   vim.api.nvim_command [[syntax on]]
   if vim.fn.has('termguicolors') == 1 then
@@ -60,17 +59,6 @@ M.colorscheme_setup = function(scheme)
   end
 
   vim.o.background = "dark"
-
-  vim.g.sonokai_style = 'shusia'
-  vim.g.sonokai_transparent_background = 1
-  vim.g.sonokai_enable_italic = 1
-  vim.g.sonokai_disable_italic_comment = 1
-
-  vim.g.nightflyCursorColor = 1
-  vim.g.nightflyUnderlineMatchParen = 1
-  vim.g.nightflyUndercurls = 1
-  vim.g.nightflyCursorColor = 1
-  vim.g.nightflyTransparent = 1
 
   local catppuccino_options = {
     colorscheme = catppuccino_theme,
@@ -120,35 +108,16 @@ M.colorscheme_setup = function(scheme)
     }
   }
 
-  local nightfox_options = {
-    fox = "nightfox",
-    transparent = true,
-    alt_nc = false,
-    terminal_colors = true,
-    styles = {
-      comments = "italic",
-      functions = "italic",
-      keywords = "italic",
-      strings = "NONE",
-      variables = "NONE",
-    },
-    inverse = {
-      match_paren = false,
-      visual = false,
-      search = false,
-    },
-    colors = {},
-    hlgroups = {},
-  }
-
-  if scheme == "catppuccino" then
+  if scheme == "katppuccino" then
     local catppuccino = require("katppuccino")
     catppuccino.setup(catppuccino_options)
     catppuccino.remap({
       --   fg = colors.fg
-		    GitSignsAdd = { fg = colors.diff.add, bg = colors.none },
-		    GitSignsChange = { fg = colors.diff.change, bg = colors.none },
-		    GitSignsDelete = { fg = colors.diff.delete, bg = colors.none },
+        PMenu = { blend=25 },
+        CursorLine = { blend=50 },
+        GitSignsAdd = { fg = colors.diff.add, bg = colors.none },
+        GitSignsChange = { fg = colors.diff.change, bg = colors.none },
+        GitSignsDelete = { fg = colors.diff.delete, bg = colors.none },
         NeogitDiffDeleteHighlight = { bg = colors.neogit.delbg, fg=colors.fg },
         NeogitDiffAddHighlight = { bg = colors.neogit.addbg, fg=colors.fg },
         NeogitDiffContextHighlight = { bg = colors.none },
@@ -156,10 +125,6 @@ M.colorscheme_setup = function(scheme)
         -- ColorColumn = { fg = colors.none }
       })
     catppuccino.load("katppuccino")
-  elseif scheme == "nightfox" then
-    local nightfox = require("nightfox")
-    nightfox.setup(nightfox_options)
-    nightfox.load()
   else
     vim.api.nvim_command("colorscheme "..scheme)
   end
