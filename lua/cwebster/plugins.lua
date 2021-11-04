@@ -87,11 +87,9 @@ return require("packer").startup {
     }
 
   -- colorschemes
-    use { "nanotech/jellybeans.vim" }
     use { "Pocco81/Catppuccino.nvim",
       branch = "dev-remaster"
     }
-    use { "EdenEast/nightfox.nvim" }
 
   -- visuals
     use {
@@ -153,7 +151,9 @@ return require("packer").startup {
       --opt = true
     }
     use { "pwntester/octo.nvim" }
-    use { "tmsvg/pear-tree" }
+    use { "windwp/nvim-autopairs",
+      config = function() require("nvim-autopairs").setup() end,
+    }
     use {"akinsho/nvim-toggleterm.lua",
       config = "require('cwebster.neoterm').setup()",
     }
