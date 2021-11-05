@@ -91,6 +91,7 @@ M.colorscheme_setup = function(scheme)
         lsp_saga = true,
         gitsigns = true,
         telescope = true,
+        cmp = true,
         nvimtree = {
           enabled = true,
           show_root = true,
@@ -122,6 +123,9 @@ M.colorscheme_setup = function(scheme)
         NeogitDiffAddHighlight = { bg = colors.neogit.addbg, fg=colors.fg },
         NeogitDiffContextHighlight = { bg = colors.none },
         GalaxyLineFillSection = { bg = colors.none },
+        CmpItemKind = { fg = colors.katppuccino2 },
+        CmpItemMenu = { fg = colors.katppuccino8 },
+        -- LspReference = { bg = colors.katppuccino4 }
         -- ColorColumn = { fg = colors.none }
       })
     catppuccino.load("katppuccino")
