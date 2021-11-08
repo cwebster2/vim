@@ -1,6 +1,6 @@
 local vim = vim
-local cp_api = require("katppuccino.api.colors")
-local cp_util = require("katppuccino.utils.util")
+local cp_api = require("catppuccin.api.colors")
+local cp_util = require("catppuccin.utils.util")
 local M = {}
 local catppuccino_theme = "dark_katppuccino"
 
@@ -15,14 +15,14 @@ colors.neogit = {
   addbg = "#012800",
   delbg = "#340001",
 }
-colors.fg = cp_util.lighten(colors.katppuccino0, 0.75)
-colors.fg_gutter = colors.katppuccino12
-colors.blue = colors.katppuccino3
-colors.green = colors.katppuccino7
+colors.fg = cp_util.lighten(colors.catppuccin0, 0.75)
+colors.fg_gutter = colors.catppuccin12
+colors.blue = colors.catppuccin3
+colors.green = colors.catppuccin7
 colors.none = "NONE"
-colors.red = colors.katppuccino6
-colors.yellow = colors.katppuccino8
-colors.gray = colors.katppuccino12
+colors.red = colors.catppuccin6
+colors.yellow = colors.catppuccin8
+colors.gray = colors.catppuccin12
 
 M.galaxyline_colors = colors
 
@@ -110,7 +110,7 @@ M.colorscheme_setup = function(scheme)
   }
 
   if scheme == "katppuccino" then
-    local catppuccino = require("katppuccino")
+    local catppuccino = require("catppuccin")
     catppuccino.setup(catppuccino_options)
     catppuccino.remap({
       --   fg = colors.fg
@@ -123,12 +123,12 @@ M.colorscheme_setup = function(scheme)
         NeogitDiffAddHighlight = { bg = colors.neogit.addbg, fg=colors.fg },
         NeogitDiffContextHighlight = { bg = colors.none },
         GalaxyLineFillSection = { bg = colors.none },
-        CmpItemKind = { fg = colors.katppuccino2 },
-        CmpItemMenu = { fg = colors.katppuccino8 },
-        -- LspReference = { bg = colors.katppuccino4 }
+        CmpItemKind = { fg = colors.catppuccin2 },
+        CmpItemMenu = { fg = colors.catppuccin8 },
+        -- LspReference = { bg = colors.catppuccin4 }
         -- ColorColumn = { fg = colors.none }
       })
-    catppuccino.load("katppuccino")
+    catppuccino.load("catppuccin")
   else
     vim.api.nvim_command("colorscheme "..scheme)
   end
