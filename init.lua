@@ -29,6 +29,8 @@ require('cwebster.mappings').init_keymap()
 require'cwebster.plugin_config'
 require('cwebster.mappings').setup_ft_mappings()
 
+require("cwebster.colors.theme").setup()
+
 a.nvim_exec([[
   if has ("autocmd")
     filetype plugin indent on

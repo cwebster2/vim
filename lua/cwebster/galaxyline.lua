@@ -7,12 +7,11 @@ local diagnostic = require('galaxyline.providers.diagnostic')
 local conditions = require('galaxyline.condition')
 local vcs = require('galaxyline.providers.vcs')
 local u = require'cwebster.utils'.u
-local theme = require'cwebster.theme'
+local theme = require'cwebster.colors.theme'
 local colors = theme.galaxyline_colors
 local mode_color = theme.mode_color
 local gps = require("nvim-gps")
 local lsp_status = require("lsp-status")
-local lsp = vim.lsp
 
 
 gl.short_line_list = {

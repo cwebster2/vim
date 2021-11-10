@@ -89,9 +89,10 @@ return require("packer").startup {
     }
 
   -- colorschemes
-    use { "Pocco81/Catppuccino.nvim",
+    use { "cwebster2/Catppuccino.nvim",
       branch = "dev-remaster",
-      config = "require('cwebster.theme').colorscheme_setup()",
+    }
+    use { "folke/tokyonight.nvim",
     }
 
   -- visuals
