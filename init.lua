@@ -22,19 +22,11 @@ end
 g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
 g.loaded_netrwPlugin = 1
 g.jsx_ext_required = 0
-g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
-g.mkdp_auto_close = 0
-g.mkdp_auto_open = 1
 
 -- require plugins and stuff
 require'cwebster.plugins'
 require('cwebster.mappings').init_keymap()
 require'cwebster.plugin_config'
-local theme = require'cwebster.theme'
-theme.colorscheme_setup()
--- theme.colorscheme_setup("nightfox")
-theme.overrides_setup()
-require('cwebster.galaxyline')
 require('cwebster.mappings').setup_ft_mappings()
 
 a.nvim_exec([[

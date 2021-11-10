@@ -23,6 +23,7 @@ colors.none = "NONE"
 colors.red = colors.catppuccin6
 colors.yellow = colors.catppuccin8
 colors.gray = colors.catppuccin12
+colors.white_br = "#FDEBC3"
 
 M.galaxyline_colors = colors
 
@@ -125,6 +126,9 @@ M.colorscheme_setup = function(scheme)
         GalaxyLineFillSection = { bg = colors.none },
         CmpItemKind = { fg = colors.catppuccin2 },
         CmpItemMenu = { fg = colors.catppuccin8 },
+        MsgArea = { fg = colors.white_br },
+        BufferlineBufferSelected = { style = "underline" },
+        BufferTabpageFil = { bg = colors.none },
         -- LspReference = { bg = colors.catppuccin4 }
         -- ColorColumn = { fg = colors.none }
       })
@@ -133,12 +137,6 @@ M.colorscheme_setup = function(scheme)
     vim.api.nvim_command("colorscheme "..scheme)
   end
 
-end
-
-M.overrides_setup = function()
-  vim.cmd[["highlight! BufferTabpageFil guibg=none]]
-  vim.cmd[["highlight! BufferlineBufferSelected gui=underline]]
-  --"autocmd ColorScheme * highlight NvimTreeFolderIcon guibg=blue
 end
 
 -- vim.g.bufferline = {

@@ -14,7 +14,9 @@ return require("packer").startup {
   function(use)
     use { "wbthomason/packer.nvim" }
     use { "dstein64/vim-startuptime" }
-    use { "mhinz/vim-startify" }
+    use { "mhinz/vim-startify",
+      config = "require('cwebster.startify').setup()",
+    }
     use { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
   -- fuzzy stuff
@@ -88,7 +90,8 @@ return require("packer").startup {
 
   -- colorschemes
     use { "Pocco81/Catppuccino.nvim",
-      branch = "dev-remaster"
+      branch = "dev-remaster",
+      config = "require('cwebster.theme').colorscheme_setup()",
     }
 
   -- visuals
@@ -100,6 +103,7 @@ return require("packer").startup {
     use {
       "NTBBloodbath/galaxyline.nvim",
       branch="main",
+      config = "require('cwebster.galaxyline')",
       requires = {"kyazdani42/nvim-web-devicons"}
     }
     use {
@@ -128,7 +132,9 @@ return require("packer").startup {
       requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
       config = "require('cwebster.neogit').setup()",
     }
-    use { "lukas-reineke/indent-blankline.nvim" }
+    use { "lukas-reineke/indent-blankline.nvim",
+      config = "require('cwebster.indentline').setup()",
+    }
     use { "simrat39/rust-tools.nvim",
       config = "require('cwebster.rust-tools').setup()"
     }
@@ -138,11 +144,15 @@ return require("packer").startup {
       config = "require('cwebster.rest').setup()"
     }
     use { "editorconfig/editorconfig-vim" }
-    use { "ntpeters/vim-better-whitespace" }
+    use { "ntpeters/vim-better-whitespace",
+      config = "require('cwebster.whitespace').setup()",
+    }
 
   -- ide stuff
     use { "terrortylor/nvim-comment" }
-    use { "simrat39/symbols-outline.nvim" }
+    use { "simrat39/symbols-outline.nvim",
+      config = "require('cwebster.symbols').setup()",
+    }
     use { "unblevable/quick-scope" }
     use { "kyazdani42/nvim-tree.lua",
       -- commit = "f1f1488",
@@ -185,11 +195,13 @@ return require("packer").startup {
 
   -- markdown
     use { "plasticboy/vim-markdown",
-        opt=true
+        opt=true,
+        setup = "require('cwebster/markdown').markdown_setup()",
     }
     use { "iamcco/markdown-preview.nvim",
         run = "cd app && yarn install",
-        ft = "markdown"
+        ft = "markdown",
+        setup = "require('cwebster/markdown').mkdp_setup()",
     }
 
     use { "vim-latex/vim-latex",
@@ -201,7 +213,9 @@ return require("packer").startup {
     use { "tpope/vim-eunuch" }
     use { "tpope/vim-surround" }
 
-    use { "andweeb/presence.nvim" }
+    use { "andweeb/presence.nvim",
+      config = "require('cwebster.presence').setup()",
+    }
     -- use {"oberblastmeister/neuron.nvim",
     --   config = "require("_neuron").setup()"
     -- }
