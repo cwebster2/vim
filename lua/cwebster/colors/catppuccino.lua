@@ -17,7 +17,7 @@ colors.neogit = {
   addbg = "#012800",
   delbg = "#340001",
 }
-colors.fg = cp_util.lighten(colors.catppuccin0, 0.75)
+colors.fg = cp_util.lighten(colors.catppuccin0, 0.90)
 colors.fg_gutter = colors.catppuccin12
 colors.blue = colors.catppuccin3
 colors.green = colors.catppuccin7
@@ -110,7 +110,7 @@ M.load = function()
     })
 
 
-  catppuccino.load("catppuccin")
+  catppuccino.load()
 end
 
 return M
