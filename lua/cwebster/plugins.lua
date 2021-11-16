@@ -89,11 +89,6 @@ return require("packer").startup {
     }
 
   -- colorschemes
-    use { "cwebster2/Catppuccino.nvim",
-      branch = "main",
-    }
-    use { "folke/tokyonight.nvim",
-    }
 
   -- visuals
     use {

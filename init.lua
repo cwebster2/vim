@@ -29,7 +29,7 @@ require('cwebster.mappings').init_keymap()
 require'cwebster.plugin_config'
 require('cwebster.mappings').setup_ft_mappings()
 
-require("cwebster.colors.theme").setup()
+require("cwebster.colors").setup()
 
 a.nvim_exec([[
   if has ("autocmd")
