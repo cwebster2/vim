@@ -65,6 +65,7 @@ return require("packer").startup {
     use { "tami5/lspsaga.nvim" }
     use { "nvim-lua/lsp-status.nvim" }
     use { "ray-x/lsp_signature.nvim" }
+    use { "jose-elias-alvarez/null-ls.nvim" }
     use { "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       config = "require('cwebster.trouble').setup()",

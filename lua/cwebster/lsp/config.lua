@@ -1,26 +1,40 @@
 local M = {}
 
-local prettier = require "cwebster.lsp.efm.prettier"
-local eslint = require "cwebster.lsp.efm.eslint"
-local hadolint = require "cwebster.lsp.efm.hadolint"
-local lsp_status = require "lsp-status"
+local lsp_status = require("lsp-status")
+local null_ls = require("null-ls")
 
-local language_formatters = {
-  typescript = {prettier, eslint},
-  javascript = {prettier, eslint},
-  typescriptreact = {prettier, eslint},
-  javascriptreact = {prettier, eslint},
-  yaml = {prettier},
-  json = {prettier},
-  html = {prettier},
-  scss = {prettier},
-  css = {prettier},
-  markdown = {prettier},
-  lua = {
-    {formatCommand = "lua-format -i", formatStdin = true}
-  },
-  dockerfile = {hadolint},
+local null_ls_sources = {
+  null_ls.builtins.formatting.stylua,
+  null_ls.builtins.formatting.eslint_d,
+  null_ls.builtins.formatting.prettierd,
+  null_ls.builtins.formatting.gofmt,
+  null_ls.builtins.formatting.rustfmt,
+  null_ls.builtins.formatting.terraform_fmt,
+  null_ls.builtins.diagnostics.eslint_d,
+  null_ls.builtins.diagnostics.hadolint,
+  null_ls.builtins.diagnostics.shellcheck,
 }
+
+null_ls.config({
+  sources = null_ls_sources,
+  diagnostics_format = "[#{c}] #{m} (#{s})"
+})
+-- local la(guage_formatters = {
+--   typescript = {prettier, eslint},
+--   javascript = {prettier, eslint},
+--   typescriptreact = {prettier, eslint},
+--   javascriptreact = {prettier, eslint},
+--   yaml = {prettier},
+--   json = {prettier},
+--   html = {prettier},
+--   scss = {prettier},
+--   css = {prettier},
+--   markdown = {prettier},
+--   lua = {
+--     {formatCommand = "lua-format -i", formatStdin = true}
+--   },
+--   dockerfile = {hadolint},
+-- }
 
 local function lua_cmd()
   local home = vim.fn.expand("$HOME")
@@ -71,20 +85,7 @@ M.servers = {
       cmd = lua_cmd(),
     },
   }),
-  efm = {
-    filetypes = vim.tbl_keys(language_formatters),
-    init_options = {
-      documentFormatting = true,
-      codeAction = true,
-      completion = true,
-      documentSymbol = true,
-      hover = true,
-    },
-    settings = {
-      rootMarkers = {".git/"},
-      languages = language_formatters
-    }
-  },
+  ["null-ls"] = {},
   -- coffeescript = {
   --   cmd = { bin_name, '--stdio' },
   --   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
