@@ -19,6 +19,10 @@ local null_ls_sources = {
     args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-colot", "-"},
   }),
   null_ls.builtins.diagnostics.shellcheck,
+  null_ls.builtins.diagnostics.write_good,
+  null_ls.builtins.code_actions.proselint,
+  null_ls.builtins.code_actions.gitsigns,
+  null_ls.builtins.code_actions.eslint_d,
 }
 
 null_ls.config({
