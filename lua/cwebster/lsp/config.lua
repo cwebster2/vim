@@ -6,12 +6,18 @@ local null_ls = require("null-ls")
 local null_ls_sources = {
   null_ls.builtins.formatting.stylua,
   null_ls.builtins.formatting.eslint_d,
-  null_ls.builtins.formatting.prettierd,
+  null_ls.builtins.formatting.prettier.with({
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "css", "scss", "less", "html", "json", "yaml", "markdown", "graphql", "svelte", "toml" }
+  }),
   null_ls.builtins.formatting.gofmt,
+  null_ls.builtins.formatting.goimports,
   null_ls.builtins.formatting.rustfmt,
   null_ls.builtins.formatting.terraform_fmt,
   null_ls.builtins.diagnostics.eslint_d,
-  null_ls.builtins.diagnostics.hadolint,
+  null_ls.builtins.diagnostics.hadolint.with({
+    command = "docker",
+    args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-colot", "-"},
+  }),
   null_ls.builtins.diagnostics.shellcheck,
 }
 
@@ -19,21 +25,11 @@ null_ls.config({
   sources = null_ls_sources,
   diagnostics_format = "[#{c}] #{m} (#{s})"
 })
+
 -- local la(guage_formatters = {
---   typescript = {prettier, eslint},
---   javascript = {prettier, eslint},
---   typescriptreact = {prettier, eslint},
---   javascriptreact = {prettier, eslint},
---   yaml = {prettier},
---   json = {prettier},
---   html = {prettier},
---   scss = {prettier},
---   css = {prettier},
---   markdown = {prettier},
 --   lua = {
 --     {formatCommand = "lua-format -i", formatStdin = true}
 --   },
---   dockerfile = {hadolint},
 -- }
 
 local function lua_cmd()

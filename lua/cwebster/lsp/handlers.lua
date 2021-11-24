@@ -31,11 +31,23 @@ function M.setup()
   --   end
   -- end
 
+  vim.diagnostic.config({
+    underline = true,
+    virtual_text = {
+      source = "if_many",
+      spacing = 3,
+      prefix = '←',
+    },
+    signs = true,
+    update_in_insert = false,
+  })
+
   handlers["textDocument/publishDiagnostics"] = lsp.with(
     lsp.diagnostic.on_publish_diagnostics, {
       underline = true,
       virtual_text = {
-        spacing = 4,
+        source = "if_many",
+        spacing = 3,
         prefix = '←',
       },
       signs = true,
