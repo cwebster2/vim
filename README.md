@@ -1,6 +1,6 @@
 # My neovim configuration
 
-![image](https://user-images.githubusercontent.com/5762261/109759786-38f6e880-7bb3-11eb-8229-f450fd9c0292.png)
+![image](https://raw.githubusercontent.com/cwebster2/vim/nvim-lua/.images/screenshot.png)
 
 ## Note
 Historically this configuration has been compatible with vim8 and neovim, but if you are
