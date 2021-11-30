@@ -1,6 +1,6 @@
 local g = vim.g
 local a = vim.api
-local augroup = require("utils").augroup
+local augroup = require("cwebster.utils").augroup
 
 a.nvim_command("set nocompatible")
 --a.nvim_command("profile start profile.log")
@@ -11,7 +11,7 @@ g.mapleader = ' '
 g.maplocalleader = ','
 
 -- set global, window and buffer options
-require'_options'
+require'cwebster.options'
 
 -- if this is being loaded by neovim running in vscode, bail
 if vim.fn.exists('g:vscode') == 1 then
@@ -22,19 +22,14 @@ end
 g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
 g.loaded_netrwPlugin = 1
 g.jsx_ext_required = 0
-g.markdown_fenced_languages = {'javascript', 'python', 'clojure', 'ruby'}
-g.mkdp_auto_close = 0
-g.mkdp_auto_open = 1
 
 -- require plugins and stuff
-require'plugins'
-require('_mappings').init_keymap()
-require'plugin_config'
-local theme = require'_theme'
-theme.colorscheme_setup("catppuccino")
-theme.overrides_setup()
-require('_galaxyline')
-require('_mappings').setup_ft_mappings()
+require'cwebster.plugins'
+require('cwebster.mappings').init_keymap()
+require'cwebster.plugin_config'
+require('cwebster.mappings').setup_ft_mappings()
+
+require("cwebster.colors").setup()
 
 a.nvim_exec([[
   if has ("autocmd")
