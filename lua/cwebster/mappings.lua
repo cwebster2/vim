@@ -227,7 +227,7 @@ M.lsp_setup = function(client, bufnr)
       name = "+code",
       ["r"] = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
       ["a"] = { "<cmd>lua require('lspsaga.codeaction').code_action()<CR>", "Code Action" },
-      ["d"] = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false,border='rounded'})<CR>", "Line Diagnostics"},
+      ["d"] = { "<cmd>lua vim.diagnostic.open_float(inil,{source=always,focusable=false,border='rounded'})<CR>", "Line Diagnostics"},
       ["l"] = {
         name = "+lsp",
         i = { "<cmd>LspInfo<cr>", "Lsp Info" },
@@ -272,8 +272,8 @@ M.lsp_setup = function(client, bufnr)
   }
 
   map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
-  map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
+  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
+  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
