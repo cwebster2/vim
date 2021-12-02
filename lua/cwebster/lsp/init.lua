@@ -106,10 +106,10 @@ function M.setup()
 
   require("cwebster.lsp.handlers").setup()
 
-  vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "LspDiagnosticsError"})
-  vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsWarning"})
-  vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsInformation"})
-  vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "LspDiagnosticsHint"})
+  -- vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "LspDiagnosticsError"})
+  -- vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsWarning"})
+  -- vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsInformation"})
+  -- vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "LspDiagnosticsHint"})
 
   local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
   for type, icon in pairs(signs) do
