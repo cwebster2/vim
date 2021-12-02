@@ -36,11 +36,11 @@ function M.get(cpt)
 		TSKeywordOperator = { fg = cpt.cyan, style = cpc.styles.keywords }, -- For `new` keyword operator
 		TSLabel = { fg = cpt.blue }, -- For labels: `label:` in C and `:label:` in Lua.
 		-- TSMethod            = { };    -- For method calls and definitions.
-		TSNamespace = { fg = cpt.cyan }, -- For identifiers referring to modules and namespaces.
+		TSNamespace = { fg = cpt.cyan, style = "italic" }, -- For identifiers referring to modules and namespaces.
 		-- TSNone              = { };    -- TODO: docs
 		-- TSNumber            = { };    -- For all numbers
 		TSOperator = { fg = cpt.cyan }, -- For any operator: `+`, but also `->` and `*` in cpt.
-		TSParameter = { fg = cpt.orange_br }, -- For parameters of a function.
+		TSParameter = { fg = cpt.orange_br, style = "italic" }, -- For parameters of a function.
 		-- TSParameterReference= { };    -- For references to parameters of a function.
 		TSProperty = { fg = cpt.red_br }, -- Same as `TSField`.
 		tomlTSProperty = { fg = cpt.blue }, -- Differentiates between string and properties
