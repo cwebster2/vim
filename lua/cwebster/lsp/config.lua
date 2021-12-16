@@ -3,7 +3,7 @@ local M = {}
 local lsp_status = require("lsp-status")
 local null_ls = require("null-ls")
 
-local null_ls_sources = {
+M.null_ls_sources = {
   null_ls.builtins.formatting.stylua,
   null_ls.builtins.formatting.eslint_d,
   null_ls.builtins.formatting.prettier.with({
@@ -25,10 +25,6 @@ local null_ls_sources = {
   null_ls.builtins.code_actions.eslint_d,
 }
 
-null_ls.config({
-  sources = null_ls_sources,
-  diagnostics_format = "[#{c}] #{m} (#{s})"
-})
 
 -- local la(guage_formatters = {
 --   lua = {
@@ -85,7 +81,6 @@ M.servers = {
       cmd = lua_cmd(),
     },
   }),
-  ["null-ls"] = {},
   -- coffeescript = {
   --   cmd = { bin_name, '--stdio' },
   --   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },

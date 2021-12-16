@@ -5,6 +5,7 @@ local lsp = vim.lsp
 local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
 local lsp_status = require("lsp-status")
+local null_ls = require("null-ls")
 
 
 local function get_capabilities()
@@ -84,6 +85,12 @@ local on_attach = function(client, bufnr)
   end
 
 end
+
+require("null-ls").setup({
+  sources = require("cwebster.lsp.config").null_ls_sources,
+  diagnostics_format = "[#{c}] #{m} (#{s})",
+  on_attach = on_attach,
+})
 
 local function custom_codeAction(_, _, action)
   print(vim.inspect(action))
