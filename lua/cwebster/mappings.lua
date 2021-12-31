@@ -169,6 +169,7 @@ M.init_keymap = function()
   map('', 'k', '(v:count == 0 ? \'gk\' : \'k\')', {expr=true,noremap=true,silent=true})
   map('', '<Up>', '(v:count == 0 ? \'gk\' : \'<Up>\')', {expr=true,noremap=true,silent=true})
 
+  map("i", "<A-t>", 'copilot#Accept("")', {expr=true,noremap=true,silent=true})
   -- quick spilt
   map('n', '<Leader>v', '<C-w>v<C-w>w', {})
 
