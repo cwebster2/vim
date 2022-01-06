@@ -90,6 +90,10 @@ return require("packer").startup {
     }
 
   -- colorschemes
+    use {
+      "catppuccin/nvim",
+      as = "catppucin"
+    }
 
   -- visuals
     use {
@@ -116,10 +120,13 @@ return require("packer").startup {
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
 
     use {
-      "folke/which-key.nvim",
+      "zeertzjq/which-key.nvim",
+      branch = "patch-1",
+      -- "folke/which-key.nvim",
       config = function()
         require("cwebster.whichkey").setup()
       end,
+      -- track until merged https://github.com/folke/which-key.nvim/pull/227
     }
 
   -- language stuff

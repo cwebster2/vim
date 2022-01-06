@@ -10,7 +10,7 @@ config.options = {
 		functions = "italic",
 		keywords = "italic",
 		strings = "NONE",
-		variables = "NONE",
+		variables = "italic",
 	},
 	integrations = {
 		treesitter = true,
