@@ -108,6 +108,10 @@ return require("packer").startup {
       requires = {"kyazdani42/nvim-web-devicons"}
     }
     use {
+      "petertriho/nvim-scrollbar",
+        config = "require('cwebster.scrollbar').setup()",
+    }
+    use {
       "RRethy/vim-hexokinase",
       run = "make hexokinase",
       config = "require('cwebster.hexokinase').setup()",
@@ -223,6 +227,12 @@ return require("packer").startup {
     -- use {"oberblastmeister/neuron.nvim",
     --   config = "require("_neuron").setup()"
     -- }
+
+    use {'KadoBOT/nvim-spotify',
+      requires = { "nvim-telescope/telescope.nvim" },
+      config = "require('cwebster.spotify').setup()",
+      run = 'make'
+    }
 
     use { "theprimeagen/neovim-irc-ui" }
 
