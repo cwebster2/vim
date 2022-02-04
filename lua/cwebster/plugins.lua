@@ -45,11 +45,11 @@ return require("packer").startup {
     }
     use { "nvim-treesitter/playground" }
     use { "nvim-treesitter/nvim-treesitter-textobjects" }
-    use { "nvim-treesitter/nvim-treesitter-refactor" }
-    use {
-      "romgrk/nvim-treesitter-context",
-      requires = {"nvim-treesitter/nvim-treesitter"}
-    }
+    -- use { "nvim-treesitter/nvim-treesitter-refactor" }
+    -- use {
+    --   "romgrk/nvim-treesitter-context",
+    --   requires = {"nvim-treesitter/nvim-treesitter"}
+    -- }
     use { "p00f/nvim-ts-rainbow" }
     use { "windwp/nvim-ts-autotag" }
     use {
