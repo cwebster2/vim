@@ -28,6 +28,7 @@ install_lsp_servers_npm() {
       vim-language-server \
       vls \
       pyright \
+      write-good \
       svelte-language-server
   )
 }
@@ -65,6 +66,7 @@ install_lsp_servers_cargo() {
 
     echo "Building the tex language server"
     cargo install --git https://github.com/latex-lsp/texlab.git --locked
+    cargo install stylua
   )
 }
 
@@ -102,7 +104,7 @@ install_lsp_servers_python() {
   echo "Installing the python language server"
   echo
   (
-    pip install --quiet python-language-server
+    pip install --quiet python-language-server proselint
   )
 }
 install_lsp_servers_lua() {
