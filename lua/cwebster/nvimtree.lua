@@ -32,7 +32,7 @@ M.setup = function()
   require'nvim-tree'.setup {
     disable_netrw       = true,
     hijack_netrw        = true,
-    open_on_setup       = true,
+    open_on_setup       = false,
     ignore_ft_on_setup  = { 'startify', 'outline' },
     auto_close          = true,
     open_on_tab         = false,
@@ -64,6 +64,11 @@ M.setup = function()
       custom = { '.git', 'node_modules', '.cache' },
       dotfiles = true,
     },
+    git = {
+      enable = true,
+      ignore = true,
+      timeout = 500,
+    },
     view = {
       width = 30,
       height = 30,
@@ -72,6 +77,18 @@ M.setup = function()
       mappings = {
         custom_only = false,
         list = {}
+      },
+      hide_root_folder = false,
+      number = false,
+      relative_number = false,
+      signcolumn = "yes",
+    },
+    actions = {
+      change_dir = {
+        global = false,
+      },
+      open_file = {
+        quit_on_open = false,
       }
     }
   }
