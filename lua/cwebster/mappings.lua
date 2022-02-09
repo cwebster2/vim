@@ -173,6 +173,18 @@ M.init_keymap = function()
   -- quick spilt
   map('n', '<Leader>v', '<C-w>v<C-w>w', {})
 
+  -- map('c', "<up>", 'wildmenumode() ? "\<left>" : "\<up>"', {expr=true, noremap=true, silent=true})
+  vim.api.nvim_exec([[
+    set wildcharm=<C-Z>
+    cnoremap  <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
+    cnoremap  <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
+    cnoremap  <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
+    cnoremap  <expr> <right> wildmenumode() ? "\<bs><C-Z>" : "\<right>"
+  ]],{})
+
+  map('n', '+', '<C-a>', {})
+  map('n', '-', '<C-x>', {})
+
   -- spell
   map ('n', '<F9>', ':set spell!<cr>', {silent=true})
   map ('i', '<F9>', '<C-O>:set spell!<cr>', {silent=true})
