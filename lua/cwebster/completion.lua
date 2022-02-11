@@ -54,6 +54,7 @@ function M.setup()
       { name = "treesitter" },
       { name = "crates" },
       { name = "spell" },
+      { name = "nvim-signature-help" },
     },
     mapping = {
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
