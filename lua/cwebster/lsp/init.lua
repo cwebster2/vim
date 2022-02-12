@@ -76,7 +76,7 @@ local on_attach = function(client, bufnr)
   -- This is causing an out of bounds error, see if this changed in a nightly
   -- vim.api.nvim_command("autocmd BufWrite,BufEnter,InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
-  vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+  -- vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
@@ -137,6 +137,9 @@ function M.setup()
     code_action_keys = {
       quit = {'q','<esc>'},
       exec = '<CR>',
+    },
+    code_action_prompt = {
+      enable = false
     },
     rename_action_keys = {
       quit = {'<C-c>', '<esc>'},

@@ -45,11 +45,14 @@ return require("packer").startup {
     }
     use { "nvim-treesitter/playground" }
     use { "nvim-treesitter/nvim-treesitter-textobjects" }
+
+    -- these are broken with curreng version of neovim
     -- use { "nvim-treesitter/nvim-treesitter-refactor" }
     -- use {
     --   "romgrk/nvim-treesitter-context",
     --   requires = {"nvim-treesitter/nvim-treesitter"}
     -- }
+
     use { "p00f/nvim-ts-rainbow" }
     use { "windwp/nvim-ts-autotag" }
     use {
@@ -61,7 +64,7 @@ return require("packer").startup {
   -- LSP stuff
     use { "neovim/nvim-lspconfig" }
     use { "folke/lua-dev.nvim" }
-    use { "kosayoda/nvim-lightbulb" }
+    -- use { "kosayoda/nvim-lightbulb" }
     use { "tami5/lspsaga.nvim" }
     use { "nvim-lua/lsp-status.nvim" }
     use { "ray-x/lsp_signature.nvim" }
@@ -111,6 +114,10 @@ return require("packer").startup {
     use {
       "petertriho/nvim-scrollbar",
         config = "require('cwebster.scrollbar').setup()",
+    }
+    use {
+      "kevinhwang91/nvim-hlslens",
+      config = "require('cwebster.hlslens').setup()",
     }
     use {
       "RRethy/vim-hexokinase",
