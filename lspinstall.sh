@@ -38,7 +38,7 @@ install_lsp_terraform() {
   echo "Installing terraform language server"
   echo
   (
-    TFLSVER=${TFLSVER:-0.17.1}
+    TFLSVER=${TFLSVER:-0.25.2}
     TFLSARCH=${TFLSARCH:-amd64}
     TFLSOS=${TFLSOS:-$mcode}
     curl -sfLo "${HOME}"/bin/terraform-ls.zip "https://releases.hashicorp.com/terraform-ls/${TFLSVER}/terraform-ls_${TFLSVER}_${TFLSOS}_${TFLSARCH}.zip"
