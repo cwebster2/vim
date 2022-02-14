@@ -88,8 +88,6 @@ install_lsp_servers_go() {
       set +e
       GO111MODULE=on go get golang.org/x/tools/gopls@latest
     )
-    echo "Installing efm general purpose ls"
-    go get github.com/mattn/efm-langserver
   )
 }
 
@@ -131,7 +129,7 @@ install_lsp_servers_lua() {
 
 install_lsp_linters() {
   echo
-  echo "Installing linters for efm"
+  echo "Installing linters for null-ls"
   echo
   (
       npm install -g prettier eslint_d @fsouza/prettierd
