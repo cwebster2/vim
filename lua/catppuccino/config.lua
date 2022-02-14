@@ -55,6 +55,7 @@ config.options = {
 		lightspeed = false,
 		ts_rainbow = true,
 		hop = true,
+    hlslens = true,
 	},
 }
 
