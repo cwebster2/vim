@@ -16,7 +16,7 @@ M.null_ls_sources = {
   null_ls.builtins.diagnostics.eslint_d,
   null_ls.builtins.diagnostics.hadolint.with({
     command = "docker",
-    args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-colot", "-"},
+    args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-color", "-"},
   }),
   null_ls.builtins.diagnostics.shellcheck,
   null_ls.builtins.diagnostics.write_good,
