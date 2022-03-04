@@ -12,7 +12,6 @@ M.null_ls_sources = {
   null_ls.builtins.formatting.gofmt,
   null_ls.builtins.formatting.goimports,
   null_ls.builtins.formatting.rustfmt,
-  null_ls.builtins.formatting.terraform_fmt,
   null_ls.builtins.diagnostics.eslint_d,
   null_ls.builtins.diagnostics.hadolint.with({
     command = "docker",
