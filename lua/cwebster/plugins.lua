@@ -19,6 +19,14 @@ return require("packer").startup {
     }
     use { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
+  -- stuff to try
+    --  https://github.com/pianocomposer321/yabs.nvim
+    --  https://github.com/Shatur/neovim-session-manager
+    --  https://github.com/kosayoda/nvim-lightbulb with new config
+    --  heirline or feline to replace galiaxyline rebelot/heirline.nvim
+    --  ChristianChiarulli/codi.vim
+    --  nvim-telescope/telescope-fzf-native.nvim
+    --  nvim-neorg/neorg
   -- fuzzy stuff
     use {
       "nvim-telescope/telescope.nvim",
