@@ -84,15 +84,17 @@ require("telescope").setup {
         qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
     },
     extensions = {
-        fzy_native = {
-          override_generic_sorter = false,
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
           override_file_sorter = true,
+          case_mode = "smart_case"
         }
     }
 }
 
 -- the fzy extension changes the behavior of telescope in a way i don't like
-require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzf')
 require('telescope').load_extension('octo')
 require('telescope').load_extension('githubcoauthors')
 require('telescope').load_extension('dap')
