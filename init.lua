@@ -43,9 +43,6 @@ augroup("vimrc-main", {
   {'StdinReadPre', '*', 'let s:std_in=1'},
   -- strip trailing whitespace
   -- vim.cmd [[ autocmd BufWritePre * :%s/\s\+$//e ]]
-  -- starphleet
-  {'BufRead,BufNewFile', 'after_containerize,on_containerize,orders', 'set filetype=sh'},
-  {'BufRead,BufNewFile', '~/.zfunc/*', 'set filetype=zsh'},
   -- tab management
   {'TabLeave', '*', 'let g:lasttab = tabpagenr()'},
   -- highlight yanks

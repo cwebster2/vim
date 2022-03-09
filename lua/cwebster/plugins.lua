@@ -17,6 +17,10 @@ return require("packer").startup {
     use { "mhinz/vim-startify",
       config = "require('cwebster.startify').setup()",
     }
+    use {
+      "nathom/filetype.nvim",
+      config = function() require('cwebster.filetype').setup() end
+    }
     use { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
   -- stuff to try
@@ -27,6 +31,7 @@ return require("packer").startup {
     --  ChristianChiarulli/codi.vim
     --  nvim-telescope/telescope-fzf-native.nvim
     --  nvim-neorg/neorg
+    --  NarutoXY/dim.lua
   -- fuzzy stuff
     use {
       "nvim-telescope/telescope.nvim",
@@ -195,6 +200,11 @@ return require("packer").startup {
         {"nvim-treesitter/nvim-treesitter"}
       }
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
+    }
+    use {
+      "narutoxy/dim.lua",
+      requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
+      config = function() require('dim').setup() end
     }
 
     use { "github/copilot.vim",
