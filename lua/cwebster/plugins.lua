@@ -29,9 +29,7 @@ return require("packer").startup {
     --  https://github.com/kosayoda/nvim-lightbulb with new config
     --  heirline or feline to replace galiaxyline rebelot/heirline.nvim
     --  ChristianChiarulli/codi.vim
-    --  nvim-telescope/telescope-fzf-native.nvim
     --  nvim-neorg/neorg
-    --  NarutoXY/dim.lua
   -- fuzzy stuff
     use {
       "nvim-telescope/telescope.nvim",
@@ -42,8 +40,6 @@ return require("packer").startup {
       config = "require('cwebster.telescope')",
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    -- use { "nvim-telescope/telescope-fzy-native.nvim" }
-    -- use { "nvim-telescope/telescope-fzf-writer.nvim" }
     use { "nvim-telescope/telescope-packer.nvim" }
     use { "nvim-telescope/telescope-github.nvim" }
     use { "nvim-telescope/telescope-symbols.nvim" }
@@ -59,9 +55,8 @@ return require("packer").startup {
     }
     use { "nvim-treesitter/playground" }
     use { "nvim-treesitter/nvim-treesitter-textobjects" }
-
+    use { "nvim-treesitter/nvim-treesitter-refactor" }
     -- these are broken with curreng version of neovim
-    -- use { "nvim-treesitter/nvim-treesitter-refactor" }
     -- use {
     --   "romgrk/nvim-treesitter-context",
     --   requires = {"nvim-treesitter/nvim-treesitter"}
@@ -258,21 +253,11 @@ return require("packer").startup {
       run = 'make'
     }
 
-    use { "theprimeagen/neovim-irc-ui" }
-
   -- still evaluating if these are needed now
   --Plug "mattn/emmet-vim"
   --Plug "terryma/vim-multiple-cursors" -- need to rebind its c-n key to use it
-  --Plug "Raimondi/delimitMate" -- closes quotes and stuff
-    --ses quotes and stuff
   use { "sheerun/vim-polyglot" }  -- syntax files for most languages
-  --Plug "vim-python/python-syntax"  " Improved python syntax
-  --Plug "Vimjas/vim-python-pep8-indent"  " Proper python indenting
-  --Plug "chrisbra/Colorizer"  " Highlight CSS colors
-  --Plug "fatih/vim-go", {"for": "go", "do": ":GoUpdateBinaries" }
-  --Plug "jaxbot/github-issues.vim"
   --Plug "rhysd/git-messenger.vim"
-  --Plug "jreybert/vimagit"
 
   end,
   config = {
