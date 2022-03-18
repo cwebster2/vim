@@ -115,11 +115,15 @@ return require("packer").startup {
       config = "require('cwebster.bufferline').setup()",
     }
     use {
-      "NTBBloodbath/galaxyline.nvim",
-      branch="main",
-      config = "require('cwebster.galaxyline')",
-      requires = {"kyazdani42/nvim-web-devicons"}
+      "rebelot/heirline.nvim",
+      config = function() require("cwebster.heirline").setup() end,
     }
+    -- use {
+    --   "NTBBloodbath/galaxyline.nvim",
+    --   branch="main",
+    --   config = "require('cwebster.galaxyline')",
+    --   requires = {"kyazdani42/nvim-web-devicons"}
+    -- }
     use {
       "petertriho/nvim-scrollbar",
         config = "require('cwebster.scrollbar').setup()",

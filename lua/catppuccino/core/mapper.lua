@@ -71,6 +71,7 @@ local function get_base()
 		WarningMsg = { fg = cpt.warning }, -- warning messages
 		Whitespace = { fg = cpt.fg_gutter }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
 		WildMenu = { bg = cpt.bg_visual }, -- current match in 'wildmenu' completion
+    WinSeparator = { bg = cpt.none, fg = cpt.gray },
 		-- These groups are not listed as default vim groups,
 		-- but they are defacto standard group names for syntax highlighting.
 		-- commented out groups should chain up to their "preferred" group by

@@ -14,6 +14,8 @@ function M.setup()
       -- ["bash"] = false,
     },
     separator = ' > ',
+    depth = 0,
+    depth_limit_indicator = "..",
   })
 end
 

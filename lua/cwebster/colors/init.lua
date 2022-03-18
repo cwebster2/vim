@@ -7,7 +7,7 @@ function M.get_colors()
   return colors
 end
 
-M.galaxyline_colors = colors
+M.theme_colors = colors
 
 M.mode_color = {
   --n = 'DarkGoldenrod2',

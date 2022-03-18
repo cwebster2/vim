@@ -80,6 +80,7 @@ opt.wildmode = 'longest,full'
 opt.winblend = 15
 opt.winblend = 30
 opt.writebackup = false
+opt.laststatus = 3
 
 local function has(value)
   return vim.fn.has(value) == 1
