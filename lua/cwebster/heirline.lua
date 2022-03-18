@@ -94,7 +94,7 @@ local Spell = {
     condition = function()
         return vim.wo.spell
     end,
-    provider = 'SPELL ',
+    provider = ' SPELL',
     hl = { style = 'bold', fg = colors.red, bg = colors.none}
 }
 

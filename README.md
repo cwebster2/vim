@@ -13,7 +13,7 @@ to change with every commit.
 
 ## Requirements
 
-- Neovim >= 0.6
+- Neovim >= 0.7
 
 ## What plugins am I using?
 
@@ -23,12 +23,11 @@ to change with every commit.
 
 ### Colorscheme
 
- - https://github.com/nanotech/jellybeans.vim
- - https://github.com/cwebster2/color-overrides.nvim
+ - Custom fork of catppuccin (in lua/catppuccin for now)
 
 ### Status Line
 
- - https://github.com/glepnir/galaxyline.nvim
+ - https://github.com/rebelot/heirline.nvim
 
 ### Tab Bar
 
@@ -41,12 +40,11 @@ to change with every commit.
 ### Fuzzy finding
 
  - https://github.com/nvim-telescope/telescope.nvim
- - https://github.com/nvim-telescope/telescope-fzy-native.nvim
+ - https://github.com/nvim-telescope/telescope-fzf-native.nvim
  - https://github.com/nvim-telescope/telescope-fzf-writer.nvim
  - https://github.com/nvim-telescope/telescope-packer.nvim
  - https://github.com/nvim-telescope/telescope-github.nvim
  - https://github.com/nvim-telescope/telescope-symbols.nvim
- - https://github.com/nvim-telescope/telescope-vimspector.nvim
  - https://github.com/junegunn/fzf
  - https://github.com/junegunn/fzf.vim
 
@@ -61,15 +59,13 @@ to change with every commit.
 ### Language Server Protocol Things
  - https://github.com/neovim/nvim-lspconfig
  - https://github.com/kosayoda/nvim-lightbulb
- - https://github.com/glepnir/lspsaga.nvim
+ - https://github.com/tami5/lspsaga.nvim
  - https://github.com/ray-x/lsp_signature.nvim
  - https://github.com/folke/lsp-trouble.nvim
 
 ### Completion
 
- - https://github.com/hrsh7th/nvim-compe
- - https://github.com/hrsh7th/vim-vsnip
- - https://github.com/hrsh7th/vim-vsnip-integ
+ - https://github.com/hrsh7th/nvim-cmp
 
 ### Symbol Tree
 
@@ -85,7 +81,7 @@ to change with every commit.
 
 ### Auto-pairs
 
- - https://github.com/tmsvg/pear-tree
+ - https://github.com/windwp/nvim-ts-autotag
 
 ### Keymap management
 
