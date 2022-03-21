@@ -23,7 +23,7 @@ local function get_base()
 		Cursor = { fg = cpt.bg, bg = cpt.fg }, -- character under the cursor
 		lCursor = { fg = cpt.bg, bg = cpt.fg }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
 		CursorIM = { fg = cpt.bg, bg = cpt.fg }, -- like Cursor, but used when in IME mode |CursorIM|
-		CursorColumn = { bg = cpt.bg_highlight }, -- Screen-column at the cursor, when 'cursorcolumn' is secpt.
+		CursorColumn = { bg = cpt.bg_highlight, blend = 50 }, -- Screen-column at the cursor, when 'cursorcolumn' is secpt.
 		CursorLine = { bg = cpt.bg_highlight , blend = 50 }, -- Screen-line at the cursor, when 'cursorline' is secpt.  Low-priority if foreground (ctermfg OR guifg) is not secpt.
 		Directory = { fg = cpt.blue }, -- directory names (and other special names in listings)
 		EndOfBuffer = { fg = cpt.bg }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.

@@ -236,7 +236,7 @@ FileNameBlock = utils.insert(FileNameBlock,
 local Gps = {
     condition = gps.is_available,
     provider = gps.get_location,
-    hl = { fg = colors.blue },
+    hl = { fg = colors.magenta },
 }
 -- local Gps = utils.make_flexible_component(3, Gps, { provider = "" })
 
