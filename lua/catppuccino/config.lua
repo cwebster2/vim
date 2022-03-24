@@ -28,14 +28,6 @@ config.options = {
 				warnings = "underline",
 				information = "underline",
 			},
-      neotree = {
-        enabled = true,
-        show_root = true,
-        transparent_panel = true,
-      },
-      nvimtee = {
-        enabled = false
-      },
 		},
     galaxyline = true,
 		lsp_trouble = true,
@@ -43,6 +35,16 @@ config.options = {
 		gitgutter = false,
 		gitsigns = true,
 		telescope = true,
+    neotree = {
+      enabled = true,
+      show_root = true,
+      transparent_panel = true,
+    },
+    nvimtee = {
+      enabled = false,
+      show_root = true,
+      transparent_panel = true,
+    },
     cmp = true,
 		which_key = true,
 		indent_blankline = {

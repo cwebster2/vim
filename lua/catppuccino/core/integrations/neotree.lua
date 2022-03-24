@@ -1,7 +1,7 @@
 local M = {}
 
 function M.get(cp)
-	local config = require("catppuccin.config").options
+	local config = require("catppuccino.config").options
 	local neotree = config.integrations.neotree
 
 	local root_dir_color = cp.pink
