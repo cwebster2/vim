@@ -35,7 +35,7 @@ to change with every commit.
 
 ### File Tree
 
- - https://github.com/kyazdani42/nvim-tree.lua
+ - https://github.com/nvim-neo-tree/neo-tree.nvim
 
 ### Fuzzy finding
 

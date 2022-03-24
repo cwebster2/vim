@@ -27,7 +27,6 @@ return require("packer").startup {
     --  https://github.com/pianocomposer321/yabs.nvim
     --  https://github.com/Shatur/neovim-session-manager
     --  https://github.com/kosayoda/nvim-lightbulb with new config
-    --  heirline or feline to replace galiaxyline rebelot/heirline.nvim
     --  ChristianChiarulli/codi.vim
     --  nvim-neorg/neorg
   -- fuzzy stuff
@@ -180,11 +179,15 @@ return require("packer").startup {
       config = "require('cwebster.symbols').setup()",
     }
     use { "unblevable/quick-scope" }
-    use { "kyazdani42/nvim-tree.lua",
-      -- commit = "f1f1488",
-      config = function() require("cwebster.nvimtree").setup() end,
-      --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
-      --opt = true
+    use { "nvim-neo-tree/neo-tree.nvim",
+      branch = "v1.x",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons",
+        "MunifTanjim/nui.nvim"
+      },
+      -- after = "hrsh7th/nvim-cmp",
+      config = function() require("cwebster.neotree").setup() end,
     }
     use { "pwntester/octo.nvim" }
     use { "windwp/nvim-autopairs",
