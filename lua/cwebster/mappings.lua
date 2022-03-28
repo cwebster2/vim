@@ -55,7 +55,7 @@ M.init_keymap = function()
     },
     ["f"] = {
       name = "+file",
-      ["t"] = { "<cmd>NeoTreeShowToggle<cr>", "NeoTree" },
+      ["t"] = { "<cmd>Neotree show<cr>", "NeoTree" },
       ["s"] = { ":SymbolsOutline<CR>", "Symbols" },
       --["t"] = { "<cmd>lua require('_nvimtree').toggle_tree()<cr>", "NvimTree" },
       ["f"] = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Find Files" },

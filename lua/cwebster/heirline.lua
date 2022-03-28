@@ -18,7 +18,7 @@ local icons = {
   error = '✘',
   warning = '⚠',
   branch = '',
-  git = ' ',
+  git = '',
   lineno = ' ',
   func = ' '..u '1d453',
 }
@@ -153,7 +153,11 @@ local Git = {
 
 local WorkDir = {
     provider = function()
+        local is_git = conditions.is_git_repo()
         local icon = "  "
+        if is_git then
+          icon = " " .. icons.git .. " "
+        end
         local cwd = vim.fn.getcwd(0)
         cwd = vim.fn.fnamemodify(cwd, ":t")
         return icon .. cwd  .. " "
@@ -333,6 +337,9 @@ local LSPActive = {
         local names = {}
         for i, server in ipairs(vim.lsp.buf_get_clients(0)) do
             local servername = u 'f817' .. server.name
+            if server.name == "null-ls" then
+              servername = "∅"
+            end
             table.insert(names, servername)
         end
         return table.concat(names, " ")
@@ -386,7 +393,7 @@ local Ruler = {
     -- %L = number of lines in the buffer
     -- %c = column number
     -- %P = percentage through file of displayed window
-    provider = "%3l:%2c",
+    provider = ":%2c",
     hl = { fg = colors.fg },
 }
 
@@ -440,8 +447,8 @@ local statusline = {
   LSPActive,
   Spacer,
 -- size?
-  FileSize,
-  Spacer,
+  -- FileSize,
+  -- Spacer,
 -- line/col
   Ruler,
 -- nvim scrollbar

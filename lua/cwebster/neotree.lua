@@ -2,10 +2,12 @@ local M = {}
 local neotree = require("neo-tree")
 
 function M.setup()
-  vim.cmd([[
-    hi link NeoTreeDirectoryName Directory
-    hi link NeoTreeDirectoryIcon NeoTreeDirectoryName
-  ]])
+  -- vim.cmd([[
+  --   hi link NeoTreeDirectoryName Directory
+  --   hi link NeoTreeDirectoryIcon NeoTreeDirectoryName
+  -- ]])
+
+  vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
   neotree.setup({
     close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
@@ -20,6 +22,10 @@ function M.setup()
         indent_marker = "│",
         last_indent_marker = "└",
         highlight = "NeoTreeIndentMarker",
+        with_expanders = true,
+        expander_collapsed = "",
+        expander_expanded = "",
+        expander_highlight = "NeoTreeExpander",
       },
       icon = {
         folder_closed = "",
@@ -32,13 +38,37 @@ function M.setup()
         use_git_status_colors = true,
       },
       git_status = {
-        -- highlight = "NeoTreeDimText", -- if you remove this the status will be colorful
+        symbols = {
+          -- Change type
+          added     = "✚",
+          deleted   = "✖",
+          modified  = "",
+          renamed   = "",
+          -- Status type
+          untracked = "",
+          ignored   = "",
+          unstaged  = "",
+          staged    = "",
+          conflict  = "",
+        }
       },
     },
+    nesting_rules = {},
     filesystem = {
-      filters = { --These filters are applied to both browsing and searching
-        show_hidden = false,
-        respect_gitignore = true,
+
+      red_items = {
+        visible = true, -- when true, they will just be displayed differently than normal items
+        hide_dotfiles = true,
+        hide_gitignored = true,
+        hide_by_name = {
+          ".DS_Store",
+          "thumbs.db"
+          --"node_modules"
+        },
+        never_show = { -- remains hidden even if visible is toggled to true
+          ".DS_Store",
+          "thumbs.db"
+        },
       },
       follow_current_file = true, -- This will find and focus the file in the active buffer every
                                     -- time the current file is changed while the tree is open.
@@ -53,6 +83,7 @@ function M.setup()
         position = "left",
         width = 30,
         mappings = {
+          ["<space>"] = "toggle_node",
           ["<2-LeftMouse>"] = "open",
           ["<cr>"] = "open",
           ["S"] = "open_split",
@@ -64,16 +95,16 @@ function M.setup()
           ["I"] = "toggle_gitignore",
           ["R"] = "refresh",
           ["/"] = "fuzzy_finder",
-          --["/"] = "filter_as_you_type", -- this was the default until v1.28
-          --["/"] = "none" -- Assigning a key to "none" will remove the default mapping
           ["f"] = "filter_on_submit",
           ["<c-x>"] = "clear_filter",
           ["a"] = "add",
+          ["A"] = "add_directory",
           ["d"] = "delete",
           ["r"] = "rename",
-          ["c"] = "copy_to_clipboard",
+          ["y"] = "copy_to_clipboard",
           ["x"] = "cut_to_clipboard",
           ["p"] = "paste_from_clipboard",
+          ["c"] = "copy", -- takes text input for destination
           ["m"] = "move", -- takes text input for destination
           ["q"] = "close_window",
         }
