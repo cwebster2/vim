@@ -339,7 +339,10 @@ local LSPActive = {
             local servername = u 'f817' .. server.name
             if server.name == "null-ls" then
               servername = "∅"
+            elseif server.name == "copilot" then
+              servername = u '2708'
             end
+
             table.insert(names, servername)
         end
         return table.concat(names, " ")

@@ -56,7 +56,8 @@ local lsp_signature_config = {
   hint_enable = true,
   handler_opts = {
     border = "single"
-  }
+  },
+  -- fix_pos = true,
 }
 
 local on_attach = function(client, bufnr)

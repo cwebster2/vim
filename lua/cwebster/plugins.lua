@@ -209,9 +209,24 @@ return require("packer").startup {
       config = function() require('dim').setup() end
     }
 
-    use { "github/copilot.vim",
-      setup = "require('cwebster.copilot').setup()"
+    -- copilot stuff
+    -- use { "github/copilot.vim",
+    --   setup = "require('cwebster.copilot').setup()"
+    -- }
+    use{
+      "zbirenbaum/copilot.lua",
+      event = {"VimEnter"},
+      config = function()
+        vim.defer_fn(function()
+          require('cwebster.copilot').setup()
+        end, 100)
+      end,
     }
+    use {
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua", "nvim-cmp" },
+    }
+
     use { "junegunn/gv.vim" }
 
   -- testing

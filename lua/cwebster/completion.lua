@@ -40,13 +40,16 @@ function M.setup()
         luasnip.lsp_expand(args.body)
       end,
     },
-    documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    window = {
+      documentation = {
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      },
     },
     sources = {
-      { name = "nvim_lsp" },
-      { name = "path" },
-      { name = "luasnip" },
+      { name = "copilot", group_index = 2 },
+      { name = "nvim_lsp", group_index = 2 },
+      { name = "path", group_index = 2 },
+      { name = "luasnip", group_index = 2 },
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "calc" },
@@ -54,7 +57,7 @@ function M.setup()
       { name = "treesitter" },
       { name = "crates" },
       { name = "spell" },
-      { name = "nvim-signature-help" },
+      { name = "nvim_lsp_signature_help" },
     },
     mapping = {
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),

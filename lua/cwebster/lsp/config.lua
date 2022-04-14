@@ -35,13 +35,14 @@ local function lua_cmd()
   local home = vim.fn.expand("$HOME")
   local build = home .. "/src/lua-language-server"
   local bin_location = ""
-  if jit.os == 'OSX' then
-    bin_location = 'macOS'
-  elseif jit.os == 'Linux' then
-    bin_location = 'Linux'
-  end
+  -- if jit.os == 'OSX' then
+  --   bin_location = 'macOS'
+  -- elseif jit.os == 'Linux' then
+  --   bin_location = 'Linux'
+  -- end
   local bin = build .. "/bin/" .. bin_location .. "/lua-language-server"
-  return {bin, "-E", build .. "/main.lua"}
+  -- return {bin, "-E", build .. "/main.lua"}
+  return {bin}
 end
 
 M.servers = {
