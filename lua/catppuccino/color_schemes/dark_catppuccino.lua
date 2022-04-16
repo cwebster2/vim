@@ -27,6 +27,7 @@ local colors = {
 	orange_br = "#F6A878",
 	pink_br = "#DF97DB",
 	comment = "#526175",
+  purple = "purple",
 }
 
 util.bg = colors.bg

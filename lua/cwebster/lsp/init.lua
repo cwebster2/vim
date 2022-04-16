@@ -5,6 +5,7 @@ local lsp = vim.lsp
 local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
 local lsp_status = require("lsp-status")
+local null_ls = require("null-ls")
 
 
 local function get_capabilities()
@@ -55,7 +56,8 @@ local lsp_signature_config = {
   hint_enable = true,
   handler_opts = {
     border = "single"
-  }
+  },
+  -- fix_pos = true,
 }
 
 local on_attach = function(client, bufnr)
@@ -75,7 +77,7 @@ local on_attach = function(client, bufnr)
   -- This is causing an out of bounds error, see if this changed in a nightly
   -- vim.api.nvim_command("autocmd BufWrite,BufEnter,InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
-  vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+  -- vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
@@ -84,6 +86,12 @@ local on_attach = function(client, bufnr)
   end
 
 end
+
+require("null-ls").setup({
+  sources = require("cwebster.lsp.config").null_ls_sources,
+  diagnostics_format = "[#{c}] #{m} (#{s})",
+  on_attach = on_attach,
+})
 
 local function custom_codeAction(_, _, action)
   print(vim.inspect(action))
@@ -106,16 +114,6 @@ function M.setup()
 
   require("cwebster.lsp.handlers").setup()
 
-  -- vim.fn.sign_define("LspDiagnosticsSignError", {text = "✘", texthl = "LspDiagnosticsError"})
-  -- vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl = "LspDiagnosticsWarning"})
-  -- vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "🛈", texthl = "LspDiagnosticsInformation"})
-  -- vim.fn.sign_define("LspDiagnosticsSignHint", {text = "💡", texthl = "LspDiagnosticsHint"})
-
-  local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-  end
 
   saga.init_lsp_saga {
     use_saga_diagnostic_sign = false,
@@ -130,6 +128,9 @@ function M.setup()
     code_action_keys = {
       quit = {'q','<esc>'},
       exec = '<CR>',
+    },
+    code_action_prompt = {
+      enable = false
     },
     rename_action_keys = {
       quit = {'<C-c>', '<esc>'},

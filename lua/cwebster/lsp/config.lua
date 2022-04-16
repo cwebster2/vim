@@ -3,7 +3,7 @@ local M = {}
 local lsp_status = require("lsp-status")
 local null_ls = require("null-ls")
 
-local null_ls_sources = {
+M.null_ls_sources = {
   null_ls.builtins.formatting.stylua,
   null_ls.builtins.formatting.eslint_d,
   null_ls.builtins.formatting.prettier.with({
@@ -12,11 +12,10 @@ local null_ls_sources = {
   null_ls.builtins.formatting.gofmt,
   null_ls.builtins.formatting.goimports,
   null_ls.builtins.formatting.rustfmt,
-  null_ls.builtins.formatting.terraform_fmt,
   null_ls.builtins.diagnostics.eslint_d,
   null_ls.builtins.diagnostics.hadolint.with({
     command = "docker",
-    args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-colot", "-"},
+    args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-color", "-"},
   }),
   null_ls.builtins.diagnostics.shellcheck,
   null_ls.builtins.diagnostics.write_good,
@@ -25,10 +24,6 @@ local null_ls_sources = {
   null_ls.builtins.code_actions.eslint_d,
 }
 
-null_ls.config({
-  sources = null_ls_sources,
-  diagnostics_format = "[#{c}] #{m} (#{s})"
-})
 
 -- local la(guage_formatters = {
 --   lua = {
@@ -40,13 +35,14 @@ local function lua_cmd()
   local home = vim.fn.expand("$HOME")
   local build = home .. "/src/lua-language-server"
   local bin_location = ""
-  if jit.os == 'OSX' then
-    bin_location = 'macOS'
-  elseif jit.os == 'Linux' then
-    bin_location = 'Linux'
-  end
+  -- if jit.os == 'OSX' then
+  --   bin_location = 'macOS'
+  -- elseif jit.os == 'Linux' then
+  --   bin_location = 'Linux'
+  -- end
   local bin = build .. "/bin/" .. bin_location .. "/lua-language-server"
-  return {bin, "-E", build .. "/main.lua"}
+  -- return {bin, "-E", build .. "/main.lua"}
+  return {bin}
 end
 
 M.servers = {
@@ -85,7 +81,6 @@ M.servers = {
       cmd = lua_cmd(),
     },
   }),
-  ["null-ls"] = {},
   -- coffeescript = {
   --   cmd = { bin_name, '--stdio' },
   --   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },

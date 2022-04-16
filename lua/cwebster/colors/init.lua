@@ -3,7 +3,11 @@ local vim = vim
 
 local _, colors = require("catppuccino.api.colors").get_colors()
 
-M.galaxyline_colors = colors
+function M.get_colors()
+  return colors
+end
+
+M.theme_colors = colors
 
 M.mode_color = {
   --n = 'DarkGoldenrod2',

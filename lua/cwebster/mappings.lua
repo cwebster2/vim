@@ -55,7 +55,7 @@ M.init_keymap = function()
     },
     ["f"] = {
       name = "+file",
-      ["t"] = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+      ["t"] = { "<cmd>Neotree show<cr>", "NeoTree" },
       ["s"] = { ":SymbolsOutline<CR>", "Symbols" },
       --["t"] = { "<cmd>lua require('_nvimtree').toggle_tree()<cr>", "NvimTree" },
       ["f"] = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Find Files" },
@@ -91,7 +91,7 @@ M.init_keymap = function()
       name = "+debug",
       ["d"] = { "JestStrategy"},
       ["h"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "Breakpoint" },
-      ["s"] = { "<cmd>lua require'dap'.stop()<CR>", "Stop" },
+      ["s"] = { "<cmd>lua require'dap'.close()<CR>", "Stop" },
       ["n"] = { "<cmd>lua require'dap'.continue()<CR>", "Cont" },
       ["k"] = { "<cmd>lua require'dap'.up()<CR>", "Up" },
       ["j"] = { "<cmd>lua require'dap'.down()<CR>", "Down" },
@@ -169,8 +169,21 @@ M.init_keymap = function()
   map('', 'k', '(v:count == 0 ? \'gk\' : \'k\')', {expr=true,noremap=true,silent=true})
   map('', '<Up>', '(v:count == 0 ? \'gk\' : \'<Up>\')', {expr=true,noremap=true,silent=true})
 
+  map("i", "<A-t>", 'copilot#Accept("")', {expr=true,noremap=true,silent=true})
   -- quick spilt
   map('n', '<Leader>v', '<C-w>v<C-w>w', {})
+
+  -- map('c', "<up>", 'wildmenumode() ? "\<left>" : "\<up>"', {expr=true, noremap=true, silent=true})
+  vim.api.nvim_exec([[
+    set wildcharm=<C-Z>
+    cnoremap  <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
+    cnoremap  <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
+    cnoremap  <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
+    cnoremap  <expr> <right> wildmenumode() ? "\<bs><C-Z>" : "\<right>"
+  ]],{})
+
+  map('n', '+', '<C-a>', {})
+  map('n', '-', '<C-x>', {})
 
   -- spell
   map ('n', '<F9>', ':set spell!<cr>', {silent=true})

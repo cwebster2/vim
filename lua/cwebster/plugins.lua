@@ -17,8 +17,18 @@ return require("packer").startup {
     use { "mhinz/vim-startify",
       config = "require('cwebster.startify').setup()",
     }
+    use {
+      "nathom/filetype.nvim",
+      config = function() require('cwebster.filetype').setup() end
+    }
     use { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
+  -- stuff to try
+    --  https://github.com/pianocomposer321/yabs.nvim
+    --  https://github.com/Shatur/neovim-session-manager
+    --  https://github.com/kosayoda/nvim-lightbulb with new config
+    --  ChristianChiarulli/codi.vim
+    --  nvim-neorg/neorg
   -- fuzzy stuff
     use {
       "nvim-telescope/telescope.nvim",
@@ -28,8 +38,7 @@ return require("packer").startup {
       },
       config = "require('cwebster.telescope')",
     }
-    use { "nvim-telescope/telescope-fzy-native.nvim" }
-    use { "nvim-telescope/telescope-fzf-writer.nvim" }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use { "nvim-telescope/telescope-packer.nvim" }
     use { "nvim-telescope/telescope-github.nvim" }
     use { "nvim-telescope/telescope-symbols.nvim" }
@@ -46,10 +55,12 @@ return require("packer").startup {
     use { "nvim-treesitter/playground" }
     use { "nvim-treesitter/nvim-treesitter-textobjects" }
     use { "nvim-treesitter/nvim-treesitter-refactor" }
-    use {
-      "romgrk/nvim-treesitter-context",
-      requires = {"nvim-treesitter/nvim-treesitter"}
-    }
+    -- these are broken with curreng version of neovim
+    -- use {
+    --   "romgrk/nvim-treesitter-context",
+    --   requires = {"nvim-treesitter/nvim-treesitter"}
+    -- }
+
     use { "p00f/nvim-ts-rainbow" }
     use { "windwp/nvim-ts-autotag" }
     use {
@@ -61,7 +72,7 @@ return require("packer").startup {
   -- LSP stuff
     use { "neovim/nvim-lspconfig" }
     use { "folke/lua-dev.nvim" }
-    use { "kosayoda/nvim-lightbulb" }
+    -- use { "kosayoda/nvim-lightbulb" }
     use { "tami5/lspsaga.nvim" }
     use { "nvim-lua/lsp-status.nvim" }
     use { "ray-x/lsp_signature.nvim" }
@@ -84,12 +95,17 @@ return require("packer").startup {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
         "Saecki/crates.nvim",
         "f3fora/cmp-spell"
       },
     }
 
   -- colorschemes
+    use {
+      "catppuccin/nvim",
+      as = "catppucin"
+    }
 
   -- visuals
     use {
@@ -98,10 +114,22 @@ return require("packer").startup {
       config = "require('cwebster.bufferline').setup()",
     }
     use {
-      "NTBBloodbath/galaxyline.nvim",
-      branch="main",
-      config = "require('cwebster.galaxyline')",
-      requires = {"kyazdani42/nvim-web-devicons"}
+      "rebelot/heirline.nvim",
+      config = function() require("cwebster.heirline").setup() end,
+    }
+    -- use {
+    --   "NTBBloodbath/galaxyline.nvim",
+    --   branch="main",
+    --   config = "require('cwebster.galaxyline')",
+    --   requires = {"kyazdani42/nvim-web-devicons"}
+    -- }
+    use {
+      "petertriho/nvim-scrollbar",
+        config = "require('cwebster.scrollbar').setup()",
+    }
+    use {
+      "kevinhwang91/nvim-hlslens",
+      config = "require('cwebster.hlslens').setup()",
     }
     use {
       "RRethy/vim-hexokinase",
@@ -151,11 +179,14 @@ return require("packer").startup {
       config = "require('cwebster.symbols').setup()",
     }
     use { "unblevable/quick-scope" }
-    use { "kyazdani42/nvim-tree.lua",
-      -- commit = "f1f1488",
-      config = function() require("cwebster.nvimtree").setup() end,
-      --cmd = {"NvimTreeFindFile", "NvimTreeToggle"},
-      --opt = true
+    use { "nvim-neo-tree/neo-tree.nvim",
+      branch = "v2.x",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+      },
+      config = function() require("cwebster.neotree").setup() end,
     }
     use { "pwntester/octo.nvim" }
     use { "windwp/nvim-autopairs",
@@ -172,10 +203,30 @@ return require("packer").startup {
       }
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
     }
-
-    use { "github/copilot.vim",
-      setup = "require('cwebster.copilot').setup()"
+    use {
+      "narutoxy/dim.lua",
+      requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
+      config = function() require('dim').setup() end
     }
+
+    -- copilot stuff
+    -- use { "github/copilot.vim",
+    --   setup = "require('cwebster.copilot').setup()"
+    -- }
+    use{
+      "zbirenbaum/copilot.lua",
+      event = {"VimEnter"},
+      config = function()
+        vim.defer_fn(function()
+          require('cwebster.copilot').setup()
+        end, 100)
+      end,
+    }
+    use {
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua", "nvim-cmp" },
+    }
+
     use { "junegunn/gv.vim" }
 
   -- testing
@@ -217,21 +268,17 @@ return require("packer").startup {
     --   config = "require("_neuron").setup()"
     -- }
 
-    use { "theprimeagen/neovim-irc-ui" }
+    use {'KadoBOT/nvim-spotify',
+      requires = { "nvim-telescope/telescope.nvim" },
+      config = "require('cwebster.spotify').setup()",
+      run = 'make'
+    }
 
   -- still evaluating if these are needed now
   --Plug "mattn/emmet-vim"
   --Plug "terryma/vim-multiple-cursors" -- need to rebind its c-n key to use it
-  --Plug "Raimondi/delimitMate" -- closes quotes and stuff
-    --ses quotes and stuff
   use { "sheerun/vim-polyglot" }  -- syntax files for most languages
-  --Plug "vim-python/python-syntax"  " Improved python syntax
-  --Plug "Vimjas/vim-python-pep8-indent"  " Proper python indenting
-  --Plug "chrisbra/Colorizer"  " Highlight CSS colors
-  --Plug "fatih/vim-go", {"for": "go", "do": ":GoUpdateBinaries" }
-  --Plug "jaxbot/github-issues.vim"
   --Plug "rhysd/git-messenger.vim"
-  --Plug "jreybert/vimagit"
 
   end,
   config = {

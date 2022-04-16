@@ -6,7 +6,7 @@ opt.autoread = true
 opt.backspace = "indent,eol,start"
 opt.backup = false
 opt.clipboard = "unnamedplus,unnamed"
-opt.cmdheight = 2
+opt.cmdheight = 1
 opt.colorcolumn = '0'
 opt.completeopt = "menu,menuone,noselect"
 opt.confirm = true
@@ -80,6 +80,7 @@ opt.wildmode = 'longest,full'
 opt.winblend = 15
 opt.winblend = 30
 opt.writebackup = false
+opt.laststatus = 3
 
 local function has(value)
   return vim.fn.has(value) == 1

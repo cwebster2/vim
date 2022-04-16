@@ -18,12 +18,8 @@ if vim.fn.exists('g:vscode') == 1 then
   do return end
 end
 
--- some globals that need setting before plugins are loaded
-g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
-g.loaded_netrwPlugin = 1
-g.jsx_ext_required = 0
-
 -- require plugins and stuff
+require("cwebster.earlystartup").setup()
 require'cwebster.plugins'
 require('cwebster.mappings').init_keymap()
 require'cwebster.plugin_config'
@@ -43,9 +39,6 @@ augroup("vimrc-main", {
   {'StdinReadPre', '*', 'let s:std_in=1'},
   -- strip trailing whitespace
   -- vim.cmd [[ autocmd BufWritePre * :%s/\s\+$//e ]]
-  -- starphleet
-  {'BufRead,BufNewFile', 'after_containerize,on_containerize,orders', 'set filetype=sh'},
-  {'BufRead,BufNewFile', '~/.zfunc/*', 'set filetype=zsh'},
   -- tab management
   {'TabLeave', '*', 'let g:lasttab = tabpagenr()'},
   -- highlight yanks

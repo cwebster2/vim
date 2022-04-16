@@ -10,7 +10,7 @@ config.options = {
 		functions = "italic",
 		keywords = "italic",
 		strings = "NONE",
-		variables = "NONE",
+		variables = "italic",
 	},
 	integrations = {
 		treesitter = true,
@@ -35,11 +35,17 @@ config.options = {
 		gitgutter = false,
 		gitsigns = true,
 		telescope = true,
+    neotree = {
+      enabled = true,
+      show_root = true,
+      transparent_panel = true,
+    },
+    nvimtee = {
+      enabled = false,
+      show_root = true,
+      transparent_panel = true,
+    },
     cmp = true,
-		nvimtree = {
-			enabled = true,
-			show_root = true,
-		},
 		which_key = true,
 		indent_blankline = {
 			enabled = true,
@@ -55,6 +61,7 @@ config.options = {
 		lightspeed = false,
 		ts_rainbow = true,
 		hop = true,
+    hlslens = true,
 	},
 }
 

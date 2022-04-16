@@ -28,6 +28,7 @@ install_lsp_servers_npm() {
       vim-language-server \
       vls \
       pyright \
+      write-good \
       svelte-language-server
   )
 }
@@ -37,7 +38,7 @@ install_lsp_terraform() {
   echo "Installing terraform language server"
   echo
   (
-    TFLSVER=${TFLSVER:-0.17.1}
+    TFLSVER=${TFLSVER:-0.25.2}
     TFLSARCH=${TFLSARCH:-amd64}
     TFLSOS=${TFLSOS:-$mcode}
     curl -sfLo "${HOME}"/bin/terraform-ls.zip "https://releases.hashicorp.com/terraform-ls/${TFLSVER}/terraform-ls_${TFLSVER}_${TFLSOS}_${TFLSARCH}.zip"
@@ -65,6 +66,7 @@ install_lsp_servers_cargo() {
 
     echo "Building the tex language server"
     cargo install --git https://github.com/latex-lsp/texlab.git --locked
+    cargo install stylua
   )
 }
 
@@ -84,10 +86,8 @@ install_lsp_servers_go() {
       # this is needed because go get is bad
       set -x
       set +e
-      GO111MODULE=on go get golang.org/x/tools/gopls@latest
+      GO111MODULE=on go install golang.org/x/tools/gopls@latest
     )
-    echo "Installing efm general purpose ls"
-    go get github.com/mattn/efm-langserver
   )
 }
 
@@ -102,7 +102,7 @@ install_lsp_servers_python() {
   echo "Installing the python language server"
   echo
   (
-    pip install --quiet python-language-server
+    pip install --quiet python-language-server proselint
   )
 }
 install_lsp_servers_lua() {
@@ -129,7 +129,7 @@ install_lsp_servers_lua() {
 
 install_lsp_linters() {
   echo
-  echo "Installing linters for efm"
+  echo "Installing linters for null-ls"
   echo
   (
       npm install -g prettier eslint_d @fsouza/prettierd
