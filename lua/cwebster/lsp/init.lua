@@ -2,7 +2,6 @@ local M={}
 
 local nvim_lsp = require "lspconfig"
 local lsp = vim.lsp
-local saga = require'lspsaga'
 local lsp_signature = require("lsp_signature")
 local lsp_status = require("lsp-status")
 local null_ls = require("null-ls")
@@ -113,30 +112,6 @@ function M.setup()
   --lsp.callbacks['textDocument/codeAction'] = custom_codeAction
 
   require("cwebster.lsp.handlers").setup()
-
-
-  saga.init_lsp_saga {
-    use_saga_diagnostic_sign = false,
-    finder_action_keys = {
-      open = 'o',
-      vsplit = 's',
-      split = 'i',
-      quit = {'q','<esc>'},
-      scroll_down = '<C-f>',
-      scroll_up = '<C-b>' -- quit can be a table
-    },
-    code_action_keys = {
-      quit = {'q','<esc>'},
-      exec = '<CR>',
-    },
-    code_action_prompt = {
-      enable = false
-    },
-    rename_action_keys = {
-      quit = {'<C-c>', '<esc>'},
-      exec = '<CR>',
-    },
-  }
 
   register_kinds()
 

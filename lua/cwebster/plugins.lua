@@ -12,16 +12,20 @@ execute "packadd packer.nvim"
 
 return require("packer").startup {
   function(use)
+  -- PLUGINS_BEGIN
+  -- PLUGINS: Core
     use { "wbthomason/packer.nvim" }
     use { "dstein64/vim-startuptime" }
-    use { "mhinz/vim-startify",
-      config = "require('cwebster.startify').setup()",
-    }
     use {
       "nathom/filetype.nvim",
       config = function() require('cwebster.filetype').setup() end
     }
     use { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+
+  -- PLUGINS: Startup
+    use { "mhinz/vim-startify",
+      config = "require('cwebster.startify').setup()",
+    }
 
   -- stuff to try
     --  https://github.com/pianocomposer321/yabs.nvim
@@ -29,7 +33,8 @@ return require("packer").startup {
     --  https://github.com/kosayoda/nvim-lightbulb with new config
     --  ChristianChiarulli/codi.vim
     --  nvim-neorg/neorg
-  -- fuzzy stuff
+
+  -- PLUGINS: Finders and pickers
     use {
       "nvim-telescope/telescope.nvim",
       requires = {
@@ -43,11 +48,12 @@ return require("packer").startup {
     use { "nvim-telescope/telescope-github.nvim" }
     use { "nvim-telescope/telescope-symbols.nvim" }
     use { "nvim-telescope/telescope-dap.nvim" }
+    use { "nvim-telescope/telescope-ui-select.nvim" }
     use { "cwebster2/github-coauthors.nvim" }
     use { "junegunn/fzf", run = "./install --all" }
     use { "junegunn/fzf.vim" }
 
-  -- Syntax
+  -- PLUGINS: Syntax
     use { "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = "require('cwebster.syntax').setup()"
@@ -63,17 +69,12 @@ return require("packer").startup {
 
     use { "p00f/nvim-ts-rainbow" }
     use { "windwp/nvim-ts-autotag" }
-    use {
-      "SmiteshP/nvim-gps",
-      requires = {"nvim-treesitter/nvim-treesitter"},
-      config = "require('cwebster.nvimgps').setup()",
-    }
 
-  -- LSP stuff
+  -- PLUGINS: LSP
     use { "neovim/nvim-lspconfig" }
     use { "folke/lua-dev.nvim" }
     -- use { "kosayoda/nvim-lightbulb" }
-    use { "tami5/lspsaga.nvim" }
+    -- use { "tami5/lspsaga.nvim" }
     use { "nvim-lua/lsp-status.nvim" }
     use { "ray-x/lsp_signature.nvim" }
     use { "jose-elias-alvarez/null-ls.nvim" }
@@ -82,7 +83,7 @@ return require("packer").startup {
       config = "require('cwebster.trouble').setup()",
     }
 
-  -- Completion
+  -- PLUGINS: Completion
     use { "hrsh7th/nvim-cmp",
       config = function()
         require("cwebster.lsp").setup()
@@ -100,14 +101,18 @@ return require("packer").startup {
         "f3fora/cmp-spell"
       },
     }
+    use {
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua", "nvim-cmp" },
+    }
 
-  -- colorschemes
+  -- PLUGINS: Colorschemes
     use {
       "catppuccin/nvim",
       as = "catppucin"
     }
 
-  -- visuals
+  -- PLUGINS: UI
     use {
       "akinsho/nvim-bufferline.lua",
       requires = {"kyazdani42/nvim-web-devicons"},
@@ -117,12 +122,6 @@ return require("packer").startup {
       "rebelot/heirline.nvim",
       config = function() require("cwebster.heirline").setup() end,
     }
-    -- use {
-    --   "NTBBloodbath/galaxyline.nvim",
-    --   branch="main",
-    --   config = "require('cwebster.galaxyline')",
-    --   requires = {"kyazdani42/nvim-web-devicons"}
-    -- }
     use {
       "petertriho/nvim-scrollbar",
         config = "require('cwebster.scrollbar').setup()",
@@ -142,15 +141,19 @@ return require("packer").startup {
       config = "require('cwebster.gitsigns').setup()",
     }
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
-
     use {
       "folke/which-key.nvim",
       config = function()
         require("cwebster.whichkey").setup()
       end,
     }
+    use {
+      "SmiteshP/nvim-gps",
+      requires = {"nvim-treesitter/nvim-treesitter"},
+      config = "require('cwebster.nvimgps').setup()",
+    }
 
-  -- language stuff
+  -- PLUGINS: language stuff
     use {
       "TimUntersberger/neogit",
       commit = "e507909",
@@ -173,7 +176,7 @@ return require("packer").startup {
       config = "require('cwebster.whitespace').setup()",
     }
 
-  -- ide stuff
+  -- PLUGINS: ide features
     use { "terrortylor/nvim-comment" }
     use { "simrat39/symbols-outline.nvim",
       config = "require('cwebster.symbols').setup()",
@@ -222,26 +225,22 @@ return require("packer").startup {
         end, 100)
       end,
     }
-    use {
-      "zbirenbaum/copilot-cmp",
-      after = { "copilot.lua", "nvim-cmp" },
-    }
 
     use { "junegunn/gv.vim" }
 
-  -- testing
+  -- PLUGINS: Testing
     use { "janko/vim-test",
         opt=true
     }
 
-  -- debugging
+  -- PLUGINS: Debugging
     use { "mfussenegger/nvim-dap",
       config = "require('cwebster.dap').setup()"
     }
     use { "theHamsta/nvim-dap-virtual-text" }
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
-  -- markdown
+  -- PLUGINS: Markdown
     use { "plasticboy/vim-markdown",
         opt=true,
         setup = "require('cwebster/markdown').markdown_setup()",
@@ -252,10 +251,13 @@ return require("packer").startup {
         setup = "require('cwebster/markdown').mkdp_setup()",
     }
 
+    -- PLUGINS: LaTeX
     use { "vim-latex/vim-latex",
         opt=true,
         ft="tex"
     }
+
+    -- PLUGINS: The Rest
     use { "airblade/vim-rooter" }
 
     use { "tpope/vim-eunuch" }
@@ -280,6 +282,7 @@ return require("packer").startup {
   use { "sheerun/vim-polyglot" }  -- syntax files for most languages
   --Plug "rhysd/git-messenger.vim"
 
+  -- PLUGINS_END
   end,
   config = {
     _display = {
