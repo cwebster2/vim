@@ -56,7 +56,6 @@ config.options = {
 		vim_sneak = false,
 		fern = false,
 		barbar = false,
-		bufferline = true,
 		markdown = true,
 		lightspeed = false,
 		ts_rainbow = true,
