@@ -5,6 +5,7 @@ opt.autoindent = false
 opt.autoread = true
 opt.backspace = "indent,eol,start"
 opt.backup = false
+opt.breakindent = true
 opt.clipboard = "unnamedplus,unnamed"
 opt.cmdheight = 1
 opt.colorcolumn = '0'
@@ -33,7 +34,7 @@ opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "2" -- I'm not in gradeschool anymore
 opt.guifont = "Hack Nerd Font Mono:h18"
 opt.hidden = true
-opt.hlsearch = true
+opt.hlsearch = false
 opt.ignorecase = true
 opt.inccommand = 'split'
 opt.incsearch = true
