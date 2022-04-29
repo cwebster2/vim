@@ -86,7 +86,7 @@ local ViMode = {
     -- Same goes for the highlight. Now the foreground will change according to the current mode.
     hl = function(self)
         local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = self.mode_colors[mode], style = "bold", bg=colors.none, }
+        return { fg = self.mode_colors[mode], bold = true, bg=colors.none, }
     end,
 }
 
@@ -95,7 +95,7 @@ local Spell = {
         return vim.wo.spell
     end,
     provider = ' SPELL',
-    hl = { style = 'bold', fg = colors.red, bg = colors.none}
+    hl = { bold = true, fg = colors.red, bg = colors.none}
 }
 
 local Git = {
@@ -224,7 +224,7 @@ local FileNameModifer = {
     hl = function()
         if vim.bo.modified then
             -- use `force` because we need to override the child's hl foreground
-            return { fg = colors.cyan, style = 'bold', force=true }
+            return { fg = colors.cyan, bold = true, force=true }
         end
     end,
 }

@@ -82,6 +82,7 @@ return require("packer").startup {
       requires = "kyazdani42/nvim-web-devicons",
       config = "require('cwebster.trouble').setup()",
     }
+    use { "onsails/lspkind.nvim" }
 
   -- PLUGINS: Completion
     use { "hrsh7th/nvim-cmp",
@@ -97,10 +98,14 @@ return require("packer").startup {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp-signature-help",
+        "hrsh7th/cmp-nvim-lsp-document-symbol",
+        "hrsh7th/cmp-cmdline",
         "Saecki/crates.nvim",
-        "f3fora/cmp-spell"
+        "f3fora/cmp-spell",
+        {"petertriho/cmp-git", requires = "nvim-lua/plenary.nvim"}
       },
     }
+
     use {
       "zbirenbaum/copilot-cmp",
       after = { "copilot.lua", "nvim-cmp" },
@@ -156,7 +161,7 @@ return require("packer").startup {
   -- PLUGINS: language stuff
     use {
       "TimUntersberger/neogit",
-      commit = "e507909",
+      -- commit = "e507909",
       requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
       config = "require('cwebster.neogit').setup()",
     }
@@ -205,11 +210,6 @@ return require("packer").startup {
         {"nvim-treesitter/nvim-treesitter"}
       }
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
-    }
-    use {
-      "narutoxy/dim.lua",
-      requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
-      config = function() require('dim').setup() end
     }
 
     -- copilot stuff

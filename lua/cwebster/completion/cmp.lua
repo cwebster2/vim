@@ -1,7 +1,5 @@
 local M = {}
 
-local is_emmet_active = function() return false end
-
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -11,13 +9,14 @@ function M.setup()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local lspkind = require("lspkind")
 
   cmp.setup {
     formatting = {
-      format = function(entry, vim_item)
-        local icons = M.icons
-        vim_item.kind = icons[vim_item.kind]
-        vim_item.menu = ({
+      format = lspkind.cmp_format({
+        mode = 'symbol_text',
+        maxwidth = 50,
+        menu = ({
           nvim_lsp = "(LSP)",
           emoji = "(Emoji)",
           path = "(Path)",
@@ -26,14 +25,18 @@ function M.setup()
           luasnip = "(Snippet)",
           buffer = "(Buffer)",
           spell = "(Spell)",
-        })[entry.source.name]
-        vim_item.dup = ({
-          buffer = 1,
-          path = 1,
-          nvim_lsp = 0,
-        })[entry.source.name] or 0
-        return vim_item
-      end,
+        })
+
+        -- before = function(entry, vim_item)
+        --   vim_item.dup = ({
+        --     buffer = 1,
+        --     path = 1,
+        --     nvim_lsp = 0,
+        --   })[entry.source.name] or 0
+
+        --   return vim_item
+        -- end
+      })
     },
     snippet = {
       expand = function(args)
@@ -45,20 +48,21 @@ function M.setup()
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
       },
     },
-    sources = {
-      { name = "copilot", group_index = 2 },
-      { name = "nvim_lsp", group_index = 2 },
-      { name = "path", group_index = 2 },
-      { name = "luasnip", group_index = 2 },
+    sources = cmp.config.sources({
+      { name = "copilot" },
+      { name = "nvim_lsp" },
+      { name = "path" },
+      { name = "luasnip" },
+      { name = "nvim_lsp_signature_help" },
       { name = "nvim_lua" },
+    },{
       { name = "buffer" },
       { name = "calc" },
       { name = "emoji" },
       { name = "treesitter" },
       { name = "crates" },
       { name = "spell" },
-      { name = "nvim_lsp_signature_help" },
-    },
+    }),
     mapping = {
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -104,34 +108,63 @@ function M.setup()
   }
 
   cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp-git' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'nvim_lsp_document_symbol'}
+    },{
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
 end
 
-M.icons = {
-  Class = " Class",
-  Color = " Color",
-  Constant = "ﲀ Constant",
-  Constructor = " Constructor",
-  Enum = "練Enum",
-  EnumMember = " EnumMember",
-  Event = " Event",
-  Field = " Field",
-  File = " File",
-  Folder = " Folder",
-  Function = " Function",
-  Interface = "ﰮ Interface",
-  Keyword = " Keyword",
-  Method = " Method",
-  Module = " Module",
-  Operator = " Operator",
-  Property = " Property",
-  Reference = " Reference",
-  Snippet = " Snippet",
-  Struct = " Struct",
-  Text = " Text",
-  TypeParameter = " Type",
-  Unit = "塞Unit",
-  Value = " Value",
-  Variable = " Variable",
-}
+
+-- M.icons = {
+--   Class = " Class",
+--   Color = " Color",
+--   Constant = "ﲀ Constant",
+--   Constructor = " Constructor",
+--   Enum = "練Enum",
+--   EnumMember = " EnumMember",
+--   Event = " Event",
+--   Field = " Field",
+--   File = " File",
+--   Folder = " Folder",
+--   Function = " Function",
+--   Interface = "ﰮ Interface",
+--   Keyword = " Keyword",
+--   Method = " Method",
+--   Module = " Module",
+--   Operator = " Operator",
+--   Property = " Property",
+--   Reference = " Reference",
+--   Snippet = " Snippet",
+--   Struct = " Struct",
+--   Text = " Text",
+--   TypeParameter = " Type",
+--   Unit = "塞Unit",
+--   Value = " Value",
+--   Variable = " Variable",
+-- }
 
 return M
