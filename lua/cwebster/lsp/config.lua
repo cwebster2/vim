@@ -1,35 +1,6 @@
 local M = {}
 
 local lsp_status = require("lsp-status")
-local null_ls = require("null-ls")
-
-M.null_ls_sources = {
-  null_ls.builtins.formatting.stylua,
-  null_ls.builtins.formatting.eslint_d,
-  null_ls.builtins.formatting.prettier.with({
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "css", "scss", "less", "html", "json", "yaml", "markdown", "graphql", "svelte", "toml" }
-  }),
-  null_ls.builtins.formatting.gofmt,
-  null_ls.builtins.formatting.goimports,
-  null_ls.builtins.formatting.rustfmt,
-  null_ls.builtins.diagnostics.eslint_d,
-  null_ls.builtins.diagnostics.hadolint.with({
-    command = "docker",
-    args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-color", "-"},
-  }),
-  null_ls.builtins.diagnostics.shellcheck,
-  null_ls.builtins.diagnostics.write_good,
-  null_ls.builtins.code_actions.proselint,
-  null_ls.builtins.code_actions.gitsigns,
-  null_ls.builtins.code_actions.eslint_d,
-}
-
-
--- local la(guage_formatters = {
---   lua = {
---     {formatCommand = "lua-format -i", formatStdin = true}
---   },
--- }
 
 local function lua_cmd()
   local home = vim.fn.expand("$HOME")
@@ -58,7 +29,7 @@ M.servers = {
   terraformls = {
     filetypes = {"tf", "terraform"},
   },
-  --dockerls = {},
+  dockerls = {},
   jsonls = {},
   clangd = {
     handlers = lsp_status.extensions.clangd.setup(),
@@ -81,14 +52,6 @@ M.servers = {
       cmd = lua_cmd(),
     },
   }),
-  -- coffeescript = {
-  --   cmd = { bin_name, '--stdio' },
-  --   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
-  --   root_dir = function(fname)
-  --     return util.root_pattern 'tsconfig.json'(fname)
-  --       or util.root_pattern('package.json', 'jsconfig.json', '.git')(fname)
-  --   end,
-  -- }
 }
 
 return M

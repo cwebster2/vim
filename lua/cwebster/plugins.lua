@@ -71,23 +71,35 @@ return require("packer").startup {
     use { "windwp/nvim-ts-autotag" }
 
   -- PLUGINS: LSP
-    use { "neovim/nvim-lspconfig" }
+    use {
+      "williamboman/nvim-lsp-installer",
+      {
+        "neovim/nvim-lspconfig",
+        config = function()
+          require("cwebster.lsp.installer").setup()
+          require("cwebster.lsp").setup()
+        end
+      }
+    }
     use { "folke/lua-dev.nvim" }
     -- use { "kosayoda/nvim-lightbulb" }
-    -- use { "tami5/lspsaga.nvim" }
     use { "nvim-lua/lsp-status.nvim" }
     use { "ray-x/lsp_signature.nvim" }
-    use { "jose-elias-alvarez/null-ls.nvim" }
+    use { "onsails/lspkind.nvim" }
+
+  -- PLUGINS: diagnostics
     use { "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
       config = "require('cwebster.trouble').setup()",
     }
-    use { "onsails/lspkind.nvim" }
+    use { "mfussenegger/nvim-lint",
+      config = function() require("cwebster.diagnostics.nvimlint").setup() end,
+    }
 
   -- PLUGINS: Completion
     use { "hrsh7th/nvim-cmp",
       config = function()
-        require("cwebster.lsp").setup()
+        -- require("cwebster.lsp").setup()
         require("cwebster.completion").setup()
       end,
       requires = {
@@ -108,7 +120,7 @@ return require("packer").startup {
 
     use {
       "zbirenbaum/copilot-cmp",
-      after = { "copilot.lua", "nvim-cmp" },
+      after = { "copilot.lua", "nvim-lsp-installer", "nvim-cmp" },
     }
 
   -- PLUGINS: Colorschemes

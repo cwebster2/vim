@@ -288,7 +288,7 @@ M.lsp_setup = function(client, bufnr)
   map("n", "]d", "<cmd>lua vim.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     keymap.c.f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Document" }
   elseif client.resolved_capabilities.document_range_formatting then
     keymap_visual.c.f = { "<cmd>lua vim.lsp.buf.range_formatting()<CR>", "Format Range" }

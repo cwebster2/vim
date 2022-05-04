@@ -4,7 +4,6 @@ local nvim_lsp = require "lspconfig"
 local lsp = vim.lsp
 local lsp_signature = require("lsp_signature")
 local lsp_status = require("lsp-status")
-local null_ls = require("null-ls")
 
 
 local function get_capabilities()
@@ -61,9 +60,9 @@ local lsp_signature_config = {
 
 local on_attach = function(client, bufnr)
 
-  if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
-  end
+  -- if client.name == "tsserver" then
+  --   client.resolved_capabilities.document_formatting = false
+  -- end
 
   lsp_signature.on_attach(lsp_signature_config)
   lsp_status.on_attach(client)
@@ -78,19 +77,13 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_command [[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]]
   -- vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
     vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
     vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
   end
 
 end
-
-require("null-ls").setup({
-  sources = require("cwebster.lsp.config").null_ls_sources,
-  diagnostics_format = "[#{c}] #{m} (#{s})",
-  on_attach = on_attach,
-})
 
 local function custom_codeAction(_, _, action)
   print(vim.inspect(action))
@@ -113,40 +106,6 @@ function M.setup()
 
   require("cwebster.lsp.handlers").setup()
 
-  register_kinds()
-
-end
-
-function register_kinds()
-  require('vim.lsp.protocol').CompletionItemKind = {
-    ' Text';        -- = 1
-    'ƒ Method';      -- = 2;
-    ' Function';    -- = 3;
-    ' Constructor'; -- = 4;
-    'Field';         -- = 5;
-    ' Variable';    -- = 6;
-    ' Class';       -- = 7;
-    'ﰮ Interface';   -- = 8;
-    ' Module';      -- = 9;
-    ' Property';    -- = 10;
-    ' Unit';        -- = 11;
-    ' Value';       -- = 12;
-    '了Enum';        -- = 13;
-    ' Keyword';     -- = 14;
-    '﬌ Snippet';     -- = 15;
-    ' Color';       -- = 16;
-    ' File';        -- = 17;
-    'Reference';     -- = 18;
-    ' Folder';      -- = 19;
-    ' EnumMember';  -- = 20;
-    ' Constant';    -- = 21;
-    ' Struct';      -- = 22;
-    'Event';         -- = 23;
-    'Operator';      -- = 24;
-    'TypeParameter'; -- = 25;
-  }
 end
 
 return M
-
-
