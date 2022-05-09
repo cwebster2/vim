@@ -36,7 +36,7 @@ to change with every commit.
  - [nvim-telescope/telescope-dap.nvim](https://github.com/nvim-telescope/telescope-dap.nvim)
  - [nvim-telescope/telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
  - [cwebster2/github-coauthors.nvim](https://github.com/cwebster2/github-coauthors.nvim)
- - [./install --all](https://github.com/./install --all)
+ - [junegunn/fzf](https://github.com/junegunn/fzf)
  - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 
 ### Syntax
