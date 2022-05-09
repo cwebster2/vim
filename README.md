@@ -23,13 +23,16 @@ to change with every commit.
  - [nathom/filetype.nvim](https://github.com/nathom/filetype.nvim)
  - [antoinemadec/FixCursorHold.nvim](https://github.com/antoinemadec/FixCursorHold.nvim)
 
+### Common
+- [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
+
 ### Startup
  - [mhinz/vim-startify](https://github.com/mhinz/vim-startify)
 
 ### Finders and pickers
  - [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
  - [nvim-lua/popup.nvim](https://github.com/nvim-lua/popup.nvim)
- - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
  - [nvim-telescope/telescope-packer.nvim](https://github.com/nvim-telescope/telescope-packer.nvim)
  - [nvim-telescope/telescope-github.nvim](https://github.com/nvim-telescope/telescope-github.nvim)
  - [nvim-telescope/telescope-symbols.nvim](https://github.com/nvim-telescope/telescope-symbols.nvim)
@@ -56,7 +59,6 @@ to change with every commit.
 
 ### diagnostics
  - [folke/lsp-trouble.nvim](https://github.com/folke/lsp-trouble.nvim)
- - [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
  - [mfussenegger/nvim-lint](https://github.com/mfussenegger/nvim-lint)
 
 ### Completion
@@ -72,7 +74,6 @@ to change with every commit.
  - [hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
  - [Saecki/crates.nvim](https://github.com/Saecki/crates.nvim)
  - [f3fora/cmp-spell](https://github.com/f3fora/cmp-spell)
- - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
  - [zbirenbaum/copilot-cmp](https://github.com/zbirenbaum/copilot-cmp)
 
 ### Colorschemes
@@ -80,13 +81,11 @@ to change with every commit.
 
 ### UI
  - [akinsho/nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)
- - [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
  - [rebelot/heirline.nvim](https://github.com/rebelot/heirline.nvim)
  - [petertriho/nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)
  - [kevinhwang91/nvim-hlslens](https://github.com/kevinhwang91/nvim-hlslens)
  - [RRethy/vim-hexokinase](https://github.com/RRethy/vim-hexokinase)
  - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
- - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
  - [szw/vim-maximizer](https://github.com/szw/vim-maximizer)
  - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
  - [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)
@@ -98,7 +97,6 @@ to change with every commit.
  - [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
  - [simrat39/rust-tools.nvim](https://github.com/simrat39/rust-tools.nvim)
  - [NTBBloodbath/rest.nvim](https://github.com/NTBBloodbath/rest.nvim)
- - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
  - [editorconfig/editorconfig-vim](https://github.com/editorconfig/editorconfig-vim)
  - [ntpeters/vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace)
 
@@ -107,14 +105,11 @@ to change with every commit.
  - [simrat39/symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim)
  - [unblevable/quick-scope](https://github.com/unblevable/quick-scope)
  - [nvim-neo-tree/neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
- - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
- - [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
  - [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
  - [pwntester/octo.nvim](https://github.com/pwntester/octo.nvim)
  - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
  - [akinsho/nvim-toggleterm.lua](https://github.com/akinsho/nvim-toggleterm.lua)
  - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
- - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
  - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
  - [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)
  - [junegunn/gv.vim](https://github.com/junegunn/gv.vim)
