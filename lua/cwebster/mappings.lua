@@ -73,11 +73,11 @@ M.init_keymap = function()
     },
     ["x"] = {
       name = "+trouble",
-      ["x"] = {'<cmd>LspTroubleToggle<cr>', "Trouble" },
-      ["w"] = {'<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>', "lsp workspace" },
-      ["d"] = {'<cmd>LspTroubleToggle lsp_document_diagostics<cr>', "lsp document" },
-      ["q"] = {'<cmd>LspTroubleToggle quickfix<cr>', "quickfix" },
-      ["l"] = {'<cmd>LspTroubleToggle loclist<cr>', "loclist" },
+      ["x"] = {'<cmd>TroubleToggle<cr>', "Trouble" },
+      ["w"] = {'<cmd>TroubleToggle lsp_workspace_diagnostics<cr>', "lsp workspace" },
+      ["d"] = {'<cmd>TroubleToggle lsp_document_diagostics<cr>', "lsp document" },
+      ["q"] = {'<cmd>TroubleToggle quickfix<cr>', "quickfix" },
+      ["l"] = {'<cmd>TroubleToggle loclist<cr>', "loclist" },
     },
     ["t"] = {
       name = "+testing",
