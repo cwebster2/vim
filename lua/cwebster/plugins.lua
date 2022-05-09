@@ -120,7 +120,7 @@ return require("packer").startup {
 
     use {
       "zbirenbaum/copilot-cmp",
-      after = { "copilot.lua", "nvim-lsp-installer", "nvim-cmp" },
+      after = { "copilot.lua", "nvim-lspconfig", "nvim-cmp" },
     }
 
   -- PLUGINS: Colorschemes

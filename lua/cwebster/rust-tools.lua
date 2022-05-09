@@ -6,11 +6,6 @@ function M.setup()
       autoSetHints = true,
       hover_with_actions = true,
 
-      runnables = {
-        use_telescope = true
-        -- rest of the opts are forwarded to telescope
-      },
-
       inlay_hints = {
         show_parameter_hints = true,
         parameter_hints_prefix = "<-",

@@ -56,6 +56,7 @@ to change with every commit.
  - [folke/lua-dev.nvim](https://github.com/folke/lua-dev.nvim)
  - [nvim-lua/lsp-status.nvim](https://github.com/nvim-lua/lsp-status.nvim)
  - [onsails/lspkind.nvim](https://github.com/onsails/lspkind.nvim)
+ - [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
 
 ### diagnostics
  - [folke/lsp-trouble.nvim](https://github.com/folke/lsp-trouble.nvim)
