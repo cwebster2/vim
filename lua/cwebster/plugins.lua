@@ -85,21 +85,21 @@ return require("packer").startup {
     -- use { "kosayoda/nvim-lightbulb" }
     use { "nvim-lua/lsp-status.nvim" }
     use { "ray-x/lsp_signature.nvim" }
+    use { "jose-elias-alvarez/null-ls.nvim" }
     use { "onsails/lspkind.nvim" }
 
   -- PLUGINS: diagnostics
-    use { "folke/lsp-trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-      config = "require('cwebster.trouble').setup()",
-    }
     use { "mfussenegger/nvim-lint",
       config = function() require("cwebster.diagnostics.nvimlint").setup() end,
+    }
+    use { "folke/lsp-trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function() require("cwebster.trouble").setup() end,
     }
 
   -- PLUGINS: Completion
     use { "hrsh7th/nvim-cmp",
       config = function()
-        -- require("cwebster.lsp").setup()
         require("cwebster.completion").setup()
       end,
       requires = {

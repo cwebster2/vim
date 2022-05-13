@@ -3,29 +3,24 @@ local lint = require("lint")
 
 function M.setup()
   lint.linters_by_ft = {
-    -- javascript = {}
+    text = {'vale',},
+    markdown = {'vale',},
+    rst = {'vale',},
+    dockerfile = {'hadolint',},
+    javascript = { 'eslint', },
+    typescript = { 'eslint', },
+    vue = { 'eslint', },
+    svelte = { 'eslint', },
+    json = { 'eslint', },
+    yaml = { 'eslint', },
+    toml = { 'eslint', },
+    sh = { 'shellcheck' },
+    bash = { 'shellcheck' },
   }
 end
 
+local nvimlintag = vim.api.nvim_create_augroup("autolint", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", { pattern = "<buffer>", group = nvimlintag, callback = function() lint.try_lint() end})
+
 return M
 
--- M.null_ls_sources = {
---   null_ls.builtins.formatting.stylua,
---   null_ls.builtins.formatting.eslint_d,
---   null_ls.builtins.formatting.prettier.with({
---     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "css", "scss", "less", "html", "json", "yaml", "markdown", "graphql", "svelte", "toml" }
---   }),
---   null_ls.builtins.formatting.gofmt,
---   null_ls.builtins.formatting.goimports,
---   null_ls.builtins.formatting.rustfmt,
---   null_ls.builtins.diagnostics.eslint_d,
---   null_ls.builtins.diagnostics.hadolint.with({
---     command = "docker",
---     args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-color", "-"},
---   }),
---   null_ls.builtins.diagnostics.shellcheck,
---   null_ls.builtins.diagnostics.write_good,
---   null_ls.builtins.code_actions.proselint,
---   null_ls.builtins.code_actions.gitsigns,
---   null_ls.builtins.code_actions.eslint_d,
--- }

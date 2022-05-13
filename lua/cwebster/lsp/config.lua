@@ -1,20 +1,35 @@
 local M = {}
 
 local lsp_status = require("lsp-status")
+local null_ls = require("null-ls")
 
-local function lua_cmd()
-  local home = vim.fn.expand("$HOME")
-  local build = home .. "/src/lua-language-server"
-  local bin_location = ""
-  -- if jit.os == 'OSX' then
-  --   bin_location = 'macOS'
-  -- elseif jit.os == 'Linux' then
-  --   bin_location = 'Linux'
-  -- end
-  local bin = build .. "/bin/" .. bin_location .. "/lua-language-server"
-  -- return {bin, "-E", build .. "/main.lua"}
-  return {bin}
-end
+M.null_ls_sources = {
+  -- formatters
+  null_ls.builtins.formatting.stylua,
+  -- null_ls.builtins.formatting.eslint_d,
+  null_ls.builtins.formatting.prettier.with({
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "css", "scss", "less", "html", "json", "yaml", "markdown", "graphql", "svelte", "toml" }
+  }),
+  null_ls.builtins.formatting.gofmt,
+  null_ls.builtins.formatting.goimports,
+  null_ls.builtins.formatting.rustfmt,
+
+  -- diagnostics
+  -- trying nvim-lint to handle diagnostics.
+  -- null_ls.builtins.diagnostics.actionlint,
+  -- null_ls.builtins.diagnostics.eslint_d,
+  -- null_ls.builtins.diagnostics.gitlint,
+  -- null_ls.builtins.diagnostics.vale,
+  -- null_ls.builtins.diagnostics.hadolint.with({
+  --   command = "docker",
+  --   args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-color", "-"},
+  -- }),
+  -- null_ls.builtins.diagnostics.shellcheck,
+
+  -- code actions
+  null_ls.builtins.code_actions.gitsigns,
+  null_ls.builtins.code_actions.eslint_d,
+}
 
 M.servers = {
   pyright = {},
@@ -47,11 +62,7 @@ M.servers = {
   yamlls = {},
   vimls = {},
   jdtls = {},
-  sumneko_lua = require("lua-dev").setup({
-    lspconfig = {
-      cmd = lua_cmd(),
-    },
-  }),
+  sumneko_lua = require("lua-dev").setup(),
 }
 
 return M
