@@ -1,6 +1,5 @@
 local g = vim.g
 local a = vim.api
-local augroup = require("cwebster.utils").augroup
 
 --a.nvim_command("profile start profile.log")
 --a.nvim_command("profile func *")
