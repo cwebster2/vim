@@ -302,14 +302,26 @@ local Diagnostics = {
             -- return self.errors > 0 and (self.error_icon .. self.errors .. " ")
             return self.error_icon .. self.errors .. " "
         end,
-        hl = { fg = colors.red, bg = colors.none },
+        hl = function(self)
+          local fg = colors.red
+          if (self.errors == 0) then
+            fg = colors.gray
+          end
+          return { fg = fg, bg = colors.none }
+        end,
     },
     {
         provider = function(self)
             -- return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
             return self.warn_icon .. self.warnings .. " "
         end,
-        hl = { fg = colors.yellow, bg = colors.none },
+        hl = function(self)
+          local fg = colors.yellow
+          if (self.warnings == 0) then
+            fg = colors.gray
+          end
+          return { fg = fg, bg = colors.none }
+        end,
     },
     {
         provider = function(self)
