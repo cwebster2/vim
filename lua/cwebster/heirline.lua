@@ -430,52 +430,101 @@ local ScrollBar ={
     hl = { fg = colors.gray, },
 }
 
-local statusline = {
--- left
--- vi mode
-  ViMode,
-  Spell,
--- directory/git repo
-  WorkDir,
--- git branch / stats
-  Git,
-  Spacer,
+local TerminalName = {
+    -- we could add a condition to check that buftype == 'terminal'
+    -- or we could do that later (see #conditional-statuslines below)
+    provider = function()
+        local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
+        return " " .. tname
+    end,
+    hl = { fg = colors.blue, bold = true },
+}
 
--- filename (with path?)
-  FileNameBlock,
-  Spacer,
--- diagnostics
+local HelpFileName = {
+    condition = function()
+        return vim.bo.filetype == "help"
+    end,
+    provider = function()
+        local filename = vim.api.nvim_buf_get_name(0)
+        return vim.fn.fnamemodify(filename, ":t")
+    end,
+    hl = { fg = colors.blue },
+}
+
+local DefaultStatusLine = {
+-- left
+  ViMode, Spell, WorkDir, Git, Spacer,
+  FileNameBlock, Spacer,
 
 -- center
--- nvim gps / nearest symbol
-  Gps,
-  Spacer,
--- debugger?
-  DAPMessages,
-  Align,
+  Gps, Spacer, DAPMessages, Align,
 
 -- right
-  LSPMessages,
--- filetype
-  Diagnostics,
-  FileFormat,
-  Spacer,
-  FileType,
-  Spacer,
-  FileEncoding,
-  LSPActive,
-  Spacer,
--- size?
-  -- FileSize,
-  -- Spacer,
--- line/col
-  Ruler,
--- nvim scrollbar
-  ScrollBar,
+  LSPMessages, Diagnostics, FileFormat, Spacer, FileType, Spacer,
+  FileEncoding, LSPActive, Spacer,
+  Ruler, ScrollBar,
+}
+
+local SpecialStatusline = {
+    condition = function()
+        return conditions.buffer_matches({
+            buftype = { "nofile", "prompt", "help", "quickfix" },
+            filetype = { "^git.*", "neogitstatus" },
+        })
+    end,
+
+    FileType, Spacer, HelpFileName, Align
+}
+
+local TerminalStatusline = {
+
+    condition = function()
+        return conditions.buffer_matches({ buftype = { "terminal" } })
+    end,
+
+    hl = { bg = colors.dark_red },
+
+    -- Quickly add a condition to the ViMode to only show it when buffer is active!
+    { condition = conditions.is_active, ViMode, Spacer }, FileType, Spacer, TerminalName, Align,
+}
+
+local StatusLines = {
+  SpecialStatusline, TerminalStatusline, DefaultStatusLine
+}
+
+local WinBars = {
+    init = utils.pick_child_on_condition,
+    {   -- Hide the winbar for special buffers
+        condition = function()
+            return conditions.buffer_matches({
+                buftype = { "nofile", "prompt", "help", "quickfix" },
+                filetype = { "^git.*", "neogit" },
+            })
+        end,
+        provider = "",
+    },
+    {   -- A special winbar for terminals
+        condition = function()
+            return conditions.buffer_matches({ buftype = { "terminal" } })
+        end,
+        utils.surround({ "", "" }, colors.dark_red, {
+            FileType,
+            Spacer,
+            TerminalName,
+        }),
+    },
+    {   -- An inactive winbar for regular files
+        condition = function()
+            return not conditions.is_active()
+        end,
+        utils.surround({ "", "" }, colors.bright_bg, { hl = { fg = "gray", force = true }, FileNameBlock }),
+    },
+    -- A winbar for regular files
+    utils.surround({ "", "" }, colors.bright_bg, FileNameBlock),
 }
 
 function M.setup()
-  heirline.setup(statusline)
+  heirline.setup(StatusLines)
 end
 
 return M
