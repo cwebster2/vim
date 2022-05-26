@@ -23,6 +23,8 @@ local icons = {
   func = ' '..u '1d453',
 }
 
+colors.none = "NONE"
+
 local ViMode = {
     -- get vim current mode, this information will be required by the provider
     -- and the highlight functions, so we compute it only once per component
@@ -240,7 +242,7 @@ FileNameBlock = utils.insert(FileNameBlock,
 local Gps = {
     condition = gps.is_available,
     provider = gps.get_location,
-    hl = { fg = colors.magenta },
+    hl = { fg = colors.magenta, bg = colors.none },
 }
 -- local Gps = utils.make_flexible_component(3, Gps, { provider = "" })
 
@@ -275,7 +277,7 @@ local DAPMessages = {
 
 local Diagnostics = {
 
-    condition = conditions.has_diagnostics,
+    -- condition = conditions.has_diagnostics,
 
     static = {
         error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
@@ -297,28 +299,30 @@ local Diagnostics = {
     {
         provider = function(self)
             -- 0 is just another output, we can decide to print it or not!
-            return self.errors > 0 and (self.error_icon .. self.errors .. " ")
+            -- return self.errors > 0 and (self.error_icon .. self.errors .. " ")
+            return self.error_icon .. self.errors .. " "
         end,
-        hl = { fg = colors.red },
+        hl = { fg = colors.red, bg = colors.none },
     },
     {
         provider = function(self)
-            return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
+            -- return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
+            return self.warn_icon .. self.warnings .. " "
         end,
-        hl = { fg = colors.yellow },
+        hl = { fg = colors.yellow, bg = colors.none },
     },
-    -- {
-    --     provider = function(self)
-    --         return self.info > 0 and (self.info_icon .. self.info .. " ")
-    --     end,
-    --     hl = { fg = colors.diag.info },
-    -- },
-    -- {
-    --     provider = function(self)
-    --         return self.hints > 0 and (self.hint_icon .. self.hints)
-    --     end,
-    --     hl = { fg = colors.diag.hint },
-    -- },
+    {
+        provider = function(self)
+            return self.info > 0 and (self.info_icon .. self.info .. " ")
+        end,
+        hl = { fg = colors.info, bg = colors.none },
+    },
+    {
+        provider = function(self)
+            return self.hints > 0 and (self.hint_icon .. self.hints .. " ")
+        end,
+        hl = { fg = colors.hint, bg = colors.none },
+    },
     -- {
     --     provider = "]",
     -- },
@@ -433,7 +437,6 @@ local statusline = {
 -- center
 -- nvim gps / nearest symbol
   Gps,
-  Diagnostics,
   Spacer,
 -- debugger?
   DAPMessages,
@@ -442,6 +445,7 @@ local statusline = {
 -- right
   LSPMessages,
 -- filetype
+  Diagnostics,
   FileFormat,
   Spacer,
   FileType,

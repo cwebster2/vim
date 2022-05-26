@@ -126,7 +126,8 @@ return require("packer").startup {
   -- PLUGINS: Colorschemes
     use {
       "catppuccin/nvim",
-      as = "catppucin"
+      as = "catppuccin",
+      -- config = function() require("cwebster.colors.catppuccin").setup() end,
     }
 
   -- PLUGINS: UI
