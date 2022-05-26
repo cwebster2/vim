@@ -489,6 +489,7 @@ local TerminalStatusline = {
 }
 
 local StatusLines = {
+  init = utils.pick_child_on_condition,
   SpecialStatusline, TerminalStatusline, DefaultStatusLine
 }
 
