@@ -28,6 +28,7 @@ return require("packer").startup {
     }
 
   -- stuff to try
+    -- https://github.com/rcarriga/neotest
     --  https://github.com/pianocomposer321/yabs.nvim
     --  https://github.com/Shatur/neovim-session-manager
     --  https://github.com/kosayoda/nvim-lightbulb with new config
