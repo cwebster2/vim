@@ -28,12 +28,13 @@ return require("packer").startup {
     }
 
   -- stuff to try
-    -- https://github.com/rcarriga/neotest
-    --  https://github.com/pianocomposer321/yabs.nvim
-    --  https://github.com/Shatur/neovim-session-manager
-    --  https://github.com/kosayoda/nvim-lightbulb with new config
-    --  ChristianChiarulli/codi.vim
-    --  nvim-neorg/neorg
+    -- https://github.com/nyngwang/NeoTerm.lua
+    -- https://github.com/nvim-neotest/neotest
+    -- https://github.com/pianocomposer321/yabs.nvim
+    -- https://github.com/Shatur/neovim-session-manager
+    -- https://github.com/kosayoda/nvim-lightbulb with new config
+    -- ChristianChiarulli/codi.vim
+    -- nvim-neorg/neorg
 
   -- PLUGINS: Finders and pickers
     use {
@@ -170,6 +171,10 @@ return require("packer").startup {
       "SmiteshP/nvim-gps",
       requires = {"nvim-treesitter/nvim-treesitter"},
       config = "require('cwebster.nvimgps').setup()",
+    }
+    use {
+      "anuvyklack/hydra.nvim",
+      config = function() require("cwebster.hydra").setup() end,
     }
 
   -- PLUGINS: language stuff
