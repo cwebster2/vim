@@ -120,6 +120,7 @@ return require("packer").startup {
       },
     }
 
+    -- use { "github/copilot.vim" }
     use {
       "zbirenbaum/copilot-cmp",
       after = { "copilot.lua", "nvim-lspconfig", "nvim-cmp" },
