@@ -98,6 +98,9 @@ return require("packer").startup {
       requires = "kyazdani42/nvim-web-devicons",
       config = function() require("cwebster.trouble").setup() end,
     }
+    use { "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = function() require("lsp_lines").setup() end,
+    }
 
   -- PLUGINS: Completion
     use { "hrsh7th/nvim-cmp",

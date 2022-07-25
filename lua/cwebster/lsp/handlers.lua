@@ -33,27 +33,23 @@ function M.setup()
 
   vim.diagnostic.config({
     underline = true,
-    virtual_text = {
-      source = "if_many",
-      spacing = 3,
-      prefix = '←',
-    },
+    virtual_text = false,
     signs = true,
     update_in_insert = false,
   })
 
-  handlers["textDocument/publishDiagnostics"] = lsp.with(
-    lsp.diagnostic.on_publish_diagnostics, {
-      underline = true,
-      virtual_text = {
-        source = "if_many",
-        spacing = 3,
-        prefix = '←',
-      },
-      signs = true,
-      update_in_insert = false,
-    }
-  )
+  -- handlers["textDocument/publishDiagnostics"] = lsp.with(
+  --   lsp.diagnostic.on_publish_diagnostics, {
+  --     underline = true,
+  --     virtual_text = {
+  --       source = "if_many",
+  --       spacing = 3,
+  --       prefix = '←',
+  --     },
+  --     signs = true,
+  --     update_in_insert = false,
+  --   }
+  -- )
 
   local pop_opts = { border = "rounded", max_width = 80 }
   handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)
