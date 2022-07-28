@@ -38,6 +38,7 @@ function M.setup()
     update_in_insert = false,
   })
 
+  -- use this in per-server setups to override
   -- handlers["textDocument/publishDiagnostics"] = lsp.with(
   --   lsp.diagnostic.on_publish_diagnostics, {
   --     underline = true,

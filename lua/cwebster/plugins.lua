@@ -119,15 +119,11 @@ return require("packer").startup {
         "hrsh7th/cmp-cmdline",
         "Saecki/crates.nvim",
         "f3fora/cmp-spell",
+        -- "hrsh7th/cmp-copilot",
         {"petertriho/cmp-git", requires = "nvim-lua/plenary.nvim"}
       },
     }
 
-    -- use { "github/copilot.vim" }
-    use {
-      "zbirenbaum/copilot-cmp",
-      after = { "copilot.lua", "nvim-lspconfig", "nvim-cmp" },
-    }
 
   -- PLUGINS: Colorschemes
     use {
@@ -247,6 +243,12 @@ return require("packer").startup {
           require('cwebster.copilot').setup()
         end, 100)
       end,
+    }
+    use {
+      "zbirenbaum/copilot-cmp",
+      module = "copilot_cmp",
+      config = function() require("copilot_cmp").setup() end,
+      -- after = { "copilot.lua", "nvim-lspconfig", "nvim-cmp" },
     }
 
     use { "junegunn/gv.vim" }

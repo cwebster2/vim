@@ -10,11 +10,23 @@ function M.setup()
   local luasnip = require("luasnip")
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local lspkind = require("lspkind")
+  local copilot_cmp = require("copilot_cmp")
 
   cmp.setup {
+    enabled = function()
+      -- disable completion in comments
+      local context = require 'cmp.config.context'
+      -- keep command mode completion enabled when cursor is in a comment
+      if vim.api.nvim_get_mode().mode == 'c' then
+        return true
+      else
+        return not context.in_treesitter_capture("comment")
+          and not context.in_syntax_group("Comment")
+      end
+    end,
     formatting = {
       format = lspkind.cmp_format({
-        mode = 'symbol_text',
+        mode = 'symbol',
         maxwidth = 50,
         menu = ({
           nvim_lsp = "(LSP)",
@@ -25,6 +37,7 @@ function M.setup()
           luasnip = "(Snippet)",
           buffer = "(Buffer)",
           spell = "(Spell)",
+          copilot = "(Copilot)",
         })
 
         -- before = function(entry, vim_item)
@@ -49,20 +62,46 @@ function M.setup()
       },
     },
     sources = cmp.config.sources({
-      { name = "copilot" },
-      { name = "nvim_lsp" },
-      { name = "path" },
-      { name = "luasnip" },
-      { name = "nvim_lsp_signature_help" },
-      { name = "nvim_lua" },
+      { name = "copilot", max_item_count = 3 },
+      { name = "nvim_lsp", max_item_count = 5 },
+      { name = "path", max_item_count = 3 },
+      { name = "luasnip", max_item_count = 5 },
+      { name = "nvim_lsp_signature_help", max_item_count = 5 },
+      { name = "nvim_lua", max_item_count = 5 },
     },{
-      { name = "buffer" },
+      { name = "buffer"},
       { name = "calc" },
       { name = "emoji" },
       { name = "treesitter" },
       { name = "crates" },
       { name = "spell" },
     }),
+    sorting = {
+      --keep priority weight at 2 for much closer matches to appear above copilot
+      --set to 1 to make copilot always appear on top
+      priority_weight = 2,
+      comparators = {
+        -- order matters here
+        cmp.config.compare.exact,
+        copilot_cmp.prioritize,
+        copilot_cmp.score,
+        cmp.config.compare.recently_used,
+        cmp.config.compare.offset,
+        -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+        cmp.config.compare.score,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+        cmp.config.compare.locality,
+        cmp.config.compare.kind,
+      },
+    },
+    -- view = {
+    --   entries = 'native'
+    -- },
+    experimental = {
+      ghost_text = true
+    },
     mapping = {
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -111,7 +150,7 @@ function M.setup()
 
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
-      { name = 'cmp-git' },
+      { name = 'cmp_git' },
     }, {
       { name = 'buffer' },
     })

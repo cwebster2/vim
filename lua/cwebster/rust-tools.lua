@@ -19,6 +19,7 @@ function M.setup()
       hover_actions = {
         -- the border that is used for the hover window
         -- see vim.api.nvim_open_win()
+        -- auto_focus = true,
         border = {
           {"╭", "FloatBorder"},
           {"─", "FloatBorder"},
@@ -29,7 +30,9 @@ function M.setup()
           {"╰", "FloatBorder"},
           {"│", "FloatBorder"}
         },
-      }
+      },
+
+      -- runnables = { use_telescope = true }
     },
 
     -- all the opts to send to nvim-lspconfig
