@@ -53,6 +53,10 @@ function M.setup()
         }
       },
     },
+    source_selector = {
+      winbar = true,
+      -- show_scrolled_off_parent_node = true,
+    },
     nesting_rules = {},
     filesystem = {
 
@@ -81,7 +85,7 @@ function M.setup()
                             -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
       window = {
         position = "left",
-        width = 30,
+        width = 40,
         mappings = {
           ["<space>"] = "toggle_node",
           ["<2-LeftMouse>"] = "open",

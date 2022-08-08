@@ -10,7 +10,7 @@ function M.setup()
   local luasnip = require("luasnip")
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local lspkind = require("lspkind")
-  local copilot_cmp = require("copilot_cmp")
+  -- local copilot_cmp = require("copilot_cmp")
 
   cmp.setup {
     enabled = function()
@@ -62,7 +62,7 @@ function M.setup()
       },
     },
     sources = cmp.config.sources({
-      { name = "copilot", max_item_count = 3 },
+      -- { name = "copilot", max_item_count = 3 },
       { name = "nvim_lsp", max_item_count = 5 },
       { name = "path", max_item_count = 3 },
       { name = "luasnip", max_item_count = 5 },
@@ -83,8 +83,8 @@ function M.setup()
       comparators = {
         -- order matters here
         cmp.config.compare.exact,
-        copilot_cmp.prioritize,
-        copilot_cmp.score,
+        -- copilot_cmp.prioritize,
+        -- copilot_cmp.score,
         cmp.config.compare.recently_used,
         cmp.config.compare.offset,
         -- cmp.config.compare.scopes, --this is commented in nvim-cmp too

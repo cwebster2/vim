@@ -293,6 +293,13 @@ local Diagnostics = {
         self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
     end,
 
+    on_click = {
+      callback = function()
+        require("trouble").toggle({ mode = "document_diagnostics" })
+      end,
+      name = "heirline_diagnostics",
+    },
+
     -- {
     --     provider = "![",
     -- },
@@ -351,7 +358,8 @@ local LSPActive = {
     -- Or complicate things a bit and get the servers names
     provider  = function()
         local names = {}
-        for i, server in ipairs(vim.lsp.buf_get_clients(0)) do
+        -- for i, server in ipairs(vim.lsp.get_active_clients({bufnr = 0})) do
+        for i, server in ipairs(vim.lsp.get_active_clients()) do
             local servername = u 'f817' .. server.name
             if server.name == "null-ls" then
               servername = "∅"
@@ -457,7 +465,8 @@ local DefaultStatusLine = {
   FileNameBlock, Spacer,
 
 -- center
-  Gps, Spacer, DAPMessages, Align,
+  -- Gps, Spacer,
+  DAPMessages, Align,
 
 -- right
   LSPMessages, Diagnostics, FileFormat, Spacer, FileType, Spacer,
@@ -498,17 +507,19 @@ local WinBars = {
     {   -- Hide the winbar for special buffers
         condition = function()
             return conditions.buffer_matches({
-                buftype = { "nofile", "prompt", "help", "quickfix" },
+                buftype = { "nofile", "prompt", "help", "quickfix", "neotree" },
                 filetype = { "^git.*", "neogit" },
             })
         end,
-        provider = "",
+        init = function()
+          vim.opt_local.winbar = nil
+        end
     },
     {   -- A special winbar for terminals
         condition = function()
             return conditions.buffer_matches({ buftype = { "terminal" } })
         end,
-        utils.surround({ "", "" }, colors.dark_red, {
+        utils.surround({ "", "" }, colors.dark_red, {
             FileType,
             Spacer,
             TerminalName,
@@ -518,14 +529,16 @@ local WinBars = {
         condition = function()
             return not conditions.is_active()
         end,
-        utils.surround({ "", "" }, colors.bright_bg, { hl = { fg = "gray", force = true }, FileNameBlock }),
+        utils.surround({ "", "" }, colors.bright_bg, { hl = { fg = "gray", force = true }, FileNameBlock }),
     },
     -- A winbar for regular files
-    utils.surround({ "", "" }, colors.bright_bg, FileNameBlock),
+    {
+      FileNameBlock, Spacer, Gps
+    }
 }
 
 function M.setup()
-  heirline.setup(StatusLines)
+  heirline.setup(StatusLines, WinBars)
 end
 
 return M
