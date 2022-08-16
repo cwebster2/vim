@@ -235,21 +235,21 @@ return require("packer").startup {
     -- use { "github/copilot.vim",
     --   setup = "require('cwebster.copilot').setup()"
     -- }
-    -- use{
-    --   "zbirenbaum/copilot.lua",
-    --   event = {"VimEnter"},
-    --   config = function()
-    --     vim.defer_fn(function()
-    --       require('cwebster.copilot').setup()
-    --     end, 100)
-    --   end,
-    -- }
-    -- use {
-    --   "zbirenbaum/copilot-cmp",
-    --   module = "copilot_cmp",
-    --   config = function() require("copilot_cmp").setup() end,
-    --   -- after = { "copilot.lua", "nvim-lspconfig", "nvim-cmp" },
-    -- }
+    use{
+      "zbirenbaum/copilot.lua",
+      event = {"VimEnter"},
+      config = function()
+        vim.defer_fn(function()
+          require('cwebster.copilot').setup()
+        end, 100)
+      end,
+    }
+    use {
+      "zbirenbaum/copilot-cmp",
+      module = "copilot_cmp",
+      config = function() require("copilot_cmp").setup() end,
+      -- after = { "copilot.lua", "nvim-lspconfig", "nvim-cmp" },
+    }
 
     use { "junegunn/gv.vim" }
 

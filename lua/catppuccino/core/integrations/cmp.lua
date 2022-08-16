@@ -45,6 +45,7 @@ function M.get(cpt)
 		CmpItemKindEvent = { fg = cpt.blue },
 		CmpItemKindOperator = { fg = cpt.blue },
 		CmpItemKindTypeParameter = { fg = cpt.blue },
+    CmpItemKindCopilot = { fg = "#6CC644" },
 	}
 end
 

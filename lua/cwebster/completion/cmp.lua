@@ -1,8 +1,10 @@
 local M = {}
 
 local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  -- return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
 
 function M.setup()
@@ -10,7 +12,7 @@ function M.setup()
   local luasnip = require("luasnip")
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local lspkind = require("lspkind")
-  -- local copilot_cmp = require("copilot_cmp")
+  local copilot_cmp = require("copilot_cmp")
 
   cmp.setup {
     enabled = function()
@@ -62,7 +64,7 @@ function M.setup()
       },
     },
     sources = cmp.config.sources({
-      -- { name = "copilot", max_item_count = 3 },
+      { name = "copilot", max_item_count = 3 },
       { name = "nvim_lsp", max_item_count = 5 },
       { name = "path", max_item_count = 3 },
       { name = "luasnip", max_item_count = 5 },
@@ -83,8 +85,8 @@ function M.setup()
       comparators = {
         -- order matters here
         cmp.config.compare.exact,
-        -- copilot_cmp.prioritize,
-        -- copilot_cmp.score,
+        copilot_cmp.prioritize,
+        copilot_cmp.score,
         cmp.config.compare.recently_used,
         cmp.config.compare.offset,
         -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
@@ -106,12 +108,12 @@ function M.setup()
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
+        if cmp.visible() and has_words_before() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
-        elseif has_words_before() then
-          cmp.complete()
+        -- elseif has_words_before() then
+          -- cmp.complete()
         else
           -- local copilot_keys = vim.fn["copilot#Accept"]()
           -- if copilot_keys ~= "" then

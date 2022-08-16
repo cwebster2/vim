@@ -35,7 +35,7 @@ function M.setup()
     underline = true,
     virtual_text = false,
     signs = true,
-    update_in_insert = false,
+    update_in_insert = true,
   })
 
   -- use this in per-server setups to override
