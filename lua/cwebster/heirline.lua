@@ -538,7 +538,8 @@ local WinBars = {
 }
 
 function M.setup()
-  heirline.setup(StatusLines, WinBars)
+  --heirline.setup(StatusLines, WinBars)
+  heirline.setup(StatusLines)
 end
 
 return M

@@ -40,7 +40,8 @@ function M.setup()
           buffer = "(Buffer)",
           spell = "(Spell)",
           copilot = "(Copilot)",
-        })
+        }),
+        symbol_map = { Copilot = "" }
 
         -- before = function(entry, vim_item)
         --   vim_item.dup = ({
@@ -107,13 +108,13 @@ function M.setup()
     mapping = {
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<Tab>"] = cmp.mapping(function(fallback)
+      ["<Tab>"] = vim.schedule_wrap(function(fallback)
         if cmp.visible() and has_words_before() then
-          cmp.select_next_item()
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         -- elseif has_words_before() then
-          -- cmp.complete()
+        --   cmp.complete()
         else
           -- local copilot_keys = vim.fn["copilot#Accept"]()
           -- if copilot_keys ~= "" then
@@ -122,10 +123,7 @@ function M.setup()
             fallback()
           -- end
         end
-      end, {
-        "i",
-        "s",
-      }),
+      end, { "i", "s", }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
@@ -134,13 +132,10 @@ function M.setup()
         else
           fallback()
         end
-      end, {
-        "i",
-        "s",
-      }),
+      end, { "i", "s", }),
 
       ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
+      ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
