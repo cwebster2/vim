@@ -264,7 +264,7 @@ M.lsp_setup = function(client, bufnr)
   end
 
   if client.name == "rust_analyzer" then
-    keymap.c.o = { "<cmd>lua require('rust-tools').hover_actions.hover_actions()<CR>", "Hover Actions" }
+    keymap.c.o = { require('rust-tools').hover_actions.hover_actions, "Hover Actions" }
   end
 
   local keymap_visual = {
