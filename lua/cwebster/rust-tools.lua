@@ -4,7 +4,6 @@ function M.setup()
   require('rust-tools').setup({
     tools = { -- rust-tools options
       autoSetHints = true,
-      hover_with_actions = true,
 
       inlay_hints = {
         show_parameter_hints = true,
@@ -19,7 +18,7 @@ function M.setup()
       hover_actions = {
         -- the border that is used for the hover window
         -- see vim.api.nvim_open_win()
-        -- auto_focus = true,
+        auto_focus = true,
         border = {
           {"╭", "FloatBorder"},
           {"─", "FloatBorder"},

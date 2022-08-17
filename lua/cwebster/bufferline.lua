@@ -69,17 +69,18 @@ function M.setup()
     },
     highlights = {
       fill = {
-        guibg = "NONE",
-        guifg = "NONE",
+        bg = "NONE",
+        fg = "NONE",
       },
       background = {
-        guibg = "NONE",
+        bg = "NONE",
       },
       buffer_selected = {
         --guifg = '#e8e8d3',
-        guibg = 'NONE',
+        bg = 'NONE',
         --guisp = '#e8e8d3',
-        gui = 'italic,bold'
+        italic = true,
+        bold = true
       },
     --   modified_selected = {
     --     gui = 'underline,italic,bold'

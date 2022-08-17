@@ -46,9 +46,9 @@ M.servers = {
   },
   dockerls = {},
   jsonls = {},
-  clangd = {
-    handlers = lsp_status.extensions.clangd.setup(),
-  },
+  -- clangd = {
+  --   handlers = lsp_status.extensions.clangd.setup(),
+  -- },
   texlab = {
     settings = {
       latex = {
