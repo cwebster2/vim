@@ -33,8 +33,14 @@ function M.setup()
 
   vim.diagnostic.config({
     underline = true,
-    virtual_text = false,
+    virtual_text = {
+      source = "if_many",
+      spacing = 3,
+      prefix = '←',
+    },
+    virtual_lines = false,
     signs = true,
+    severity_sort = true,
     update_in_insert = true,
   })
 
