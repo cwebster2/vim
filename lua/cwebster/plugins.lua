@@ -216,6 +216,10 @@ return require("packer").startup {
       config = function() require("cwebster.neotree").setup() end,
     }
     use { "pwntester/octo.nvim" }
+    use { "kylechui/nvim-surround",
+      tag = "*",
+      config = function() require("cwebster.surround").setup() end,
+    }
     use { "windwp/nvim-autopairs",
       config = function() require("nvim-autopairs").setup() end,
     }
@@ -231,7 +235,7 @@ return require("packer").startup {
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
     }
 
-    -- copilot stuff
+    -- PLUGINS: copilot
     -- use { "github/copilot.vim",
     --   setup = "require('cwebster.copilot').setup()"
     -- }
@@ -284,9 +288,7 @@ return require("packer").startup {
 
     -- PLUGINS: The Rest
     use { "airblade/vim-rooter" }
-
     use { "tpope/vim-eunuch" }
-    use { "tpope/vim-surround" }
 
     use { "andweeb/presence.nvim",
       config = "require('cwebster.presence').setup()",
