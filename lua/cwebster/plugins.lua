@@ -29,7 +29,6 @@ return require("packer").startup {
 
   -- stuff to try
     -- https://github.com/nyngwang/NeoTerm.lua
-    -- https://github.com/nvim-neotest/neotest
     -- https://github.com/pianocomposer321/yabs.nvim
     -- https://github.com/Shatur/neovim-session-manager
     -- https://github.com/kosayoda/nvim-lightbulb with new config
@@ -225,6 +224,21 @@ return require("packer").startup {
     }
     use {"akinsho/nvim-toggleterm.lua",
       config = "require('cwebster.neoterm').setup()",
+    }
+    -- https://github.com/nvim-neotest/neotest
+    use {
+      "nvim-neotest/neotest",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "antoinemadec/FixCursorHold.nvim",
+        "haydenmeade/neotest-jest",
+      },
+      config = function() require("cwebster.neotest").setup() end,
+    }
+    use {
+      "cwebster2/mocha-runner.nvim",
+      config = function() require("mocha-runner").setup({}) end,
     }
     use {
       "ThePrimeagen/refactoring.nvim",
