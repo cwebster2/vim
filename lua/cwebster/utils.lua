@@ -6,11 +6,17 @@ local bit = require("bit")
 -- Key mapping
 function M.map(mode, key, result, opts)
   local map_opts = {
-    noremap = true,
+    noremap = opts.noremap or true,
     silent = opts.silent or false,
     expr = opts.expr or false,
-    script = opts.script or false
+    script = opts.script or false,
+    desc = opts.desc or nil,
+    replace_termcodes = opts.replace_temrcodes or nil
   }
+  if type(result) == "function" then
+    map_opts.callback = result
+    result = ""
+  end
   if not opts.buffer then
     vim.api.nvim_set_keymap(mode, key, result, map_opts)
   else
@@ -21,6 +27,8 @@ function M.map(mode, key, result, opts)
     vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
   end
 end
+
+
 
 function M.has(value)
   return vim.fn.has(value) == 1

@@ -28,12 +28,12 @@ return require("packer").startup {
     }
 
   -- stuff to try
-    -- https://github.com/nyngwang/NeoTerm.lua
-    -- https://github.com/pianocomposer321/yabs.nvim
-    -- https://github.com/Shatur/neovim-session-manager
-    -- https://github.com/kosayoda/nvim-lightbulb with new config
-    -- ChristianChiarulli/codi.vim
-    -- nvim-neorg/neorg
+  -- https://github.com/nyngwang/NeoTerm.lua
+  -- https://github.com/pianocomposer321/yabs.nvim
+  -- https://github.com/Shatur/neovim-session-manager
+  -- https://github.com/kosayoda/nvim-lightbulb with new config
+  -- ChristianChiarulli/codi.vim
+  -- nvim-neorg/neorg
 
   -- PLUGINS: Finders and pickers
     use {
@@ -160,12 +160,6 @@ return require("packer").startup {
       config = "require('cwebster.gitsigns').setup()",
     }
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
-    use {
-      "folke/which-key.nvim",
-      config = function()
-        require("cwebster.whichkey").setup()
-      end,
-    }
     use {
       "SmiteshP/nvim-gps",
       requires = {"nvim-treesitter/nvim-treesitter"},
