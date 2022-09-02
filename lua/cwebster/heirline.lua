@@ -498,12 +498,12 @@ local TerminalStatusline = {
 }
 
 local StatusLines = {
-  init = utils.pick_child_on_condition,
+  fallthrough = false,
   SpecialStatusline, TerminalStatusline, DefaultStatusLine
 }
 
 local WinBars = {
-    init = utils.pick_child_on_condition,
+  fallthrough = false,
     {   -- Hide the winbar for special buffers
         condition = function()
             return conditions.buffer_matches({
