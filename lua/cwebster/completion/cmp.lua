@@ -64,21 +64,20 @@ function M.setup()
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
       },
     },
-    sources = cmp.config.sources({
-      { name = "copilot", max_item_count = 3 },
-      { name = "nvim_lsp", max_item_count = 5 },
-      { name = "path", max_item_count = 3 },
-      { name = "luasnip", max_item_count = 5 },
-      { name = "nvim_lsp_signature_help", max_item_count = 5 },
-      { name = "nvim_lua", max_item_count = 5 },
-    },{
-      { name = "buffer"},
-      { name = "calc" },
-      { name = "emoji" },
-      { name = "treesitter" },
-      { name = "crates" },
-      { name = "spell" },
-    }),
+    sources = {
+      { name = "crates", group_index = 1 },
+      { name = "copilot", max_item_count = 3, group_index = 2 },
+      { name = "nvim_lsp", max_item_count = 5, group_index = 2 },
+      { name = "path", max_item_count = 3, group_index = 2 },
+      { name = "luasnip", max_item_count = 5, group_index = 2 },
+      { name = "nvim_lsp_signature_help", max_item_count = 5, group_index = 2 },
+      { name = "nvim_lua", max_item_count = 5, group_index = 2 },
+      { name = "buffer", group_index = 3},
+      { name = "calc" , group_index = 3},
+      { name = "emoji", group_index = 3 },
+      { name = "treesitter", group_index = 3 },
+      { name = "spell", group_index = 3 },
+    },
     sorting = {
       --keep priority weight at 2 for much closer matches to appear above copilot
       --set to 1 to make copilot always appear on top
@@ -135,6 +134,7 @@ function M.setup()
       end, { "i", "s", }),
 
       ["<C-Space>"] = cmp.mapping.complete(),
+      -- ["<Right>"] = cmp.mapping.confirm({ select = true }), -- see how much I use/like this
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -154,17 +154,17 @@ function M.setup()
   })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  -- cmp.setup.cmdline('/', {
-  --   mapping = cmp.mapping.preset.cmdline(),
-  --   view = {
-  --     entries = { name = 'wildmenu', separator = "|" }
-  --   },
-  --   sources = {
-  --     { name = 'nvim_lsp_document_symbol'}
-  --   },{
-  --     { name = 'buffer' }
-  --   }
-  -- })
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    view = {
+      entries = { name = 'wildmenu', separator = "|" }
+    },
+    sources = {
+      { name = 'nvim_lsp_document_symbol'}
+    },{
+      { name = 'buffer' }
+    }
+  })
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
