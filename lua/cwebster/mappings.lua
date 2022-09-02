@@ -251,47 +251,18 @@ M.setup_ft_mappings = function()
 
   augroup("globalftmaps", {
       {'FileType', 'markdown', 'lua registerMappingsMD()'},
-      {'FileType', 'fugitive', 'lua registerMappingsFugitive()'},
       {'FileType', 'gitcommit', 'lua registerMappingsCommitMsg()'},
     }
   )
 
   _G.registerMappingsCommitMsg = function()
-    local wk = require("which-key")
     local buf = vim.api.nvim_get_current_buf()
-
-    wk.register({
-      ["g"] = {
-        name = "+git",
-        ["a"] = { "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", "coauthors" },
-      }
-    }, { buffer = buf, prefix = "<leader>" })
+    map("n", "ga", "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", { buffer = buf} ),
   end
 
   _G.registerMappingsMD = function()
-    local wk = require("which-key")
     local buf = vim.api.nvim_get_current_buf()
-
-    wk.register({
-      ["<C-s>"] = {
-        name = "+Markdown",
-        ["p"] = { "<cmd>MarkdownPreview<cr>", "Preview", buffer = buf }
-      }
-    })
-
-  end
-
-  _G.registerMappingsFugitive = function()
-    local wk = require("which-key")
-    local buf = vim.api.nvim_get_current_buf()
-
-    wk.register({
-      ["q"] = { "<c-w>q", "Close Fugitive", buffer = buf },
-      ["C"] = { "cc", "Git Commit", buffer = buf },
-      ["D"] = { "dd", "D", buffer = buf },
-      ["PP"] = { "<cmd>Git push<cr>", "Git Push", buffer = buf },
-    })
-
+    map("n", "<C-S>p", "<cmd>MarkdownPreview<cr>", { buffer = buf })
   end
 
 end
