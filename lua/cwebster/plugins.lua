@@ -214,7 +214,9 @@ return require("packer").startup {
       },
       config = function() require("cwebster.neotree").setup() end,
     }
-    use { "pwntester/octo.nvim" }
+    use { "pwntester/octo.nvim",
+      config = function() require("octo").setup() end,
+    }
     use { "kylechui/nvim-surround",
       tag = "*",
       config = function() require("cwebster.surround").setup() end,
