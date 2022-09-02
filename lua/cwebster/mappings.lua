@@ -257,7 +257,7 @@ M.setup_ft_mappings = function()
 
   _G.registerMappingsCommitMsg = function()
     local buf = vim.api.nvim_get_current_buf()
-    map("n", "ga", "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", { buffer = buf} ),
+    map("n", "ga", "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", { buffer = buf} )
   end
 
   _G.registerMappingsMD = function()
