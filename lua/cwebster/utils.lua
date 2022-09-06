@@ -23,7 +23,6 @@ function M.map(mode, key, result, opts, category, id)
     if not id then
       vim.api.nvim_set_keymap(mode, key, result, map_opts)
     else
-      print("mapping ".." "..mode.." "..key.." "..result.." "..category.." "..id.." "..opts.desc)
       mapper.map(mode, key, result, map_opts, category, id, opts.desc or "")
     end
   else
