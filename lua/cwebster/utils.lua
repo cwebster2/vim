@@ -2,9 +2,11 @@ local M = {}
 
 local api = vim.api
 local bit = require("bit")
+local mapper = require("nvim-mapper")
+
 
 -- Key mapping
-function M.map(mode, key, result, opts)
+function M.map(mode, key, result, opts, category, id)
   local map_opts = {
     noremap = opts.noremap or true,
     silent = opts.silent or false,
@@ -18,13 +20,22 @@ function M.map(mode, key, result, opts)
     result = ""
   end
   if not opts.buffer then
-    vim.api.nvim_set_keymap(mode, key, result, map_opts)
+    if not id then
+      vim.api.nvim_set_keymap(mode, key, result, map_opts)
+    else
+      print("mapping ".." "..mode.." "..key.." "..result.." "..category.." "..id.." "..opts.desc)
+      mapper.map(mode, key, result, map_opts, category, id, opts.desc or "")
+    end
   else
     local buffer = opts.buffer
     if buffer == true then
       buffer = 0
     end
-    vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
+    if not id then
+      vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
+    else
+      mapper.map(buffer, mode, key, result, map_opts, category, id, opts.desc or "")
+    end
   end
 end
 
