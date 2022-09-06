@@ -33,11 +33,12 @@ M.init_keymap = function()
 
   -- <leader>h -- help
 
+  map("n", "<leader>hk", "<Cmd>Telescope mapper<CR>", { desc = "Find keymaps"}, "help", "telescope_mapper")
   map("n", "<leader>ht", "<cmd>Telescope builtin<cr>", { desc = "Telescope"}, "help", "telescope_builtins")
   map("n", "<leader>hc", "<cmd>Telescope commands<cr>", { desc = "Commands"}, "help", "telescope_commands")
   map("n", "<leader>hh", "<cmd>Telescope help_tags<cr>", { desc = "Help Pages"}, "help", "telescope_help")
   map("n", "<leader>hm", "<cmd>Telescope man_pages<cr>", { desc = "Man Pages"}, "help", "telescope_man")
-  map("n", "<leader>hk", "<cmd>Telescope keymaps<cr>", { desc = "Key Maps"}, "help", "telescope_keymaps_all")
+  -- map("n", "<leader>hk", "<cmd>Telescope keymaps<cr>", { desc = "Key Maps"}, "help", "telescope_keymaps_all")
   map("n", "<leader>hs", "<cmd>Telescope highlights<cr>", { desc = "Search Highlight Groups"}, "help", "telescope_highlight")
   map("n", "<leader>hl", "<cmd>TSHighlightCapturesUnderCursor<cr>", { desc = "Highlight Groups at cursor"}, "help", "telescope_get_high")
   map("n", "<leader>hf", "<cmd>Telescope filetypes<cr>", { desc = "File Types"}, "help", "telescope_filetype")
@@ -198,46 +199,46 @@ M.lsp_setup = function(client, bufnr)
 
   local opts = { noremap = true, silent = true, buffer = bufnr}
 
-  map("n", "<leader>cr", "<cmd>lua vim.lsp.fub.rename()<CR>", opts)
-  map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  map("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float(nil,{source=always,focusable=false,border='rounded'})<CR>", opts)
-  map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts)
-  map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-  map("n", "<leader>clr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-  map("n", "<leader>cll", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+  map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts, "Lsp", "lsp_buf_rename", "Rename symbol")
+  map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts, "Lsp", "lsp_code_action", "Buffer code actions")
+  map("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float(nil,{source=always,focusable=false,border='rounded'})<CR>", opts, "Lsp", "lsp_diag_float", "Open floating diagnostic window")
+  map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts, "Lsp", "lsp_info", "Show LSP information")
+  map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts, "Lsp", "lsp_buf_add_wksp", "Add workspace folder")
+  map("n", "<leader>clr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts, "Lsp", "lsp_buf_rmv_wksp", "Remove workspace folder")
+  map("n", "<leader>cll", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts, "Lsp", "list_wkspc_folder", "List workspace folders")
 
-  map("n", "<leader>xs", "<cmd>Telescope lsp_document_diagnostics<cr>", opts)
-  map("n", "<leader>xW", "<cmd>Telescope lsp_workspace_diagnostics<cr>", opts)
+  map("n", "<leader>xs", "<cmd>Telescope lsp_document_diagnostics<cr>", opts, "Lsp", "lsp_doc_diag", "Open document diagnostics in telescope")
+  map("n", "<leader>xW", "<cmd>Telescope lsp_workspace_diagnostics<cr>", opts, "Lsp", "lsp_wksp_diag", "Open workspace diagnostics in telescope")
 
   if client.name == "typescript" then
-    map("n", "<leader>co", "<cmd>:TSLspOrganize<CR>", opts)
-    map("n", "<leader>cR", "<cmd>:TSLspRenameFile<CR>", opts)
+    map("n", "<leader>co", "<cmd>:TSLspOrganize<CR>", opts, "Lsp", "ts_lsp_org", "Typescript: Organize imports")
+    map("n", "<leader>cR", "<cmd>:TSLspRenameFile<CR>", opts, "Lsp", "ts_lsp_rename_file", "Typescript: Rename file")
   end
 
   if client.name == "rust_analyzer" then
-    map("n", "<leader>co", require('rust-tools').hover_actions.hover_actions, opts)
+    map("n", "<leader>co", require('rust-tools').hover_actions.hover_actions, opts, "Lsp", "rust_lsp_hover", "Rust: show hover actions")
   end
 
-  map("v", "<leader>ca", ":<C-U>lua vim.lsp.buf.code_action()<CR>", opts )
+  map("v", "<leader>ca", ":<C-U>lua vim.lsp.buf.code_action()<CR>", opts)
 
-  map("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
-  map("n", "gR", "<cmd>LspTrouble lsp_references<cr>", opts)
-  map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  map("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-  map("n", "gk", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  map("n", "gh", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts)
+  map("n", "gr", "<cmd>Telescope lsp_references<cr>", opts, "Lsp", "lsp_refs_tele", "Show lsp references in telescope")
+  map("n", "gR", "<cmd>Trouble lsp_references<cr>", opts, "Lsp", "lsp_refs_trouble", "Show lsp references in trouble")
+  map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts, "Lsp", "lsp_buf_decl", "Show lsp declarations")
+  map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts, "Lsp", "lsp_buf_def", "Show lsp definition")
+  map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts, "Lsp", "lsp_buf_sighlp", "Show lsp signature help")
+  map("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts, "Lsp", "lsp_buf_impl", "Show lsp implementation")
+  map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts, "Lsp", "lsp_buf_typedef", "Show lsp buffer declarations")
+  map("n", "gk", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts, "Lsp", "lsp_buf_hover", "Show lsp buffer hover actions")
+  map("n", "gh", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts, "Lsp", "lsp_symbols_tele", "Show lsp symbols in telescope")
 
-  map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
-  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts)
+  map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts, "Lsp", "lsp_buf_hoverK", "Show lsp buffer hover actions")
+  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev({popup_opts={focusable=false,border='rounded'}})<CR>", opts, "Lsp", "lsp_buf_diag_p", "Prev diagnostic")
+  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts, "Lsp", "lsp_buf_diag_n", "Next diagnostic")
   map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.server_capabilities.documentFormattingProvider then
-    map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
+    map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts, "Lsp", "lsp_doc_fmt", "Format document (lsp)")
   elseif client.server_capabilities.documentRangeFormattingProvider then
     map("v", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 

@@ -6,13 +6,13 @@ local mapper = require("nvim-mapper")
 
 
 -- Key mapping
-function M.map(mode, key, result, opts, category, id)
+function M.map(mode, key, result, opts, category, id, desc)
   local map_opts = {
     noremap = opts.noremap or true,
     silent = opts.silent or false,
     expr = opts.expr or false,
     script = opts.script or false,
-    desc = opts.desc or nil,
+    desc = opts.desc or desc or nil,
     replace_termcodes = opts.replace_temrcodes or nil
   }
   if type(result) == "function" then
@@ -23,7 +23,7 @@ function M.map(mode, key, result, opts, category, id)
     if not id then
       vim.api.nvim_set_keymap(mode, key, result, map_opts)
     else
-      mapper.map(mode, key, result, map_opts, category, id, opts.desc or "")
+      mapper.map(mode, key, result, map_opts, category, id, map_opts.desc or "")
     end
   else
     local buffer = opts.buffer
@@ -33,7 +33,7 @@ function M.map(mode, key, result, opts, category, id)
     if not id then
       vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
     else
-      mapper.map(buffer, mode, key, result, map_opts, category, id, opts.desc or "")
+      mapper.map_buf(buffer, mode, key, result, map_opts, category, id, map_opts.desc or "")
     end
   end
 end
