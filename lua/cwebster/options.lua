@@ -1,7 +1,7 @@
 local opt = vim.opt
 local augroup = require("cwebster.utils").augroup
 
-opt.autoindent = false
+opt.autoindent = true
 opt.autoread = true
 opt.backspace = "indent,eol,start"
 opt.backup = false
@@ -77,7 +77,7 @@ opt.updatetime = 300
 opt.viewoptions = "cursor,folds,options,unix,slash"
 opt.virtualedit = "onemore"
 opt.wildmenu = true
-opt.wildmode = 'longest,full'
+opt.wildmode = 'longest:full'
 opt.winblend = 15
 opt.winblend = 30
 opt.writebackup = false
