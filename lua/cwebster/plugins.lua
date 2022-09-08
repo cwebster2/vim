@@ -249,6 +249,7 @@ return require("packer").startup {
       }
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
     }
+    use { "metakirby5/codi.vim" }
 
     -- PLUGINS: copilot
     -- use { "github/copilot.vim",
