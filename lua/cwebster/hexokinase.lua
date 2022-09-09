@@ -9,7 +9,7 @@ M.setup = function()
     'rgba',
     'hsl',
     'hsla',
-    'colour_names'
+    -- 'colour_names'
   }
 end
 
