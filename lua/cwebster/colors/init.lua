@@ -1,7 +1,7 @@
 local M = {}
 local vim = vim
 
-vim.g.catppuccin_flavor = "latte"  -- latte, frappe, macchiato mocha
+vim.g.catppuccin_flavour = "mocha"  -- latte, frappe, macchiato mocha
 local colors = require("catppuccin.palettes").get_palette()
 
 function M.get_colors()
@@ -46,10 +46,9 @@ M.setup = function()
   if vim.fn.has('termguicolors') == 1 then
     vim.cmd[[set termguicolors]]
   end
-  vim.g.catppuccin_flavor = "latte"  -- latte, frappe, macchiato mocha
+
   require("cwebster.colors.catppuccin").setup()
   vim.cmd[[colorscheme catppuccin]]
-  -- require("catppuccino").load()
 end
 
 return M
