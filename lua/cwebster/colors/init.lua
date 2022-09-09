@@ -1,18 +1,18 @@
 local M = {}
 local vim = vim
 
-local _, colors = require("catppuccino.api.colors").get_colors()
+vim.g.catppuccin_flavour = "mocha"  -- latte, frappe, macchiato mocha
+local colors = require("catppuccin.palettes").get_palette()
 
 function M.get_colors()
+  colors.diff = { -- git and native diffs
+    add = "green",
+    change = "#2B5B77",
+    delete = "red",
+    text = colors.blue,
+    conflict = colors.magenta,
+  }
   return colors
-  -- return vim.tbl_deep_extend("force", colors, {
-  --   diff = {
-  --     add = colors.green,
-  --     delete = colors.red,
-  --     change = "#2B5B77",
-  --   },
-  --   none = "NONE"
-  -- })
 end
 
 M.theme_colors = colors
@@ -46,10 +46,9 @@ M.setup = function()
   if vim.fn.has('termguicolors') == 1 then
     vim.cmd[[set termguicolors]]
   end
-  -- require("cwebster.colors.catppuccin").setup()
-  -- vim.g.catppuccin_flavor = "frappe"
-  -- vim.cmd[[colorscheme catppuccin]]
-  require("catppuccino").load()
+
+  require("cwebster.colors.catppuccin").setup()
+  vim.cmd[[colorscheme catppuccin]]
 end
 
 return M

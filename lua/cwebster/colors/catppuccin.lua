@@ -1,79 +1,85 @@
 local M = {}
 local catppuccin = require("catppuccin")
 
+M.overrides = {
+  colors = {},
+  highlights = {}
+}
+
 function M.setup()
   catppuccin.setup({
     transparent_background = true,
     term_colors = false,
+    compile = {
+      enabled = false,
+      path = vim.fn.stdpath("cache") .. "/catppuccin",
+    },
+    dim_inactive = {
+      enabled = false,
+      shade = "dark",
+      percentage = 0.15,
+    },
     styles = {
-      comments = "italic",
-      conditionals = "italic",
-      loops = "NONE",
-      functions = "NONE",
-      keywords = "italic",
-      strings = "NONE",
-      variables = "italic",
-      numbers = "NONE",
-      booleans = "NONE",
-      properties = "NONE",
-      types = "NONE",
-      operators = "NONE",
+      comments = { "italic" },
+      conditionals = { "italic" },
+      loops = {},
+      functions = {},
+      keywords = { "italic" },
+      strings = {},
+      variables = { "italic" },
+      numbers = {},
+      booleans = {},
+      properties = {},
+      types = {},
+      operators = {},
     },
     integrations = {
       treesitter = true,
-      native_lsp = {
-        enabled = true,
-        virtual_text = {
-          errors = "italic",
-          hints = "italic",
-          warnings = "italic",
-          information = "italic",
-        },
-        underlines = {
-          errors = "underline",
-          hints = "underline",
-          warnings = "underline",
-          information = "underline",
-        },
-      },
-      lsp_trouble = true,
+      treesitter_context = true,
+      ts_rainbow = true,
       cmp = true,
-      lsp_saga = false,
-      gitgutter = false,
+      gitgutter = true,
       gitsigns = true,
+      lsp_trouble = true,
+      neogit = true,
+      symbols_outline = true,
       telescope = true,
-      nvimtree = {
-        enabled = false,
-        show_root = false,
-        transparent_panel = false,
-      },
-      neotree = {
-        enabled = true,
-        show_root = false,
-        transparent_panel = false,
-      },
-      which_key = true,
+      nvimtree = true, --false? neotree
+      dashboard = false,
+      markdown = true,
+      notify = true,
       indent_blankline = {
         enabled = true,
         colored_indent_levels = true,
       },
-      dashboard = true,
-      neogit = true,
-      vim_sneak = false,
-      fern = false,
-      barbar = false,
-      bufferline = true,
-      markdown = true,
-      lightspeed = false,
-      ts_rainbow = true,
-      hop = false,
-      notify = true,
-      telekasten = true,
-      symbols_outline = true,
-    }
+      dap = {
+        enabled = true,
+        enabled_ui = true,
+      },
+      native_lsp = {
+        enabled = true,
+        virtual_text = {
+          errors = { "italic" },
+          hints = { "italic" },
+          warnings = { "italic" },
+          information = { "italic" },
+        },
+        underlines = {
+          errors = { "underline" },
+          hints = { "underline" },
+          warnings = { "underline" },
+          information = { "underline" },
+        },
+      },
+      neotree = {
+        enabled = true,
+        show_root = true,
+        transparent_panel = false,
+      }
+    },
+    color_overrides = M.overrides.colors,
+    highlight_overrides = M.overrides.highlights,
   })
-
-  -- remaps
 end
 
 return M
