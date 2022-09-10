@@ -12,6 +12,8 @@ function M.get_colors()
     text = colors.blue,
     conflict = colors.magenta,
   }
+	colors.magenta = "#c678dd"
+	colors.gray = "#2a2e36"
   return colors
 end
 
