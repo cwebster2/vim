@@ -266,9 +266,8 @@ return require("packer").startup {
     }
     use {
       "zbirenbaum/copilot-cmp",
-      module = "copilot_cmp",
+      after = { "copilot.lua" },
       config = function() require("copilot_cmp").setup() end,
-      -- after = { "copilot.lua", "nvim-lspconfig", "nvim-cmp" },
     }
 
     use { "junegunn/gv.vim" }
