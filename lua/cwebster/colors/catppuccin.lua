@@ -1,9 +1,23 @@
 local M = {}
 local catppuccin = require("catppuccin")
+local mocha = require("catppuccin.palettes").get_palette("mocha")
 
 M.overrides = {
   colors = {},
-  highlights = {}
+  highlights = {
+    all = {
+      CmpItemAbbrMatch = { fg = mocha.blue },
+      CmpItemAbbrMatchFuzzy = { fg = mocha.blue },
+		  Pmenu = { bg = mocha.mantle },
+		  PmenuSel = { fg = mocha.sapphire },
+		  PmenuSbar = { bg = mocha.base }, -- Popup menu: scrollbar.
+		  PmenuThumb = { bg = mocha.surface0 }, -- Popup menu: Thumb of the scrollbar.
+    }
+    -- mocha = {
+    --   ["@field"] = { fg = mocha.rosewater },
+    --   TSField = { fg = mocha.rosewater },
+    -- }
+  }
 }
 
 function M.setup()
