@@ -8,10 +8,11 @@ M.overrides = {
     all = {
       CmpItemAbbrMatch = { fg = mocha.blue },
       CmpItemAbbrMatchFuzzy = { fg = mocha.blue },
-		  Pmenu = { bg = mocha.mantle },
+		  Pmenu = { bg = mocha.crust },
 		  PmenuSel = { fg = mocha.sapphire },
 		  PmenuSbar = { bg = mocha.base }, -- Popup menu: scrollbar.
 		  PmenuThumb = { bg = mocha.surface0 }, -- Popup menu: Thumb of the scrollbar.
+      FloadBorder = { fg = mocha.red },
     }
     -- mocha = {
     --   ["@field"] = { fg = mocha.rosewater },

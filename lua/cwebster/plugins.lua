@@ -266,8 +266,11 @@ return require("packer").startup {
     }
     use {
       "zbirenbaum/copilot-cmp",
+      module = "copilot_cmp",
       after = { "copilot.lua" },
-      config = function() require("copilot_cmp").setup() end,
+      config = function() require("copilot_cmp").setup({
+        method = "getCompletionsCycling"
+      }) end,
     }
 
     use { "junegunn/gv.vim" }
