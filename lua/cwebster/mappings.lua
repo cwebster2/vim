@@ -1,13 +1,15 @@
 local map = require("cwebster.utils").map
 local augroup = require("cwebster.utils").augroup
+local wk = require("which-key")
 
 local M = {}
 
 
 M.init_keymap = function()
-
+  local leader_map = {}
   -- <leader>g -- git stuff
 
+  leader_map.g = { name = "+git" }
   map("n", "<leader>gg", function() require("neogit").open() end, { desc = "Neogit" }, "git", "git_neogit")
   map("n", "<leader>gc", "<Cmd>Telescope git_commits<CR>", { desc = "Show git commits" }, "git", "telescope_git_commits")
   map("n", "<leader>gb", "<Cmd>Telescope git_branches<CR>", { desc = "Show git branches" },"git", "telescope_git_branches" )
@@ -19,6 +21,7 @@ M.init_keymap = function()
 
   -- <leader>b and bufferline stuff
 
+  leader_map.b = { name = "+buffer" }
   map("n", "<leader>bg", "<cmd>BufferLinePick<cr>", { desc = "Goto Buffer"}, "buffer", "bufferline_pick")
   map("n", "<leader>bp", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer"}, "buffer", "bufferline_cycle_prev")
   map("n", "<leader>bn", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer"}, "buffer", "bufferline_cycle_next")
@@ -33,6 +36,7 @@ M.init_keymap = function()
 
   -- <leader>h -- help
 
+  leader_map.h = { name = "+help" }
   map("n", "<leader>hk", "<Cmd>Telescope mapper<CR>", { desc = "Find keymaps"}, "help", "telescope_mapper")
   map("n", "<leader>ht", "<cmd>Telescope builtin<cr>", { desc = "Telescope"}, "help", "telescope_builtins")
   map("n", "<leader>hc", "<cmd>Telescope commands<cr>", { desc = "Commands"}, "help", "telescope_commands")
@@ -48,6 +52,7 @@ M.init_keymap = function()
 
   -- <leader>hp -- packer
   --
+  leader_map.h.p = { name = "+packer" }
   map("n", "<leader>hpp", "<cmd>PackerSync<cr>", { desc = "Sync"}, "packer", "packer_sync")
   map("n", "<leader>hps", "<cmd>PackerStatus<cr>", { desc = "Status"}, "packer", "packer_status")
   map("n", "<leader>hpi", "<cmd>PackerInstall<cr>", { desc = "Install"}, "packer", "packer_install")
@@ -55,6 +60,7 @@ M.init_keymap = function()
 
   -- <leader>f -- file finders
   --
+  leader_map.f = { name = "+find" }
   map("n", "<leader>ft", "<cmd>Neotree show<cr>", { desc = "NeoTree"}, "files", "neotree_show")
   map("n", "<leader>fs", ":SymbolsOutline<CR>", { desc = "Symbols"}, "files", "symboltree_show")
   map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>", { desc = "Find Files"}, "files", "telescope_find_files")
@@ -64,6 +70,7 @@ M.init_keymap = function()
 
 
   -- leader s -- searching
+  leader_map.s = { name = "+search" }
   map("n", "<leader>sg", "<cmd>lua require('telescope.builtin').live_grep()<CR>", { desc = "Grep"}, "search", "search_livegrep")
   map("n", "<leader>sc", '<cmd>let @/=""<cr>', { desc = "Clear search highlight"}, "search", "search_clear_high")
   map("n", "<leader>sl", "<cmd>lua require('telescope.builtin').loclist()<CR>", { desc = "Loclist"}, "search", "search_loclist")
@@ -71,6 +78,7 @@ M.init_keymap = function()
   map("n", "<leader>ss", "<cmd>lua require('telescope.builtin').spell_suggest()<CR>", { desc = "Spelling"}, "search", "spelling_suggest")
 
   -- leader x -- trouble
+  leader_map.x = { name = "+trouble" }
   map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Trouble"}, "Trouble", "trouble_toggle")
   map("n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", { desc = "lsp workspace"}, "Trouble", "trouble_workspace_diag")
   map("n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagostics<cr>", { desc = "lsp document"}, "Trouble", "trouble_document_diag")
@@ -78,6 +86,7 @@ M.init_keymap = function()
   map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { desc = "loclist"}, "Trouble", "trouble_loclist")
 
   -- leader t -- testing
+  leader_map.t = { name = "+testing" }
   map("n", "<leader>tr", "<Plug>RestNvim<CR>", { desc = "REST request", noremap = true}, "http", "rest_http_req")
   map("n", "<leader>tt", "<cmd>TestNearest<CR>", { desc = "Nearest"}, "test", "test_nearest")
   map("n", "<leader>tf", "<cmd>TestFile<CR>", { desc = "File"}, "test", "test_file")
@@ -86,6 +95,7 @@ M.init_keymap = function()
 
   -- leader d --debug stuff
 
+  leader_map.d = { name = "+debug" }
   map("n", "<leader>dh", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "Breakpoint"}, "debug", "dap_toggle_bp")
   map("n", "<leader>ds", "<cmd>lua require'dap'.close()<CR>", { desc = "Stop"}, "debug", "dap_close")
   map("n", "<leader>dn", "<cmd>lua require'dap'.continue()<CR>", { desc = "Cont"}, "debug", "dap_cont")
@@ -109,6 +119,27 @@ M.init_keymap = function()
 -- nnoremap <S-k> :lua require'dap'.step_out()<CR>
 -- nnoremap <S-l> :lua require'dap'.step_into()<CR>
 -- nnoremap <S-j> :lua require'dap'.step_over()<CR>
+
+  local normal_map = {
+    ["g"] = {
+      name = "+goto",
+      ["z"] = {
+        name = "+zettle",
+        n = { "New" },
+        z = { "Find/create" },
+        Z = { "Insert ID" },
+        b = { "Backlinks" },
+        B = { "Id of backlink" },
+        t = { "Find/insert tags" },
+        s = { "Start server" },
+        ["]"] = { "Next Link" },
+        ["["] = { "Prev Link" },
+      },
+    },
+  }
+
+  wk.register(leader_map, { prefix = "<leader>" })
+  wk.register(normal_map)
 
   map("v", "J", "<cmd>m '>+1<CR>gv=gv", { desc = "Move down" })
   map("v", "K", "<cmd>m '<-2<CR>gv=gv", { desc = "Move up"})

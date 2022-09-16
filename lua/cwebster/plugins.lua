@@ -171,6 +171,9 @@ return require("packer").startup {
       config = function() require("nvim-mapper").setup({ no_map = true }) end,
       before = "telescope.nvim"
     }
+    use { "folke/which-key.nvim",
+      config = function() require("cwebster.whichkey").setup() end,
+    }
 
   -- PLUGINS: language stuff
     use {
