@@ -50,7 +50,7 @@ M.setup = function()
   end
 
   require("cwebster.colors.catppuccin").setup()
-  vim.cmd[[colorscheme catppuccin]]
+  vim.cmd.colorscheme("catppuccin")
 end
 
 return M

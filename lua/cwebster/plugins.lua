@@ -32,7 +32,6 @@ return require("packer").startup {
   -- https://github.com/pianocomposer321/yabs.nvim
   -- https://github.com/Shatur/neovim-session-manager
   -- https://github.com/kosayoda/nvim-lightbulb with new config
-  -- ChristianChiarulli/codi.vim
   -- nvim-neorg/neorg
 
   -- PLUGINS: Finders and pickers
@@ -118,7 +117,6 @@ return require("packer").startup {
         "hrsh7th/cmp-cmdline",
         "Saecki/crates.nvim",
         "f3fora/cmp-spell",
-        -- "hrsh7th/cmp-copilot",
         {"petertriho/cmp-git", requires = "nvim-lua/plenary.nvim"}
       },
     }
@@ -128,7 +126,6 @@ return require("packer").startup {
     use {
       "catppuccin/nvim",
       as = "catppuccin",
-      -- config = function() require("cwebster.colors.catppuccin").setup() end,
     }
 
   -- PLUGINS: UI
@@ -250,8 +247,10 @@ return require("packer").startup {
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
     }
     use { "metakirby5/codi.vim" }
+    use { "junegunn/gv.vim" }
+    use { "uga-rosa/ccc.nvim" }
 
-    -- PLUGINS: copilot
+  -- PLUGINS: copilot
     -- use { "github/copilot.vim",
     --   setup = "require('cwebster.copilot').setup()"
     -- }
@@ -273,7 +272,6 @@ return require("packer").startup {
       }) end,
     }
 
-    use { "junegunn/gv.vim" }
 
   -- PLUGINS: Testing
     use { "janko/vim-test",
