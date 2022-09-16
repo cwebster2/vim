@@ -223,21 +223,26 @@ M.init_keymap = function()
     end
   end
 
-  vim.api.nvim_set_keymap('n', '<F10>', '<cmd>lua ToggleMouse()<cr>', { noremap = true })
+  vim.api.nvim_set_keymap('n', '<F10>', '<cmd>lua ToggleMouse()<cr>', { noremap = true, desc = "Toggle mouse for paste" })
 end
 
 M.lsp_setup = function(client, bufnr)
 
-  local opts = { noremap = true, silent = true, buffer = bufnr}
+  local keymap = {}
 
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+
+  keymap.c = { name = "+Code Actions", }
   map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts, "Lsp", "lsp_buf_rename", "Rename symbol")
   map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts, "Lsp", "lsp_code_action", "Buffer code actions")
   map("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float(nil,{source=always,focusable=false,border='rounded'})<CR>", opts, "Lsp", "lsp_diag_float", "Open floating diagnostic window")
+  keymap.c.l = { name = "+LSP Actions"}
   map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts, "Lsp", "lsp_info", "Show LSP information")
   map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts, "Lsp", "lsp_buf_add_wksp", "Add workspace folder")
   map("n", "<leader>clr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts, "Lsp", "lsp_buf_rmv_wksp", "Remove workspace folder")
   map("n", "<leader>cll", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts, "Lsp", "list_wkspc_folder", "List workspace folders")
 
+  keymap.x = { name = "+LSP Diagnostics"}
   map("n", "<leader>xs", "<cmd>Telescope lsp_document_diagnostics<cr>", opts, "Lsp", "lsp_doc_diag", "Open document diagnostics in telescope")
   map("n", "<leader>xW", "<cmd>Telescope lsp_workspace_diagnostics<cr>", opts, "Lsp", "lsp_wksp_diag", "Open workspace diagnostics in telescope")
 
@@ -250,8 +255,12 @@ M.lsp_setup = function(client, bufnr)
     map("n", "<leader>co", require('rust-tools').hover_actions.hover_actions, opts, "Lsp", "rust_lsp_hover", "Rust: show hover actions")
   end
 
+  local visual_keymap = {}
+  visual_keymap.c = { name = "+Code Actions" }
   map("v", "<leader>ca", ":<C-U>lua vim.lsp.buf.code_action()<CR>", opts)
 
+  local goto_keymap = {}
+  goto_keymap.g = { name = "+goto" }
   map("n", "gr", "<cmd>Telescope lsp_references<cr>", opts, "Lsp", "lsp_refs_tele", "Show lsp references in telescope")
   map("n", "gR", "<cmd>Trouble lsp_references<cr>", opts, "Lsp", "lsp_refs_trouble", "Show lsp references in trouble")
   map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts, "Lsp", "lsp_buf_decl", "Show lsp declarations")
@@ -275,6 +284,10 @@ M.lsp_setup = function(client, bufnr)
 
   end
 
+  wk.register(keymap, { buffer = bufnr, prefix = "<leader>" })
+  wk.register(visual_keymap, { buffer = bufnr, prefix = "<leader>", mode = "v" })
+  wk.register(goto_keymap, { buffer = bufnr, prefix = "g" })
+
 end
 
 M.setup_ft_mappings = function()
@@ -287,7 +300,7 @@ M.setup_ft_mappings = function()
 
   _G.registerMappingsCommitMsg = function()
     local buf = vim.api.nvim_get_current_buf()
-    map("n", "ga", "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", { buffer = buf} )
+    map("n", "ga", "<cmd>lua require('telescope').extensions.githubcoauthors.coauthors()<CR>", { buffer = buf, desc = "Github Co-authors"} )
   end
 
   _G.registerMappingsMD = function()
