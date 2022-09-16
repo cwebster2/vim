@@ -46,7 +46,7 @@ M.mode_color = {
 M.setup = function()
   vim.api.nvim_command [[syntax on]]
   if vim.fn.has('termguicolors') == 1 then
-    vim.cmd[[set termguicolors]]
+    vim.cmd.set("termguicolors")
   end
 
   require("cwebster.colors.catppuccin").setup()
