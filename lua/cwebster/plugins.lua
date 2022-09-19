@@ -286,12 +286,12 @@ return require("packer").startup {
   -- PLUGINS: Markdown
     use { "plasticboy/vim-markdown",
         opt=true,
-        setup = "require('cwebster/markdown').markdown_setup()",
+        setup = "require('cwebster.markdown').markdown_setup()",
     }
     use { "iamcco/markdown-preview.nvim",
         run = "cd app && yarn install",
         ft = "markdown",
-        setup = "require('cwebster/markdown').mkdp_setup()",
+        setup = "require('cwebster.markdown').mkdp_setup()",
     }
 
     -- PLUGINS: LaTeX
