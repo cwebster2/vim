@@ -19,7 +19,8 @@ require("telescope").setup {
                 ["<tab>"] = actions.toggle_selection,
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<M-q>"] = actions.send_selected_to_qflist,
-                ["<C-t"] = trouble.open_with_trouble,
+                ["<C-t>"] = trouble.open_with_trouble,
+                ["<C-h>"] = "which_key"
             },
             n = {
                 -- horizontal split
@@ -33,7 +34,8 @@ require("telescope").setup {
                 ["e"] = actions.move_selection_previous,
                 -- use esc for exit no normal mode
                 ["<esc>"] = actions.close,
-                ["<C-t"] = trouble.open_with_trouble,
+                ["<C-t>"] = trouble.open_with_trouble,
+                ["<C-h>"] = "which_key"
             },
         },
         vimgrep_arguments = {
@@ -64,9 +66,7 @@ require("telescope").setup {
           -- preview_cutoff = 120,
           -- prompt_position = "bottom",
         },
-        -- file_sorter = require "telescope.sorters".get_fzy_sorter,
         file_sorter = require "telescope.sorters".get_fuzzy_file,
-        --file_sorter = require "telescope.sorters".fuzzy_with_index_bias,
         file_ignore_patterns = {"^%.git$", "node_modules"},
         generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
         path_display = {
@@ -104,4 +104,3 @@ require('telescope').load_extension('octo')
 require('telescope').load_extension('githubcoauthors')
 require('telescope').load_extension('dap')
 require('telescope').load_extension('ui-select')
-require('telescope').load_extension('mapper')

@@ -166,11 +166,6 @@ return require("packer").startup {
       "anuvyklack/hydra.nvim",
       config = function() require("cwebster.hydra").setup() end,
     }
-    use {
-      "lazytanuki/nvim-mapper",
-      config = function() require("nvim-mapper").setup({ no_map = true }) end,
-      before = "telescope.nvim"
-    }
     use { "folke/which-key.nvim",
       config = function() require("cwebster.whichkey").setup() end,
     }
