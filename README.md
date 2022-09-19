@@ -26,20 +26,19 @@ to change with every commit.
 ### Common
 - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
+- [nvim-lua/popup.nvim](https://github.com/nvim-lua/popup.nvim)
 
 ### Startup
  - [mhinz/vim-startify](https://github.com/mhinz/vim-startify)
 
 ### Finders and pickers
  - [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
- - [nvim-lua/popup.nvim](https://github.com/nvim-lua/popup.nvim)
  - [nvim-telescope/telescope-packer.nvim](https://github.com/nvim-telescope/telescope-packer.nvim)
  - [nvim-telescope/telescope-github.nvim](https://github.com/nvim-telescope/telescope-github.nvim)
  - [nvim-telescope/telescope-symbols.nvim](https://github.com/nvim-telescope/telescope-symbols.nvim)
  - [nvim-telescope/telescope-dap.nvim](https://github.com/nvim-telescope/telescope-dap.nvim)
  - [nvim-telescope/telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
  - [cwebster2/github-coauthors.nvim](https://github.com/cwebster2/github-coauthors.nvim)
- - [junegunn/fzf](https://github.com/junegunn/fzf)
  - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 
 ### Syntax
@@ -55,12 +54,14 @@ to change with every commit.
  - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
  - [folke/lua-dev.nvim](https://github.com/folke/lua-dev.nvim)
  - [nvim-lua/lsp-status.nvim](https://github.com/nvim-lua/lsp-status.nvim)
- - [onsails/lspkind.nvim](https://github.com/onsails/lspkind.nvim)
  - [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
+ - [jose-elias-alvarez/null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)
+ - [onsails/lspkind.nvim](https://github.com/onsails/lspkind.nvim)
 
 ### diagnostics
- - [folke/lsp-trouble.nvim](https://github.com/folke/lsp-trouble.nvim)
  - [mfussenegger/nvim-lint](https://github.com/mfussenegger/nvim-lint)
+ - [folke/lsp-trouble.nvim](https://github.com/folke/lsp-trouble.nvim)
+ - [https://git.sr.ht/~whynothugo/lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim)
 
 ### Completion
  - [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
@@ -75,7 +76,7 @@ to change with every commit.
  - [hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
  - [Saecki/crates.nvim](https://github.com/Saecki/crates.nvim)
  - [f3fora/cmp-spell](https://github.com/f3fora/cmp-spell)
- - [zbirenbaum/copilot-cmp](https://github.com/zbirenbaum/copilot-cmp)
+ - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 
 ### Colorschemes
  - [catppuccin/nvim](https://github.com/catppuccin/nvim)
@@ -88,9 +89,10 @@ to change with every commit.
  - [RRethy/vim-hexokinase](https://github.com/RRethy/vim-hexokinase)
  - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
  - [szw/vim-maximizer](https://github.com/szw/vim-maximizer)
- - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
  - [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)
  - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+ - [anuvyklack/hydra.nvim](https://github.com/anuvyklack/hydra.nvim)
+ - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
 
 ### language stuff
  - [TimUntersberger/neogit](https://github.com/TimUntersberger/neogit)
@@ -108,12 +110,25 @@ to change with every commit.
  - [nvim-neo-tree/neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
  - [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
  - [pwntester/octo.nvim](https://github.com/pwntester/octo.nvim)
+ - [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
  - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
  - [akinsho/nvim-toggleterm.lua](https://github.com/akinsho/nvim-toggleterm.lua)
- - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
+ - [nvim-neotest/neotest](https://github.com/nvim-neotest/neotest)
+ - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
  - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
- - [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)
+ - [antoinemadec/FixCursorHold.nvim](https://github.com/antoinemadec/FixCursorHold.nvim)
+ - [haydenmeade/neotest-jest](https://github.com/haydenmeade/neotest-jest)
+ - [cwebster2/mocha-runner.nvim](https://github.com/cwebster2/mocha-runner.nvim)
+ - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
+ - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+ - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+ - [metakirby5/codi.vim](https://github.com/metakirby5/codi.vim)
  - [junegunn/gv.vim](https://github.com/junegunn/gv.vim)
+ - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
+
+### copilot
+ - [zbirenbaum/copilot.lua](https://github.com/zbirenbaum/copilot.lua)
+ - [zbirenbaum/copilot-cmp](https://github.com/zbirenbaum/copilot-cmp)
 
 ### Testing
  - [janko/vim-test](https://github.com/janko/vim-test)
@@ -125,9 +140,7 @@ to change with every commit.
 
 ### Markdown
  - [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
- - [require('cwebster/markdown').markdown_setup()](https://github.com/require('cwebster/markdown').markdown_setup())
  - [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
- - [require('cwebster/markdown').mkdp_setup()](https://github.com/require('cwebster/markdown').mkdp_setup())
 
 ### LaTeX
  - [vim-latex/vim-latex](https://github.com/vim-latex/vim-latex)
@@ -135,9 +148,7 @@ to change with every commit.
 ### The Rest
  - [airblade/vim-rooter](https://github.com/airblade/vim-rooter)
  - [tpope/vim-eunuch](https://github.com/tpope/vim-eunuch)
- - [tpope/vim-surround](https://github.com/tpope/vim-surround)
  - [andweeb/presence.nvim](https://github.com/andweeb/presence.nvim)
- - [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
  - [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)
 
 ## Using this configuration
