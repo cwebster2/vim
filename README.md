@@ -86,7 +86,6 @@ to change with every commit.
  - [rebelot/heirline.nvim](https://github.com/rebelot/heirline.nvim)
  - [petertriho/nvim-scrollbar](https://github.com/petertriho/nvim-scrollbar)
  - [kevinhwang91/nvim-hlslens](https://github.com/kevinhwang91/nvim-hlslens)
- - [RRethy/vim-hexokinase](https://github.com/RRethy/vim-hexokinase)
  - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
  - [szw/vim-maximizer](https://github.com/szw/vim-maximizer)
  - [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)
