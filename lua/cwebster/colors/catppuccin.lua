@@ -12,6 +12,7 @@ M.overrides = {
 		  PmenuSel = { fg = mocha.sapphire },
 		  PmenuSbar = { bg = mocha.base }, -- Popup menu: scrollbar.
 		  PmenuThumb = { bg = mocha.surface0 }, -- Popup menu: Thumb of the scrollbar.
+      VertSplit = { fg = mocha.surface0 },
     }
     -- mocha = {
     --   ["@field"] = { fg = mocha.rosewater },
