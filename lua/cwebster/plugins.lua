@@ -147,11 +147,6 @@ return require("packer").startup {
       config = function() require('cwebster.hlslens').setup() end,
     }
     use {
-      "RRethy/vim-hexokinase",
-      run = "make hexokinase",
-      config = function() require('cwebster.hexokinase').setup() end,
-    }
-    use {
       "lewis6991/gitsigns.nvim",
       requires = {"nvim-lua/plenary.nvim"},
       config = function() require('cwebster.gitsigns').setup() end,
@@ -246,7 +241,9 @@ return require("packer").startup {
     }
     use { "metakirby5/codi.vim" }
     use { "junegunn/gv.vim" }
-    use { "uga-rosa/ccc.nvim" }
+    use { "uga-rosa/ccc.nvim" ,
+      config = function() require("cwebster.ccc").setup() end,
+    }
 
   -- PLUGINS: copilot
     -- use { "github/copilot.vim",
