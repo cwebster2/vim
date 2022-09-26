@@ -20,7 +20,6 @@ return require("packer").startup {
       "nathom/filetype.nvim",
       config = function() require('cwebster.filetype').setup() end
     }
-    use { "antoinemadec/FixCursorHold.nvim" } -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
   -- PLUGINS: Startup
     use { "mhinz/vim-startify",
