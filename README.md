@@ -13,7 +13,7 @@ to change with every commit.
 
 ## Requirements
 
-- Neovim 0.8
+- Neovim 0.9 (nightly)
 
 ## What plugins am I using?
 

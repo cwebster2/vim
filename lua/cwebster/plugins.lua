@@ -174,6 +174,7 @@ return require("packer").startup {
       -- broken commit = "9c63259c56e13e3385705fd44722f31381045c0c",
       requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
       config = function() require('cwebster.neogit').setup() end,
+      module = "neogit",
     }
     use { "lukas-reineke/indent-blankline.nvim",
       config = function() require('cwebster.indentline').setup() end,
@@ -225,7 +226,6 @@ return require("packer").startup {
       requires = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
         "haydenmeade/neotest-jest",
       },
       config = function() require("cwebster.neotest").setup() end,
@@ -284,19 +284,19 @@ return require("packer").startup {
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
   -- PLUGINS: Markdown
-    use { "plasticboy/vim-markdown",
-        opt=true,
-        setup = "require('cwebster.markdown').markdown_setup()",
-    }
+    -- use { "plasticboy/vim-markdown",
+    --   ft = {"markdown"},
+    --   setup = function() require('cwebster.markdown').markdown_setup() end,
+    -- }
     use { "iamcco/markdown-preview.nvim",
-        run = "cd app && yarn install",
-        ft = "markdown",
-        setup = "require('cwebster.markdown').mkdp_setup()",
+      run = "cd app && npm install",
+      -- ft = { "markdown" },
+      -- setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+      setup = function() require('cwebster.markdown').mkdp_setup() end,
     }
 
     -- PLUGINS: LaTeX
     use { "vim-latex/vim-latex",
-        opt=true,
         ft="tex"
     }
 
@@ -314,7 +314,8 @@ return require("packer").startup {
     use {'KadoBOT/nvim-spotify',
       requires = { "nvim-telescope/telescope.nvim" },
       config = function() require('cwebster.spotify').setup() end,
-      run = 'make'
+      run = 'make',
+      cmd = "Spotify"
     }
 
   -- still evaluating if these are needed now
@@ -326,6 +327,10 @@ return require("packer").startup {
   -- PLUGINS_END
   end,
   config = {
+    profile = {
+      enable = true,
+      threshold = 1,
+    },
     _display = {
       open_fn = function(name)
         -- Can only use plenary when we have our plugins.

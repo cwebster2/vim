@@ -8,9 +8,9 @@ function M.markdown_setup()
 end
 
 function M.mkdp_setup()
-  g.mkdp_auto_close = 0
-  g.mkdp_auto_open = 1
-  g.mkdp_filetypes = { "markdown" }
+  -- g.mkdp_auto_close = 0
+  -- g.mkdp_auto_open  = 1
+  g.mkdp_filetypes  = { "markdown" }
 end
 
 return M
