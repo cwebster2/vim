@@ -1,9 +1,19 @@
 local M = {}
 local vim = vim
 
-local _, colors = require("catppuccino.api.colors").get_colors()
+vim.g.catppuccin_flavour = "mocha"  -- latte, frappe, macchiato mocha
+local colors = require("catppuccin.palettes").get_palette()
 
 function M.get_colors()
+  colors.diff = { -- git and native diffs
+    add = "green",
+    change = "#2B5B77",
+    delete = "red",
+    text = colors.blue,
+    conflict = colors.magenta,
+  }
+	colors.magenta = "#c678dd"
+	colors.gray = "#2a2e36"
   return colors
 end
 
@@ -36,9 +46,11 @@ M.mode_color = {
 M.setup = function()
   vim.api.nvim_command [[syntax on]]
   if vim.fn.has('termguicolors') == 1 then
-    vim.cmd[[set termguicolors]]
+    vim.cmd.set("termguicolors")
   end
-  require("catppuccino").load()
+
+  require("cwebster.colors.catppuccin").setup()
+  vim.cmd.colorscheme("catppuccin")
 end
 
 return M

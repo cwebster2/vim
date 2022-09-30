@@ -38,22 +38,25 @@ function M.setup()
       spacing = 3,
       prefix = '←',
     },
+    virtual_lines = false,
     signs = true,
-    update_in_insert = false,
+    severity_sort = true,
+    update_in_insert = true,
   })
 
-  handlers["textDocument/publishDiagnostics"] = lsp.with(
-    lsp.diagnostic.on_publish_diagnostics, {
-      underline = true,
-      virtual_text = {
-        source = "if_many",
-        spacing = 3,
-        prefix = '←',
-      },
-      signs = true,
-      update_in_insert = false,
-    }
-  )
+  -- use this in per-server setups to override
+  -- handlers["textDocument/publishDiagnostics"] = lsp.with(
+  --   lsp.diagnostic.on_publish_diagnostics, {
+  --     underline = true,
+  --     virtual_text = {
+  --       source = "if_many",
+  --       spacing = 3,
+  --       prefix = '←',
+  --     },
+  --     signs = true,
+  --     update_in_insert = false,
+  --   }
+  -- )
 
   local pop_opts = { border = "rounded", max_width = 80 }
   handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)

@@ -27,7 +27,6 @@ let test#strategy = "neovim"
 let test#neovim#term_position = "vertical"
 ]]
 
-
 if vim.fn.exists("g:neovide") == 1 then
   g.neovide_transparency = 0.8
 end

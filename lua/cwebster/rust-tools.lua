@@ -4,12 +4,6 @@ function M.setup()
   require('rust-tools').setup({
     tools = { -- rust-tools options
       autoSetHints = true,
-      hover_with_actions = true,
-
-      runnables = {
-        use_telescope = true
-        -- rest of the opts are forwarded to telescope
-      },
 
       inlay_hints = {
         show_parameter_hints = true,
@@ -24,6 +18,7 @@ function M.setup()
       hover_actions = {
         -- the border that is used for the hover window
         -- see vim.api.nvim_open_win()
+        auto_focus = true,
         border = {
           {"╭", "FloatBorder"},
           {"─", "FloatBorder"},
@@ -34,7 +29,9 @@ function M.setup()
           {"╰", "FloatBorder"},
           {"│", "FloatBorder"}
         },
-      }
+      },
+
+      -- runnables = { use_telescope = true }
     },
 
     -- all the opts to send to nvim-lspconfig

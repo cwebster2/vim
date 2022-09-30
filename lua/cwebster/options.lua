@@ -1,10 +1,11 @@
 local opt = vim.opt
 local augroup = require("cwebster.utils").augroup
 
-opt.autoindent = false
+opt.autoindent = true
 opt.autoread = true
 opt.backspace = "indent,eol,start"
 opt.backup = false
+opt.breakindent = true
 opt.clipboard = "unnamedplus,unnamed"
 opt.cmdheight = 1
 opt.colorcolumn = '0'
@@ -33,7 +34,7 @@ opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "2" -- I'm not in gradeschool anymore
 opt.guifont = "Hack Nerd Font Mono:h18"
 opt.hidden = true
-opt.hlsearch = true
+opt.hlsearch = false
 opt.ignorecase = true
 opt.inccommand = 'split'
 opt.incsearch = true
@@ -76,7 +77,7 @@ opt.updatetime = 300
 opt.viewoptions = "cursor,folds,options,unix,slash"
 opt.virtualedit = "onemore"
 opt.wildmenu = true
-opt.wildmode = 'longest,full'
+opt.wildmode = 'longest:full'
 opt.winblend = 15
 opt.winblend = 30
 opt.writebackup = false

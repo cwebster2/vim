@@ -2,10 +2,10 @@ local M = {}
 local g = vim.g
 
 function M.setup()
-  g.symbols_outline = {
+  require("symbols-outline").setup({
     highlight_hovered_item = true,
     show_guides = true,
-    auto_preview = true,
+    auto_preview = false,
     position = 'right',
     keymaps = {
         close = "<Esc>",
@@ -14,9 +14,10 @@ function M.setup()
         hover_symbol = "<C-space>",
         rename_symbol = "r",
         code_actions = "a",
+        toggle_preview = "K",
     },
     lsp_blacklist = {},
-  }
+  })
 end
 
 return M

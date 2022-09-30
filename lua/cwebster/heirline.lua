@@ -23,6 +23,8 @@ local icons = {
   func = ' '..u '1d453',
 }
 
+colors.none = "NONE"
+
 local ViMode = {
     -- get vim current mode, this information will be required by the provider
     -- and the highlight functions, so we compute it only once per component
@@ -86,7 +88,7 @@ local ViMode = {
     -- Same goes for the highlight. Now the foreground will change according to the current mode.
     hl = function(self)
         local mode = self.mode:sub(1, 1) -- get only the first mode character
-        return { fg = self.mode_colors[mode], style = "bold", bg=colors.none, }
+        return { fg = self.mode_colors[mode], bold = true, bg=colors.none, }
     end,
 }
 
@@ -95,7 +97,7 @@ local Spell = {
         return vim.wo.spell
     end,
     provider = ' SPELL',
-    hl = { style = 'bold', fg = colors.red, bg = colors.none}
+    hl = { bold = true, fg = colors.red, bg = colors.none}
 }
 
 local Git = {
@@ -224,7 +226,7 @@ local FileNameModifer = {
     hl = function()
         if vim.bo.modified then
             -- use `force` because we need to override the child's hl foreground
-            return { fg = colors.cyan, style = 'bold', force=true }
+            return { fg = colors.cyan, bold = true, force=true }
         end
     end,
 }
@@ -240,7 +242,7 @@ FileNameBlock = utils.insert(FileNameBlock,
 local Gps = {
     condition = gps.is_available,
     provider = gps.get_location,
-    hl = { fg = colors.magenta },
+    hl = { fg = colors.magenta, bg = colors.none },
 }
 -- local Gps = utils.make_flexible_component(3, Gps, { provider = "" })
 
@@ -275,7 +277,7 @@ local DAPMessages = {
 
 local Diagnostics = {
 
-    condition = conditions.has_diagnostics,
+    -- condition = conditions.has_diagnostics,
 
     static = {
         error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
@@ -291,34 +293,55 @@ local Diagnostics = {
         self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
     end,
 
+    on_click = {
+      callback = function()
+        require("trouble").toggle({ mode = "document_diagnostics" })
+      end,
+      name = "heirline_diagnostics",
+    },
+
     -- {
     --     provider = "![",
     -- },
     {
         provider = function(self)
             -- 0 is just another output, we can decide to print it or not!
-            return self.errors > 0 and (self.error_icon .. self.errors .. " ")
+            -- return self.errors > 0 and (self.error_icon .. self.errors .. " ")
+            return self.error_icon .. self.errors .. " "
         end,
-        hl = { fg = colors.red },
+        hl = function(self)
+          local fg = colors.red
+          if (self.errors == 0) then
+            fg = colors.gray
+          end
+          return { fg = fg, bg = colors.none }
+        end,
     },
     {
         provider = function(self)
-            return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
+            -- return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
+            return self.warn_icon .. self.warnings .. " "
         end,
-        hl = { fg = colors.yellow },
+        hl = function(self)
+          local fg = colors.yellow
+          if (self.warnings == 0) then
+            fg = colors.gray
+          end
+          return { fg = fg, bg = colors.none }
+        end,
     },
-    -- {
-    --     provider = function(self)
-    --         return self.info > 0 and (self.info_icon .. self.info .. " ")
-    --     end,
-    --     hl = { fg = colors.diag.info },
-    -- },
-    -- {
-    --     provider = function(self)
-    --         return self.hints > 0 and (self.hint_icon .. self.hints)
-    --     end,
-    --     hl = { fg = colors.diag.hint },
-    -- },
+    {
+        provider = function(self)
+            return self.info > 0 and (self.info_icon .. self.info .. " ")
+        end,
+        hl = { fg = colors.info, bg = colors.none },
+    },
+    {
+        provider = function(self)
+            return self.hints > 0 and (self.hint_icon .. self.hints .. " ")
+        end,
+        hl = { fg = colors.hint, bg = colors.none },
+    },
     -- {
     --     provider = "]",
     -- },
@@ -335,7 +358,8 @@ local LSPActive = {
     -- Or complicate things a bit and get the servers names
     provider  = function()
         local names = {}
-        for i, server in ipairs(vim.lsp.buf_get_clients(0)) do
+        -- for i, server in ipairs(vim.lsp.get_active_clients({bufnr = 0})) do
+        for i, server in ipairs(vim.lsp.get_active_clients()) do
             local servername = u 'f817' .. server.name
             if server.name == "null-ls" then
               servername = "∅"
@@ -414,52 +438,108 @@ local ScrollBar ={
     hl = { fg = colors.gray, },
 }
 
-local statusline = {
--- left
--- vi mode
-  ViMode,
-  Spell,
--- directory/git repo
-  WorkDir,
--- git branch / stats
-  Git,
-  Spacer,
+local TerminalName = {
+    -- we could add a condition to check that buftype == 'terminal'
+    -- or we could do that later (see #conditional-statuslines below)
+    provider = function()
+        local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
+        return " " .. tname
+    end,
+    hl = { fg = colors.blue, bold = true },
+}
 
--- filename (with path?)
-  FileNameBlock,
-  Spacer,
--- diagnostics
+local HelpFileName = {
+    condition = function()
+        return vim.bo.filetype == "help"
+    end,
+    provider = function()
+        local filename = vim.api.nvim_buf_get_name(0)
+        return vim.fn.fnamemodify(filename, ":t")
+    end,
+    hl = { fg = colors.blue },
+}
+
+local DefaultStatusLine = {
+-- left
+  ViMode, Spell, WorkDir, Git, Spacer,
+  FileNameBlock, Spacer,
 
 -- center
--- nvim gps / nearest symbol
-  Gps,
-  Diagnostics,
-  Spacer,
--- debugger?
-  DAPMessages,
-  Align,
+  -- Gps, Spacer,
+  DAPMessages, Align,
 
 -- right
-  LSPMessages,
--- filetype
-  FileFormat,
-  Spacer,
-  FileType,
-  Spacer,
-  FileEncoding,
-  LSPActive,
-  Spacer,
--- size?
-  -- FileSize,
-  -- Spacer,
--- line/col
-  Ruler,
--- nvim scrollbar
-  ScrollBar,
+  LSPMessages, Diagnostics, FileFormat, Spacer, FileType, Spacer,
+  FileEncoding, LSPActive, Spacer,
+  Ruler, ScrollBar,
+}
+
+local SpecialStatusline = {
+    condition = function()
+        return conditions.buffer_matches({
+            buftype = { "nofile", "prompt", "help", "quickfix" },
+            filetype = { "^git.*", "neogitstatus" },
+        })
+    end,
+
+    FileType, Spacer, HelpFileName, Align
+}
+
+local TerminalStatusline = {
+
+    condition = function()
+        return conditions.buffer_matches({ buftype = { "terminal" } })
+    end,
+
+    hl = { bg = colors.dark_red },
+
+    -- Quickly add a condition to the ViMode to only show it when buffer is active!
+    { condition = conditions.is_active, ViMode, Spacer }, FileType, Spacer, TerminalName, Align,
+}
+
+local StatusLines = {
+  fallthrough = false,
+  SpecialStatusline, TerminalStatusline, DefaultStatusLine
+}
+
+local WinBars = {
+  fallthrough = false,
+    {   -- Hide the winbar for special buffers
+        condition = function()
+            return conditions.buffer_matches({
+                buftype = { "nofile", "prompt", "help", "quickfix", "neotree" },
+                filetype = { "^git.*", "neogit" },
+            })
+        end,
+        init = function()
+          vim.opt_local.winbar = nil
+        end
+    },
+    {   -- A special winbar for terminals
+        condition = function()
+            return conditions.buffer_matches({ buftype = { "terminal" } })
+        end,
+        utils.surround({ "", "" }, colors.dark_red, {
+            FileType,
+            Spacer,
+            TerminalName,
+        }),
+    },
+    {   -- An inactive winbar for regular files
+        condition = function()
+            return not conditions.is_active()
+        end,
+        utils.surround({ "", "" }, colors.bright_bg, { hl = { fg = "gray", force = true }, FileNameBlock }),
+    },
+    -- A winbar for regular files
+    {
+      FileNameBlock, Spacer, Gps
+    }
 }
 
 function M.setup()
-  heirline.setup(statusline)
+  heirline.setup(StatusLines, WinBars)
+  -- heirline.setup(StatusLines)
 end
 
 return M
