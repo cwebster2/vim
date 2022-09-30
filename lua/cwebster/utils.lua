@@ -8,26 +8,41 @@ local bit = require("bit")
 function M.map(mode, key, result, opts, desc)
   opts = opts or {}
   local map_opts = {
-    noremap = opts.noremap or true,
+    -- noremap = opts.noremap or true,
+    remap = opts.remap or not opts.noremap or false,
+    buffer = opts.buffer or false,
     silent = opts.silent or false,
     expr = opts.expr or false,
     script = opts.script or false,
     desc = opts.desc or desc or nil,
-    replace_termcodes = opts.replace_temrcodes or nil
+    replace_keycodes = opts.replace_keycodes or nil
   }
-  if type(result) == "function" then
-    map_opts.callback = result
-    result = ""
-  end
-  if not opts.buffer then
-      vim.api.nvim_set_keymap(mode, key, result, map_opts)
-  else
-    local buffer = opts.buffer
-    if buffer == true then
-      buffer = 0
-    end
-      vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
-  end
+  -- if type(result) == "function" then
+  --   map_opts.callback = result
+  --   result = ""
+  -- end
+  vim.keymap.set(mode, key, result, map_opts)
+  -- if not opts.buffer then
+  --   if type(mode) == "table" then
+  --     for _, mm in ipairs(mode) do
+  --       vim.api.nvim_set_keymap(mm, key, result, map_opts)
+  --     end
+  --   else
+  --     vim.api.nvim_set_keymap(mode, key, result, map_opts)
+  --   end
+  -- else
+  --   local buffer = opts.buffer
+  --   if buffer == true then
+  --     buffer = 0
+  --   end
+  --   if type(mode) == "table" then
+  --     for _, mm in ipairs(mode) do
+  --       vim.api.nvim_buf_set_keymap(buffer, mm, key, result, map_opts)
+  --     end
+  --   else
+  --     vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
+  --   end
+  -- end
 end
 
 

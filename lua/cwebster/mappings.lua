@@ -18,6 +18,8 @@ M.init_keymap = function()
   map("n", "<leader>gp", function() require('telescope').extensions.gh.pull_request() end, { desc = "Show gh pr" })
       --l = { function() require"util".float_terminal("lazygit") end, "LazyGit" },
       --["d"] = { "<cmd>DiffviewOpen<cr>", "DiffView" },
+  leader_map.g.h = { name = "+hunks" }
+  map({'n', 'v'}, '<leader>ghs', function() require("gitsigns").stage_hunk() end, { desc = "Stage hunk" })
 
   -- <leader>b and bufferline stuff
 
@@ -37,7 +39,7 @@ M.init_keymap = function()
   -- <leader>h -- help
 
   leader_map.h = { name = "+help" }
-  map("n", "<leader>hk", "<Cmd>Telescope mapper<CR>", { desc = "Find keymaps"})
+  map("n", "<leader>hk", "<Cmd>Telescope keymaps<CR>", { desc = "Find keymaps"})
   map("n", "<leader>ht", "<cmd>Telescope builtin<cr>", { desc = "Telescope"})
   map("n", "<leader>hc", "<cmd>Telescope commands<cr>", { desc = "Commands"})
   map("n", "<leader>hh", "<cmd>Telescope help_tags<cr>", { desc = "Help Pages"})
