@@ -82,7 +82,7 @@ return require("packer").startup {
     }
     use { "folke/lua-dev.nvim" }
     -- use { "kosayoda/nvim-lightbulb" }
-    use { "nvim-lua/lsp-status.nvim" }
+    -- use { "nvim-lua/lsp-status.nvim" }
     use { "ray-x/lsp_signature.nvim" }
     use { "jose-elias-alvarez/null-ls.nvim" }
     use { "onsails/lspkind.nvim" }
@@ -162,6 +162,14 @@ return require("packer").startup {
     }
     use { "folke/which-key.nvim",
       config = function() require("cwebster.whichkey").setup() end,
+    }
+    use { "rcarriga/nvim-notify",
+      config = function()
+        require("notify").setup({
+          background_colour = "#000000",
+        })
+        vim.notify = require("notify")
+      end
     }
 
   -- PLUGINS: language stuff

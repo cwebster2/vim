@@ -1,6 +1,6 @@
 local M = {}
 
-local lsp_status = require("lsp-status")
+-- local lsp_status = require("lsp-status")
 local null_ls = require("null-ls")
 
 M.null_ls_sources = {

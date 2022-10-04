@@ -17,35 +17,8 @@ function M.map(mode, key, result, opts, desc)
     desc = opts.desc or desc or nil,
     replace_keycodes = opts.replace_keycodes or nil
   }
-  -- if type(result) == "function" then
-  --   map_opts.callback = result
-  --   result = ""
-  -- end
   vim.keymap.set(mode, key, result, map_opts)
-  -- if not opts.buffer then
-  --   if type(mode) == "table" then
-  --     for _, mm in ipairs(mode) do
-  --       vim.api.nvim_set_keymap(mm, key, result, map_opts)
-  --     end
-  --   else
-  --     vim.api.nvim_set_keymap(mode, key, result, map_opts)
-  --   end
-  -- else
-  --   local buffer = opts.buffer
-  --   if buffer == true then
-  --     buffer = 0
-  --   end
-  --   if type(mode) == "table" then
-  --     for _, mm in ipairs(mode) do
-  --       vim.api.nvim_buf_set_keymap(buffer, mm, key, result, map_opts)
-  --     end
-  --   else
-  --     vim.api.nvim_buf_set_keymap(buffer, mode, key, result, map_opts)
-  --   end
-  -- end
 end
-
-
 
 function M.has(value)
   return vim.fn.has(value) == 1
@@ -98,6 +71,52 @@ function M.scratchBuffer(splitcmd)
   local win = vim.api.nvim_get_current_win()
   local buf = vim.api.nvim_create_buf(true, true)
   vim.api.nvim_win_set_buf(win, buf)
+end
+
+-- Utility functions shared between progress reports for LSP and DAP
+
+local client_notifs = {}
+
+function M.get_notif_data(client_id, token)
+  if not client_notifs[client_id] then
+    client_notifs[client_id] = {}
+  end
+
+  if not client_notifs[client_id][token] then
+    client_notifs[client_id][token] = {}
+  end
+
+  return client_notifs[client_id][token]
+end
+
+
+M.spinner_frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" }
+
+function M.update_spinner(client_id, token)
+  local notif_data = M.get_notif_data(client_id, token)
+
+  if notif_data.spinner then
+    local new_spinner = (notif_data.spinner + 1) % #M.spinner_frames
+    notif_data.spinner = new_spinner
+
+    notif_data.notification = vim.notify(nil, nil, {
+      hide_from_history = true,
+      icon = M.spinner_frames[new_spinner],
+      replace = notif_data.notification,
+    })
+
+    vim.defer_fn(function()
+      M.update_spinner(client_id, token)
+     end, 100)
+  end
+end
+
+function M.format_title(title, client_name)
+  return client_name .. (#title > 0 and ": " .. title or "")
+end
+
+function M.format_message(message, percentage)
+  return (percentage and percentage .. "%\t" or "") .. (message or "")
 end
 
 return M

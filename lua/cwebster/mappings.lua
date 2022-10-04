@@ -16,6 +16,7 @@ M.init_keymap = function()
   map("n", "<leader>gs", "<Cmd>Telescope git_status<CR>", { desc = "Show git status" })
   map("n", "<leader>gi", function() require('telescope').extensions.gh.issues() end, { desc = "Show gh issues" })
   map("n", "<leader>gp", function() require('telescope').extensions.gh.pull_request() end, { desc = "Show gh pr" })
+  map("n", "<leader>gf", "<Cmd>OpenInGHFile<CR>", { desc = "Open file in github"})
       --l = { function() require"util".float_terminal("lazygit") end, "LazyGit" },
       --["d"] = { "<cmd>DiffviewOpen<cr>", "DiffView" },
   leader_map.g.h = { name = "+hunks" }

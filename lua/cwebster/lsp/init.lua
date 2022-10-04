@@ -1,9 +1,8 @@
 local M={}
 
-local nvim_lsp = require "lspconfig"
 local lsp = vim.lsp
 local lsp_signature = require("lsp_signature")
-local lsp_status = require("lsp-status")
+-- local lsp_status = require("lsp-status")
 local null_ls = require("null-ls")
 
 
@@ -24,28 +23,28 @@ local function get_capabilities()
   return capabilities
 end
 
-lsp_status.config {
-  select_symbol = function(cursor_pos, symbol)
-    if symbol.valueRange then
-      local value_range = {
-        ["start"] = {
-          character = 0,
-          line = vim.fn.byte2line(symbol.valueRange[1])
-        },
-        ["end"] = {
-          character = 0,
-          line = vim.fn.byte2line(symbol.valueRange[2])
-        }
-      }
+-- lsp_status.config {
+--   select_symbol = function(cursor_pos, symbol)
+--     if symbol.valueRange then
+--       local value_range = {
+--         ["start"] = {
+--           character = 0,
+--           line = vim.fn.byte2line(symbol.valueRange[1])
+--         },
+--         ["end"] = {
+--           character = 0,
+--           line = vim.fn.byte2line(symbol.valueRange[2])
+--         }
+--       }
 
-      return require("lsp-status.util").in_range(cursor_pos, value_range)
-    end
-  end,
-  diagnostics = false,
-  current_function = false,
-  status_symbol = '',
-}
-lsp_status.register_progress()
+--       return require("lsp-status.util").in_range(cursor_pos, value_range)
+--     end
+--   end,
+--   diagnostics = false,
+--   current_function = false,
+--   status_symbol = '',
+-- }
+-- lsp_status.register_progress()
 
 
 local lsp_signature_config = {
@@ -66,7 +65,7 @@ local on_attach = function(client, bufnr)
   -- end
 
   lsp_signature.on_attach(lsp_signature_config)
-  lsp_status.on_attach(client)
+  -- lsp_status.on_attach(client)
 
   require("cwebster.mappings").lsp_setup(client, bufnr)
 
@@ -104,6 +103,7 @@ end
 function M.setup()
 
   local servers = require("cwebster.lsp.config").servers
+  local nvim_lsp = require "lspconfig"
 
   for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = get_capabilities() }, config))

@@ -7,7 +7,7 @@ local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color
 local gps = require("nvim-gps")
-local lsp_status = require("lsp-status")
+-- local lsp_status = require("lsp-status")
 
 local icons = {
   locked = "🔒",
@@ -347,10 +347,10 @@ local Diagnostics = {
     -- },
 }
 
-local LSPMessages = {
-    provider = function() return lsp_status.status() end,
-    hl = { fg = colors.blue },
-}
+-- local LSPMessages = {
+--     provider = function() return lsp_status.status() end,
+--     hl = { fg = colors.blue },
+-- }
 
 local LSPActive = {
     condition = conditions.lsp_attached,
@@ -469,7 +469,7 @@ local DefaultStatusLine = {
   DAPMessages, Align,
 
 -- right
-  LSPMessages, Diagnostics, FileFormat, Spacer, FileType, Spacer,
+  Diagnostics, FileFormat, Spacer, FileType, Spacer,
   FileEncoding, LSPActive, Spacer,
   Ruler, ScrollBar,
 }
