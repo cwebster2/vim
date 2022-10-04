@@ -192,7 +192,7 @@ return require("packer").startup {
       config = function() require('cwebster.whitespace').setup() end,
     }
 
-  -- PLUGINS: ide features
+  -- PLUGINS: PDE features
     use { "terrortylor/nvim-comment" }
     use { "simrat39/symbols-outline.nvim",
       config = function() require('cwebster.symbols').setup() end,
@@ -220,7 +220,6 @@ return require("packer").startup {
     use {"akinsho/nvim-toggleterm.lua",
       config = function() require('cwebster.neoterm').setup() end,
     }
-    -- https://github.com/nvim-neotest/neotest
     use {
       "nvim-neotest/neotest",
       requires = {
@@ -247,6 +246,7 @@ return require("packer").startup {
     use { "uga-rosa/ccc.nvim" ,
       config = function() require("cwebster.ccc").setup() end,
     }
+    use { "almo7aya/openingh.nvim" }
 
   -- PLUGINS: copilot
     -- use { "github/copilot.vim",
