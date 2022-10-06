@@ -60,9 +60,9 @@ local lsp_signature_config = {
 
 local on_attach = function(client, bufnr)
 
-  -- if client.name == "tsserver" then
-  --   client.resolved_capabilities.document_formatting = false
-  -- end
+  if client.name == "tsserver" then
+    client.server_capabilities.documentFormattingProvider = false
+  end
 
   lsp_signature.on_attach(lsp_signature_config)
   -- lsp_status.on_attach(client)

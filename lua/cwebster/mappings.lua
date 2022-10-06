@@ -284,7 +284,6 @@ M.lsp_setup = function(client, bufnr)
     map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts, "Format document (lsp)")
   elseif client.server_capabilities.documentRangeFormattingProvider then
     map("v", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-
   end
 
   wk.register(keymap, { buffer = bufnr, prefix = "<leader>" })
