@@ -317,9 +317,6 @@ return require("packer").startup {
     use { "andweeb/presence.nvim",
       config = function() require('cwebster.presence').setup() end,
     }
-    -- use {"oberblastmeister/neuron.nvim",
-    --   config = "require("_neuron").setup()"
-    -- }
 
     use {'KadoBOT/nvim-spotify',
       requires = { "nvim-telescope/telescope.nvim" },
