@@ -201,7 +201,9 @@ return require("packer").startup {
     }
 
   -- PLUGINS: PDE features
-    use { "terrortylor/nvim-comment" }
+    use { "terrortylor/nvim-comment",
+      config = function() require("nvim_comment").setup({ comment_empty = false }) end
+    }
     use { "simrat39/symbols-outline.nvim",
       config = function() require('cwebster.symbols').setup() end,
     }
@@ -328,9 +330,9 @@ return require("packer").startup {
 
   -- still evaluating if these are needed now
   --Plug "mattn/emmet-vim"
-  --Plug "terryma/vim-multiple-cursors" -- need to rebind its c-n key to use it
-  use { "sheerun/vim-polyglot" }  -- syntax files for most languages
-  --Plug "rhysd/git-messenger.vim"
+  use { "sheerun/vim-polyglot",
+    setup = function() vim.g.polyglot_disabled = { "autoindent", "sensible" } end,
+    }  -- syntax files for most languages
 
   -- PLUGINS_END
   end,

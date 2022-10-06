@@ -21,7 +21,7 @@ end
 require("cwebster.earlystartup").setup()
 require("cwebster.plugins")
 require("cwebster.mappings").init_keymap()
-require("cwebster.plugin_config")
+-- require("cwebster.plugin_config")
 require("cwebster.mappings").setup_ft_mappings()
 require("cwebster.colors").setup()
 require("cwebster.augroups")
