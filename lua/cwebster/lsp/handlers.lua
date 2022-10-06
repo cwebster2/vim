@@ -5,20 +5,6 @@ local handlers = lsp.handlers
 local util = require("cwebster.utils")
 
 function M.setup()
-  -- local ok, lsputil = pcall(require, "lsputil")
-  -- if ok then
-  --   local codeAction = require("lsputil.codeAction")
-  --   local locations = require("lsputil.locations")
-  --   local symbols = require("lsputil.symbols")
-  --   handlers['textDocument/codeAction'] = codeAction.code_action_handler
-  --   handlers['textDocument/references'] = locations.references_handler
-  --   handlers['textDocument/definition'] = locations.definition_handler
-  --   handlers['textDocument/declaration'] = locations.declaration_handler
-  --   handlers['textDocument/typeDefinition'] = locations.typeDefinition_handler
-  --   handlers['textDocument/implementation'] = locations.implementation_handler
-  --   handlers['textDocument/documentSymbol'] = symbols.document_handler
-  --   handlers['workspace/symbol'] = symbols.workspace_handler
-  -- end
 
   -- handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
   --   if err ~= nil or result == nil then
@@ -85,7 +71,7 @@ function M.setup()
       })
 
       notif_data.spinner = 1
-      -- util.update_spinner(client_id, result.token)
+      util.update_spinner(client_id, result.token)
     elseif val.kind == "report" and notif_data then
       notif_data.notification = vim.notify(util.format_message(val.message, val.percentage), "info", {
         replace = notif_data.notification,
