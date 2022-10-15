@@ -61,7 +61,7 @@ M.servers = {
   yamlls = {},
   vimls = {},
   jdtls = {},
-  sumneko_lua = require("lua-dev").setup(),
+  sumneko_lua = {},
 }
 
 return M

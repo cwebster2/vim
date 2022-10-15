@@ -3,7 +3,9 @@ local M={}
 local lsp = vim.lsp
 local lsp_signature = require("lsp_signature")
 local null_ls = require("null-ls")
+local neodev = require("neodev")
 
+neodev.setup({})
 
 local function get_capabilities()
   local capabilities = lsp.protocol.make_client_capabilities()
