@@ -8,7 +8,7 @@ local neodev = require("neodev")
 neodev.setup({})
 
 local function get_capabilities()
-  local capabilities = lsp.protocol.make_client_capabilities()
+  local capabilities = require("cmp_nvim_lsp").default_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {
@@ -17,7 +17,6 @@ local function get_capabilities()
       'additionalTextEdits',
     }
   }
-  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
   capabilities.window = capabilities.window or {}
   capabilities.window.workDoneProgress = true
 
