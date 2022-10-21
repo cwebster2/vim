@@ -131,7 +131,7 @@ return require("packer").startup {
     use {
       "akinsho/nvim-bufferline.lua",
       requires = {"kyazdani42/nvim-web-devicons"},
-      config = function() require('cwebster.bufferline').setup() end,
+      config = function() require('cwebster.ui.bufferline').setup() end,
     }
     use {
       "rebelot/heirline.nvim",
@@ -139,16 +139,16 @@ return require("packer").startup {
     }
     use {
       "petertriho/nvim-scrollbar",
-        config = function() require('cwebster.scrollbar').setup() end,
+        config = function() require('cwebster.ui.scrollbar').setup() end,
     }
     use {
       "kevinhwang91/nvim-hlslens",
-      config = function() require('cwebster.hlslens').setup() end,
+      config = function() require('cwebster.ui.hlslens').setup() end,
     }
     use {
       "lewis6991/gitsigns.nvim",
       requires = {"nvim-lua/plenary.nvim"},
-      config = function() require('cwebster.gitsigns').setup() end,
+      config = function() require('cwebster.ui.gitsigns').setup() end,
     }
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
     use {
@@ -163,13 +163,15 @@ return require("packer").startup {
     use { "folke/which-key.nvim",
       config = function() require("cwebster.whichkey").setup() end,
     }
-    use { "rcarriga/nvim-notify",
-      config = function()
-        require("notify").setup({
-          background_colour = "#000000",
-        })
-        vim.notify = require("notify")
-      end
+    use { "folke/noice.nvim",
+      event = "VimEnter",
+      config = function() require("cwebster.ui.noice").setup() end,
+      requires = {
+        {
+          "rcarriga/nvim-notify",
+          config = function() require("cwebster.ui.notify").setup() end,
+        },
+      }
     }
 
   -- PLUGINS: language stuff
@@ -254,7 +256,7 @@ return require("packer").startup {
     use { "metakirby5/codi.vim" }
     use { "junegunn/gv.vim" }
     use { "uga-rosa/ccc.nvim" ,
-      config = function() require("cwebster.ccc").setup() end,
+      config = function() require("cwebster.ui.ccc").setup() end,
     }
     use { "almo7aya/openingh.nvim" }
 

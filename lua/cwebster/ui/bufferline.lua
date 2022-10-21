@@ -11,7 +11,7 @@ function M.setup()
       -- as an escape hatch for people who cannot bear it for whatever reason
       -- indicator_icon = '▎',
       indicator = {
-        icon = '',
+        style = "underline"
       },
       buffer_close_icon = '',
       modified_icon = '●',
@@ -50,7 +50,7 @@ function M.setup()
       -- end,
       offsets = {
         {filetype = "neo-tree", text = "File Explorer", text_align = "center"},
-        -- `{filetype = "Outline", text = "File Explorer", text_align = "center"},
+        {filetype = "Outline", text = "Symbol Explorer", text_align = "center"},
       },
       color_icons = true,
       show_buffer_icons = true, -- disable filetype icons for buffers
@@ -63,11 +63,16 @@ function M.setup()
       -- [focused and unfocused]. eg: { '|', '|' }
       separator_style = {'', '' }, -- "slant" | "thick" | "thin" | { 'any', 'any' },
       enforce_regular_tabs = false, -- | true,
-      always_show_bufferline = true,
+      always_show_bufferline = false,
       -- sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
       --   -- add custom logic
       --   return buffer_a.modified > buffer_b.modified
       -- end,
+      hover = {
+        enabled = true,
+        delay = 200,
+        reveal = {"close"},
+      }
     },
     highlights = {
       fill = {

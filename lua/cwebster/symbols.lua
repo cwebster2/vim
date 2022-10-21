@@ -7,6 +7,7 @@ function M.setup()
     show_guides = true,
     auto_preview = false,
     position = 'right',
+    width = 20,
     keymaps = {
         close = "<Esc>",
         goto_location = "<Cr>",
