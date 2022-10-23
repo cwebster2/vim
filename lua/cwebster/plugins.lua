@@ -163,6 +163,9 @@ return require("packer").startup {
     use { "folke/which-key.nvim",
       config = function() require("cwebster.whichkey").setup() end,
     }
+    use { "stevearc/dressing.nvim",
+      config = function() require("cwebster.ui.dressing").setup() end,
+    }
     use { "folke/noice.nvim",
       event = "VimEnter",
       config = function() require("cwebster.ui.noice").setup() end,
