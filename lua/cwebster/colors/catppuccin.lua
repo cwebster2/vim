@@ -64,6 +64,8 @@ function M.setup()
       dashboard = false,
       markdown = true,
       notify = true,
+      noice = true,
+      which_key = true,
       indent_blankline = {
         enabled = true,
         colored_indent_levels = true,
