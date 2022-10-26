@@ -52,6 +52,7 @@ opt.listchars = {
 }
 opt.matchtime = 5
 opt.mouse = 'a'
+opt.mousemoveevent = true
 opt.number = true
 opt.pastetoggle = "<F11>"
 opt.previewheight = 25
@@ -82,6 +83,7 @@ opt.winblend = 15
 opt.winblend = 30
 opt.writebackup = false
 opt.laststatus = 3
+-- opt.cmdheight = 0
 
 local function has(value)
   return vim.fn.has(value) == 1

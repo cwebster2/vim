@@ -60,7 +60,7 @@ M.servers = {
   },
   yamlls = {},
   vimls = {},
-  jdtls = {},
+  -- jdtls = {},
   sumneko_lua = {},
 }
 

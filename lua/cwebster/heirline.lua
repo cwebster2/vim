@@ -7,6 +7,7 @@ local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color
 local gps = require("nvim-gps")
+-- local noice = require("noice")
 -- local lsp_status = require("lsp-status")
 
 local icons = {
@@ -275,6 +276,11 @@ local DAPMessages = {
     hl = { fg = utils.get_highlight('Debug').fg },
 }
 
+-- local Noice = {
+--   condition = require("noice").api.status.is_available,
+--   provider = require("noice").api.status.get_status,
+-- }
+
 local Diagnostics = {
 
     -- condition = conditions.has_diagnostics,
@@ -465,7 +471,7 @@ local DefaultStatusLine = {
   FileNameBlock, Spacer,
 
 -- center
-  -- Gps, Spacer,
+  -- Gps, Spacer, Noice
   DAPMessages, Align,
 
 -- right
