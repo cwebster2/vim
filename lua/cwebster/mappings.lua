@@ -75,7 +75,7 @@ M.init_keymap = function()
   -- leader s -- searching
   leader_map.s = { name = "+search" }
   map("n", "<leader>sg", "<cmd>lua require('telescope.builtin').live_grep()<CR>", { desc = "Grep"})
-  map("n", "<leader>sc", '<cmd>let @/=""<cr>', { desc = "Clear search highlight"})
+  map("n", "<leader>sc", function() vim.cmd.noh() end, { desc = "Clear search highlight"})
   map("n", "<leader>sl", "<cmd>lua require('telescope.builtin').loclist()<CR>", { desc = "Loclist"})
   map("n", "<leader>sq", "<cmd>lua require('telescope.builtin').quickfix()<CR>",{ desc = "Quickfix"})
   map("n", "<leader>ss", "<cmd>lua require('telescope.builtin').spell_suggest()<CR>")
@@ -117,7 +117,10 @@ M.init_keymap = function()
   map("n", "<leader>dc", "<cmd>Telescope dap commands<CR>", { desc = "Commands"})
   map("n", "<leader>db", "<cmd>Telescope dap list_breakpoints<CR>", { desc = "List BPs"})
 
-
+  map("n", "<leader>z", function()
+      require("notify").dismiss()
+      vim.cmd.noh()
+    end, { desc = "Clear hightlights and notifications"})
 
 -- nnoremap <S-k> :lua require'dap'.step_out()<CR>
 -- nnoremap <S-l> :lua require'dap'.step_into()<CR>
