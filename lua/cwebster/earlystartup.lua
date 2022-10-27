@@ -25,6 +25,17 @@ function M.setup()
     g.neovide_transparency = 0.8
   end
 
+  vim.filetype.add({
+    filename = {
+      ["after_containerize"] = "bash",
+      ["on_containerize"] = "bash",
+      ["orders"] = "bash",
+    },
+    pattern = {
+      ["~/.zfunc/.*"] = "zsh"
+    }
+  })
+
   -- these need to get setup before plugins run
   -- local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
   local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }

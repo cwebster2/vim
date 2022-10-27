@@ -16,10 +16,6 @@ return require("packer").startup {
   -- PLUGINS: Core
     use { "wbthomason/packer.nvim" }
     use { "dstein64/vim-startuptime" }
-    use {
-      "nathom/filetype.nvim",
-      config = function() require('cwebster.filetype').setup() end
-    }
 
   -- PLUGINS: Startup
     use { "mhinz/vim-startify",
