@@ -10,8 +10,15 @@ function M.setup()
     popupmenu = {
       backend = "cmp"
     },
-    lsp_progress = {
-      enabled = true,
+    lsp = {
+      progress = {
+        enabled = true,
+      },
+      override = {
+        ["cmp.entry.get_documentation"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      }
     },
     views = {
       cmdline_popup = {

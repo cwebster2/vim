@@ -24,7 +24,7 @@ local function get_capabilities()
 end
 
 local lsp_signature_config = {
-  bind = true,
+  bind = false,
   doc_lines = 0,
   floating_window = true,
   hint_enable = true,
