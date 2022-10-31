@@ -261,6 +261,18 @@ M.lsp_setup = function(client, bufnr)
     map("n", "<leader>co", require('rust-tools').hover_actions.hover_actions, opts, "Rust: show hover actions")
   end
 
+  map("n", "<c-f>", function()
+    if not require("noice.lsp").scroll(4) then
+      return "<c-f>"
+    end
+  end, opts, "Scroll down")
+
+  map("n", "<c-b>", function()
+    if not require("noice.lsp").scroll(-4) then
+      return "<c-b>"
+    end
+  end, opts, "Scroll up")
+
   local visual_keymap = {}
   visual_keymap.c = { name = "+Code Actions" }
   map("v", "<leader>ca", ":<C-U>lua vim.lsp.buf.code_action()<CR>", opts)
