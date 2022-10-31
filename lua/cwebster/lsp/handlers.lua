@@ -45,9 +45,9 @@ function M.setup()
   --   }
   -- )
 
-  local pop_opts = { border = "rounded", max_width = 80 }
-  handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)
-  handlers["textDocument/signature_help"] = lsp.with(handlers.signature_help, pop_opts)
+  -- local pop_opts = { border = "rounded", max_width = 80 }
+  -- handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)
+  -- handlers["textDocument/signature_help"] = lsp.with(handlers.signature_help, pop_opts)
 
   -- handlers["$/progress"] = function(_, result, ctx)
   --   local client_id = ctx.client_id
