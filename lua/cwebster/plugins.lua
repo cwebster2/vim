@@ -176,11 +176,7 @@ return require("packer").startup {
   -- PLUGINS: language stuff
     use {
       "TimUntersberger/neogit",
-      commit = "64245bb7f577bad0308d77dc1116ce7d8428f27f", --works
-      -- commit = "536ded80c32caf58c50c62ed4670b61d6a462d8e", --works
-      -- broken commit = "463820a83f4ba387655f370a17c87dc3100cdf0d",
-      -- broken commit = "3fab92b376655277eec15d36b75f850176b6f4d4",
-      -- broken commit = "9c63259c56e13e3385705fd44722f31381045c0c",
+      -- commit = "64245bb7f577bad0308d77dc1116ce7d8428f27f", --works
       requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
       config = function() require('cwebster.neogit').setup() end,
       module = "neogit",
