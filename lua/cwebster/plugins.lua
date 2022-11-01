@@ -67,18 +67,15 @@ return require("packer").startup {
 
   -- PLUGINS: LSP
     use {
-      "williamboman/nvim-lsp-installer",
-      {
-        "neovim/nvim-lspconfig",
-        config = function()
-          require("cwebster.lsp.installer").setup()
-          require("cwebster.lsp").setup()
-        end
-      }
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig",
+      "neovim/nvim-lspconfig",
+      config = function()
+        require("cwebster.lsp.installer").setup()
+        require("cwebster.lsp").setup()
+      end
     }
     use { "folke/neodev.nvim" }
-    -- use { "kosayoda/nvim-lightbulb" }
-    -- use { "nvim-lua/lsp-status.nvim" }
     use { "ray-x/lsp_signature.nvim" }
     use { "jose-elias-alvarez/null-ls.nvim" }
     use { "onsails/lspkind.nvim" }
