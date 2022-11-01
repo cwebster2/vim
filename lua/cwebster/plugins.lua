@@ -66,10 +66,12 @@ return require("packer").startup {
     use { "windwp/nvim-ts-autotag" }
 
   -- PLUGINS: LSP
+    use { "williamboman/mason.nvim" }
     use {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig",
       "neovim/nvim-lspconfig",
+      requires = {
+        "williamboman/mason-lspconfig.nvim",
+      },
       config = function()
         require("cwebster.lsp.installer").setup()
         require("cwebster.lsp").setup()
