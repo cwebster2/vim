@@ -148,7 +148,7 @@ return require("packer").startup {
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
     use {
       "SmiteshP/nvim-navic",
-      requires = {"neovim/lsp-config"},
+      requires = {"neovim/nvim-lspconfig"},
       config = function() require('cwebster.ui.navic').setup() end,
     }
     use {
