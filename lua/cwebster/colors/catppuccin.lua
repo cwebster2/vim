@@ -63,6 +63,7 @@ function M.setup()
       nvimtree = true, --false? neotree
       dashboard = false,
       markdown = true,
+      mason = true,
       notify = true,
       noice = true,
       which_key = true,
