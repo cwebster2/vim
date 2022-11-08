@@ -6,7 +6,7 @@ local u = require'cwebster.utils'.u
 local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color
-local gps = require("nvim-gps")
+local gps = require("nvim-navic")
 -- local noice = require("noice")
 -- local lsp_status = require("lsp-status")
 
@@ -393,7 +393,8 @@ local FileEncoding = {
         local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc -- :h 'enc'
         enc = enc .. " "
         return enc ~= 'utf-8 ' and enc:upper()
-    end
+    end,
+    hl = { fg = colors.gray },
 }
 
 local FileFormat = {

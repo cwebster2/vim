@@ -66,6 +66,10 @@ function M.setup()
       notify = true,
       noice = true,
       which_key = true,
+      navic = {
+        enabled = true,
+        custom_bg = "NONE",
+      },
       indent_blankline = {
         enabled = true,
         colored_indent_levels = true,

@@ -1,9 +1,9 @@
 local M={}
 
-local lsp = vim.lsp
 local lsp_signature = require("lsp_signature")
 local null_ls = require("null-ls")
 local neodev = require("neodev")
+local navic = require("nvim-navic")
 
 neodev.setup({})
 
@@ -38,6 +38,10 @@ local on_attach = function(client, bufnr)
 
   if client.name == "tsserver" then
     client.server_capabilities.documentFormattingProvider = false
+  end
+
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
   end
 
   lsp_signature.on_attach(lsp_signature_config)

@@ -147,9 +147,9 @@ return require("packer").startup {
     }
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
     use {
-      "SmiteshP/nvim-gps",
-      requires = {"nvim-treesitter/nvim-treesitter"},
-      config = function() require('cwebster.nvimgps').setup() end,
+      "SmiteshP/nvim-navic",
+      requires = {"neovim/lsp-config"},
+      config = function() require('cwebster.ui.navic').setup() end,
     }
     use {
       "anuvyklack/hydra.nvim",
