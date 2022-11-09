@@ -34,7 +34,7 @@ opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "2" -- I'm not in gradeschool anymore
 opt.guifont = "Hack Nerd Font Mono:h18"
 opt.hidden = true
-opt.hlsearch = false
+opt.hlsearch = true
 opt.ignorecase = true
 opt.inccommand = 'split'
 opt.incsearch = true

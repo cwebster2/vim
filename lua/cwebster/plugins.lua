@@ -135,10 +135,10 @@ return require("packer").startup {
     use {
       "petertriho/nvim-scrollbar",
         config = function() require('cwebster.ui.scrollbar').setup() end,
-    }
-    use {
-      "kevinhwang91/nvim-hlslens",
-      config = function() require('cwebster.ui.hlslens').setup() end,
+        requires = {
+          "kevinhwang91/nvim-hlslens",
+          config = function() require('cwebster.ui.hlslens').setup() end,
+      }
     }
     use {
       "lewis6991/gitsigns.nvim",

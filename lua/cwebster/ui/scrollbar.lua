@@ -36,7 +36,7 @@ function M.setup()
     },
     handlers = {
       diagnostic = true,
-      search = true,
+      search = false,
     },
   })
 end

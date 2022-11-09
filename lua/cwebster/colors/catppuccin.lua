@@ -60,7 +60,8 @@ function M.setup()
       neogit = true,
       symbols_outline = true,
       telescope = true,
-      nvimtree = true, --false? neotree
+      neotest = true,
+      nvimtree = false,
       dashboard = false,
       markdown = true,
       mason = true,
