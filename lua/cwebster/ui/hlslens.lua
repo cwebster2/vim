@@ -1,12 +1,11 @@
 local M = {}
-local hlslens = require("hlslens")
 
 M.setup = function()
-  hlslens.setup({
-    calm_down = false,
+  require("scrollbar.handlers.search").setup({
+    calm_down = true,
     nearest_only = false,
     nearest_float_when = 'auto',
-    virt_priority = 50,
+    virt_priority = 10,
     override_lens = function(render, posList, nearest, idx, relIdx)
       local sfw = vim.v.searchforward == 1
       local indicator, text, chunks

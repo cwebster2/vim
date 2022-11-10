@@ -14,6 +14,8 @@ M.overrides = {
 		  PmenuThumb = { bg = mocha.surface0 }, -- Popup menu: Thumb of the scrollbar.
       VertSplit = { fg = mocha.surface0 },
       NonText = { fg = mocha.surface0 },
+      HlSearchLensNear = { fg = mocha.sky, bg = mocha.surface0 },
+      HlSearchLens = { fg = mocha.sky, bg = mocha.surface1 },
     }
     -- mocha = {
     --   ["@field"] = { fg = mocha.rosewater },
@@ -37,17 +39,17 @@ function M.setup()
     },
     styles = {
       comments = { "italic" },
-      conditionals = { "italic" },
-      loops = {},
-      functions = {},
+      conditionals = { "bold" },
+      loops = { "bold" },
+      functions = { "italic, bold" },
       keywords = { "italic" },
       strings = {},
-      variables = { "italic" },
+      variables = {},
       numbers = {},
-      booleans = {},
-      properties = {},
+      booleans = { "bold", "italic" },
+      properties = { "italic" },
       types = {},
-      operators = {},
+      operators = { "bold" },
     },
     integrations = {
       treesitter = true,

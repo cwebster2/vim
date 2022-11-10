@@ -10,6 +10,9 @@ function M.setup()
     popupmenu = {
       backend = "cmp"
     },
+    messages = {
+      view = "mini",
+    },
     lsp = {
       progress = {
         enabled = true,
@@ -44,6 +47,13 @@ function M.setup()
           find = "^%s*[/?]",
         },
         view = "cmdline",
+      },
+      {
+        filter = {
+          event = "msg_show",
+          kind = "search_count",
+        },
+        opts = { skip = true },
       },
     },
   })

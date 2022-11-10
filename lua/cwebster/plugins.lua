@@ -133,11 +133,11 @@ return require("packer").startup {
       config = function() require("cwebster.heirline").setup() end,
     }
     use {
-      "petertriho/nvim-scrollbar",
-        config = function() require('cwebster.ui.scrollbar').setup() end,
-        requires = {
-          "kevinhwang91/nvim-hlslens",
-          config = function() require('cwebster.ui.hlslens').setup() end,
+      "kevinhwang91/nvim-hlslens",
+      config = function() require('cwebster.ui.hlslens').setup() end,
+      requires = {
+        "petertriho/nvim-scrollbar",
+          config = function() require('cwebster.ui.scrollbar').setup() end,
       }
     }
     use {
