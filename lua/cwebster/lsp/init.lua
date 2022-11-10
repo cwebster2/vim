@@ -2,10 +2,14 @@ local M={}
 
 local lsp_signature = require("lsp_signature")
 local null_ls = require("null-ls")
--- local neodev = require("neodev")
+local neodev = require("neodev")
 local navic = require("nvim-navic")
 
--- neodev.setup({})
+neodev.setup({
+  library = {
+    plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+  }
+})
 
 local function get_capabilities()
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
