@@ -21,6 +21,9 @@ function M.setup()
         ["cmp.entry.get_documentation"] = true,
         ["vim.lsp.util.stylize_markdown"] = true,
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      },
+      signature = {
+        enabled = false
       }
     },
     views = {

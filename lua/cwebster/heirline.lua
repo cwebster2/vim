@@ -130,21 +130,21 @@ local Git = {
             local count = self.status_dict.added or 0
             return count > 0 and ("+" .. count)
         end,
-        hl = { fg = colors.green },
+        hl = { fg = colors.diff.add },
     },
     {
         provider = function(self)
             local count = self.status_dict.removed or 0
             return count > 0 and ("-" .. count)
         end,
-        hl = { fg = colors.red },
+        hl = { fg = colors.diff.delete },
     },
     {
         provider = function(self)
             local count = self.status_dict.changed or 0
             return count > 0 and ("~" .. count)
         end,
-        hl = { fg = colors.sapphire },
+        hl = { fg = colors.diff.change },
     },
     {
         condition = function(self)

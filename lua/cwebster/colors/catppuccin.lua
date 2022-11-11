@@ -16,6 +16,9 @@ M.overrides = {
       NonText = { fg = mocha.surface0 },
       HlSearchLensNear = { fg = mocha.sky, bg = mocha.surface0 },
       HlSearchLens = { fg = mocha.sky, bg = mocha.surface1 },
+      GitSignsAdd = { fg = mocha.diff.add },
+      GitSignsChange = { fg = mocha.diff.change },
+      GitSignsDelete = { fg = mocha.diff.delete },
     }
     -- mocha = {
     --   ["@field"] = { fg = mocha.rosewater },

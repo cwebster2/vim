@@ -15,12 +15,12 @@ function M.setup()
     yaml = { 'eslint', },
     toml = { 'eslint', },
     sh = { 'shellcheck' },
+    zsh = { 'shellcheck' },
     bash = { 'shellcheck' },
   }
 end
 
-local nvimlintag = vim.api.nvim_create_augroup("autolint", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", { pattern = "<buffer>", group = nvimlintag, callback = function() lint.try_lint() end})
+vim.api.nvim_create_autocmd("BufWritePost", { callback = function() lint.try_lint() end })
 
 return M
 
