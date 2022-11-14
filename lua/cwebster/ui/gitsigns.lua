@@ -46,6 +46,7 @@ function M.setup()
       internal = true,  -- If luajit is present
     }
   })
+  require("scrollbar.handlers.gitsigns").setup()
 end
 
 return M
