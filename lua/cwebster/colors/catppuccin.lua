@@ -2,23 +2,55 @@ local M = {}
 local catppuccin = require("catppuccin")
 local mocha = require("catppuccin.palettes").get_palette("mocha")
 
+local mocha_overrides = {
+  green = "#9ece6a",
+}
+
+local my_palette = vim.tbl_deep_extend("force", mocha, mocha_overrides, {
+  warning = mocha.yellow,
+  info = mocha.blue,
+  hint = mocha.teal,
+  variable = mocha.text,
+
+	magenta = "#c678dd",
+	cyan = "#63cdcf",
+	white = "#dfdfe0",
+	orange = "#F4A261",
+	gray = "#2a2e36",
+	none = "NONE",
+
+  diff = {
+    add = "green",
+    change = "#2B5B77",
+    delete = "red",
+    text = mocha.blue,
+    conflict = mocha.magenta,
+  }
+})
+
+function M.get_palette()
+  return my_palette
+end
+
 M.overrides = {
-  colors = {},
+  colors = {
+    all = mocha_overrides,
+  },
   highlights = {
     all = {
-      CmpItemAbbrMatch = { fg = mocha.blue },
-      CmpItemAbbrMatchFuzzy = { fg = mocha.blue },
-		  Pmenu = { bg = mocha.crust },
-		  PmenuSel = { fg = mocha.sapphire },
-		  PmenuSbar = { bg = mocha.base }, -- Popup menu: scrollbar.
-		  PmenuThumb = { bg = mocha.surface0 }, -- Popup menu: Thumb of the scrollbar.
-      VertSplit = { fg = mocha.surface0 },
-      NonText = { fg = mocha.surface0 },
-      HlSearchLensNear = { fg = mocha.sky, bg = mocha.surface0 },
-      HlSearchLens = { fg = mocha.sky, bg = mocha.surface1 },
-      GitSignsAdd = { fg = mocha.diff.add },
-      GitSignsChange = { fg = mocha.diff.change },
-      GitSignsDelete = { fg = mocha.diff.delete },
+      CmpItemAbbrMatch = { fg = my_palette.blue },
+      CmpItemAbbrMatchFuzzy = { fg = my_palette.blue },
+		  Pmenu = { bg = my_palette.crust },
+		  PmenuSel = { fg = my_palette.sapphire },
+		  PmenuSbar = { bg = my_palette.base }, -- Popup menu: scrollbar.
+		  PmenuThumb = { bg = my_palette.surface0 }, -- Popup menu: Thumb of the scrollbar.
+      VertSplit = { fg = my_palette.surface0 },
+      NonText = { fg = my_palette.surface0 },
+      HlSearchLensNear = { fg = my_palette.sky, bg = mocha.surface0 },
+      HlSearchLens = { fg = my_palette.sky, bg = mocha.surface1 },
+      GitSignsAdd = { fg = my_palette.diff.add },
+      GitSignsChange = { fg = my_palette.diff.change },
+      GitSignsDelete = { fg = my_palette.diff.delete },
     }
     -- mocha = {
     --   ["@field"] = { fg = mocha.rosewater },
@@ -29,6 +61,7 @@ M.overrides = {
 
 function M.setup()
   catppuccin.setup({
+    flavor = "mocha",
     transparent_background = true,
     term_colors = false,
     compile = {
@@ -73,6 +106,7 @@ function M.setup()
       notify = true,
       noice = true,
       which_key = true,
+      semantic_tokens = true,
       navic = {
         enabled = true,
         custom_bg = "NONE",

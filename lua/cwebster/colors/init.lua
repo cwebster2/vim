@@ -2,18 +2,9 @@ local M = {}
 local vim = vim
 
 vim.g.catppuccin_flavour = "mocha"  -- latte, frappe, macchiato mocha
-local colors = require("catppuccin.palettes").get_palette()
+local colors = require("cwebster.colors.catppuccin").get_palette()
 
 function M.get_colors()
-  colors.diff = { -- git and native diffs
-    add = "green",
-    change = "#2B5B77",
-    delete = "red",
-    text = colors.blue,
-    conflict = colors.magenta,
-  }
-	colors.magenta = "#c678dd"
-	colors.gray = "#2a2e36"
   return colors
 end
 
