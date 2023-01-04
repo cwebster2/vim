@@ -78,7 +78,7 @@ return require("packer").startup {
       end
     }
     use { "folke/neodev.nvim" }
-    -- use { "ray-x/lsp_signature.nvim" }
+    use { "ray-x/lsp_signature.nvim" }
     use { "jose-elias-alvarez/null-ls.nvim" }
     use { "onsails/lspkind.nvim" }
 
@@ -155,7 +155,9 @@ return require("packer").startup {
       "anuvyklack/hydra.nvim",
       config = function() require("cwebster.hydra").setup() end,
     }
-    use { "folke/which-key.nvim" }
+    use { "folke/which-key.nvim",
+      config = function() require("cwebster.whichkey").setup() end,
+    }
     use { "stevearc/dressing.nvim",
       config = function() require("cwebster.ui.dressing").setup() end,
     }
@@ -173,20 +175,34 @@ return require("packer").startup {
   -- PLUGINS: language stuff
     use {
       "TimUntersberger/neogit",
+      -- commit = "64245bb7f577bad0308d77dc1116ce7d8428f27f", --works
       requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
+      config = function() require('cwebster.neogit').setup() end,
       module = "neogit",
     }
-    use { "lukas-reineke/indent-blankline.nvim" }
-    use { "simrat39/rust-tools.nvim" }
-    use { "NTBBloodbath/rest.nvim",
-      requires = {"nvim-lua/plenary.nvim"}
+    use { "lukas-reineke/indent-blankline.nvim",
+      config = function() require('cwebster.indentline').setup() end,
+    }
+    use { "simrat39/rust-tools.nvim",
+      config = function() require('cwebster.rust-tools').setup() end
+    }
+    use {
+      "NTBBloodbath/rest.nvim",
+      requires = {"nvim-lua/plenary.nvim"},
+      config = function() require('cwebster.rest').setup() end
     }
     use { "editorconfig/editorconfig-vim" }
-    use { "ntpeters/vim-better-whitespace" }
+    use { "ntpeters/vim-better-whitespace",
+      config = function() require('cwebster.whitespace').setup() end,
+    }
 
   -- PLUGINS: PDE features
-    use { "terrortylor/nvim-comment" }
-    use { "simrat39/symbols-outline.nvim" }
+    use { "terrortylor/nvim-comment",
+      config = function() require("nvim_comment").setup({ comment_empty = false }) end
+    }
+    use { "simrat39/symbols-outline.nvim",
+      config = function() require('cwebster.symbols').setup() end,
+    }
     use { "unblevable/quick-scope" }
     use { "nvim-neo-tree/neo-tree.nvim",
       branch = "v2.x",
@@ -194,23 +210,35 @@ return require("packer").startup {
         "nvim-lua/plenary.nvim",
         "kyazdani42/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
-      }
+      },
+      config = function() require("cwebster.neotree").setup() end,
     }
-    use { "pwntester/octo.nvim" }
+    use { "pwntester/octo.nvim",
+      config = function() require("octo").setup() end,
+    }
     use { "kylechui/nvim-surround",
       tag = "*",
+      config = function() require("cwebster.surround").setup() end,
     }
-    use { "windwp/nvim-autopairs" }
-    use {"akinsho/nvim-toggleterm.lua" }
+    use { "windwp/nvim-autopairs",
+      config = function() require("nvim-autopairs").setup() end,
+    }
+    use {"akinsho/nvim-toggleterm.lua",
+      config = function() require('cwebster.neoterm').setup() end,
+    }
     use {
       "nvim-neotest/neotest",
       requires = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "haydenmeade/neotest-jest",
-      }
+      },
+      config = function() require("cwebster.neotest").setup() end,
     }
-    use { "cwebster2/mocha-runner.nvim" }
+    use {
+      "cwebster2/mocha-runner.nvim",
+      config = function() require("mocha-runner").setup({}) end,
+    }
     use {
       "ThePrimeagen/refactoring.nvim",
       requires = {
@@ -221,7 +249,9 @@ return require("packer").startup {
     }
     use { "metakirby5/codi.vim" }
     use { "junegunn/gv.vim" }
-    use { "uga-rosa/ccc.nvim" }
+    use { "uga-rosa/ccc.nvim" ,
+      config = function() require("cwebster.ui.ccc").setup() end,
+    }
     use { "almo7aya/openingh.nvim" }
 
   -- PLUGINS: copilot
