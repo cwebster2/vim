@@ -35,8 +35,7 @@ return require("packer").startup {
       requires = {
         {"nvim-lua/popup.nvim"},
         {"nvim-lua/plenary.nvim"}
-      },
-      config = function() require('cwebster.telescope') end,
+      }
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use { "nvim-telescope/telescope-packer.nvim" }
