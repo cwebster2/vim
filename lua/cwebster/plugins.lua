@@ -34,7 +34,7 @@ return require("packer").startup {
       "nvim-telescope/telescope.nvim",
       requires = {
         {"nvim-lua/popup.nvim"},
-        {"nvim-lua/plenary.nvim"}
+        {"nvim-lua/plenary.nvim"},
       }
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -50,7 +50,6 @@ return require("packer").startup {
   -- PLUGINS: Syntax
     use { "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
-      config = function() require('cwebster.syntax').setup() end
     }
     use { "nvim-treesitter/playground" }
     use { "nvim-treesitter/nvim-treesitter-textobjects" }
@@ -173,7 +172,6 @@ return require("packer").startup {
     use {
       "TimUntersberger/neogit",
       requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
-      module = "neogit",
     }
     use { "lukas-reineke/indent-blankline.nvim" }
     use { "simrat39/rust-tools.nvim" }
