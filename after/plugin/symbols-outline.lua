@@ -1,5 +1,9 @@
-local g = vim.g
+local map = require("cwebster.utils").map
 
+-- mappings
+map("n", "<leader>fs", ":SymbolsOutline<CR>", { desc = "Symbols"})
+
+--config
 require("symbols-outline").setup({
   highlight_hovered_item = true,
   show_guides = true,

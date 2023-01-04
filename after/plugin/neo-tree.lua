@@ -1,10 +1,10 @@
 local neotree = require("neo-tree")
+local map = require("cwebster.utils").map
 
--- vim.cmd([[
---   hi link NeoTreeDirectoryName Directory
---   hi link NeoTreeDirectoryIcon NeoTreeDirectoryName
--- ]])
+-- mappings
+map("n", "<leader>ft", "<cmd>Neotree show<cr>", { desc = "NeoTree" })
 
+-- config
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 neotree.setup({
