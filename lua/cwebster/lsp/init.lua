@@ -1,6 +1,6 @@
 local M={}
 
-local lsp_signature = require("lsp_signature")
+-- local lsp_signature = require("lsp_signature")
 local null_ls = require("null-ls")
 local neodev = require("neodev")
 local navic = require("nvim-navic")
@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
     navic.attach(client, bufnr)
   end
 
-  lsp_signature.on_attach(lsp_signature_config)
+  -- lsp_signature.on_attach(lsp_signature_config)
 
   require("cwebster.mappings").lsp_setup(client, bufnr)
 
@@ -83,6 +83,8 @@ function M.setup()
 
   local servers = require("cwebster.lsp.config").servers
   local nvim_lsp = require "lspconfig"
+
+  require("cwebster.lsp.rust-tools")
 
   for server, config in pairs(servers) do
     nvim_lsp[server].setup(vim.tbl_deep_extend("force", { on_attach = on_attach, capabilities = get_capabilities() }, config))

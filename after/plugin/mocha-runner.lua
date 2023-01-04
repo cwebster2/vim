@@ -1,0 +1,1 @@
+require("mocha-runner").setup({})
