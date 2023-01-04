@@ -5,6 +5,7 @@ local a = vim.api
 --a.nvim_command("profile func *")
 --a.nvim_command("profile file *")
 
+print("loading my stuff")
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 g.mapleader = ' '
 g.maplocalleader = ','
@@ -20,6 +21,7 @@ end
 -- require plugins and stuff
 require("cwebster.earlystartup").setup()
 require("cwebster.plugins")
+print("loading plugins is done")
 require("cwebster.mappings").init_keymap()
 -- require("cwebster.plugin_config")
 require("cwebster.mappings").setup_ft_mappings()

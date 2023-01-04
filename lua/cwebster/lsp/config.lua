@@ -40,6 +40,7 @@ M.servers = {
   vuels = {},
   svelte = {},
   gopls = {},
+  -- deno = {},
   terraformls = {
     filetypes = {"tf", "terraform"},
   },
@@ -48,6 +49,7 @@ M.servers = {
   -- clangd = {
   --   handlers = lsp_status.extensions.clangd.setup(),
   -- },
+  sqlls = {},
   texlab = {
     settings = {
       latex = {

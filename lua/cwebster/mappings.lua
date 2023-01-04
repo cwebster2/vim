@@ -11,11 +11,6 @@ M.init_keymap = function()
 
   leader_map.g = { name = "+git" }
   map("n", "<leader>gg", function() require("neogit").open() end, { desc = "Neogit" })
-  map("n", "<leader>gc", "<Cmd>Telescope git_commits<CR>", { desc = "Show git commits" })
-  map("n", "<leader>gb", "<Cmd>Telescope git_branches<CR>", { desc = "Show git branches" })
-  map("n", "<leader>gs", "<Cmd>Telescope git_status<CR>", { desc = "Show git status" })
-  map("n", "<leader>gi", function() require('telescope').extensions.gh.issues() end, { desc = "Show gh issues" })
-  map("n", "<leader>gp", function() require('telescope').extensions.gh.pull_request() end, { desc = "Show gh pr" })
   map("n", "<leader>gf", "<Cmd>OpenInGHFile<CR>", { desc = "Open file in github"})
       --l = { function() require"util".float_terminal("lazygit") end, "LazyGit" },
       --["d"] = { "<cmd>DiffviewOpen<cr>", "DiffView" },
@@ -40,17 +35,7 @@ M.init_keymap = function()
   -- <leader>h -- help
 
   leader_map.h = { name = "+help" }
-  map("n", "<leader>hk", "<Cmd>Telescope keymaps<CR>", { desc = "Find keymaps"})
-  map("n", "<leader>ht", "<cmd>Telescope builtin<cr>", { desc = "Telescope"})
-  map("n", "<leader>hc", "<cmd>Telescope commands<cr>", { desc = "Commands"})
-  map("n", "<leader>hh", "<cmd>Telescope help_tags<cr>", { desc = "Help Pages"})
-  map("n", "<leader>hm", "<cmd>Telescope man_pages<cr>", { desc = "Man Pages"})
-  -- map("n", "<leader>hk", "<cmd>Telescope keymaps<cr>", { desc = "Key Maps"}, "help", "telescope_keymaps_all")
-  map("n", "<leader>hs", "<cmd>Telescope highlights<cr>", { desc = "Search Highlight Groups"})
   map("n", "<leader>hl", "<cmd>TSHighlightCapturesUnderCursor<cr>", { desc = "Highlight Groups at cursor"})
-  map("n", "<leader>hf", "<cmd>Telescope filetypes<cr>", { desc = "File Types"})
-  map("n", "<leader>ho", "<cmd>Telescope vim_options<cr>", { desc = "Options"})
-  map("n", "<leader>ha", "<cmd>Telescope autocommands<cr>", { desc = "Auto Commands"})
   map("n", "<leader>hi", "<cmd>echo \"hi<\" . synIDattr(synID(line(\".\"),col(\".\"),1),\"name\") . '> trans<' . synIDattr(synID(line(\".\"),col(\".\"),0),\"name\") . \"> lo<\" . synIDattr(synIDtrans(synID(line(\".\"),col(\".\"),1)),\"name\") . \">\"<CR> ", { desc = "Highlight Under Cursos"})
 
   -- <leader>hp -- packer
@@ -64,21 +49,12 @@ M.init_keymap = function()
   -- <leader>f -- file finders
   --
   leader_map.f = { name = "+find" }
-  map("n", "<leader>ft", "<cmd>Neotree show<cr>", { desc = "NeoTree"})
-  map("n", "<leader>fs", ":SymbolsOutline<CR>", { desc = "Symbols"})
-  map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>", { desc = "Find Files"})
-  map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').git_files()<CR>", { desc = "Find Git Files"})
-  map("n", "<leader>fr", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", { desc = "Recent Files"})
   map("n", "<leader>fn", "<cmd>enew<CR>", { desc = "New File" })
 
 
   -- leader s -- searching
   leader_map.s = { name = "+search" }
-  map("n", "<leader>sg", "<cmd>lua require('telescope.builtin').live_grep()<CR>", { desc = "Grep"})
   map("n", "<leader>sc", function() vim.cmd.noh() end, { desc = "Clear search highlight"})
-  map("n", "<leader>sl", "<cmd>lua require('telescope.builtin').loclist()<CR>", { desc = "Loclist"})
-  map("n", "<leader>sq", "<cmd>lua require('telescope.builtin').quickfix()<CR>",{ desc = "Quickfix"})
-  map("n", "<leader>ss", "<cmd>lua require('telescope.builtin').spell_suggest()<CR>")
 
   -- leader x -- trouble
   leader_map.x = { name = "+trouble" }

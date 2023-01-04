@@ -23,7 +23,7 @@ function M.setup()
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
       },
       signature = {
-        enabled = false
+        enabled = true
       }
     },
     views = {
