@@ -239,13 +239,6 @@ return require("packer").startup {
     use { "airblade/vim-rooter" }
     use { "tpope/vim-eunuch" }
 
-    use {'KadoBOT/nvim-spotify',
-      requires = { "nvim-telescope/telescope.nvim" },
-      config = function() require('cwebster.spotify').setup() end,
-      run = 'make',
-      cmd = "Spotify"
-    }
-
   -- still evaluating if these are needed now
   --Plug "mattn/emmet-vim"
   use { "sheerun/vim-polyglot" }  -- syntax files for most languages
