@@ -6,36 +6,19 @@ local M = {}
 
 
 M.init_keymap = function()
-  local leader_map = {}
-  -- <leader>g -- git stuff
 
-  leader_map.g = { name = "+git" }
-  leader_map.g.h = { name = "+hunks" }
-
-  leader_map.b = { name = "+buffer" }
-  leader_map.h = { name = "+help" }
-  leader_map.h.p = { name = "+packer" }
-  map("n", "<leader>hpp", "<cmd>PackerSync<cr>", { desc = "Sync"})
-  map("n", "<leader>hps", "<cmd>PackerStatus<cr>", { desc = "Status"})
-  map("n", "<leader>hpi", "<cmd>PackerInstall<cr>", { desc = "Install"})
-  map("n", "<leader>hpc", "<cmd>PackerCompile<cr>", { desc = "Compile"})
-
-  -- <leader>f -- file finders
-  --
-  leader_map.f = { name = "+find" }
-  leader_map.s = { name = "+search" }
-  leader_map.x = { name = "+trouble" }
-  leader_map.t = { name = "+testing" }
-
-  -- leader d --debug stuff
-
-  leader_map.d = { name = "+debug" }
 
   map("n", "<leader>z", function()
       require("notify").dismiss()
       vim.cmd.noh()
     end, { desc = "Clear hightlights and notifications"})
 
+  map("n", "<leader>hpp", "<cmd>PackerSync<cr>", { desc = "Sync"})
+  map("n", "<leader>hps", "<cmd>PackerStatus<cr>", { desc = "Status"})
+  map("n", "<leader>hpi", "<cmd>PackerInstall<cr>", { desc = "Install"})
+  map("n", "<leader>hpc", "<cmd>PackerCompile<cr>", { desc = "Compile"})
+
+  -- <leader>f -- file finders
   map("n", "<leader>bb", '<cmd>e#<CR>', { desc = "Last Buffer"})
   map("n", "<leader>bv", function() require("cwebster.utils").scratchBuffer("vsplit") end, { desc = "Scrach buffer in vert split"})
   map("n", "<leader>fn", "<cmd>enew<CR>", { desc = "New File" })
@@ -50,27 +33,6 @@ M.init_keymap = function()
 -- nnoremap <S-k> :lua require'dap'.step_out()<CR>
 -- nnoremap <S-l> :lua require'dap'.step_into()<CR>
 -- nnoremap <S-j> :lua require'dap'.step_over()<CR>
-
-  local normal_map = {
-    ["g"] = {
-      name = "+goto",
-      ["z"] = {
-        name = "+zettle",
-        n = { "New" },
-        z = { "Find/create" },
-        Z = { "Insert ID" },
-        b = { "Backlinks" },
-        B = { "Id of backlink" },
-        t = { "Find/insert tags" },
-        s = { "Start server" },
-        ["]"] = { "Next Link" },
-        ["["] = { "Prev Link" },
-      },
-    },
-  }
-
-  wk.register(leader_map, { prefix = "<leader>" })
-  wk.register(normal_map)
 
   map("v", "J", "<cmd>m '>+1<CR>gv=gv", { desc = "Move down" })
   map("v", "K", "<cmd>m '<-2<CR>gv=gv", { desc = "Move up"})
