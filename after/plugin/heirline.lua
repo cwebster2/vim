@@ -1,4 +1,3 @@
-local M = {}
 local heirline = require("heirline")
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
@@ -544,9 +543,6 @@ local WinBars = {
     }
 }
 
-function M.setup()
-  heirline.setup(StatusLines, WinBars)
-  -- heirline.setup(StatusLines)
-end
+heirline.setup(StatusLines, WinBars)
+-- heirline.setup(StatusLines)
 
-return M
