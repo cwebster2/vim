@@ -65,25 +65,15 @@ return require("packer").startup {
 
   -- PLUGINS: LSP
     use { "williamboman/mason.nvim" }
-    use {
-      "neovim/nvim-lspconfig",
-      requires = {
-        "williamboman/mason-lspconfig.nvim",
-      },
-      config = function()
-        require("cwebster.lsp.installer").setup()
-        require("cwebster.lsp").setup()
-      end
-    }
+    use { "neovim/nvim-lspconfig" }
+    use { "williamboman/mason-lspconfig.nvim" }
     use { "folke/neodev.nvim" }
     -- use { "ray-x/lsp_signature.nvim" }
     use { "jose-elias-alvarez/null-ls.nvim" }
     use { "onsails/lspkind.nvim" }
 
   -- PLUGINS: diagnostics
-    use { "mfussenegger/nvim-lint",
-      config = function() require("cwebster.diagnostics.nvimlint").setup() end,
-    }
+    use { "mfussenegger/nvim-lint" }
     use { "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
     }
@@ -93,9 +83,6 @@ return require("packer").startup {
 
   -- PLUGINS: Completion
     use { "hrsh7th/nvim-cmp",
-      config = function()
-        require("cwebster.completion").setup()
-      end,
       requires = {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
