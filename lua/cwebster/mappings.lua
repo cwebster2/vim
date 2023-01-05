@@ -10,24 +10,9 @@ M.init_keymap = function()
   -- <leader>g -- git stuff
 
   leader_map.g = { name = "+git" }
-  map("n", "<leader>gf", "<Cmd>OpenInGHFile<CR>", { desc = "Open file in github"})
   leader_map.g.h = { name = "+hunks" }
-  map({'n', 'v'}, '<leader>ghs', function() require("gitsigns").stage_hunk() end, { desc = "Stage hunk" })
-
-  -- <leader>b and bufferline stuff
 
   leader_map.b = { name = "+buffer" }
-  map("n", "<leader>bg", "<cmd>BufferLinePick<cr>", { desc = "Goto Buffer"})
-  map("n", "<leader>bp", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer"})
-  map("n", "<leader>bn", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer"})
-  map("n", "<leader>bd", '<Cmd>BufferLineSortByDirectory<CR>', { desc = "Order by Dir"})
-  map("n", "<leader>bl", '<Cmd>BufferLineSortByDirectory<CR>', { desc = "Order by Lang"})
-  map("n", "<leader>m", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer"})
-  map("n", "<leader>i", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer"})
-
-  map("n", "<leader>bb", '<cmd>e#<CR>', { desc = "Last Buffer"})
-  map("n", "<leader>bv", function() require("cwebster.utils").scratchBuffer("vsplit") end, { desc = "Scrach buffer in vert split"})
-
   leader_map.h = { name = "+help" }
   leader_map.h.p = { name = "+packer" }
   map("n", "<leader>hpp", "<cmd>PackerSync<cr>", { desc = "Sync"})
@@ -38,28 +23,10 @@ M.init_keymap = function()
   -- <leader>f -- file finders
   --
   leader_map.f = { name = "+find" }
-  map("n", "<leader>fn", "<cmd>enew<CR>", { desc = "New File" })
-
-
-  -- leader s -- searching
   leader_map.s = { name = "+search" }
-  map("n", "<leader>sc", function() vim.cmd.noh() end, { desc = "Clear search highlight"})
-
-  -- leader x -- trouble
   leader_map.x = { name = "+trouble" }
-  map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { desc = "Trouble"})
-  map("n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", { desc = "lsp workspace"})
-  map("n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagostics<cr>", { desc = "lsp document"})
-  map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { desc = "quickfix"})
-  map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { desc = "loclist"})
-
-  -- leader t -- testing
   leader_map.t = { name = "+testing" }
   map("n", "<leader>tr", "<Plug>RestNvim<CR>", { desc = "REST request", noremap = true})
-  map("n", "<leader>tt", "<cmd>TestNearest<CR>", { desc = "Nearest"})
-  map("n", "<leader>tf", "<cmd>TestFile<CR>", { desc = "File"})
-  map("n", "<leader>ts", "<cmd>TestSuite<CR>", { desc = "Suite"})
-  map("n", "<leader>t_", "<cmd>TestLast<CR>", { desc = "Last"})
 
   -- leader d --debug stuff
 
@@ -86,6 +53,17 @@ M.init_keymap = function()
       require("notify").dismiss()
       vim.cmd.noh()
     end, { desc = "Clear hightlights and notifications"})
+
+  map("n", "<leader>bb", '<cmd>e#<CR>', { desc = "Last Buffer"})
+  map("n", "<leader>bv", function() require("cwebster.utils").scratchBuffer("vsplit") end, { desc = "Scrach buffer in vert split"})
+  map("n", "<leader>fn", "<cmd>enew<CR>", { desc = "New File" })
+  map("n", "<leader>sc", function() vim.cmd.noh() end, { desc = "Clear search highlight"})
+
+  -- what ar these from?
+  map("n", "<leader>tt", "<cmd>TestNearest<CR>", { desc = "Nearest"})
+  map("n", "<leader>tf", "<cmd>TestFile<CR>", { desc = "File"})
+  map("n", "<leader>ts", "<cmd>TestSuite<CR>", { desc = "Suite"})
+  map("n", "<leader>t_", "<cmd>TestLast<CR>", { desc = "Last"})
 
 -- nnoremap <S-k> :lua require'dap'.step_out()<CR>
 -- nnoremap <S-l> :lua require'dap'.step_into()<CR>

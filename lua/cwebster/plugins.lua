@@ -86,7 +86,6 @@ return require("packer").startup {
     }
     use { "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
-      config = function() require("cwebster.trouble").setup() end,
     }
     use { "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       config = function() require("lsp_lines").setup() end,
@@ -137,10 +136,8 @@ return require("packer").startup {
           config = function() require('cwebster.ui.scrollbar').setup() end,
       }
     }
-    use {
-      "lewis6991/gitsigns.nvim",
+    use { "lewis6991/gitsigns.nvim",
       requires = {"nvim-lua/plenary.nvim"},
-      config = function() require('cwebster.ui.gitsigns').setup() end,
     }
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
     use {
@@ -197,9 +194,8 @@ return require("packer").startup {
       tag = "*",
     }
     use { "windwp/nvim-autopairs" }
-    use {"akinsho/nvim-toggleterm.lua" }
-    use {
-      "nvim-neotest/neotest",
+    use { "akinsho/nvim-toggleterm.lua" }
+    use { "nvim-neotest/neotest",
       requires = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
@@ -207,8 +203,7 @@ return require("packer").startup {
       }
     }
     use { "cwebster2/mocha-runner.nvim" }
-    use {
-      "ThePrimeagen/refactoring.nvim",
+    use { "ThePrimeagen/refactoring.nvim",
       requires = {
         {"nvim-lua/plenary.nvim"},
         {"nvim-treesitter/nvim-treesitter"}
@@ -289,9 +284,7 @@ return require("packer").startup {
 
   -- still evaluating if these are needed now
   --Plug "mattn/emmet-vim"
-  use { "sheerun/vim-polyglot",
-    setup = function() vim.g.polyglot_disabled = { "autoindent", "sensible" } end,
-    }  -- syntax files for most languages
+  use { "sheerun/vim-polyglot" }  -- syntax files for most languages
 
   -- PLUGINS_END
   end,

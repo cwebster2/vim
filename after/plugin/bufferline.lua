@@ -5,6 +5,19 @@ if not ok then
   do return end
 end
 
+local map = require("cwebster.utils").map
+
+--mappings
+map("n", "<leader>bg", "<cmd>BufferLinePick<cr>", { desc = "Goto Buffer"})
+map("n", "<leader>bp", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer"})
+map("n", "<leader>bn", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer"})
+map("n", "<leader>bd", '<Cmd>BufferLineSortByDirectory<CR>', { desc = "Order by Dir"})
+map("n", "<leader>bl", '<Cmd>BufferLineSortByDirectory<CR>', { desc = "Order by Lang"})
+map("n", "<leader>m", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer"})
+map("n", "<leader>i", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer"})
+
+--config
+--
 bufferline.setup {
   options = {
     -- mode = "buffers", -- set to "tabs" to only show tabpages instead
