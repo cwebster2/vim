@@ -1,5 +1,11 @@
+local ok, neotest = pcall(require, "neotest")
 
-require("neotest").setup({
+if not ok then
+  print("neotest not installed, run PackerSync")
+  do return end
+end
+
+neotest.setup({
   adapters = {
     require("neotest-jest")({
       jestCommand = "npm test --",

@@ -1,5 +1,12 @@
 local g = vim.g
 
+local ok, indent_blankline = pcall(require, "indent_blankline")
+
+if not ok then
+  print("indent_blankline not installed, run PackerSync")
+  do return end
+end
+
 g.indentLine_char = '▏'
 g.indent_blankline_char_highlight = 'IndentGuides'
 g.indent_blankline_use_treesitter = true
@@ -33,7 +40,7 @@ g.indent_blankline_context_patterns = {
   "dictionary"
 }
 
-require("indent_blankline").setup({
+indent_blankline.setup({
   -- show_end_of_line = true,
   space_char_blankline = " ",
   show_current_context = true,

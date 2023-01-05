@@ -1,4 +1,9 @@
-local neogit = require("neogit")
+local ok, neogit = pcall(require, "neogit")
+
+if not ok then
+  print("neogit not installed, run PackerSync")
+  do return end
+end
 
 neogit.setup({
   disable_signs = false,

@@ -1,4 +1,10 @@
-local neotree = require("neo-tree")
+local ok, neotree = pcall(require, "neo-tree")
+
+if not ok then
+  print("neo-tree not installed, run PackerSync")
+  do return end
+end
+
 local map = require("cwebster.utils").map
 
 -- mappings

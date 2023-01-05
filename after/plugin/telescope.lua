@@ -1,3 +1,10 @@
+local ok, telescope = pcall(require, "telescope")
+
+if not ok then
+  print("telescope not installed, run PackerSync")
+  do return end
+end
+
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 local map = require("cwebster.utils").map
@@ -31,7 +38,7 @@ map("n", "<leader>gp", function() require('telescope').extensions.gh.pull_reques
 
 -- config
 
-require("telescope").setup {
+telescope.setup {
     defaults = {
         mappings = {
             i = {

@@ -1,10 +1,17 @@
-local map = require("cwebster.utils").map
+local ok, symbols_outline = pcall(require, "symbols-outline")
 
+if not ok then
+  print("symbols-outline not installed, run PackerSync")
+  do return end
+end
+
+local map = require("cwebster.utils").map
 -- mappings
+--
 map("n", "<leader>fs", ":SymbolsOutline<CR>", { desc = "Symbols"})
 
 --config
-require("symbols-outline").setup({
+symbols_outline.setup({
   highlight_hovered_item = true,
   show_guides = true,
   auto_preview = false,

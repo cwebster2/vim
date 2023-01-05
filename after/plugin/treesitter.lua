@@ -1,3 +1,10 @@
+local ok, _ = pcall(require, "nvim-treesitter")
+
+if not ok then
+  print("ccc not installed, run PackerSync")
+  do return end
+end
+
  local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 parser_configs.http = {
   install_info = {

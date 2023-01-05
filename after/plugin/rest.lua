@@ -1,5 +1,11 @@
+local ok, rest_nvim = pcall(require, "rest-nvim")
 
-require("rest-nvim").setup({
+if not ok then
+  print("rest-nvim not installed, run PackerSync")
+  do return end
+end
+
+rest_nvim.setup({
   -- Open request results in a horizontal split
   result_split_horizontal = false,
   -- Skip SSL verification, useful for unknown certificates
