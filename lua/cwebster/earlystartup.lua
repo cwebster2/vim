@@ -15,6 +15,7 @@ function M.setup()
 
   g.tex_conceal = ""
 
+  g.polyglot_disabled = { "autoindent", "sensible" }
   -- figure out what plugin this goes with
   -- vim.api.nvim_command[[
   -- let test#strategy = "neovim"
