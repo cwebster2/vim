@@ -17,6 +17,11 @@ return require("packer").startup {
     use { "wbthomason/packer.nvim" }
     use { "dstein64/vim-startuptime" }
 
+  -- PLUGINS: Colorschemes
+    use { "catppuccin/nvim",
+      as = "catppuccin",
+    }
+
   -- PLUGINS: Startup
     use { "mhinz/vim-startify" }
 
@@ -95,11 +100,6 @@ return require("packer").startup {
     }
 
 
-  -- PLUGINS: Colorschemes
-    use {
-      "catppuccin/nvim",
-      as = "catppuccin",
-    }
 
   -- PLUGINS: UI
     use {
@@ -238,10 +238,6 @@ return require("packer").startup {
     -- PLUGINS: The Rest
     use { "airblade/vim-rooter" }
     use { "tpope/vim-eunuch" }
-
-    use { "andweeb/presence.nvim",
-      config = function() require('cwebster.presence').setup() end,
-    }
 
     use {'KadoBOT/nvim-spotify',
       requires = { "nvim-telescope/telescope.nvim" },
