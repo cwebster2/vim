@@ -5,6 +5,12 @@ if not ok then
   do return end
 end
 
+local map = require("cwebster.utils").map
+
+-- mappings
+map("n", "<leader>tr", "<Plug>RestNvim<CR>", { desc = "REST request", noremap = true})
+
+-- config
 rest_nvim.setup({
   -- Open request results in a horizontal split
   result_split_horizontal = false,
