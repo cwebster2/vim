@@ -66,7 +66,6 @@ return require("packer").startup {
     use { "neovim/nvim-lspconfig" }
     use { "williamboman/mason-lspconfig.nvim" }
     use { "folke/neodev.nvim" }
-    -- use { "ray-x/lsp_signature.nvim" }
     use { "jose-elias-alvarez/null-ls.nvim" }
     use { "onsails/lspkind.nvim" }
 
@@ -75,9 +74,7 @@ return require("packer").startup {
     use { "folke/lsp-trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
     }
-    use { "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-      config = function() require("lsp_lines").setup() end,
-    }
+    use { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }
 
   -- PLUGINS: Completion
     use { "hrsh7th/nvim-cmp",
@@ -110,34 +107,22 @@ return require("packer").startup {
       requires = {"kyazdani42/nvim-web-devicons"},
     }
     use {
-      "rebelot/heirline.nvim",
-      config = function() require("cwebster.heirline").setup() end,
-    }
+      "rebelot/heirline.nvim", }
     use {
       "kevinhwang91/nvim-hlslens",
-      config = function() require('cwebster.ui.hlslens').setup() end,
-      requires = {
-        "petertriho/nvim-scrollbar",
-          config = function() require('cwebster.ui.scrollbar').setup() end,
-      }
+      requires = { "petertriho/nvim-scrollbar" }
     }
     use { "lewis6991/gitsigns.nvim",
       requires = {"nvim-lua/plenary.nvim"},
     }
     use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
-    use {
-      "SmiteshP/nvim-navic",
+    use { "SmiteshP/nvim-navic",
       requires = {"neovim/nvim-lspconfig"},
-      config = function() require('cwebster.ui.navic').setup() end,
     }
-    use {
-      "anuvyklack/hydra.nvim",
-      config = function() require("cwebster.hydra").setup() end,
-    }
+    use { "anuvyklack/hydra.nvim" }
     use { "folke/which-key.nvim" }
-    use { "stevearc/dressing.nvim",
-      config = function() require("cwebster.ui.dressing").setup() end,
-    }
+    use { "stevearc/dressing.nvim" }
+
     use { "folke/noice.nvim",
       event = "VimEnter",
       config = function() require("cwebster.ui.noice").setup() end,

@@ -1,15 +1,17 @@
-local null_ls = require("null-ls")
-local neodev = require("neodev")
-local navic = require("nvim-navic")
-local rust_tools = require('rust-tools')
-local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
 local ok, nvim_lsp = pcall(require,"lspconfig")
 
 if not ok then
   print("lspconfig is not installed")
   do return end
 end
+
+local null_ls = require("null-ls")
+local neodev = require("neodev")
+local navic = require("nvim-navic")
+local rust_tools = require('rust-tools')
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local lsp_lines = require("lsp_lines")
 
 -- the servers we want
 
@@ -201,6 +203,7 @@ null_ls.setup({
   on_attach = on_attach,
 })
 
+lsp_lines.setup()
 -- registration
 
 for server, config in pairs(servers) do
