@@ -103,6 +103,7 @@ function M.setup()
       dashboard = false,
       markdown = true,
       mason = true,
+      mini = true,
       notify = true,
       noice = true,
       which_key = true,
