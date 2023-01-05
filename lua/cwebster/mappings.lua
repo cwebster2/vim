@@ -7,6 +7,12 @@ local M = {}
 
 M.init_keymap = function()
 
+  -- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+  -- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+  vim.keymap.set("n", "J", "mzJ`z")
+  vim.keymap.set("n", "<C-d>", "<C-d>zz")
+  vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
   map("n", "<leader>z", function()
       require("notify").dismiss()
@@ -18,7 +24,6 @@ M.init_keymap = function()
   map("n", "<leader>hpi", "<cmd>PackerInstall<cr>", { desc = "Install"})
   map("n", "<leader>hpc", "<cmd>PackerCompile<cr>", { desc = "Compile"})
 
-  -- <leader>f -- file finders
   map("n", "<leader>bb", '<cmd>e#<CR>', { desc = "Last Buffer"})
   map("n", "<leader>bv", function() require("cwebster.utils").scratchBuffer("vsplit") end, { desc = "Scrach buffer in vert split"})
   map("n", "<leader>fn", "<cmd>enew<CR>", { desc = "New File" })
