@@ -36,6 +36,8 @@ map("n", "<leader>gs", "<Cmd>Telescope git_status<CR>", { desc = "Show git statu
 map("n", "<leader>gi", function() require('telescope').extensions.gh.issues() end, { desc = "Show gh issues" })
 map("n", "<leader>gp", function() require('telescope').extensions.gh.pull_request() end, { desc = "Show gh pr" })
 
+map("n", "<leader>bs", function() require('telescope.builtin').buffers() end, { desc =  "Buffers"})
+
 -- config
 
 telescope.setup {

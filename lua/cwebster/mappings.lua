@@ -10,10 +10,7 @@ M.init_keymap = function()
   -- <leader>g -- git stuff
 
   leader_map.g = { name = "+git" }
-  map("n", "<leader>gg", function() require("neogit").open() end, { desc = "Neogit" })
   map("n", "<leader>gf", "<Cmd>OpenInGHFile<CR>", { desc = "Open file in github"})
-      --l = { function() require"util".float_terminal("lazygit") end, "LazyGit" },
-      --["d"] = { "<cmd>DiffviewOpen<cr>", "DiffView" },
   leader_map.g.h = { name = "+hunks" }
   map({'n', 'v'}, '<leader>ghs', function() require("gitsigns").stage_hunk() end, { desc = "Stage hunk" })
 
@@ -28,18 +25,10 @@ M.init_keymap = function()
   map("n", "<leader>m", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer"})
   map("n", "<leader>i", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer"})
 
-  map("n", "<leader>bs", function() require('telescope.builtin').buffers() end, { desc =  "Buffers"})
   map("n", "<leader>bb", '<cmd>e#<CR>', { desc = "Last Buffer"})
   map("n", "<leader>bv", function() require("cwebster.utils").scratchBuffer("vsplit") end, { desc = "Scrach buffer in vert split"})
 
-  -- <leader>h -- help
-
   leader_map.h = { name = "+help" }
-  map("n", "<leader>hl", "<cmd>TSHighlightCapturesUnderCursor<cr>", { desc = "Highlight Groups at cursor"})
-  map("n", "<leader>hi", "<cmd>echo \"hi<\" . synIDattr(synID(line(\".\"),col(\".\"),1),\"name\") . '> trans<' . synIDattr(synID(line(\".\"),col(\".\"),0),\"name\") . \"> lo<\" . synIDattr(synIDtrans(synID(line(\".\"),col(\".\"),1)),\"name\") . \">\"<CR> ", { desc = "Highlight Under Cursos"})
-
-  -- <leader>hp -- packer
-  --
   leader_map.h.p = { name = "+packer" }
   map("n", "<leader>hpp", "<cmd>PackerSync<cr>", { desc = "Sync"})
   map("n", "<leader>hps", "<cmd>PackerStatus<cr>", { desc = "Status"})

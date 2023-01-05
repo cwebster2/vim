@@ -5,6 +5,13 @@ if not ok then
   do return end
 end
 
+local map = require("cwebster.utils").map
+
+--mappings
+map("n", "<leader>gg", function() require("neogit").open() end, { desc = "Neogit" })
+
+--config
+
 neogit.setup({
   disable_signs = false,
   disable_context_highlighting = false,
