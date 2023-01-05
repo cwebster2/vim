@@ -186,7 +186,7 @@ return {
   {
     "zbirenbaum/copilot-cmp",
     module = "copilot_cmp",
-    after = { "copilot.lua" },
+    dependencies = { "copilot.lua" },
     config = function() require("copilot_cmp").setup({
       method = "getCompletionsCycling"
     }) end,
@@ -212,7 +212,7 @@ return {
     build = "cd app && npm install",
     -- ft = { "markdown" },
     -- setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-    setup = function() require('cwebster.markdown').mkdp_setup() end,
+    init = function() require('cwebster.markdown').mkdp_setup() end,
   },
 
   -- PLUGINS: LaTeX
