@@ -18,9 +18,7 @@ return require("packer").startup {
     use { "dstein64/vim-startuptime" }
 
   -- PLUGINS: Startup
-    use { "mhinz/vim-startify",
-      config = function() require('cwebster.startify').setup() end,
-    }
+    use { "mhinz/vim-startify" }
 
   -- stuff to try
   -- https://github.com/nyngwang/NeoTerm.lua
