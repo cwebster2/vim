@@ -26,28 +26,10 @@ M.init_keymap = function()
   leader_map.s = { name = "+search" }
   leader_map.x = { name = "+trouble" }
   leader_map.t = { name = "+testing" }
-  map("n", "<leader>tr", "<Plug>RestNvim<CR>", { desc = "REST request", noremap = true})
 
   -- leader d --debug stuff
 
   leader_map.d = { name = "+debug" }
-  map("n", "<leader>dh", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "Breakpoint"})
-  map("n", "<leader>ds", "<cmd>lua require'dap'.close()<CR>", { desc = "Stop"})
-  map("n", "<leader>dn", "<cmd>lua require'dap'.continue()<CR>", { desc = "Cont"})
-  map("n", "<leader>dk", "<cmd>lua require'dap'.up()<CR>", { desc = "Up"})
-  map("n", "<leader>dj", "<cmd>lua require'dap'.down()<CR>", { desc = "Down"})
-  map("n", "<leader>d_", "<cmd>lua require'dap'.disconnect();require'dap'.stop();require'dap'.run_last()<CR>", { desc = "Disco"})
-  map("n", "<leader>dr", "<cmd>lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l", { desc = "REPL"})
-      -- ["i"] = { "<cmd>lua require'dap.ui.variables'.hover()<CR>", "" },
-      -- ["?"] = { "<cmd>lua require'dap.ui.variables'.scopes()<CR>", "" },
-  map("n", "<leader>de", "<cmd>lua require'dap'.set_exception_breakpoints({'all'})<CR>", { desc = "Enable BPs"})
-  map("n", "<leader>da", "<cmd>lua require'debugHelper'.attach()<CR>", { desc = "Attack"})
-  map("n", "<leader>dA", "<cmd>lua require'debugHelper'.attachToRemote()<CR>", { desc = "Att Remote"})
-  map("n", "<leader>di", "<cmd>lua require'dap.ui.widgets'.hover()<CR>", { desc = "UI"})
-  map("n", "<leader>d?", "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>", { desc = "Scopes"})
-  map("n", "<leader>df", "<cmd>Telescope dap frames<CR>", { desc = "Frames"})
-  map("n", "<leader>dc", "<cmd>Telescope dap commands<CR>", { desc = "Commands"})
-  map("n", "<leader>db", "<cmd>Telescope dap list_breakpoints<CR>", { desc = "List BPs"})
 
   map("n", "<leader>z", function()
       require("notify").dismiss()

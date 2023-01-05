@@ -244,9 +244,7 @@ return require("packer").startup {
     }
 
   -- PLUGINS: Debugging
-    use { "mfussenegger/nvim-dap",
-      config = function() require('cwebster.dap').setup() end
-    }
+    use { "mfussenegger/nvim-dap" }
     use { "theHamsta/nvim-dap-virtual-text" }
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
