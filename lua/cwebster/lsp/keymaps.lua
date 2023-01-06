@@ -4,13 +4,20 @@ function M.on_attach(client, buffer)
   local self = M.new(client, buffer)
 
   self:map("<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+  -- map("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float(nil,{source=always,focusable=false,border='rounded'})<CR>", opts, "Open floating diagnostic window")
   self:map("<leader>cl", "LspInfo", { desc = "Lsp Info" })
   self:map("<leader>xd", "Telescope diagnostics", { desc = "Telescope Diagnostics" })
+
   self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
+  -- map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts, "Show lsp definition")
   self:map("gr", "Telescope lsp_references", { desc = "References" })
+  self:map("gR", "<cmd>Trouble lsp_references<cr>", { desc = "Show lsp references in trouble "})
   self:map("gD", "Telescope lsp_declarations", { desc = "Goto Declaration" })
+  -- map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts, "Show lsp declarations")
   self:map("gI", "Telescope lsp_implementations", { desc = "Goto Implementation" })
+  -- map("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts, "Show lsp implementation")
   self:map("gt", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
+  -- map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts, "Show lsp buffer declarations")
   self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
   self:map("[d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
   self:map("]d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
@@ -40,19 +47,22 @@ end
 
 M.lsp_setup = function(client, bufnr)
 
-  local keymap = {}
-
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
   map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts, "Rename symbol")
   map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts, "Buffer code actions")
-  map("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float(nil,{source=always,focusable=false,border='rounded'})<CR>", opts, "Open floating diagnostic window")
   map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts, "Show LSP information")
   map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts, "Add workspace folder")
   map("n", "<leader>clr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts, "Remove workspace folder")
   map("n", "<leader>cll", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts, "List workspace folders")
   map("n", "<leader>xs", "<cmd>Telescope lsp_document_diagnostics<cr>", opts, "Open document diagnostics in telescope")
   map("n", "<leader>xW", "<cmd>Telescope lsp_workspace_diagnostics<cr>", opts, "Open workspace diagnostics in telescope")
+  map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts, "Show lsp signature help")
+  map("n", "gk", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts, "Show lsp buffer hover actions")
+  map("n", "gh", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts, "Show lsp symbols in telescope")
+  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev({popup_opts={focusable=false,border='rounded'}})<CR>", opts, "Prev diagnostic")
+  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts, "Next diagnostic")
+  map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 
 
 
@@ -74,20 +84,6 @@ M.lsp_setup = function(client, bufnr)
 
   local goto_keymap = {}
   goto_keymap.g = { name = "+goto" }
-  map("n", "gr", "<cmd>Telescope lsp_references<cr>", opts, "Show lsp references in telescope")
-  map("n", "gR", "<cmd>Trouble lsp_references<cr>", opts, "Show lsp references in trouble")
-  map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts, "Show lsp declarations")
-  map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts, "Show lsp definition")
-  map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts, "Show lsp signature help")
-  map("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts, "Show lsp implementation")
-  map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts, "Show lsp buffer declarations")
-  map("n", "gk", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts, "Show lsp buffer hover actions")
-  map("n", "gh", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts, "Show lsp symbols in telescope")
-
-  map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts, "Show lsp buffer hover actions")
-  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev({popup_opts={focusable=false,border='rounded'}})<CR>", opts, "Prev diagnostic")
-  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts, "Next diagnostic")
-  map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.server_capabilities.documentFormattingProvider then
