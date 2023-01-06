@@ -11,13 +11,14 @@ function M.on_attach(client, buffer)
   self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
   -- map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts, "Show lsp definition")
   self:map("gr", "Telescope lsp_references", { desc = "References" })
-  self:map("gR", "<cmd>Trouble lsp_references<cr>", { desc = "Show lsp references in trouble "})
+  self:map("gR", "Trouble lsp_references", { desc = "Show lsp references in trouble "})
   self:map("gD", "Telescope lsp_declarations", { desc = "Goto Declaration" })
   -- map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts, "Show lsp declarations")
   self:map("gI", "Telescope lsp_implementations", { desc = "Goto Implementation" })
   -- map("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts, "Show lsp implementation")
   self:map("gt", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
   -- map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts, "Show lsp buffer declarations")
+
   self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
   self:map("[d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
   self:map("]d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
@@ -28,6 +29,10 @@ function M.on_attach(client, buffer)
 
   self:map("<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i", "n" }, has = "signatureHelp" })
   self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
+
+  self:map("<leader>xs", "Telescope lsp_document_diagnostics",  { desc = "Open document diagnostics in telescope" })
+  self:map("<leader>xW", "Telescope lsp_workspace_diagnostics", { desc = "Open workspace diagnostics in telescope"})
+  self:map("gh", "Telescope lsp_document_symbols", { desc = "Show lsp symbols in telescope"})
 
   local format = require("cwebster.lsp.format").format
   self:map("<leader>cf", format, { desc = "Format Document", has = "documentFormatting" })
@@ -42,56 +47,44 @@ function M.on_attach(client, buffer)
   if client.name == "rust_analyzer" then
     self:map("<leader>co", require('rust-tools').hover_actions.hover_actions, { desc = "Rust: show hover actions" })
   end
+
+  -- map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts, "Show LSP information")
+  -- map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts, "Add workspace folder")
+  -- map("n", "<leader>clr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts, "Remove workspace folder")
+  -- map("n", "<leader>cll", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts, "List workspace folders")
+
+  self:map("<c-f>", function()
+    if not require("noice.lsp").scroll(4) then
+      return "<c-f>"
+    end
+  end, "Scroll down")
+
+  self:map("<c-b>", function()
+    if not require("noice.lsp").scroll(-4) then
+      return "<c-b>"
+    end
+  end, "Scroll up")
+
 end
 ---------------------------
 
 M.lsp_setup = function(client, bufnr)
 
-  local opts = { noremap = true, silent = true, buffer = bufnr }
+  -- Set some keybinds conditional on server capabilities
+  -- if client.server_capabilities.documentFormattingProvider then
+  --   map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts, "Format document (lsp)")
+  -- elseif client.server_capabilities.documentRangeFormattingProvider then
+  --   map("v", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  -- end
 
-  map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts, "Rename symbol")
-  map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts, "Buffer code actions")
-  map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts, "Show LSP information")
-  map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts, "Add workspace folder")
-  map("n", "<leader>clr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts, "Remove workspace folder")
-  map("n", "<leader>cll", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts, "List workspace folders")
-  map("n", "<leader>xs", "<cmd>Telescope lsp_document_diagnostics<cr>", opts, "Open document diagnostics in telescope")
-  map("n", "<leader>xW", "<cmd>Telescope lsp_workspace_diagnostics<cr>", opts, "Open workspace diagnostics in telescope")
-  map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts, "Show lsp signature help")
-  map("n", "gk", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts, "Show lsp buffer hover actions")
-  map("n", "gh", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts, "Show lsp symbols in telescope")
-  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev({popup_opts={focusable=false,border='rounded'}})<CR>", opts, "Prev diagnostic")
-  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next({popup_opts={focusable=false,border='rounded'}})<CR>", opts, "Next diagnostic")
-  map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-
-
-
-  map("n", "<c-f>", function()
-    if not require("noice.lsp").scroll(4) then
-      return "<c-f>"
-    end
-  end, opts, "Scroll down")
-
-  map("n", "<c-b>", function()
-    if not require("noice.lsp").scroll(-4) then
-      return "<c-b>"
-    end
-  end, opts, "Scroll up")
-
+  local keymap = {}
+  keymap.c = { name = "+Code Actions", }
+  keymap.c.l = { name = "+LSP Actions"}
+  keymap.x = { name = "+LSP Diagnostics"}
   local visual_keymap = {}
   visual_keymap.c = { name = "+Code Actions" }
-  map("v", "<leader>ca", ":<C-U>lua vim.lsp.buf.code_action()<CR>", opts)
-
   local goto_keymap = {}
   goto_keymap.g = { name = "+goto" }
-
-  -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.documentFormattingProvider then
-    map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts, "Format document (lsp)")
-  elseif client.server_capabilities.documentRangeFormattingProvider then
-    map("v", "<leader>cf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  end
-
   wk.register(keymap, { buffer = bufnr, prefix = "<leader>" })
   wk.register(visual_keymap, { buffer = bufnr, prefix = "<leader>", mode = "v" })
   wk.register(goto_keymap, { buffer = bufnr, prefix = "g" })
