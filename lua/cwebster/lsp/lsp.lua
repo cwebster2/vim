@@ -17,57 +17,8 @@ local lsp_lines = require("lsp_lines")
 
 local servers = require("cwebster.lsp.servers")
 
--- install servers
-
-mason.setup({
-  ui = {
-    icons = {
-      server_installed = "✓",
-      server_pending = "➜",
-      server_uninstalled = "✗"
-    }
-  }
-})
-
-local ensure_installed = { "rust_analyzer" }
-for key, _ in pairs(servers) do
-  table.insert(ensure_installed, key)
-end
-
-mason_lspconfig.setup({
-  ensure_installed = ensure_installed, -- ensure these servers are always installed
-  automatic_installation = true, -- { exclude = { "null-ls" } }, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-})
-
 -- config
 
-local null_ls_sources = {
-  -- formatters
-  null_ls.builtins.formatting.stylua,
-  -- null_ls.builtins.formatting.eslint_d,
-  null_ls.builtins.formatting.prettier.with({
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "css", "scss", "less", "html", "json", "yaml", "markdown", "graphql", "svelte", "toml" }
-  }),
-  null_ls.builtins.formatting.gofmt,
-  null_ls.builtins.formatting.goimports,
-  null_ls.builtins.formatting.rustfmt,
-
-  -- diagnostics
-  -- trying nvim-lint to handle diagnostics.
-  -- null_ls.builtins.diagnostics.actionlint,
-  -- null_ls.builtins.diagnostics.eslint_d,
-  -- null_ls.builtins.diagnostics.gitlint,
-  -- null_ls.builtins.diagnostics.vale,
-  -- null_ls.builtins.diagnostics.hadolint.with({
-  --   command = "docker",
-  --   args = { "run", "--rm", "-i", "hadolint/hadolint", "hadolint", "--no-color", "-"},
-  -- }),
-  -- null_ls.builtins.diagnostics.shellcheck,
-
-  -- code actions
-  null_ls.builtins.code_actions.gitsigns,
-  null_ls.builtins.code_actions.eslint_d,
-}
 
 -- handlers
 

@@ -19,18 +19,18 @@ local servers = {
   --   handlers = lsp_status.extensions.clangd.setup(),
   -- },
   sqlls = {},
-  sumneko_lua = {
-    settings = {
-      Lua = {
-        workspace = {
-          checkThirdParty = false,
-        },
-        completion = {
-          callSnippet = "Replace",
-        },
-      },
-    },
-  },
+  -- sumneko_lua = {
+  --   settings = {
+  --     Lua = {
+  --       workspace = {
+  --         checkThirdParty = false,
+  --       },
+  --       completion = {
+  --         callSnippet = "Replace",
+  --       },
+  --     },
+  --   },
+  -- },
   texlab = {
     settings = {
       latex = {

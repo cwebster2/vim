@@ -56,14 +56,6 @@ return {
   { "p00f/nvim-ts-rainbow" },
   { "windwp/nvim-ts-autotag" },
 
--- PLUGINS: LSP
-  { "williamboman/mason.nvim" },
-  { "neovim/nvim-lspconfig" },
-  { "williamboman/mason-lspconfig.nvim" },
-  { "folke/neodev.nvim" },
-  { "jose-elias-alvarez/null-ls.nvim" },
-  { "onsails/lspkind.nvim" },
-
 -- PLUGINS: diagnostics
   { "mfussenegger/nvim-lint" },
   { "folke/lsp-trouble.nvim",
