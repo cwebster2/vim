@@ -1,6 +1,6 @@
 local M={}
 
-local lsp_signature = require("lsp_signature")
+-- local lsp_signature = require("lsp_signature")
 local null_ls = require("null-ls")
 local neodev = require("neodev")
 local navic = require("nvim-navic")
@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
     navic.attach(client, bufnr)
   end
 
-  lsp_signature.on_attach(lsp_signature_config)
+  -- lsp_signature.on_attach(lsp_signature_config)
 
   require("cwebster.mappings").lsp_setup(client, bufnr)
 
@@ -68,11 +68,11 @@ local on_attach = function(client, bufnr)
 
 end
 
-null_ls.setup({
-  sources = require("cwebster.lsp.config").null_ls_sources,
-  diagnostics_format = "[#{c}] #{m} (#{s})",
-  on_attach = on_attach,
-})
+-- null_ls.setup({
+--   sources = require("cwebster.lsp.config").null_ls_sources,
+--   diagnostics_format = "[#{c}] #{m} (#{s})",
+--   on_attach = on_attach,
+-- })
 
 function M.get_server_config()
   local config = { on_attach = on_attach, capabilities = get_capabilities() }

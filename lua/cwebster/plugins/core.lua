@@ -67,20 +67,104 @@ return {
     { "windwp/nvim-ts-autotag" },
 
   -- PLUGINS: LSP
-    { "williamboman/mason.nvim" },
+  -- NEW
     {
       "neovim/nvim-lspconfig",
+      event = "BufReadPre",
       dependencies = {
-        "williamboman/mason-lspconfig.nvim",
+        { "folke/neodev.nvim", config = true },
+        { "mason.nvim" },
+        { "williamboman/mason-lspconfig.nvim" },
+        { "hrsh7th/cmp-nvim-lsp" },
+        { "rust-tools.nvim" },
       },
-      config = function()
+      config = function() -- plugins, opts
         require("cwebster.lsp.installer").setup()
         require("cwebster.lsp").setup()
-      end
+      end,
     },
-    { "folke/neodev.nvim" },
+    {
+      "jose-elias-alvarez/null-ls.nvim",
+      dependencies = {
+        { "mason.nvim" },
+      },
+      event = "BufReadPre",
+      opts = function()
+        local nls = require("null-ls")
+        return {
+          sources = {
+            nls.builtins.formatting.stylua,
+            -- null_ls.builtins.formatting.eslint_d,
+            nls.builtins.formatting.prettier.with({
+              filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "css", "scss", "less", "html", "json", "yaml", "markdown", "graphql", "svelte", "toml" }
+            }),
+            nls.builtins.formatting.gofmt,
+            nls.builtins.formatting.goimports,
+            nls.builtins.formatting.rustfmt,
+            -- code actions
+            nls.builtins.code_actions.gitsigns,
+            nls.builtins.code_actions.eslint_d,
+          }
+        }
+      end,
+      -- null_ls.setup({
+      --   sources = require("cwebster.lsp.config").null_ls_sources,
+      --   diagnostics_format = "[#{c}] #{m} (#{s})",
+      --   on_attach = on_attach,
+      -- })
+    },
+    {
+      "williamboman/mason.nvim",
+      cmd = "Mason",
+      keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+      opts = {
+        ensure_installed = {
+          "stylua",
+          "shellcheck",
+          "shfmt",
+          "flake8",
+        },
+      },
+      ---@param opts MasonSettings | {ensure_installed: string[]}
+      config = function(plugin, opts)
+        if plugin.ensure_installed then
+          require("lazyvim.util").deprecate("treesitter.ensure_installed", "treesitter.opts.ensure_installed")
+        end
+        require("mason").setup(opts)
+        local mr = require("mason-registry")
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
+        end
+      end,
+    },
+    { "simrat39/rust-tools.nvim",
+      config = function() require('cwebster.rust-tools').setup() end
+    },
+  --
+  --
+  --
+  --
+  --
+  --
+  --
+  --
+  -- OLD
+    -- { "williamboman/mason.nvim" },
+    -- {
+    --   "neovim/nvim-lspconfig",
+    --   dependencies = {
+    --     "williamboman/mason-lspconfig.nvim",
+    --   },
+    --   config = function()
+    --     require("cwebster.lsp.installer").setup()
+    --     require("cwebster.lsp").setup()
+    --   end
+    -- },
+    -- { "folke/neodev.nvim" },
     { "ray-x/lsp_signature.nvim" },
-    { "jose-elias-alvarez/null-ls.nvim" },
     { "onsails/lspkind.nvim" },
 
   -- PLUGINS: diagnostics
@@ -107,7 +191,7 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
+        -- "hrsh7th/cmp-nvim-lsp-signature-help",
         "hrsh7th/cmp-nvim-lsp-document-symbol",
         "hrsh7th/cmp-cmdline",
         "Saecki/crates.nvim",
@@ -156,6 +240,7 @@ return {
     { "stevearc/dressing.nvim",
       config = function() require("cwebster.ui.dressing").setup() end,
     },
+
     { "folke/noice.nvim",
       event = "VimEnter",
       config = function() require("cwebster.ui.noice").setup() end,
@@ -177,9 +262,6 @@ return {
     },
     { "lukas-reineke/indent-blankline.nvim",
       config = function() require('cwebster.indentline').setup() end,
-    },
-    { "simrat39/rust-tools.nvim",
-      config = function() require('cwebster.rust-tools').setup() end
     },
     {
       "NTBBloodbath/rest.nvim",

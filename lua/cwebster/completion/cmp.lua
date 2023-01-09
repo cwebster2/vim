@@ -75,7 +75,7 @@ function M.setup()
       { name = "nvim_lsp", max_item_count = 5, group_index = 2 },
       { name = "path", max_item_count = 3, group_index = 2 },
       { name = "luasnip", max_item_count = 5, group_index = 2 },
-      { name = "nvim_lsp_signature_help", max_item_count = 5, group_index = 2 },
+      -- { name = "nvim_lsp_signature_help", max_item_count = 5, group_index = 2 },
       { name = "nvim_lua", max_item_count = 5, group_index = 2 },
       { name = "buffer", group_index = 3},
       { name = "calc" , group_index = 3},

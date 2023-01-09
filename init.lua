@@ -32,7 +32,9 @@ end
 
 -- require plugins and stuff
 require("cwebster.earlystartup").setup()
+
 require("lazy").setup("cwebster.plugins")
+
 require("cwebster.mappings").init_keymap()
 require("cwebster.mappings").setup_ft_mappings()
 require("cwebster.augroups")
