@@ -12,6 +12,19 @@ g.maplocalleader = ','
 -- set global, window and buffer options
 require("cwebster.options")
 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
 -- if this is being loaded by neovim running in vscode, bail
 if vim.fn.exists('g:vscode') == 1 then
   do return end
@@ -19,11 +32,9 @@ end
 
 -- require plugins and stuff
 require("cwebster.earlystartup").setup()
-require("cwebster.plugins")
+require("lazy").setup("cwebster.plugins")
 require("cwebster.mappings").init_keymap()
--- require("cwebster.plugin_config")
 require("cwebster.mappings").setup_ft_mappings()
-require("cwebster.colors").setup()
 require("cwebster.augroups")
 
 a.nvim_exec([[

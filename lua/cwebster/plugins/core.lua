@@ -1,26 +1,24 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim", install_path})
-  execute "packadd packer.nvim"
-end
-
-execute "packadd packer.nvim"
-
-return require("packer").startup {
-  function(use)
+return {
   -- PLUGINS_BEGIN
+  -- PLUGINS: Colorschemes
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      lazy = false,
+      priority = 1000,
+      config = function()
+        require("cwebster.colors").setup()
+      end,
+    },
+
   -- PLUGINS: Core
-    use { "wbthomason/packer.nvim" }
-    use { "dstein64/vim-startuptime" }
+    { "wbthomason/packer.nvim" },
+    { "dstein64/vim-startuptime" },
 
   -- PLUGINS: Startup
-    use { "mhinz/vim-startify",
+    { "mhinz/vim-startify",
       config = function() require('cwebster.startify').setup() end,
-    }
+    },
 
   -- stuff to try
   -- https://github.com/nyngwang/NeoTerm.lua
@@ -30,76 +28,79 @@ return require("packer").startup {
   -- nvim-neorg/neorg
 
   -- PLUGINS: Finders and pickers
-    use {
-      "nvim-telescope/telescope.nvim",
-      requires = {
-        {"nvim-lua/popup.nvim"},
-        {"nvim-lua/plenary.nvim"}
+    { "nvim-telescope/telescope.nvim",
+      dependencies = {
+        { "nvim-lua/popup.nvim" },
+        { "nvim-lua/plenary.nvim" },
+        { "pwntester/octo.nvim",
+          config = function() require("octo").setup() end,
+        },
+        { "cwebster2/github-coauthors.nvim" },
       },
       config = function() require('cwebster.telescope') end,
-    }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    use { "nvim-telescope/telescope-packer.nvim" }
-    use { "nvim-telescope/telescope-github.nvim" }
-    use { "nvim-telescope/telescope-symbols.nvim" }
-    use { "nvim-telescope/telescope-dap.nvim" }
-    use { "nvim-telescope/telescope-ui-select.nvim" }
-    use { "cwebster2/github-coauthors.nvim" }
-    use { "junegunn/fzf", run = "./install --all" }
-    use { "junegunn/fzf.vim" }
+    },
+    {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    { "nvim-telescope/telescope-packer.nvim" },
+    { "nvim-telescope/telescope-github.nvim" },
+    { "nvim-telescope/telescope-symbols.nvim" },
+    { "nvim-telescope/telescope-dap.nvim" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
+    { "cwebster2/github-coauthors.nvim" },
+    { "junegunn/fzf", build = "./install --all" },
+    { "junegunn/fzf.vim" },
 
   -- PLUGINS: Syntax
-    use { "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
+    { "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
       config = function() require('cwebster.syntax').setup() end
-    }
-    use { "nvim-treesitter/playground" }
-    use { "nvim-treesitter/nvim-treesitter-textobjects" }
-    use { "nvim-treesitter/nvim-treesitter-refactor" }
+    },
+    { "nvim-treesitter/playground" },
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
+    { "nvim-treesitter/nvim-treesitter-refactor" },
     -- these are broken with curreng version of neovim
-    -- use {
+    -- {,
     --   "romgrk/nvim-treesitter-context",
-    --   requires = {"nvim-treesitter/nvim-treesitter"}
+    --   dependencies = {"nvim-treesitter/nvim-treesitter"}
     -- }
 
-    use { "p00f/nvim-ts-rainbow" }
-    use { "windwp/nvim-ts-autotag" }
+    { "p00f/nvim-ts-rainbow" },
+    { "windwp/nvim-ts-autotag" },
 
   -- PLUGINS: LSP
-    use { "williamboman/mason.nvim" }
-    use {
+    { "williamboman/mason.nvim" },
+    {
       "neovim/nvim-lspconfig",
-      requires = {
+      dependencies = {
         "williamboman/mason-lspconfig.nvim",
       },
       config = function()
         require("cwebster.lsp.installer").setup()
         require("cwebster.lsp").setup()
       end
-    }
-    use { "folke/neodev.nvim" }
-    use { "ray-x/lsp_signature.nvim" }
-    use { "jose-elias-alvarez/null-ls.nvim" }
-    use { "onsails/lspkind.nvim" }
+    },
+    { "folke/neodev.nvim" },
+    { "ray-x/lsp_signature.nvim" },
+    { "jose-elias-alvarez/null-ls.nvim" },
+    { "onsails/lspkind.nvim" },
 
   -- PLUGINS: diagnostics
-    use { "mfussenegger/nvim-lint",
+    { "mfussenegger/nvim-lint",
       config = function() require("cwebster.diagnostics.nvimlint").setup() end,
-    }
-    use { "folke/lsp-trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
+    },
+    { "folke/lsp-trouble.nvim",
+      dependencies = "kyazdani42/nvim-web-devicons",
       config = function() require("cwebster.trouble").setup() end,
-    }
-    use { "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    },
+    { "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       config = function() require("lsp_lines").setup() end,
-    }
+    },
 
   -- PLUGINS: Completion
-    use { "hrsh7th/nvim-cmp",
+    { "hrsh7th/nvim-cmp",
       config = function()
         require("cwebster.completion").setup()
       end,
-      requires = {
+      dependencies = {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-buffer",
@@ -111,229 +112,213 @@ return require("packer").startup {
         "hrsh7th/cmp-cmdline",
         "Saecki/crates.nvim",
         "f3fora/cmp-spell",
-        {"petertriho/cmp-git", requires = "nvim-lua/plenary.nvim"}
+        {"petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim"}
       },
-    }
+    },
 
-
-  -- PLUGINS: Colorschemes
-    use {
-      "catppuccin/nvim",
-      as = "catppuccin",
-    }
 
   -- PLUGINS: UI
-    use {
+    {
       "akinsho/nvim-bufferline.lua",
-      requires = {"kyazdani42/nvim-web-devicons"},
+      dependencies = {"kyazdani42/nvim-web-devicons"},
       config = function() require('cwebster.ui.bufferline').setup() end,
-    }
-    use {
+    },
+    {
       "rebelot/heirline.nvim",
       config = function() require("cwebster.heirline").setup() end,
-    }
-    use {
+    },
+    {
       "kevinhwang91/nvim-hlslens",
       config = function() require('cwebster.ui.hlslens').setup() end,
-      requires = {
+      dependencies = {
         "petertriho/nvim-scrollbar",
           config = function() require('cwebster.ui.scrollbar').setup() end,
       }
-    }
-    use {
+    },
+    {
       "lewis6991/gitsigns.nvim",
-      requires = {"nvim-lua/plenary.nvim"},
+      dependencies = {"nvim-lua/plenary.nvim"},
       config = function() require('cwebster.ui.gitsigns').setup() end,
-    }
-    use {"szw/vim-maximizer", opt=true, cmd="MaximizerToggle"}
-    use {
+    },
+    {"szw/vim-maximizer", lazy = true, cmd="MaximizerToggle"},
+    {
       "SmiteshP/nvim-navic",
-      requires = {"neovim/nvim-lspconfig"},
+      dependencies = {"neovim/nvim-lspconfig"},
       config = function() require('cwebster.ui.navic').setup() end,
-    }
-    use {
+    },
+    {
       "anuvyklack/hydra.nvim",
       config = function() require("cwebster.hydra").setup() end,
-    }
-    use { "folke/which-key.nvim",
+    },
+    { "folke/which-key.nvim",
       config = function() require("cwebster.whichkey").setup() end,
-    }
-    use { "stevearc/dressing.nvim",
+    },
+    { "stevearc/dressing.nvim",
       config = function() require("cwebster.ui.dressing").setup() end,
-    }
-    use { "folke/noice.nvim",
+    },
+    { "folke/noice.nvim",
       event = "VimEnter",
       config = function() require("cwebster.ui.noice").setup() end,
-      requires = {
+      dependencies = {
         {
           "rcarriga/nvim-notify",
           config = function() require("cwebster.ui.notify").setup() end,
         },
       }
-    }
+    },
 
   -- PLUGINS: language stuff
-    use {
+    {
       "TimUntersberger/neogit",
       -- commit = "64245bb7f577bad0308d77dc1116ce7d8428f27f", --works
-      requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
+      dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
       config = function() require('cwebster.neogit').setup() end,
       module = "neogit",
-    }
-    use { "lukas-reineke/indent-blankline.nvim",
+    },
+    { "lukas-reineke/indent-blankline.nvim",
       config = function() require('cwebster.indentline').setup() end,
-    }
-    use { "simrat39/rust-tools.nvim",
+    },
+    { "simrat39/rust-tools.nvim",
       config = function() require('cwebster.rust-tools').setup() end
-    }
-    use {
+    },
+    {
       "NTBBloodbath/rest.nvim",
-      requires = {"nvim-lua/plenary.nvim"},
+      dependencies = {"nvim-lua/plenary.nvim"},
       config = function() require('cwebster.rest').setup() end
-    }
-    use { "editorconfig/editorconfig-vim" }
-    use { "ntpeters/vim-better-whitespace",
+    },
+    { "editorconfig/editorconfig-vim" },
+    { "ntpeters/vim-better-whitespace",
       config = function() require('cwebster.whitespace').setup() end,
-    }
+    },
 
   -- PLUGINS: PDE features
-    use { "terrortylor/nvim-comment",
+    { "terrortylor/nvim-comment",
       config = function() require("nvim_comment").setup({ comment_empty = false }) end
-    }
-    use { "simrat39/symbols-outline.nvim",
+    },
+    { "simrat39/symbols-outline.nvim",
       config = function() require('cwebster.symbols').setup() end,
-    }
-    use { "unblevable/quick-scope" }
-    use { "nvim-neo-tree/neo-tree.nvim",
+    },
+    { "unblevable/quick-scope" },
+    { "nvim-neo-tree/neo-tree.nvim",
       branch = "v2.x",
-      requires = {
+      dependencies = {
         "nvim-lua/plenary.nvim",
         "kyazdani42/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
       },
       config = function() require("cwebster.neotree").setup() end,
-    }
-    use { "pwntester/octo.nvim",
-      config = function() require("octo").setup() end,
-    }
-    use { "kylechui/nvim-surround",
-      tag = "*",
+    },
+    { "kylechui/nvim-surround",
+      version = "*",
       config = function() require("cwebster.surround").setup() end,
-    }
-    use { "windwp/nvim-autopairs",
+    },
+    { "windwp/nvim-autopairs",
       config = function() require("nvim-autopairs").setup() end,
-    }
-    use {"akinsho/nvim-toggleterm.lua",
+    },
+    {"akinsho/nvim-toggleterm.lua",
       config = function() require('cwebster.neoterm').setup() end,
-    }
-    use {
+    },
+    {
       "nvim-neotest/neotest",
-      requires = {
+      dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "haydenmeade/neotest-jest",
       },
       config = function() require("cwebster.neotest").setup() end,
-    }
-    use {
+    },
+    {
       "cwebster2/mocha-runner.nvim",
       config = function() require("mocha-runner").setup({}) end,
-    }
-    use {
+    },
+    {
       "ThePrimeagen/refactoring.nvim",
-      requires = {
+      dependencies = {
         {"nvim-lua/plenary.nvim"},
         {"nvim-treesitter/nvim-treesitter"}
       }
       -- TODO setup https://github.com/ThePrimeagen/refactoring.nvim
-    }
-    use { "metakirby5/codi.vim" }
-    use { "junegunn/gv.vim" }
-    use { "uga-rosa/ccc.nvim" ,
+    },
+    { "metakirby5/codi.vim" },
+    { "junegunn/gv.vim" },
+    { "uga-rosa/ccc.nvim" ,
       config = function() require("cwebster.ui.ccc").setup() end,
-    }
-    use { "almo7aya/openingh.nvim" }
+    },
+    { "almo7aya/openingh.nvim" },
 
   -- PLUGINS: copilot
-    -- use { "github/copilot.vim",
-    --   setup = "require('cwebster.copilot').setup()"
+    -- { "github/copilot.vim",
+    --   init = "require('cwebster.copilot').setup()"
     -- }
-    use{
+    {
       "zbirenbaum/copilot.lua",
-      event = {"VimEnter"},
+     event = {"VimEnter"},
       config = function()
         vim.defer_fn(function()
           require('cwebster.copilot').setup()
         end, 100)
       end,
-    }
-    use {
+    },
+    {
       "zbirenbaum/copilot-cmp",
       module = "copilot_cmp",
-      after = { "copilot.lua" },
+      dependencies = { "copilot.lua" },
       config = function() require("copilot_cmp").setup({
         method = "getCompletionsCycling"
       }) end,
-    }
+    },
 
 
   -- PLUGINS: Testing
-    use { "janko/vim-test",
-        opt=true
-    }
+    { "janko/vim-test",
+        lazy = true
+    },
 
   -- PLUGINS: Debugging
-    use { "mfussenegger/nvim-dap",
+    { "mfussenegger/nvim-dap",
       config = function() require('cwebster.dap').setup() end
-    }
-    use { "theHamsta/nvim-dap-virtual-text" }
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    },
+    { "theHamsta/nvim-dap-virtual-text" },
+    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap"} },
 
   -- PLUGINS: Markdown
-    -- use { "plasticboy/vim-markdown",
+    -- { "plasticboy/vim-markdown",
     --   ft = {"markdown"},
-    --   setup = function() require('cwebster.markdown').markdown_setup() end,
+    --   init = function() require('cwebster.markdown').markdown_setup() end,
     -- }
-    use { "iamcco/markdown-preview.nvim",
-      run = "cd app && npm install",
+    { "iamcco/markdown-preview.nvim",
+      build = "cd app && npm install",
       -- ft = { "markdown" },
-      -- setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-      setup = function() require('cwebster.markdown').mkdp_setup() end,
-    }
+      -- init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+      init = function() require('cwebster.markdown').mkdp_setup() end,
+    },
 
     -- PLUGINS: LaTeX
-    use { "vim-latex/vim-latex",
+    { "vim-latex/vim-latex",
         ft="tex"
-    }
+    },
 
     -- PLUGINS: The Rest
-    use { "airblade/vim-rooter" }
-    use { "tpope/vim-eunuch" }
+    { "airblade/vim-rooter" },
+    { "tpope/vim-eunuch" },
 
-    use { "andweeb/presence.nvim",
+    { "andweeb/presence.nvim",
       config = function() require('cwebster.presence').setup() end,
-    }
+    },
 
-    use {'KadoBOT/nvim-spotify',
-      requires = { "nvim-telescope/telescope.nvim" },
+    {'KadoBOT/nvim-spotify',
+      dependencies = { "nvim-telescope/telescope.nvim" },
       config = function() require('cwebster.spotify').setup() end,
-      run = 'make',
+      build = 'make',
       cmd = "Spotify"
-    }
+    },
 
   -- still evaluating if these are needed now
   --Plug "mattn/emmet-vim"
-  use { "sheerun/vim-polyglot",
-    setup = function() vim.g.polyglot_disabled = { "autoindent", "sensible" } end,
-    }  -- syntax files for most languages
+  { "sheerun/vim-polyglot",
+    init = function() vim.g.polyglot_disabled = { "autoindent", "sensible" } end,
+    },  -- syntax files for most languages
 
   -- PLUGINS_END
-  end,
-  config = {
-    profile = {
-      enable = true,
-      threshold = 1,
-    },
-  }
 }
 
