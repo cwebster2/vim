@@ -11,8 +11,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
 
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-nvim-lsp-document-symbol",
     },
     opts = {
       servers = require("cwebster.lsp.servers")
@@ -32,10 +30,10 @@ return {
     ---@param opts PluginLspOpts
     config = function(plugin, opts)
       -- setup formatting and keymaps
-      -- require("lazyvim.util").on_attach(function(client, buffer)
-      --   require("lazyvim.plugins.lsp.format").on_attach(client, buffer)
-      --   require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
-      -- end)
+      require("cwebster.util").on_attach(function(client, buffer)
+        require("cwebster.lsp.format").on_attach(client, buffer)
+        require("cwebster.lsp.keymaps").on_attach(client, buffer)
+      end)
 
       -- diagnostics
       -- for name, icon in pairs(require("lazyvim.config.settings").icons.diagnostics) do
