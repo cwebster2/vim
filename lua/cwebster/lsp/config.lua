@@ -61,7 +61,15 @@ M.servers = {
   yamlls = {},
   vimls = {},
   -- jdtls = {},
-  sumneko_lua = {},
+  sumneko_lua = {
+    settings = {
+      Lua = {
+        completion = {
+          callSnippet = "Replace"
+        }
+      }
+    }
+  },
 }
 
 return M

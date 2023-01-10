@@ -106,13 +106,14 @@ return {
         library = {
           plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
         }
-      }
+      },
+      config = true,
     },
     {
       "neovim/nvim-lspconfig",
       event = "BufReadPre",
       dependencies = {
-        { "folke/neodev.nvim", config = true },
+        { "neodev.nvim" },
         { "mason.nvim" },
         { "williamboman/mason-lspconfig.nvim" },
         { "hrsh7th/cmp-nvim-lsp" },

@@ -1,6 +1,6 @@
 local M={}
 
--- local lsp_signature = require("lsp_signature")
+local lsp_signature = require("lsp_signature")
 local navic = require("nvim-navic")
 
 
@@ -41,7 +41,7 @@ local on_attach = function(client, bufnr)
     navic.attach(client, bufnr)
   end
 
-  -- lsp_signature.on_attach(lsp_signature_config)
+lsp_signature.on_attach(lsp_signature_config)
 
   require("cwebster.mappings").lsp_setup(client, bufnr)
 
