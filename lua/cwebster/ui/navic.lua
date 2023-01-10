@@ -1,34 +1,8 @@
 local M = {}
 local navic = require("nvim-navic")
+local util = require("cwebster.utils")
 
 function M.setup()
-  -- icons = {
-  --   File = ' ',
-  --   Module = ' ',
-  --   Namespace = ' ',
-  --   Package = ' ',
-  --   Class = ' ',
-  --   Method = ' ',
-  --   Property = ' ',
-  --   Field = ' ',
-  --   Constructor = ' ',
-  --   Enum = ' ',
-  --   Interface = ' ',
-  --   Function = ' ',
-  --   Variable = ' ',
-  --   Constant = ' ',
-  --   String = ' ',
-  --   Number = ' ',
-  --   Boolean = ' ',
-  --   Array = ' ',
-  --   Object = ' ',
-  --   Key = ' ',
-  --   Null = ' ',
-  --   EnumMember = ' ',
-  --   Struct = ' ',
-  --   Event = ' ',
-  --   Operator = ' ',
-  --   TypeParameter = ' '
   navic.setup({
     icons = {
         File          = " ",
@@ -64,6 +38,13 @@ function M.setup()
     depth_limit_indicator = "..",
     safe_output = true
   })
+
+  util.on_attach(function(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+    end
+  end
+  )
 end
 
 return M
