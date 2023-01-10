@@ -12,7 +12,6 @@ return {
     },
 
   -- PLUGINS: Core
-    { "wbthomason/packer.nvim" },
     { "dstein64/vim-startuptime" },
 
   -- PLUGINS: Startup
@@ -167,11 +166,7 @@ return {
           "flake8",
         },
       },
-      ---@param opts MasonSettings | {ensure_installed: string[]}
-      config = function(plugin, opts)
-        if plugin.ensure_installed then
-          require("lazyvim.util").deprecate("treesitter.ensure_installed", "treesitter.opts.ensure_installed")
-        end
+      config = function(_, opts)
         require("mason").setup(opts)
         local mr = require("mason-registry")
         for _, tool in ipairs(opts.ensure_installed) do
@@ -185,27 +180,6 @@ return {
     { "simrat39/rust-tools.nvim",
       config = function() require('cwebster.rust-tools').setup() end
     },
-  --
-  --
-  --
-  --
-  --
-  --
-  --
-  --
-  -- OLD
-    -- { "williamboman/mason.nvim" },
-    -- {
-    --   "neovim/nvim-lspconfig",
-    --   dependencies = {
-    --     "williamboman/mason-lspconfig.nvim",
-    --   },
-    --   config = function()
-    --     require("cwebster.lsp.installer").setup()
-    --     require("cwebster.lsp").setup()
-    --   end
-    -- },
-    -- { "folke/neodev.nvim" },
     { "ray-x/lsp_signature.nvim" },
     { "onsails/lspkind.nvim" },
 
@@ -223,6 +197,7 @@ return {
 
   -- PLUGINS: Completion
     { "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
       config = function()
         require("cwebster.completion").setup()
       end,
@@ -282,16 +257,18 @@ return {
       config = function() require("cwebster.ui.dressing").setup() end,
     },
 
-    -- { "folke/noice.nvim",
-    --   event = "VimEnter",
-    --   config = function() require("cwebster.ui.noice").setup() end,
-    --   dependencies = {
-    --     {
-    --       "rcarriga/nvim-notify",
-    --       config = function() require("cwebster.ui.notify").setup() end,
-    --     },
-    --   }
-    -- },
+    { "folke/noice.nvim",
+      event = "VimEnter",
+      enabled = false,
+      config = function() require("cwebster.ui.noice").setup() end,
+      dependencies = {
+        {
+          "rcarriga/nvim-notify",
+          enabled = false,
+          config = function() require("cwebster.ui.notify").setup() end,
+        },
+      }
+    },
 
   -- PLUGINS: language stuff
     {
