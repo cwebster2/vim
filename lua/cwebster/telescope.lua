@@ -98,9 +98,3 @@ require("telescope").setup {
     }
 }
 
--- the fzy extension changes the behavior of telescope in a way i don't like
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('octo')
-require('telescope').load_extension('githubcoauthors')
-require('telescope').load_extension('dap')
-require('telescope').load_extension('ui-select')
