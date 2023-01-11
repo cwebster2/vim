@@ -84,8 +84,8 @@ return {
 
 			require("cwebster.utils").on_attach(function(client, buffer)
 				require("cwebster.plugins.lsp.format").on_attach(client, buffer)
-				-- require("cwebster.plugins.lsp.keymaps").on_attach(client, buffer)
-				require("cwebster.mappings").lsp_setup(client, buffer)
+				require("cwebster.plugins.lsp.keymaps").on_attach(client, buffer)
+				-- require("cwebster.mappings").lsp_setup(client, buffer)
 
 				if client.name == "tsserver" then
 					client.server_capabilities.documentFormattingProvider = false
@@ -95,14 +95,14 @@ return {
 
 				-- This is causing an out of bounds error, see if this changed in a nightly
 				-- vim.api.nvim_command("autocmd BufWrite,BufEnter,InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
-				vim.api.nvim_command([[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]])
+				-- vim.api.nvim_command([[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]])
 				-- vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
-				if client.server_capabilities.documentHighlightProvider then
-					vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
-					vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
-					vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
-				end
+				-- if client.server_capabilities.documentHighlightProvider then
+				-- 	vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
+				-- 	vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
+				-- 	vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
+				-- end
 			end)
 
 			local servers = plugin.opts.servers
@@ -243,22 +243,22 @@ return {
 		},
 	},
 
-	{
-		"ray-x/lsp_signature.nvim",
-		enabled = true,
-		opts = {
-			bind = false,
-			doc_lines = 0,
-			floating_window = true,
-			hint_enable = true,
-			handler_opts = {
-				border = "single",
-			},
-		},
-		config = function(plugin, opts)
-			require("lsp_signature").on_attach(plugin.opts)
-		end,
-	},
+	-- {
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	enabled = true,
+	-- 	opts = {
+	-- 		bind = false,
+	-- 		doc_lines = 0,
+	-- 		floating_window = true,
+	-- 		hint_enable = true,
+	-- 		handler_opts = {
+	-- 			border = "single",
+	-- 		},
+	-- 	},
+	-- 	config = function(plugin, opts)
+	-- 		require("lsp_signature").on_attach(plugin.opts)
+	-- 	end,
+	-- },
 
 	{ "onsails/lspkind.nvim" },
 }

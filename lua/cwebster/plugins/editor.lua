@@ -1,8 +1,9 @@
 return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		event = "BufRead",
 		opts = {
-			show_end_of_line = true,
+			show_end_of_line = false,
 			space_char_blankline = " ",
 			show_current_context = true,
 			show_current_context_start = true,
@@ -116,9 +117,19 @@ return {
 		opts = {
 			signs = {
 				add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-				change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+				change = {
+					hl = "GitSignsChange",
+					text = "▎",
+					numhl = "GitSignsChangeNr",
+					linehl = "GitSignsChangeLn",
+				},
 				delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-				topdelete = { hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+				topdelete = {
+					hl = "GitSignsDelete",
+					text = "‾",
+					numhl = "GitSignsDeleteNr",
+					linehl = "GitSignsDeleteLn",
+				},
 				changedelete = {
 					hl = "GitSignsChange",
 					text = "▋",
