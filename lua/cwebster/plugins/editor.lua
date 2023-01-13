@@ -313,29 +313,72 @@ return {
 
 	{
 		"simrat39/symbols-outline.nvim",
-		config = function()
-			require("cwebster.symbols").setup()
-		end,
+		opts = {
+			highlight_hovered_item = true,
+			show_guides = true,
+			auto_preview = false,
+			position = "right",
+			width = 20,
+			keymaps = {
+				close = "<Esc>",
+				goto_location = "<Cr>",
+				focus_location = "o",
+				hover_symbol = "<C-space>",
+				rename_symbol = "r",
+				code_actions = "a",
+				toggle_preview = "K",
+			},
+			lsp_blacklist = {},
+		},
 	},
 	{ "unblevable/quick-scope" },
 	{
 		"kylechui/nvim-surround",
 		version = "*",
-		config = function()
-			require("cwebster.surround").setup()
-		end,
+		config = true,
 	},
 	{
 		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup()
-		end,
+		config = true,
 	},
 	{
 		"akinsho/nvim-toggleterm.lua",
-		config = function()
-			require("cwebster.neoterm").setup()
-		end,
+		opts = {
+			open_mapping = [[<c-Q>]],
+			hide_numbers = true,
+			shade_filetypes = {},
+			highlights = {
+				Normal = {
+					guibg = "NONE",
+				},
+				NormalFloat = {
+					link = "Normal",
+				},
+				ExtraWhiteSpace = {
+					guibg = "NONE",
+					guifg = "NONE",
+				},
+				FloatBorder = {
+					guibg = "NONE",
+					guifg = "grey",
+				},
+			},
+			shade_terminals = true,
+			shading_factor = "1",
+			start_in_insert = true,
+			insert_mappings = true,
+			persist_size = true,
+			direction = "float",
+			close_on_exit = true,
+			shell = vim.env.SHELL,
+			float_opts = {
+				border = "curved",
+				winblend = 10,
+			},
+			winbar = {
+				enabled = false,
+			},
+		},
 	},
 	{
 		"mfussenegger/nvim-lint",
@@ -367,15 +410,19 @@ return {
 	{
 		"folke/lsp-trouble.nvim",
 		dependencies = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("cwebster.trouble").setup()
-		end,
+		opts = {
+			action_keys = {
+				previous = "e",
+				next = "n",
+			},
+			auto_open = false,
+			auto_close = false,
+			use_diagnostic_signs = true,
+		},
 	},
 	{
 		url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		config = function()
-			require("lsp_lines").setup()
-		end,
+		config = true,
 	},
 	{
 		"uga-rosa/ccc.nvim",
@@ -389,8 +436,6 @@ return {
 	{ "almo7aya/openingh.nvim" },
 	{
 		"terrortylor/nvim-comment",
-		config = function()
-			require("nvim_comment").setup({ comment_empty = false })
-		end,
+		opts = { comment_empty = false },
 	},
 }
