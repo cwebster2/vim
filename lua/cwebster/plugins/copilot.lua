@@ -12,12 +12,13 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		event = { "VimEnter" },
-		config = function()
+		opts = {
+			ft_disable = { "markdown" },
+			copilot_node_command = node,
+		},
+		config = function(plugin)
 			vim.defer_fn(function()
-				require("copilot").setup({
-					ft_disable = { "markdown" },
-					copilot_node_command = node,
-				})
+				require("copilot").setup(plugin.opts)
 			end, 100)
 		end,
 	},
@@ -25,10 +26,8 @@ return {
 		"zbirenbaum/copilot-cmp",
 		module = "copilot_cmp",
 		dependencies = { "copilot.lua" },
-		config = function()
-			require("copilot_cmp").setup({
-				method = "getCompletionsCycling",
-			})
-		end,
+		opts = {
+			method = "getCompletionsCycling",
+		},
 	},
 }
