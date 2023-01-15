@@ -3,13 +3,28 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufRead",
 		opts = {
+			char = "▏",
 			show_end_of_line = false,
 			space_char_blankline = " ",
 			show_current_context = true,
 			show_current_context_start = true,
 			show_trailing_blankline_indent = true,
+			use_treesitter = true,
+			use_treesitter_scope = true,
+			filetype_exclude = {
+				"help",
+				"vimwiki",
+				"startify",
+				"man",
+				"git",
+				"packer",
+				"gitmessengerpopup",
+				"diagnosticpopup",
+				"markdown",
+				"lspinfo",
+			},
 			-- char_highlight_list = {
-			--     "IndentBlanklineIndent1",
+			-- "IndentBlanklineIndent1",
 			--     "IndentBlanklineIndent2",
 			--     "IndentBlanklineIndent3",
 			--     "IndentBlanklineIndent4",
@@ -17,9 +32,6 @@ return {
 			--     "IndentBlanklineIndent6",
 			-- },
 		},
-		config = function(plugin, _)
-			require("indent_blankline").setup(plugin.opts)
-		end,
 	},
 	{
 		"kevinhwang91/nvim-hlslens",

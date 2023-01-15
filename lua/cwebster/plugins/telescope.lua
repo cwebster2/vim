@@ -3,6 +3,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		event = "BufEnter",
 		version = false,
 		-- keys = {},
 		dependencies = {
