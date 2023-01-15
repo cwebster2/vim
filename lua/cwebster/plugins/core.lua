@@ -32,12 +32,21 @@ return {
 	-- PLUGINS: language stuff
 	{
 		"TimUntersberger/neogit",
-		-- commit = "64245bb7f577bad0308d77dc1116ce7d8428f27f", --works
 		dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
-		config = function()
-			require("cwebster.neogit").setup()
-		end,
-		module = "neogit",
+		opts = {
+			disable_signs = false,
+			disable_context_highlighting = false,
+			disable_commit_confirmation = true,
+			signs = {
+				-- { CLOSED, OPENED }
+				section = { ">", "v" },
+				item = { ">", "v" },
+				hunk = { "", "" },
+			},
+			integrations = {
+				diffview = true,
+			},
+		},
 	},
 	{
 		"NTBBloodbath/rest.nvim",
@@ -82,7 +91,18 @@ return {
 			"haydenmeade/neotest-jest",
 		},
 		config = function()
-			require("cwebster.neotest").setup()
+			require("neotest").setup({
+				adapters = {
+					require("neotest-jest")({
+						jestCommand = "npm test --",
+						jestConfigFile = "custom.jest.config.ts",
+						env = { CI = true },
+						cwd = function(path)
+							return vim.fn.getcwd()
+						end,
+					}),
+				},
+			})
 		end,
 	},
 	{
