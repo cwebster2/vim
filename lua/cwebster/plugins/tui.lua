@@ -224,8 +224,19 @@ return {
 			"kyazdani42/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
-		config = function()
-			require("cwebster.neotree").setup()
-		end,
+		opts = {
+			close_if_last_window = true,
+			popup_border_style = "rounded",
+			source_selector = {
+				winbar = true,
+			},
+			filesystem = {
+				filtered_items = {
+					visible = true,
+				},
+				follow_current_file = true,
+				use_libuv_file_watcher = true,
+			},
+		},
 	},
 }
