@@ -3,16 +3,15 @@ return {
 		"akinsho/nvim-bufferline.lua",
 		event = "VeryLazy",
 		dependencies = { "kyazdani42/nvim-web-devicons" },
-		init = function()
-			local map = require("cwebster.utils").map
-			map("n", "<leader>bg", "<cmd>BufferLinePick<cr>", { desc = "Goto Buffer" })
-			map("n", "<leader>bp", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
-			map("n", "<leader>bn", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
-			map("n", "<leader>bd", "<Cmd>BufferLineSortByDirectory<CR>", { desc = "Order by Dir" })
-			map("n", "<leader>bl", "<Cmd>BufferLineSortByDirectory<CR>", { desc = "Order by Lang" })
-			map("n", "<leader>m", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
-			map("n", "<leader>i", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
-		end,
+		keys = {
+			{ "<leader>bg", "<cmd>BufferLinePick<cr>", desc = "Goto Buffer" },
+			{ "<leader>bp", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
+			{ "<leader>bn", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
+			{ "<leader>bd", "<Cmd>BufferLineSortByDirectory<CR>", desc = "Order by Dir" },
+			{ "<leader>bl", "<Cmd>BufferLineSortByDirectory<CR>", desc = "Order by Lang" },
+			{ "<leader>m", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
+			{ "<leader>i", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
+		},
 		opts = {
 			options = {
 				indicator = {
@@ -32,8 +31,6 @@ return {
 				max_name_length = 18,
 				max_prefix_length = 15,
 				tab_size = 18,
-				--diagnostics = false | "nvim_lsp",
-				--diagnostics_update_in_insert = false,
 				diagnostics_indicator = function(count, level, diagnostics_dict, context)
 					return "(" .. count .. ")"
 				end,
