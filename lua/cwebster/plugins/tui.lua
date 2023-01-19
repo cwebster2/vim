@@ -150,7 +150,7 @@ return {
 		},
 		opts = {
 			cmdline = {
-				view = "cmdline",
+				view = "cmdline_popup",
 			},
 			popupmenu = {
 				backend = "cmp",
@@ -173,10 +173,18 @@ return {
 			},
 			views = {
 				cmdline_popup = {
-					border = {
-						style = "none",
-						padding = { 2, 3 },
+					position = {
+						row = 2,
+						col = "50%",
 					},
+					size = {
+						height = "auto",
+						width = 60,
+					},
+					-- border = {
+					-- 	style = "none",
+					-- 	padding = { 2, 3 },
+					-- },
 					filter_options = {},
 				},
 			},
