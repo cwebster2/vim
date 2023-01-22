@@ -17,9 +17,11 @@ opt.expandtab = true
 opt.fillchars = {
   eob = "~",
   vert ="│",
+  foldopen = "v",
+  foldclose = ">",
 }
 opt.foldexpr='nvim_treesitter#foldexpr()'
-opt.foldlevelstart = 99
+opt.foldlevelstart = 1
 opt.foldmethod='expr'
 opt.foldenable=false
 opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
