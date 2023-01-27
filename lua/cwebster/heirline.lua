@@ -468,14 +468,14 @@ local HelpFileName = {
 
 local DefaultStatusLine = {
 -- left
-  ViMode, Spell, WorkDir, Git, Spacer,
+  ViMode, WorkDir, Git, Spacer,
   FileNameBlock, Spacer,
 
 -- center
   -- Gps, Spacer, Noice
   DAPMessages, Align,
 
--- right
+-- right Spell somewhere?
   Diagnostics, FileFormat, Spacer, FileType, Spacer,
   FileEncoding, LSPActive, Spacer,
   Ruler, ScrollBar,

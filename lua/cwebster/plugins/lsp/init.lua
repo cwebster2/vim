@@ -163,6 +163,7 @@ return {
 					nls.builtins.formatting.gofmt,
 					nls.builtins.formatting.goimports,
 					nls.builtins.formatting.rustfmt,
+					nls.builtins.formatting.stylua,
 					-- code actions
 					nls.builtins.code_actions.gitsigns,
 					nls.builtins.code_actions.eslint_d,
