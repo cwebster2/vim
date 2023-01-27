@@ -360,6 +360,7 @@ local Diagnostics = {
 
 local LSPActive = {
     condition = conditions.lsp_attached,
+  update = {"LspAttach", "LspDetach"},
 
     -- Or complicate things a bit and get the servers names
     provider  = function()
@@ -544,9 +545,14 @@ local WinBars = {
     }
 }
 
+StatusColumn = {}
+
 function M.setup()
-  heirline.setup({statusline = StatusLines, winbar = WinBars})
-  -- heirline.setup(StatusLines)
+  heirline.setup({
+    statusline = StatusLines,
+    winbar = WinBars,
+    -- statuscolumn = StatusColumn
+  })
 end
 
 return M
