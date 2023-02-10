@@ -241,7 +241,7 @@ FileNameBlock = utils.insert(FileNameBlock,
 )
 
 local Gps = {
-    condition = gps.is_available,
+    condition = gps.is_available(0),
     provider = gps.get_location,
     hl = { fg = colors.magenta, bg = colors.none },
 }
