@@ -1,6 +1,13 @@
 local g = vim.g
 local a = vim.api
 
+if vim.fn.has("unix") and vim.env.NEOVIM_NODE_VERSION then
+  local node_dir = vim.env.HOME ..  "/.local/share/fnm/node-versions/"  .. vim.env.NEOVIM_NODE_VERSION .. "/installation/bin/"
+  if vim.fn.isdirectory(node_dir) then
+    vim.env.PATH = node_dir .. ":" .. vim.env.PATH
+  end
+end
+
 --a.nvim_command("profile start profile.log")
 --a.nvim_command("profile func *")
 --a.nvim_command("profile file *")
@@ -12,6 +19,19 @@ g.maplocalleader = ','
 -- set global, window and buffer options
 require("cwebster.options")
 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
 -- if this is being loaded by neovim running in vscode, bail
 if vim.fn.exists('g:vscode') == 1 then
   do return end
@@ -19,11 +39,11 @@ end
 
 -- require plugins and stuff
 require("cwebster.earlystartup").setup()
-require("cwebster.plugins")
+
+require("lazy").setup("cwebster.plugins")
+
 require("cwebster.mappings").init_keymap()
-require("cwebster.plugin_config")
 require("cwebster.mappings").setup_ft_mappings()
-require("cwebster.colors").setup()
 require("cwebster.augroups")
 
 a.nvim_exec([[

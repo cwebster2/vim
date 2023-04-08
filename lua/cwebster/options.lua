@@ -17,9 +17,11 @@ opt.expandtab = true
 opt.fillchars = {
   eob = "~",
   vert ="│",
+  foldopen = "v",
+  foldclose = ">",
 }
 opt.foldexpr='nvim_treesitter#foldexpr()'
-opt.foldlevelstart = 99
+opt.foldlevelstart = 1
 opt.foldmethod='expr'
 opt.foldenable=false
 opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
@@ -34,11 +36,11 @@ opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "2" -- I'm not in gradeschool anymore
 opt.guifont = "Hack Nerd Font Mono:h18"
 opt.hidden = true
-opt.hlsearch = false
+opt.hlsearch = true
 opt.ignorecase = true
 opt.inccommand = 'split'
 opt.incsearch = true
-opt.lazyredraw = true
+opt.lazyredraw = false
 opt.linebreak = true
 opt.list = true
 opt.listchars = {
@@ -52,6 +54,7 @@ opt.listchars = {
 }
 opt.matchtime = 5
 opt.mouse = 'a'
+opt.mousemoveevent = true
 opt.number = true
 opt.pastetoggle = "<F11>"
 opt.previewheight = 25
@@ -67,6 +70,8 @@ opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
 opt.softtabstop = 2
+opt.spell = true
+opt.spelloptions = "noplainbuffer,camel"
 opt.splitbelow = true
 opt.splitright = true
 opt.tabstop = 2
@@ -78,10 +83,13 @@ opt.viewoptions = "cursor,folds,options,unix,slash"
 opt.virtualedit = "onemore"
 opt.wildmenu = true
 opt.wildmode = 'longest:full'
-opt.winblend = 15
 opt.winblend = 30
+opt.wrap = false
+-- opt.sidescroll = 5
+opt.sidescrolloff = 5
 opt.writebackup = false
 opt.laststatus = 3
+-- opt.cmdheight = 0
 
 local function has(value)
   return vim.fn.has(value) == 1

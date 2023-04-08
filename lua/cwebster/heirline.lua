@@ -6,8 +6,9 @@ local u = require'cwebster.utils'.u
 local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color
-local gps = require("nvim-gps")
-local lsp_status = require("lsp-status")
+local gps = require("nvim-navic")
+-- local noice = require("noice")
+-- local lsp_status = require("lsp-status")
 
 local icons = {
   locked = "🔒",
@@ -240,7 +241,7 @@ FileNameBlock = utils.insert(FileNameBlock,
 )
 
 local Gps = {
-    condition = gps.is_available,
+    condition = gps.is_available(0),
     provider = gps.get_location,
     hl = { fg = colors.magenta, bg = colors.none },
 }
@@ -274,6 +275,11 @@ local DAPMessages = {
     end,
     hl = { fg = utils.get_highlight('Debug').fg },
 }
+
+-- local Noice = {
+--   condition = require("noice").api.status.is_available,
+--   provider = require("noice").api.status.get_status,
+-- }
 
 local Diagnostics = {
 
@@ -347,13 +353,14 @@ local Diagnostics = {
     -- },
 }
 
-local LSPMessages = {
-    provider = function() return lsp_status.status() end,
-    hl = { fg = colors.blue },
-}
+-- local LSPMessages = {
+--     provider = function() return lsp_status.status() end,
+--     hl = { fg = colors.blue },
+-- }
 
 local LSPActive = {
     condition = conditions.lsp_attached,
+  update = {"LspAttach", "LspDetach"},
 
     -- Or complicate things a bit and get the servers names
     provider  = function()
@@ -387,7 +394,8 @@ local FileEncoding = {
         local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc -- :h 'enc'
         enc = enc .. " "
         return enc ~= 'utf-8 ' and enc:upper()
-    end
+    end,
+    hl = { fg = colors.gray },
 }
 
 local FileFormat = {
@@ -461,15 +469,15 @@ local HelpFileName = {
 
 local DefaultStatusLine = {
 -- left
-  ViMode, Spell, WorkDir, Git, Spacer,
+  ViMode, WorkDir, Git, Spacer,
   FileNameBlock, Spacer,
 
 -- center
-  -- Gps, Spacer,
+  -- Gps, Spacer, Noice
   DAPMessages, Align,
 
--- right
-  LSPMessages, Diagnostics, FileFormat, Spacer, FileType, Spacer,
+-- right Spell somewhere?
+  Diagnostics, FileFormat, Spacer, FileType, Spacer,
   FileEncoding, LSPActive, Spacer,
   Ruler, ScrollBar,
 }
@@ -537,9 +545,14 @@ local WinBars = {
     }
 }
 
+StatusColumn = {}
+
 function M.setup()
-  heirline.setup(StatusLines, WinBars)
-  -- heirline.setup(StatusLines)
+  heirline.setup({
+    statusline = StatusLines,
+    winbar = WinBars,
+    -- statuscolumn = StatusColumn
+  })
 end
 
 return M

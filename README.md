@@ -13,7 +13,7 @@ to change with every commit.
 
 ## Requirements
 
-- Neovim 0.8
+- Neovim 0.9 (nightly)
 
 ## What plugins am I using?
 
@@ -154,7 +154,9 @@ to change with every commit.
 
 Clone this repo to `~/.config/nvim` e.g.
 
+```bash
     git clone git@github.com:cwebster2/vim --depth 1 ~/.config/nvim
+```
 
 The first time you run neovim with this config it will install the packer plugin
 automatically.  You may see errors the first time you run nvim but this is ok and
