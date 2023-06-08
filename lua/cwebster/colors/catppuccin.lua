@@ -94,6 +94,9 @@ function M.setup()
 			treesitter_context = true,
 			ts_rainbow = true,
 			cmp = true,
+      dropbar = {
+        color_mode = true,
+      },
 			gitgutter = true,
 			gitsigns = true,
 			lsp_trouble = true,
@@ -109,10 +112,6 @@ function M.setup()
 			noice = true,
 			which_key = true,
 			semantic_tokens = true,
-			navic = {
-				enabled = true,
-				custom_bg = "NONE",
-			},
 			indent_blankline = {
 				enabled = true,
 				colored_indent_levels = true,

@@ -195,55 +195,6 @@ return {
 	{ "szw/vim-maximizer", lazy = true, cmd = "MaximizerToggle" },
 
 	{
-		"SmiteshP/nvim-navic",
-		opts = {
-			icons = {
-				File = " ",
-				Module = " ",
-				Namespace = " ",
-				Package = " ",
-				Class = " ",
-				Method = " ",
-				Property = " ",
-				Field = " ",
-				Constructor = " ",
-				Enum = "練",
-				Interface = "練",
-				Function = " ",
-				Variable = " ",
-				Constant = " ",
-				String = " ",
-				Number = " ",
-				Boolean = "◩ ",
-				Array = " ",
-				Object = " ",
-				Key = " ",
-				Null = "ﳠ ",
-				EnumMember = " ",
-				Struct = " ",
-				Event = " ",
-				Operator = " ",
-				TypeParameter = " ",
-			},
-			highlight = true,
-			separator = " > ",
-			depth_limit = 0,
-			depth_limit_indicator = "..",
-			safe_output = true,
-		},
-		config = function(plugin, _)
-			local navic = require("nvim-navic")
-			navic.setup(plugin.opts)
-			local util = require("cwebster.utils")
-			util.on_attach(function(client, bufnr)
-				if client.server_capabilities.documentSymbolProvider then
-					navic.attach(client, bufnr)
-				end
-			end)
-		end,
-	},
-
-	{
 		"anuvyklack/hydra.nvim",
 		opts = {
 			name = "Window Ops",

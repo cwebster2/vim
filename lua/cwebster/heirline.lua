@@ -6,7 +6,6 @@ local u = require'cwebster.utils'.u
 local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color
-local gps = require("nvim-navic")
 -- local noice = require("noice")
 -- local lsp_status = require("lsp-status")
 
@@ -240,13 +239,6 @@ FileNameBlock = utils.insert(FileNameBlock,
     { provider = '%<'} -- this means that the statusline is cut here when there's not enough space
 )
 
-local Gps = {
-    condition = gps.is_available(0),
-    provider = gps.get_location,
-    hl = { fg = colors.magenta, bg = colors.none },
-}
--- local Gps = utils.make_flexible_component(3, Gps, { provider = "" })
-
 local Spacer = {
   hl = { bg = colors.none },
   provider = " ",
@@ -473,7 +465,7 @@ local DefaultStatusLine = {
   FileNameBlock, Spacer,
 
 -- center
-  -- Gps, Spacer, Noice
+  -- Spacer, Noice
   DAPMessages, Align,
 
 -- right Spell somewhere?
@@ -541,7 +533,7 @@ local WinBars = {
     },
     -- A winbar for regular files
     {
-      FileNameBlock, Spacer, Gps
+      FileNameBlock, Spacer
     }
 }
 
@@ -550,7 +542,7 @@ StatusColumn = {}
 function M.setup()
   heirline.setup({
     statusline = StatusLines,
-    winbar = WinBars,
+    -- winbar = WinBars,
     -- statuscolumn = StatusColumn
   })
 end

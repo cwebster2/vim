@@ -75,7 +75,6 @@ return {
 
   {
     "rebelot/heirline.nvim",
-    dependencies = { "nvim-navic" },
     -- event = "VeryLazy", -- this is breaking the winbar
     config = function()
       require("cwebster.heirline").setup()
