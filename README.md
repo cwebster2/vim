@@ -169,15 +169,5 @@ Clone this repo to `~/.config/nvim` e.g.
     git clone git@github.com:cwebster2/vim --depth 1 ~/.config/nvim
 ```
 
-The first time you run neovim with this config it will install the packer plugin
-automatically. You may see errors the first time you run nvim but this is ok and
-just a byproduct of plugins not being installed yet.
-You will need to run the PackerSync command to download and install
-all the configured plugins.
-
-    <esc>:PackerSync<CR>
-
-Exit and re-enter nvim to make sure everything is initialized properly.
-
 This configuration makes use of the builtin nvim lsp client and configures a number
 of language servers. Installation of configured servers should happen automatically.
