@@ -6,8 +6,6 @@ local u = require'cwebster.utils'.u
 local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color
--- local noice = require("noice")
--- local lsp_status = require("lsp-status")
 
 local icons = {
   locked = "🔒",
@@ -268,11 +266,6 @@ local DAPMessages = {
     hl = { fg = utils.get_highlight('Debug').fg },
 }
 
--- local Noice = {
---   condition = require("noice").api.status.is_available,
---   provider = require("noice").api.status.get_status,
--- }
-
 local Diagnostics = {
 
     -- condition = conditions.has_diagnostics,
@@ -344,11 +337,6 @@ local Diagnostics = {
     --     provider = "]",
     -- },
 }
-
--- local LSPMessages = {
---     provider = function() return lsp_status.status() end,
---     hl = { fg = colors.blue },
--- }
 
 local LSPActive = {
     condition = conditions.lsp_attached,
