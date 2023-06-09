@@ -1,6 +1,7 @@
 return {
 	{
 		"petertriho/nvim-scrollbar",
+    event = "VeryLazy",
 		config = function()
 			local sb = require("scrollbar")
 			local colors = require("cwebster.colors").get_colors()
