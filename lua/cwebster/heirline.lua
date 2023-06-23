@@ -9,16 +9,12 @@ local mode_color = theme.mode_color
 
 local icons = {
   locked = "🔒",
-  unsaved = u 'f693',
-  dos = u 'e70f',
-  unix = u 'f17c',
-  mac = u 'f179',
   error = '✘',
   warning = '⚠',
   branch = '',
-  git = '',
+  git = u'f02a2',
   lineno = ' ',
-  func = ' '..u '1d453',
+  func = ' '..u 'f0295',
 }
 
 colors.none = "NONE"
@@ -347,7 +343,7 @@ local LSPActive = {
         local names = {}
         -- for i, server in ipairs(vim.lsp.get_active_clients({bufnr = 0})) do
         for i, server in ipairs(vim.lsp.get_active_clients()) do
-            local servername = u 'f817' .. server.name
+            local servername = u 'f0318' .. server.name
             if server.name == "null-ls" then
               servername = "∅"
             elseif server.name == "copilot" then
