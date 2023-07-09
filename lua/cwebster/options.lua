@@ -19,11 +19,13 @@ opt.fillchars = {
   vert ="│",
   foldopen = "v",
   foldclose = ">",
+  foldsep = " ",
 }
 opt.foldexpr='nvim_treesitter#foldexpr()'
-opt.foldlevelstart = 1
+opt.foldlevelstart = 99
 opt.foldmethod='expr'
-opt.foldenable=false
+opt.foldenable=true
+opt.foldcolumn = '1'
 opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "a" -- Auto formatting is BAD.
   - "t" -- Don't auto format my code. I got linters for that.
@@ -66,7 +68,7 @@ opt.shiftwidth = 2
 opt.shortmess = vim.o.shortmess .. 'c'
 opt.showmatch = true
 opt.showmode = false
-opt.signcolumn = "yes"
+-- opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
 opt.softtabstop = 2
