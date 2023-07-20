@@ -1,7 +1,8 @@
 return {
 	{
-		"TimUntersberger/neogit",
+		"NeogitOrg/neogit",
 		dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
+    event = "VeryLazy",
 		opts = {
 			disable_signs = false,
 			disable_context_highlighting = false,
