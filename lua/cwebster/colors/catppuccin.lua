@@ -95,6 +95,7 @@ function M.setup()
 			ts_rainbow = true,
 			cmp = true,
       dropbar = {
+        enabled = true,
         color_mode = true,
       },
 			gitgutter = true,
