@@ -84,6 +84,7 @@ return {
 
 			require("cwebster.utils").on_attach(function(client, buffer)
 				require("cwebster.plugins.lsp.format").on_attach(client, buffer)
+        require("cwebster.plugins.lsp.inlay-hints").on_attach(client, buffer)
 				require("cwebster.plugins.lsp.keymaps").on_attach(client, buffer)
 				-- require("cwebster.mappings").lsp_setup(client, buffer)
 
