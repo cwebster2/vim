@@ -70,12 +70,13 @@ return {
 			-- does this go somewhere better?
 			vim.diagnostic.config({
 				underline = true,
-				virtual_text = {
-					source = "if_many",
-					spacing = 3,
-					prefix = "←",
-				},
-				virtual_lines = false,
+				virtual_text = false, --{
+				-- 	source = "if_many",
+				-- 	spacing = 3,
+				-- 	prefix = "←",
+				--           enabled = false,
+				-- },
+				virtual_lines = true,
 				signs = true,
 				severity_sort = true,
 				update_in_insert = true,
