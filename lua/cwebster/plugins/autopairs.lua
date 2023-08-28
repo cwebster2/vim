@@ -1,6 +1,8 @@
 return {
 	{
 		"windwp/nvim-autopairs",
-		config = true,
+    opts = {
+      check_ts = true,
+    }
 	},
 }

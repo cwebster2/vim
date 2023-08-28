@@ -165,7 +165,7 @@ return {
 				},
 			})
 
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = false } }))
 
 			cmp.setup.filetype("gitcommit", {
 				sources = cmp.config.sources({

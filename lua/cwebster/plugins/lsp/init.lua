@@ -79,7 +79,7 @@ return {
 				virtual_lines = true,
 				signs = true,
 				severity_sort = true,
-				update_in_insert = true,
+				update_in_insert = false,
 			})
 			-- set diagnostic signs?
 
