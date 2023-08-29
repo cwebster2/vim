@@ -2,7 +2,6 @@ local M = {}
 local heirline = require("heirline")
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
--- local u = require'cwebster.utils'.u
 local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color

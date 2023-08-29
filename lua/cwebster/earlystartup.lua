@@ -1,6 +1,5 @@
 local M = {}
 local g = vim.g
-local u = require'cwebster.utils'.u
 
 function M.setup()
   -- some globals that need setting before plugins are loaded
@@ -39,7 +38,7 @@ function M.setup()
 
   -- these need to get setup before plugins run
   -- local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
-  local signs = { Error = "✘", Warn = "", Hint = u'ea61', Info = "" }
+  local signs = { Error = "✘", Warn = "", Hint = '', Info = "" }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
