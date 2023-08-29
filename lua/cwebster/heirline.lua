@@ -2,7 +2,7 @@ local M = {}
 local heirline = require("heirline")
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
-local u = require'cwebster.utils'.u
+-- local u = require'cwebster.utils'.u
 local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color
@@ -12,9 +12,9 @@ local icons = {
   error = '✘',
   warning = '⚠',
   branch = '',
-  git = u'f02a2',
+  git = '󰊢',
   lineno = ' ',
-  func = ' '..u 'f0295',
+  func = '󰊕',
 }
 
 colors.none = "NONE"
@@ -343,11 +343,11 @@ local LSPActive = {
         local names = {}
         -- for i, server in ipairs(vim.lsp.get_active_clients({bufnr = 0})) do
         for i, server in ipairs(vim.lsp.get_active_clients()) do
-            local servername = u 'f0318' .. server.name
+            local servername = '󰌘' .. server.name
             if server.name == "null-ls" then
               servername = "∅"
             elseif server.name == "copilot" then
-              servername = u '2708'
+              servername = ''
             end
 
             table.insert(names, servername)
@@ -486,48 +486,9 @@ local StatusLines = {
   SpecialStatusline, TerminalStatusline, DefaultStatusLine
 }
 
-local WinBars = {
-  fallthrough = false,
-    {   -- Hide the winbar for special buffers
-        condition = function()
-            return conditions.buffer_matches({
-                buftype = { "nofile", "prompt", "help", "quickfix", "neotree" },
-                filetype = { "^git.*", "neogit" },
-            })
-        end,
-        init = function()
-          vim.opt_local.winbar = nil
-        end
-    },
-    {   -- A special winbar for terminals
-        condition = function()
-            return conditions.buffer_matches({ buftype = { "terminal" } })
-        end,
-        utils.surround({ "", "" }, colors.dark_red, {
-            FileType,
-            Spacer,
-            TerminalName,
-        }),
-    },
-    {   -- An inactive winbar for regular files
-        condition = function()
-            return not conditions.is_active()
-        end,
-        utils.surround({ "", "" }, colors.bright_bg, { hl = { fg = "gray", force = true }, FileNameBlock }),
-    },
-    -- A winbar for regular files
-    {
-      FileNameBlock, Spacer
-    }
-}
-
-StatusColumn = {}
-
 function M.setup()
   heirline.setup({
     statusline = StatusLines,
-    -- winbar = WinBars,
-    -- statuscolumn = StatusColumn
   })
 end
 
