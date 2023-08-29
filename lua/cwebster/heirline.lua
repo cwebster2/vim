@@ -149,7 +149,7 @@ local Git = {
 local WorkDir = {
     provider = function()
         local is_git = conditions.is_git_repo()
-        local icon = "  "
+        local icon = "  "
         if is_git then
           icon = " " .. icons.git .. " "
         end
