@@ -10,8 +10,11 @@ function M.setup()
     },
   }
 
-  require'nvim-treesitter.configs'.setup {
+  require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
+    sync_install = false,
+    auto_install = true,
+    modules = {},
     ignore_install = { "haskell" },
     textobjects = {
       select = {
@@ -38,7 +41,6 @@ function M.setup()
     },
     rainbow = {
       enable = true,
-      disable = {'bash'},
     },
     refactor = {
       highlight_definitions = { enable = true },
@@ -47,7 +49,7 @@ function M.setup()
     autotag = {
       enable = true
     }
-  }
+  })
 end
 
 return M

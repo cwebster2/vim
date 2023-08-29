@@ -13,6 +13,6 @@ return {
   --   dependencies = {"nvim-treesitter/nvim-treesitter"}
   -- }
 
-  { "p00f/nvim-ts-rainbow" },
+  { "HiPhish/nvim-ts-rainbow2" },
   { "windwp/nvim-ts-autotag" },
 }
