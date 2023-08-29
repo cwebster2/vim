@@ -2,7 +2,7 @@ return {
   {
     "rebelot/heirline.nvim",
     event = "VeryLazy",
-    depedencies = {
+    dependencies = {
       "catppuccin/nvim",
       "nvim-web-devicons",
     },
