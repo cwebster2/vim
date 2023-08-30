@@ -8,10 +8,10 @@ return {
   { "nvim-treesitter/nvim-treesitter-textobjects" },
   { "nvim-treesitter/nvim-treesitter-refactor" },
   -- these are broken with curreng version of neovim
-  -- {,
-  --   "romgrk/nvim-treesitter-context",
-  --   dependencies = {"nvim-treesitter/nvim-treesitter"}
-  -- }
+  {
+    "romgrk/nvim-treesitter-context",
+    dependencies = {"nvim-treesitter/nvim-treesitter"}
+  },
 
   { "HiPhish/nvim-ts-rainbow2" },
   { "windwp/nvim-ts-autotag" },
