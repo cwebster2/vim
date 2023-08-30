@@ -92,7 +92,7 @@ function M.setup()
 		integrations = {
 			treesitter = true,
 			treesitter_context = true,
-			ts_rainbow = true,
+			ts_rainbow2 = true,
 			cmp = true,
       dropbar = {
         enabled = true,
