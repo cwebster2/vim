@@ -12,6 +12,8 @@ function M.on_attach(client, buf)
   if client.server_capabilities.inlayHintProvider then
     vim.g.inlay_hints_visible = true
     vim.lsp.inlay_hint(buf, true)
+  else
+    print("Inlay hints not supported for this server")
   end
 end
 
