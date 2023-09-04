@@ -93,7 +93,11 @@ return {
 					{ name = "path", max_item_count = 3, group_index = 2 },
 					{ name = "luasnip", max_item_count = 5, group_index = 2, keyword_length = 2 },
 					{ name = "nvim_lua", max_item_count = 5, group_index = 2 },
-          { name = "nerdfonts", max_item_count = 5, group_index = 3},
+          { name = "nerdfonts",
+            keyword_pattern = "nf-",
+            max_item_count = 5,
+            group_index = 2
+          },
 					{ name = "buffer", group_index = 3 },
 					{ name = "calc", group_index = 3 },
 					{ name = "emoji", group_index = 3 },
