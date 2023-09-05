@@ -37,6 +37,8 @@ return {
 			local copilot_comparitors = require("copilot_cmp.comparators")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
+      -- vim.opt.winhighlight = cmp.config.window.bordered().winhighlight
+
 			cmp.setup({
 				enabled = function()
 					-- disable completion in comments
@@ -138,15 +140,8 @@ return {
 							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 						elseif luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
-						-- elseif has_words_before() then
-						--   cmp.complete()
 						else
-							-- local copilot_keys = vim.fn["copilot#Accept"]()
-							-- if copilot_keys ~= "" then
-							--   vim.api.nvim_feedkeys(copilot_keys, "i", true)
-							-- else
 							fallback()
-							-- end
 						end
 					end, { "i", "s" }),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -160,12 +155,18 @@ return {
 					end, { "i", "s" }),
 
 					["<C-Space>"] = cmp.mapping.complete(),
-					-- ["<Right>"] = cmp.mapping.confirm({ select = true }), -- see how much I use/like this
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = false,
-					}),
+          ["<CR>"] = cmp.mapping({
+            i = function(fallback)
+              if cmp.visible() and cmp.get_active_entry() then
+                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+              else
+                fallback()
+              end
+            end,
+            s = cmp.mapping.confirm({ select = true }),
+            -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+          }),
 				},
 			})
 

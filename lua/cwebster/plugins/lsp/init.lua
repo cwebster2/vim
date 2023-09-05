@@ -66,15 +66,13 @@ return {
 			},
 			setup = {},
 		},
-		config = function(plugin, opts) -- plugins, opts
-			-- does this go somewhere better?
+		config = function(plugin, opts)
 			vim.diagnostic.config({
 				underline = true,
 				virtual_text = {
 					source = "if_many",
 					spacing = 3,
 					prefix = "←",
-				          enabled = false,
 				},
 				virtual_lines = false,
 				signs = true,
@@ -87,24 +85,10 @@ return {
 				require("cwebster.plugins.lsp.format").on_attach(client, buffer)
         require("cwebster.plugins.lsp.inlay-hints").on_attach(client, buffer)
 				require("cwebster.plugins.lsp.keymaps").on_attach(client, buffer)
-				-- require("cwebster.mappings").lsp_setup(client, buffer)
 
 				if client.name == "tsserver" then
 					client.server_capabilities.documentFormattingProvider = false
 				end
-
-				--vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()")
-
-				-- This is causing an out of bounds error, see if this changed in a nightly
-				-- vim.api.nvim_command("autocmd BufWrite,BufEnter,InsertLeave <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})")
-				-- vim.api.nvim_command([[ highlight TSCurrentScope ctermbg=NONE guibg=NONE ]])
-				-- vim.api.nvim_command [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-
-				-- if client.server_capabilities.documentHighlightProvider then
-				-- 	vim.api.nvim_command("autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()")
-				-- 	vim.api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
-				-- 	vim.api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.util.buf_clear_references()")
-				-- end
 			end)
 
 			local servers = plugin.opts.servers

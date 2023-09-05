@@ -7,6 +7,7 @@ return {
 			show_end_of_line = false,
 			space_char_blankline = " ",
 			show_current_context = true,
+      context_char_list = { "▏"},
 			show_current_context_start = true,
 			show_trailing_blankline_indent = true,
 			use_treesitter = true,

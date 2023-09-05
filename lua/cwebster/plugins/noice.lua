@@ -55,13 +55,18 @@ return {
         progress = {
           enabled = true,
         },
-        override = {
-          ["cmp.entry.get_documentation"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        },
+        -- override = {
+        --   ["cmp.entry.get_documentation"] = true,
+        --   ["vim.lsp.util.stylize_markdown"] = true,
+        --   ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        -- },
         signature = {
           enabled = true,
+        },
+        documentation = {
+          opts = {
+            lang = "markdown",
+          },
         },
       },
       views = {
@@ -79,6 +84,13 @@ return {
           --  padding = { 2, 3 },
           -- },
           filter_options = {},
+        },
+        hover = {
+          border = {
+            style = "rounded",
+            -- padding = { 2, 3 },
+          },
+          position = { row = 2, col = 0 },
         },
       },
       routes = {

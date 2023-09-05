@@ -12,7 +12,7 @@ return {
             click = "v:lua.ScSa"
           },
           {
-            sign = { name = { "Diagnostic" }, maxwidth = 1, auto = true },
+            sign = { name = { "Diagnostic" }, maxwidth = 1, auto = false },
             click = "v:lua.ScSa"
           },
           {
