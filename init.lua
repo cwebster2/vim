@@ -1,13 +1,6 @@
 local g = vim.g
 local a = vim.api
 
-if vim.fn.has("unix") and vim.env.NEOVIM_NODE_VERSION then
-  local node_dir = vim.env.HOME ..  "/.local/share/fnm/node-versions/"  .. vim.env.NEOVIM_NODE_VERSION .. "/installation/bin/"
-  if vim.fn.isdirectory(node_dir) then
-    vim.env.PATH = node_dir .. ":" .. vim.env.PATH
-  end
-end
-
 --a.nvim_command("profile start profile.log")
 --a.nvim_command("profile func *")
 --a.nvim_command("profile file *")
