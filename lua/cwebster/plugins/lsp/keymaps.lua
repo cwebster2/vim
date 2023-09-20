@@ -49,6 +49,9 @@ function M.on_attach(client, buffer)
     self:map("<leader>co", require("rust-tools").hover_actions.hover_actions, { desc = "Rust: show hover actions" })
   end
 
+  if client.server_capabilities.inlayHintProvider then
+    self:map("<leader>uh", function() vim.lsp.inlay_hint(buffer, nil) end, { desc = "Toggle Inlay Hints" })
+  end
   -- map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts, "Show LSP information")
   -- map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts, "Add workspace folder")
   -- map("n", "<leader>clr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts, "Remove workspace folder")

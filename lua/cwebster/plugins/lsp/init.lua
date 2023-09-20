@@ -61,6 +61,8 @@ return {
               completion = {
                 callSnippet = "Replace",
               },
+              telemetry = { enable = false },
+              hint = { enable = true },
             },
           },
         },
