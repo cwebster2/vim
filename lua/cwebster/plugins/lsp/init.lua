@@ -113,13 +113,23 @@ return {
 
       require("cwebster.utils").on_attach(function(client, buffer)
         require("cwebster.plugins.lsp.format").on_attach(client, buffer)
-        require("cwebster.plugins.lsp.inlay-hints").on_attach(client, buffer)
         require("cwebster.plugins.lsp.keymaps").on_attach(client, buffer)
 
         if client.name == "tsserver" then
           client.server_capabilities.documentFormattingProvider = false
         end
+
+
       end)
+
+      local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+      if inlay_hint then
+        require("cwebster.utils").on_attach(function(client, buffer)
+          if client.supports_method("textDocument/inlayHint") then
+            inlay_hint(buffer)
+          end
+        end)
+      end
 
       local servers = plugin.opts.servers
       local capabilities =
