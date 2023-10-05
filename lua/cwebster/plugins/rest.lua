@@ -1,7 +1,8 @@
 return {
 	{
-		"NTBBloodbath/rest.nvim",
+		"rest-nvim/rest.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+    event = "VeryLazy",
 		opts = {
 			-- Open request results in a horizontal split
 			result_split_horizontal = false,
@@ -17,6 +18,12 @@ return {
 				show_url = true,
 				show_http_info = true,
 				show_headers = true,
+        formatters = {
+          json = "jq",
+          html = function(body)
+            return vim.fn.system({"tidy", "-i", "-q", "-"}, body)
+          end
+        },
 			},
 			-- Jump to request line on run
 			jump_to_request = false,

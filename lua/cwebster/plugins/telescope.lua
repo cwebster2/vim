@@ -16,8 +16,7 @@ return {
 			local trouble = require("trouble.providers.telescope")
 
 			actions.select_default:replace(function()
-				actions.select_default()
-				actions.center()
+				return actions.select_default() + actions.center()
 			end)
 
 			require("telescope").setup({

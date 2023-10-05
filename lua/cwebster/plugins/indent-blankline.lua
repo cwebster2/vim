@@ -1,37 +1,22 @@
 return {
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = "BufRead",
-		opts = {
-			char = "▏",
-			show_end_of_line = false,
-			space_char_blankline = " ",
-			show_current_context = true,
-      context_char_list = { "▏"},
-			show_current_context_start = true,
-			show_trailing_blankline_indent = true,
-			use_treesitter = true,
-			use_treesitter_scope = true,
-			filetype_exclude = {
-				"help",
-				"vimwiki",
-				"startify",
-				"man",
-				"git",
-				"packer",
-				"gitmessengerpopup",
-				"diagnosticpopup",
-				"markdown",
-				"lspinfo",
-			},
-			-- char_highlight_list = {
-			-- "IndentBlanklineIndent1",
-			--     "IndentBlanklineIndent2",
-			--     "IndentBlanklineIndent3",
-			--     "IndentBlanklineIndent4",
-			--     "IndentBlanklineIndent5",
-			--     "IndentBlanklineIndent6",
-			-- },
-		},
-	},
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    main = "ibl",
+    opts = {
+      indent = {
+        highlight = "IndentBlanklineChar",
+        char = "▏",
+      },
+      scope = {
+        highlight = "IndentBlanklineContextChar",
+      },
+      -- show_end_of_line = false,
+      -- context_char_list = { "▏"},
+      -- show_current_context_start = true,
+      -- show_trailing_blankline_indent = true,
+      -- use_treesitter = true,
+      -- use_treesitter_scope = true,
+    },
+  },
 }
