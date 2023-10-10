@@ -21,6 +21,7 @@ return {
       leader_map.x = { name = "+trouble" }
       leader_map.t = { name = "+testing" }
       leader_map.d = { name = "+debug" }
+      leader_map.c = { name = "+Code Actions" }
       leader_map.c.g = { name = "+Chat GPT" }
       local normal_map = {
         ["g"] = {
