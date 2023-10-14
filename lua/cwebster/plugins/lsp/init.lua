@@ -32,7 +32,7 @@ return {
           settings = {
             javascript = {
               inlayHints = {
-                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHints = "all",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = true,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,
@@ -40,11 +40,11 @@ return {
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
                 includeInlayEnumMemberValueHints = true,
-              }
+              },
             },
             typescript = {
               inlayHints = {
-                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHints = "all",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = true,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,
@@ -52,9 +52,9 @@ return {
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
                 includeInlayEnumMemberValueHints = true,
-              }
+              },
             },
-          }
+          },
         },
         vuels = {},
         svelte = {},
@@ -118,8 +118,6 @@ return {
         if client.name == "tsserver" then
           client.server_capabilities.documentFormattingProvider = false
         end
-
-
       end)
 
       local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
@@ -133,7 +131,7 @@ return {
 
       local servers = plugin.opts.servers
       local capabilities =
-      require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+        require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
       require("mason-lspconfig").setup_handlers({
@@ -156,11 +154,40 @@ return {
   },
 
   {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+        -- in sublist runs the first available choice
+        javascript = { { "prettierd", "prettier" } },
+        javascriptreact = { { "prettierd", "prettier" } },
+        typescript = { { "prettierd", "prettier" } },
+        typescriptreact = { { "prettierd", "prettier" } },
+        vue = { { "prettierd", "prettier" } },
+        css = { { "prettierd", "prettier" } },
+        scss = { { "prettierd", "prettier" } },
+        less = { { "prettierd", "prettier" } },
+        html = { { "prettierd", "prettier" } },
+        json = { { "prettierd", "prettier" } },
+        yaml = { { "prettierd", "prettier" } },
+        markdown = { { "prettierd", "prettier" } },
+        graphql = { { "prettierd", "prettier" } },
+        svelte = { { "prettierd", "prettier" } },
+        toml = { { "prettierd", "prettier" } },
+        -- multiple top level all run
+        go = { "gofmt", "goimports" },
+        rust = { "rustfmt" },
+      },
+    },
+  },
+
+  {
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = {
       { "mason.nvim" },
     },
     event = "BufReadPre",
+    enabled = false,
     opts = function()
       local nls = require("null-ls")
       return {
