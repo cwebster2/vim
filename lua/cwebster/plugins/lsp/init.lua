@@ -120,14 +120,12 @@ return {
         end
       end)
 
-      local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-      if inlay_hint then
-        require("cwebster.utils").on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
-            inlay_hint(buffer)
-          end
-        end)
-      end
+      --TODO:fixme
+      -- require("cwebster.utils").on_attach(function(client, buffer)
+      --   if client.supports_method("textDocument/inlayHint") then
+      --     vim.lsp.inlay_hint(buffer)
+      --   end
+      -- end)
 
       local servers = plugin.opts.servers
       local capabilities =
