@@ -111,7 +111,7 @@ return {
       })
       -- set diagnostic signs?
 
-      require("cwebster.utils").on_attach(function(client, buffer)
+      require("lazyvim.util").lsp.on_attach(function(client, buffer)
         require("cwebster.plugins.lsp.format").on_attach(client, buffer)
         require("cwebster.plugins.lsp.keymaps").on_attach(client, buffer)
 
@@ -121,7 +121,7 @@ return {
       end)
 
       --TODO:fixme
-      -- require("cwebster.utils").on_attach(function(client, buffer)
+      -- require("lazyvim.util").lsp.on_attach(function(client, buffer)
       --   if client.supports_method("textDocument/inlayHint") then
       --     vim.lsp.inlay_hint(buffer)
       --   end
