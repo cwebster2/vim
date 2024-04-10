@@ -66,7 +66,6 @@ M.init_keymap = function()
   -- <leader>f -- file finders
   --
   map("n", "<leader>ft", "<cmd>Neotree show<cr>", { desc = "NeoTree" })
-  map("n", "<leader>fs", ":SymbolsOutline<CR>", { desc = "Symbols" })
   map(
     "n",
     "<leader>ff",
