@@ -9,11 +9,11 @@ return {
     dependencies = {
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
-      { "lsp-trouble.nvim" },
+      { "trouble.nvim" },
     },
     config = function()
       local actions = require("telescope.actions")
-      local trouble = require("trouble.providers.telescope")
+      local trouble = require("trouble.sources.telescope")
 
       actions.select_default:replace(function()
         return actions.select_default() + actions.center()
@@ -27,7 +27,7 @@ return {
               ["<C-p>"] = actions.select_default + actions.center,
               ["<C-e>"] = actions.move_selection_previous,
               ["<esc>"] = actions.close,
-              ["<C-t>"] = trouble.open_with_trouble,
+              ["<C-t>"] = trouble.open,
               ["<C-h>"] = actions.which_key,
             },
             n = {
@@ -37,7 +37,7 @@ return {
               ["j"] = false,
               ["n"] = actions.move_selection_next,
               ["e"] = actions.move_selection_previous,
-              ["<C-t>"] = trouble.open_with_trouble,
+              ["<C-t>"] = trouble.open,
               ["<C-h>"] = actions.which_key,
             },
           },
