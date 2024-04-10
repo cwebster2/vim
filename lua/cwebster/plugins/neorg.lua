@@ -1,11 +1,13 @@
 return {
   {
     "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    tag = "v7.0.0",
-    ft = "norg",
-    cmd = "Neorg",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
+    -- ft = "norg",
+    -- cmd = "Neorg",
+    dependencies = {
+      "luarocks.nvim",
+      "nvim-lua/plenary.nvim",
+    },
     config = function()
       require("neorg").setup({
         load = {
