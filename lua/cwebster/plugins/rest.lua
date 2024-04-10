@@ -1,8 +1,17 @@
 return {
   {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+  },
+  {
     "rest-nvim/rest.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neotest/nvim-nio",
+      "luarocks.nvim",
+    },
+    ft = "http",
     main = "rest-nvim",
     opts = {
       -- Open request results in a horizontal split

@@ -2,7 +2,7 @@ return {
   {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
-    -- tag = "*",
+    tag = "v7.0.0",
     ft = "norg",
     cmd = "Neorg",
     dependencies = { "nvim-lua/plenary.nvim" },
