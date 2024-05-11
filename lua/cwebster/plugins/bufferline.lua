@@ -2,7 +2,7 @@ return {
   {
     "akinsho/nvim-bufferline.lua",
     event = "VeryLazy",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
+    dependencies = { "nvim-web-devicons" },
     keys = {
       { "<leader>bg", "<cmd>BufferLinePick<cr>", desc = "Goto Buffer" },
       { "<leader>bp", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous Buffer" },
@@ -71,5 +71,5 @@ return {
     config = function(plugin)
       require("bufferline").setup(plugin.opts)
     end,
-  }
+  },
 }
