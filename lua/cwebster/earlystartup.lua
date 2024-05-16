@@ -3,15 +3,15 @@ local g = vim.g
 
 function M.setup()
   -- some globals that need setting before plugins are loaded
-  g.python3_host_prog = os.getenv("HOME") .. '/miniconda3/bin/python3'
+  g.python3_host_prog = os.getenv("HOME") .. "/miniconda3/bin/python3"
   g.loaded_netrwPlugin = 1
   g.jsx_ext_required = 0
 
-  g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
-  g.qs_buftype_blacklist = {'terminal', 'nofile'}
+  g.qs_highlight_on_keys = { "f", "F", "t", "T" }
+  g.qs_buftype_blacklist = { "terminal", "nofile" }
   g.qs_lazy_highlight = 1
 
-  g.fzf_command_prefix = 'F'
+  g.fzf_command_prefix = "F"
 
   g.tex_conceal = ""
 
@@ -32,13 +32,16 @@ function M.setup()
       ["orders"] = "bash",
     },
     pattern = {
-      ["~/.zfunc/.*"] = "zsh"
-    }
+      ["~/.zfunc/.*"] = "zsh",
+    },
+    extension = {
+      norg = "norg",
+    },
   })
 
   -- these need to get setup before plugins run
   -- local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
-  local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
+  local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -46,4 +49,3 @@ function M.setup()
 end
 
 return M
-

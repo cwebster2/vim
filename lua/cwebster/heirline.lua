@@ -2,26 +2,18 @@ local M = {}
 local heirline = require("heirline")
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
-local u = require'cwebster.utils'.u
 local theme = require'cwebster.colors'
 local colors = theme.theme_colors
 local mode_color = theme.mode_color
-local gps = require("nvim-navic")
--- local noice = require("noice")
--- local lsp_status = require("lsp-status")
 
 local icons = {
   locked = "🔒",
-  unsaved = u 'f693',
-  dos = u 'e70f',
-  unix = u 'f17c',
-  mac = u 'f179',
   error = '✘',
   warning = '⚠',
   branch = '',
-  git = '',
+  git = '󰊢',
   lineno = ' ',
-  func = ' '..u '1d453',
+  func = '󰊕',
 }
 
 colors.none = "NONE"
@@ -157,7 +149,7 @@ local Git = {
 local WorkDir = {
     provider = function()
         local is_git = conditions.is_git_repo()
-        local icon = "  "
+        local icon = "  "
         if is_git then
           icon = " " .. icons.git .. " "
         end
@@ -240,13 +232,6 @@ FileNameBlock = utils.insert(FileNameBlock,
     { provider = '%<'} -- this means that the statusline is cut here when there's not enough space
 )
 
-local Gps = {
-    condition = gps.is_available(0),
-    provider = gps.get_location,
-    hl = { fg = colors.magenta, bg = colors.none },
-}
--- local Gps = utils.make_flexible_component(3, Gps, { provider = "" })
-
 local Spacer = {
   hl = { bg = colors.none },
   provider = " ",
@@ -275,11 +260,6 @@ local DAPMessages = {
     end,
     hl = { fg = utils.get_highlight('Debug').fg },
 }
-
--- local Noice = {
---   condition = require("noice").api.status.is_available,
---   provider = require("noice").api.status.get_status,
--- }
 
 local Diagnostics = {
 
@@ -353,11 +333,6 @@ local Diagnostics = {
     -- },
 }
 
--- local LSPMessages = {
---     provider = function() return lsp_status.status() end,
---     hl = { fg = colors.blue },
--- }
-
 local LSPActive = {
     condition = conditions.lsp_attached,
   update = {"LspAttach", "LspDetach"},
@@ -367,11 +342,11 @@ local LSPActive = {
         local names = {}
         -- for i, server in ipairs(vim.lsp.get_active_clients({bufnr = 0})) do
         for i, server in ipairs(vim.lsp.get_active_clients()) do
-            local servername = u 'f817' .. server.name
+            local servername = '󰌘' .. server.name
             if server.name == "null-ls" then
               servername = "∅"
             elseif server.name == "copilot" then
-              servername = u '2708'
+              servername = ''
             end
 
             table.insert(names, servername)
@@ -473,7 +448,7 @@ local DefaultStatusLine = {
   FileNameBlock, Spacer,
 
 -- center
-  -- Gps, Spacer, Noice
+  -- Spacer, Noice
   DAPMessages, Align,
 
 -- right Spell somewhere?
@@ -510,48 +485,9 @@ local StatusLines = {
   SpecialStatusline, TerminalStatusline, DefaultStatusLine
 }
 
-local WinBars = {
-  fallthrough = false,
-    {   -- Hide the winbar for special buffers
-        condition = function()
-            return conditions.buffer_matches({
-                buftype = { "nofile", "prompt", "help", "quickfix", "neotree" },
-                filetype = { "^git.*", "neogit" },
-            })
-        end,
-        init = function()
-          vim.opt_local.winbar = nil
-        end
-    },
-    {   -- A special winbar for terminals
-        condition = function()
-            return conditions.buffer_matches({ buftype = { "terminal" } })
-        end,
-        utils.surround({ "", "" }, colors.dark_red, {
-            FileType,
-            Spacer,
-            TerminalName,
-        }),
-    },
-    {   -- An inactive winbar for regular files
-        condition = function()
-            return not conditions.is_active()
-        end,
-        utils.surround({ "", "" }, colors.bright_bg, { hl = { fg = "gray", force = true }, FileNameBlock }),
-    },
-    -- A winbar for regular files
-    {
-      FileNameBlock, Spacer, Gps
-    }
-}
-
-StatusColumn = {}
-
 function M.setup()
   heirline.setup({
     statusline = StatusLines,
-    winbar = WinBars,
-    -- statuscolumn = StatusColumn
   })
 end
 
