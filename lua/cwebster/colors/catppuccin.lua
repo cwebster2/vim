@@ -40,6 +40,7 @@ M.overrides = {
     all = {
       CmpItemAbbrMatch = { fg = my_palette.blue },
       CmpItemAbbrMatchFuzzy = { fg = my_palette.blue },
+      -- NormalFloat = { bg = my_palette.crust },
       Pmenu = { bg = my_palette.crust },
       PmenuSel = { fg = my_palette.sapphire },
       PmenuSbar = { bg = my_palette.base }, -- Popup menu: scrollbar.

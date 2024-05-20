@@ -8,7 +8,7 @@ return {
     "rest-nvim/rest.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-neotest/nvim-nio",
+      "nvim-nio",
       "luarocks.nvim",
     },
     ft = "http",
