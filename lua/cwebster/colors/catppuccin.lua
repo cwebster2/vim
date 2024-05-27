@@ -143,6 +143,8 @@ function M.setup()
       mason = true,
       notify = true,
       noice = true,
+      mini = true,
+      octo = true,
       which_key = true,
       semantic_tokens = true,
       indent_blankline = {
@@ -167,11 +169,6 @@ function M.setup()
           warnings = { "underline" },
           information = { "underline" },
         },
-      },
-      neotree = {
-        enabled = true,
-        show_root = true,
-        transparent_panel = false,
       },
     },
     color_overrides = M.overrides.colors,
