@@ -50,7 +50,7 @@ function M.on_attach(client, buffer)
   end
 
   if client.server_capabilities.inlayHintProvider then
-    self:map("<leader>uh", function() vim.lsp.inlay_hint(buffer, nil) end, { desc = "Toggle Inlay Hints" })
+    self:map("<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
   end
   -- map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts, "Show LSP information")
   -- map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts, "Add workspace folder")
