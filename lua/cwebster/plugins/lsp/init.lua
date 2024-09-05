@@ -28,7 +28,7 @@ return {
         bashls = {},
         -- rust-tools configures this
         -- rust_analyzer = {},
-        tsserver = {
+        ts_ls = {
           settings = {
             javascript = {
               inlayHints = {
@@ -129,7 +129,7 @@ return {
         require("cwebster.plugins.lsp.format").on_attach(client, buffer)
         require("cwebster.plugins.lsp.keymaps").on_attach(client, buffer)
 
-        if client.name == "tsserver" then
+        if client.name == "ts_ls" then
           client.server_capabilities.documentFormattingProvider = false
         end
       end)
