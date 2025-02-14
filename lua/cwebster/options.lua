@@ -30,7 +30,7 @@ opt.foldlevelstart = 99
 opt.foldmethod = "expr"
 opt.foldenable = true
 opt.foldcolumn = "1"
-opt.foldnestmax = 1
+opt.foldnestmax = 3
 opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "a" -- Auto formatting is BAD.
   - "t" -- Don't auto format my code. I got linters for that.
