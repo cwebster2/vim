@@ -2,6 +2,7 @@ return {
 	{
 		"petertriho/cmp-git",
 		dependencies = "nvim-lua/plenary.nvim",
+    enabled = false,
 		config = function()
 			local format = require("cmp_git.format")
 			local sort = require("cmp_git.sort")

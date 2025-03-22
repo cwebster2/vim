@@ -4,10 +4,19 @@ return {
     event = { "InsertEnter" },
     opts = {
       filetypes = { markdown = false },
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
+  },
+  {
+    "giuxtaposition/blink-cmp-copilot",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
     },
   },
   {
     "zbirenbaum/copilot-cmp",
+    enabled = false,
     module = "copilot_cmp",
     dependencies = { "copilot.lua" },
     opts = {
@@ -16,7 +25,6 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper

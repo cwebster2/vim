@@ -1,3 +1,4 @@
 return {
-  "fazibear/cmp-nerdfonts"
+  "fazibear/cmp-nerdfonts",
+  enabled = false
 }
