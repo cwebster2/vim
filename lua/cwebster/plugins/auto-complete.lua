@@ -1,4 +1,28 @@
   return { -- Autocompletion
+  {
+    'saghen/blink.compat',
+    -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
+    version = '*',
+    -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
+    lazy = true,
+
+    -- make sure to set opts so that lazy.nvim calls blink.compat's setup
+    opts = {},
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
+  },
+  {
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
@@ -30,6 +54,7 @@
         opts = {},
       },
       'folke/lazydev.nvim',
+      "fang2hou/blink-copilot",
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -71,13 +96,14 @@
       completion = {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'copilot', 'lsp', 'path', 'snippets', 'lazydev' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          copilot = { module = 'blink-copilot', score_offset = 100, async = true}
         },
       },
 
@@ -95,4 +121,5 @@
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
     },
+  }
   }
