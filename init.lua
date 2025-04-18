@@ -10,7 +10,7 @@ g.mapleader = " "
 g.maplocalleader = ","
 
 -- set global, window and buffer options
-require("cwebster.options")
+-- require("cwebster.options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -25,29 +25,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- if this is being loaded by neovim running in vscode, bail
-if vim.fn.exists("g:vscode") == 1 then
-  do
-    return
-  end
-end
-
 -- require plugins and stuff
-require("cwebster.earlystartup").setup()
+-- require("cwebster.earlystartup").setup()
 
-require("lazy").setup("cwebster.plugins")
+-- require("lazy").setup("cwebster.plugins")
 
-require("cwebster.mappings").init_keymap()
-require("cwebster.mappings").setup_ft_mappings()
-require("cwebster.augroups")
+-- require("cwebster.mappings").init_keymap()
+-- require("cwebster.mappings").setup_ft_mappings()
+-- require("cwebster.augroups")
 
-a.nvim_exec(
-  [[
-  if has ("autocmd")
-    filetype plugin indent on
-  endif
-]],
-  ""
-)
+-- a.nvim_exec(
+--   [[
+--  if has ("autocmd")
+--    filetype plugin indent on
+--  endif
+--]],
+--  ""
+--)
 
 a.nvim_command("silent! helptags ALL")
