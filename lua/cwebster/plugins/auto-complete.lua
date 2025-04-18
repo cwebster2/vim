@@ -14,7 +14,7 @@
     cmd = "Copilot",
     event = "InsertEnter",
     opts = {
-      suggestion = { enabled = false },
+      suggestion = { enabled = true },
       panel = { enabled = false },
       filetypes = {
         markdown = true,
@@ -103,7 +103,7 @@
         default = { 'copilot', 'lsp', 'path', 'snippets', 'lazydev' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-          copilot = { module = 'blink-copilot', score_offset = 100, async = true}
+          copilot = { name = "copilot", module = 'blink-copilot', score_offset = 100, async = true}
         },
       },
 
