@@ -4,6 +4,9 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
     -- branch = "nightly",
     event = "VeryLazy",
+    keys = {
+      { "<leader>gg", function() require("neogit").open() end, desc = "Open Neogit" },
+    },
     opts = {
       disable_signs = false,
       disable_context_highlighting = false,
