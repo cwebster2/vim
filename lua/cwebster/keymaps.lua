@@ -34,3 +34,43 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+  vim.api.nvim_exec(
+    [[
+    set wildcharm=<C-Z>
+    cnoremap  <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
+    cnoremap  <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
+    cnoremap  <expr> <left> wildmenkeyumode() ? "\<up>" : "\<left>"
+    cnoremap  <expr> <right> wildmenumode() ? "\<bs><C-Z>" : "\<right>"
+  ]],
+    {}
+  )
+
+  -- Toggle to disable mouse mode and indentlines for easier paste
+  ToggleMouse = function()
+    if vim.o.mouse == "a" then
+      vim.cmd([[IndentBlanklineDisable]])
+      vim.wo.signcolumn = "no"
+      vim.o.mouse = "v"
+      vim.wo.number = false
+      vim.wo.relativenumber = false
+      print("Mouse disabled")
+    else
+      vim.cmd([[IndentBlanklineEnable]])
+      vim.wo.signcolumn = "yes"
+      vim.o.mouse = "a"
+      vim.wo.number = true
+      print("Mouse enabled")
+    end
+  end
+
+  vim.api.nvim_set_keymap(
+    "n",
+    "<F10>",
+    "<cmd>lua ToggleMouse()<cr>",
+    { noremap = true, desc = "Toggle mouse for paste" }
+  )
+
+  -- visual mode indent keep selection
+  vim.keymap.set("v", "<", "<gv", { noremap = true })
+  vim.keymap.set("v", ">", ">gv", { noremap = true })
+  vim.keymap.set("v", ".", ":normal .<CR>", { noremap = true })

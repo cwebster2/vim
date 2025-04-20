@@ -30,7 +30,6 @@ M.init_keymap = function()
 
   -- <leader>h -- help
 
-  map("n", "<leader>hk", "<Cmd>Telescope keymaps<CR>", { desc = "Find keymaps" })
   map("n", "<leader>ht", "<cmd>Telescope builtin<cr>", { desc = "Telescope" })
   map("n", "<leader>hc", "<cmd>Telescope commands<cr>", { desc = "Commands" })
   map("n", "<leader>hh", "<cmd>Telescope help_tags<cr>", { desc = "Help Pages" })
@@ -53,32 +52,13 @@ M.init_keymap = function()
     { desc = "Highlight Under Cursos" }
   )
 
-  -- <leader>hp -- packer
-  --
-  map("n", "<leader>hpp", "<cmd>PackerSync<cr>", { desc = "Sync" })
-  map("n", "<leader>hps", "<cmd>PackerStatus<cr>", { desc = "Status" })
-  map("n", "<leader>hpi", "<cmd>PackerInstall<cr>", { desc = "Install" })
-  map("n", "<leader>hpc", "<cmd>PackerCompile<cr>", { desc = "Compile" })
-
   -- <leader>f -- file finders
   --
-  map(
-    "n",
-    "<leader>ff",
-    "<cmd>lua require('telescope.builtin').find_files()<CR>",
-    { desc = "Find Files" }
-  )
   map(
     "n",
     "<leader>fg",
     "<cmd>lua require('telescope.builtin').git_files()<CR>",
     { desc = "Find Git Files" }
-  )
-  map(
-    "n",
-    "<leader>fr",
-    "<cmd>lua require('telescope.builtin').oldfiles()<CR>",
-    { desc = "Recent Files" }
   )
   map("n", "<leader>fn", "<cmd>enew<CR>", { desc = "New File" })
 
@@ -108,59 +88,10 @@ M.init_keymap = function()
   map("n", "<leader>ts", "<cmd>TestSuite<CR>", { desc = "Suite" })
   map("n", "<leader>t_", "<cmd>TestLast<CR>", { desc = "Last" })
 
-  -- leader d --debug stuff
-
-  map("n", "<leader>dh", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "Breakpoint" })
-  map("n", "<leader>ds", "<cmd>lua require'dap'.close()<CR>", { desc = "Stop" })
-  map("n", "<leader>dn", "<cmd>lua require'dap'.continue()<CR>", { desc = "Cont" })
-  map("n", "<leader>dk", "<cmd>lua require'dap'.up()<CR>", { desc = "Up" })
-  map("n", "<leader>dj", "<cmd>lua require'dap'.down()<CR>", { desc = "Down" })
-  map(
-    "n",
-    "<leader>d_",
-    "<cmd>lua require'dap'.disconnect();require'dap'.stop();require'dap'.run_last()<CR>",
-    { desc = "Disco" }
-  )
-  map(
-    "n",
-    "<leader>dr",
-    "<cmd>lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l",
-    { desc = "REPL" }
-  )
-  -- ["i"] = { "<cmd>lua require'dap.ui.variables'.hover()<CR>", "" },
-  -- ["?"] = { "<cmd>lua require'dap.ui.variables'.scopes()<CR>", "" },
-  map(
-    "n",
-    "<leader>de",
-    "<cmd>lua require'dap'.set_exception_breakpoints({'all'})<CR>",
-    { desc = "Enable BPs" }
-  )
-  map("n", "<leader>da", "<cmd>lua require'debugHelper'.attach()<CR>", { desc = "Attack" })
-  map(
-    "n",
-    "<leader>dA",
-    "<cmd>lua require'debugHelper'.attachToRemote()<CR>",
-    { desc = "Att Remote" }
-  )
-  map("n", "<leader>di", "<cmd>lua require'dap.ui.widgets'.hover()<CR>", { desc = "UI" })
-  map(
-    "n",
-    "<leader>d?",
-    "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>",
-    { desc = "Scopes" }
-  )
-  map("n", "<leader>df", "<cmd>Telescope dap frames<CR>", { desc = "Frames" })
-  map("n", "<leader>dc", "<cmd>Telescope dap commands<CR>", { desc = "Commands" })
-  map("n", "<leader>db", "<cmd>Telescope dap list_breakpoints<CR>", { desc = "List BPs" })
-
   map("n", "<leader>z", function()
     require("notify").dismiss()
     vim.cmd.noh()
   end, { desc = "Clear hightlights and notifications" })
-
-  -- nnoremap <S-k> :lua require'dap'.step_out()<CR>
-  -- nnoremap <S-l> :lua require'dap'.step_into()<CR>
-  -- nnoremap <S-j> :lua require'dap'.step_over()<CR>
 
   map("v", "J", "<cmd>m '>+1<CR>gv=gv", { desc = "Move down" })
   map("v", "K", "<cmd>m '<-2<CR>gv=gv", { desc = "Move up" })
@@ -175,10 +106,6 @@ M.init_keymap = function()
   --map('n', '<C-e>', '<C-w><C-k>', {noremap=true})
   --map('n', '<C-i>', '<C-w><C-l>', {noremap=true})
 
-  -- visual mode indent keep selection
-  map("v", "<", "<gv", { noremap = true })
-  map("v", ">", ">gv", { noremap = true })
-  map("v", ".", ":normal .<CR>", { noremap = true })
 
   -- visual line movement
   map("", "j", "(v:count == 0 ? 'gj' : 'j')", { expr = true, noremap = true, silent = true })
@@ -196,16 +123,6 @@ M.init_keymap = function()
   map("n", "<Leader>v", "<C-w>v<C-w>w", {})
 
   -- map('c', "<up>", 'wildmenumode() ? "\<left>" : "\<up>"', {expr=true, noremap=true, silent=true})
-  vim.api.nvim_exec(
-    [[
-    set wildcharm=<C-Z>
-    cnoremap  <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
-    cnoremap  <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
-    cnoremap  <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
-    cnoremap  <expr> <right> wildmenumode() ? "\<bs><C-Z>" : "\<right>"
-  ]],
-    {}
-  )
 
   map("n", "+", "<C-a>", {})
   map("n", "-", "<C-x>", {})
@@ -234,37 +151,10 @@ M.init_keymap = function()
   -- neotermm
   map("t", "<c-w>", "<c-\\><c-n><c-w>", { noremap = true })
 
-  -- Toggle to disable mouse mode and indentlines for easier paste
-  ToggleMouse = function()
-    if vim.o.mouse == "a" then
-      vim.cmd([[IndentBlanklineDisable]])
-      vim.wo.signcolumn = "no"
-      vim.o.mouse = "v"
-      vim.wo.number = false
-      vim.wo.relativenumber = false
-      print("Mouse disabled")
-    else
-      vim.cmd([[IndentBlanklineEnable]])
-      vim.wo.signcolumn = "yes"
-      vim.o.mouse = "a"
-      vim.wo.number = true
-      print("Mouse enabled")
-    end
-  end
-
-  vim.api.nvim_set_keymap(
-    "n",
-    "<F10>",
-    "<cmd>lua ToggleMouse()<cr>",
-    { noremap = true, desc = "Toggle mouse for paste" }
-  )
-end
 
 M.lsp_setup = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts, "Rename symbol")
-  map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts, "Buffer code actions")
   map(
     "n",
     "<leader>cd",
@@ -327,22 +217,8 @@ M.lsp_setup = function(client, bufnr)
 
   map("v", "<leader>ca", ":<C-U>lua vim.lsp.buf.code_action()<CR>", opts)
 
-  map("n", "gr", "<cmd>Telescope lsp_references<cr>", opts, "Show lsp references in telescope")
-  map("n", "gR", "<cmd>Trouble lsp_references<cr>", opts, "Show lsp references in trouble")
-  map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts, "Show lsp declarations")
-  map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts, "Show lsp definition")
   map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts, "Show lsp signature help")
-  map("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts, "Show lsp implementation")
-  map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts, "Show lsp buffer declarations")
   map("n", "gk", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts, "Show lsp buffer hover actions")
-  map(
-    "n",
-    "gh",
-    "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>",
-    opts,
-    "Show lsp symbols in telescope"
-  )
-
   map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts, "Show lsp buffer hover actions")
   map(
     "n",
