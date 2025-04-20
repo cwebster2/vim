@@ -9,7 +9,7 @@ return {
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       require('tokyonight').setup {
-        transparent = true,
+        -- transparent = true,
         styles = {
           comments = { italic = true },
         },
@@ -77,6 +77,8 @@ return {
       statusline.section_location = function()
         return '%2l:%-2v'
       end
+
+      require("mini.trailspace").setup()
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim

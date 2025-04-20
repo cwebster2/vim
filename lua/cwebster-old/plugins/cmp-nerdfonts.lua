@@ -1,3 +1,0 @@
-return {
-  "fazibear/cmp-nerdfonts"
-}

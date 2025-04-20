@@ -14,23 +14,6 @@ opt.confirm = true
 opt.cursorline = true
 opt.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
 opt.expandtab = true
-opt.fillchars = {
-  eob = "~",
-  vert = "│",
-  foldopen = "",
-  foldclose = "",
-  foldsep = " ",
-  fold = " ",
-}
--- opt.foldtext = "nvim_treesitter#foldtext()"
-opt.foldtext =
-  [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' … ' . '(' . (v:foldend - v:foldstart + 1) . ' lines)']]
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldlevelstart = 99
-opt.foldmethod = "expr"
-opt.foldenable = true
-opt.foldcolumn = "1"
-opt.foldnestmax = 3
 opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "a" -- Auto formatting is BAD.
   - "t" -- Don't auto format my code. I got linters for that.
