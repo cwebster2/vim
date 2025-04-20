@@ -4,6 +4,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+      notifier = {},
       statuscolumn = {
         left = { "mark", "sign" },
         right = { "fold", "git" },
