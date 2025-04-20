@@ -9,7 +9,7 @@ return {
         left = { "mark", "sign" },
         right = { "fold", "git" },
         folds = {
-          open = false, -- "",
+          open = true, -- "",
           git_hl = false,
         },
         git = {
