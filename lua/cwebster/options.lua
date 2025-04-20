@@ -37,3 +37,4 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldenable = true
 vim.opt.foldcolumn = "1"
 vim.opt.foldnestmax = 3
+vim.opt.laststatus = 3
