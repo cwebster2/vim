@@ -1,7 +1,6 @@
 return {
   {
     "folke/trouble.nvim",
-    branch = "dev",
     keys = {
       {
         "<leader>xx",
@@ -19,7 +18,7 @@ return {
         desc = "Symbols (Trouble)",
       },
       {
-        "<leader>cl",
+        "<leader>cL",
         "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
         desc = "LSP Definitions / references / ... (Trouble)",
       },

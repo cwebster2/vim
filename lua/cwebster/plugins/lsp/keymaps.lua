@@ -27,30 +27,56 @@ function M.on_attach(client, buffer)
   self:map("]w", M.diagnostic_goto(true, "WARNING"), { desc = "Next Warning" })
   self:map("[w", M.diagnostic_goto(false, "WARNING"), { desc = "Prev Warning" })
 
-  self:map("gK", vim.lsp.buf.signature_help, { desc = "Signature Help", mode = { "i", "n" }, has = "signatureHelp" })
-  self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
+  self:map(
+    "gK",
+    vim.lsp.buf.signature_help,
+    { desc = "Signature Help", mode = { "i", "n" }, has = "signatureHelp" }
+  )
+  self:map(
+    "<leader>ca",
+    vim.lsp.buf.code_action,
+    { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" }
+  )
 
-  self:map("<leader>xs", "Telescope lsp_document_diagnostics", { desc = "Open document diagnostics in telescope" })
-  self:map("<leader>xW", "Telescope lsp_workspace_diagnostics", { desc = "Open workspace diagnostics in telescope" })
+  self:map(
+    "<leader>xs",
+    "Telescope lsp_document_diagnostics",
+    { desc = "Open document diagnostics in telescope" }
+  )
+  self:map(
+    "<leader>xW",
+    "Telescope lsp_workspace_diagnostics",
+    { desc = "Open workspace diagnostics in telescope" }
+  )
   self:map("gh", "Telescope lsp_document_symbols", { desc = "Show lsp symbols in telescope" })
 
   local format = require("cwebster.plugins.lsp.format")
   self:map("<leader>cf", format.format, { desc = "Format Document", has = "documentFormatting" })
-  self:map("<leader>cf", format.format, { desc = "Format Range", mode = "v", has = "documentRangeFormatting" })
+  self:map(
+    "<leader>cf",
+    format.format,
+    { desc = "Format Range", mode = "v", has = "documentRangeFormatting" }
+  )
   self:map("<leader>cr", M.rename, { expr = true, desc = "Rename", has = "rename" })
   self:map("<leader>ct", format.toggle, { desc = "Toggle Auto Formatting" })
 
-  if client.name == "tsserver" and pcall(require, "typescript") then
+  if client.name == "ts_ls" and pcall(require, "typescript") then
     self:map("<leader>co", "TypescriptOrganizeImports", { desc = "Organize Imports" })
     self:map("<leader>cR", "TypescriptRenameFile", { desc = "Rename File" })
   end
 
   if client.name == "rust_analyzer" then
-    self:map("<leader>co", require("rust-tools").hover_actions.hover_actions, { desc = "Rust: show hover actions" })
+    self:map(
+      "<leader>co",
+      require("rust-tools").hover_actions.hover_actions,
+      { desc = "Rust: show hover actions" }
+    )
   end
 
   if client.server_capabilities.inlayHintProvider then
-    self:map("<leader>uh", function() vim.lsp.inlay_hint(buffer, nil) end, { desc = "Toggle Inlay Hints" })
+    self:map("<leader>uh", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end, { desc = "Toggle Inlay Hints" })
   end
   -- map("n", "<leader>cli", "<cmd>LspInfo<cr>", opts, "Show LSP information")
   -- map("n", "<leader>cla", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts, "Add workspace folder")
@@ -75,8 +101,8 @@ function M:map(lhs, rhs, opts)
     opts.mode or "n",
     lhs,
     type(rhs) == "string" and ("<cmd>%s<cr>"):format(rhs) or rhs,
-      ---@diagnostic disable-next-line: no-unknown
-      { silent = true, buffer = self.buffer, expr = opts.expr, desc = opts.desc }
+    ---@diagnostic disable-next-line: no-unknown
+    { silent = true, buffer = self.buffer, expr = opts.expr, desc = opts.desc }
   )
 end
 
@@ -92,7 +118,7 @@ function M.diagnostic_goto(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-  go({ severity = severity })
+    go({ severity = severity })
   end
 end
 

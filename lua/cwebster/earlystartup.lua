@@ -41,11 +41,11 @@ function M.setup()
 
   -- these need to get setup before plugins run
   -- local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
-  local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-  end
+  -- local signs = { Error = "✘", Warn = "", Hint = "", Info = "" }
+  -- for type, icon in pairs(signs) do
+  --   local hl = "DiagnosticSign" .. type
+  --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+  -- end
 end
 
 return M

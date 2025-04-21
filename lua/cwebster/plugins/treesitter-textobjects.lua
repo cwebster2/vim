@@ -1,7 +1,8 @@
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
   lazy = true,
-  config = function ()
+  enabled = true,
+  config = function()
     require("nvim-treesitter.configs").setup({
       textobjects = {
         select = {
@@ -13,23 +14,29 @@ return {
             ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of assignment" },
             ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of assignment" },
 
-            ["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument"},
-            ["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument"},
+            ["aa"] = {
+              query = "@parameter.outer",
+              desc = "Select outer part of a parameter/argument",
+            },
+            ["ia"] = {
+              query = "@parameter.inner",
+              desc = "Select inner part of a parameter/argument",
+            },
 
-            ["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional"},
-            ["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional"},
+            ["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
+            ["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
 
-            ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop"},
-            ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop"},
+            ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
+            ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
 
-            ["af"] = { query = "@call.outer", desc = "Select outer part of a call"},
-            ["if"] = { query = "@call.inner", desc = "Select inner part of a call"},
+            ["af"] = { query = "@call.outer", desc = "Select outer part of a call" },
+            ["if"] = { query = "@call.inner", desc = "Select inner part of a call" },
 
-            ["am"] = { query = "@function.outer", desc = "Select outer part of a function"},
-            ["im"] = { query = "@function.inner", desc = "Select inner part of a function"},
+            ["am"] = { query = "@function.outer", desc = "Select outer part of a function" },
+            ["im"] = { query = "@function.inner", desc = "Select inner part of a function" },
 
-            ["ac"] = { query = "@class.outer", desc = "Select outer part of a class"},
-            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class"},
+            ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
+            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
           },
         },
         swap = {
@@ -88,19 +95,19 @@ return {
             ["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
             ["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
             ["[A"] = { query = "@parameter.outer", desc = "Prev function parameter end" },
-          }
-        }
+          },
+        },
       },
     })
 
     local tpm = require("nvim-treesitter.textobjects.repeatable_move")
-    vim.keymap.set({ "n", "x", "o" }, ";", tpm.repeat_last_move)
-    vim.keymap.set({ "n", "x", "o" }, ",", tpm.repeat_last_move_opposite)
+    vim.keymap.set({ "n", "x", "o" }, ";", tpm.repeat_last_move_next)
+    vim.keymap.set({ "n", "x", "o" }, ",", tpm.repeat_last_move_previous)
 
     -- do I like these?
     vim.keymap.set({ "n", "x", "o" }, "f", tpm.builtin_f)
     vim.keymap.set({ "n", "x", "o" }, "F", tpm.builtin_F)
     vim.keymap.set({ "n", "x", "o" }, "t", tpm.builtin_t)
     vim.keymap.set({ "n", "x", "o" }, "T", tpm.builtin_T)
-  end
+  end,
 }

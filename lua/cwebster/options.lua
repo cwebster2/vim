@@ -8,7 +8,7 @@ opt.backup = false
 opt.breakindent = true
 opt.clipboard = "unnamedplus,unnamed"
 opt.cmdheight = 1
-opt.colorcolumn = '0'
+opt.colorcolumn = "0"
 opt.completeopt = "menu,menuone,noselect"
 opt.confirm = true
 opt.cursorline = true
@@ -16,16 +16,21 @@ opt.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
 opt.expandtab = true
 opt.fillchars = {
   eob = "~",
-  vert ="│",
-  foldopen = "v",
-  foldclose = ">",
+  vert = "│",
+  foldopen = "",
+  foldclose = "",
   foldsep = " ",
+  fold = " ",
 }
-opt.foldexpr='nvim_treesitter#foldexpr()'
+-- opt.foldtext = "nvim_treesitter#foldtext()"
+opt.foldtext =
+  [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' … ' . '(' . (v:foldend - v:foldstart + 1) . ' lines)']]
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevelstart = 99
-opt.foldmethod='expr'
-opt.foldenable=true
-opt.foldcolumn = '1'
+opt.foldmethod = "expr"
+opt.foldenable = true
+opt.foldcolumn = "1"
+opt.foldnestmax = 3
 opt.formatoptions = opt.formatoptions --:gsub('[cro]','')
   - "a" -- Auto formatting is BAD.
   - "t" -- Don't auto format my code. I got linters for that.
@@ -40,22 +45,22 @@ opt.guifont = "Hack Nerd Font Mono:h18"
 opt.hidden = true
 opt.hlsearch = true
 opt.ignorecase = true
-opt.inccommand = 'split'
+opt.inccommand = "split"
 opt.incsearch = true
 opt.lazyredraw = false
 opt.linebreak = true
 opt.list = true
 opt.listchars = {
-  tab="▷ ",
-  trail="·",
-  extends="…",
-  precedes="…",
-  conceal="┊",
-  nbsp="○",
-  eol="¬",
+  tab = "▷ ",
+  trail = "·",
+  extends = "…",
+  precedes = "…",
+  conceal = "┊",
+  nbsp = "○",
+  eol = "¬",
 }
 opt.matchtime = 5
-opt.mouse = 'a'
+opt.mouse = "a"
 opt.mousemoveevent = true
 opt.number = true
 opt.previewheight = 25
@@ -64,7 +69,7 @@ opt.scrolloff = 5
 opt.shell = "/bin/bash"
 opt.shiftround = true
 opt.shiftwidth = 2
-opt.shortmess = vim.o.shortmess .. 'c'
+opt.shortmess = vim.o.shortmess .. "c"
 opt.showmatch = true
 opt.showmode = false
 -- opt.signcolumn = "yes"
@@ -83,7 +88,7 @@ opt.updatetime = 300
 opt.viewoptions = "cursor,folds,options,unix,slash"
 opt.virtualedit = "onemore"
 opt.wildmenu = true
-opt.wildmode = 'longest:full'
+opt.wildmode = "longest:full"
 opt.winblend = 5
 opt.wrap = false
 -- opt.sidescroll = 5
@@ -96,25 +101,25 @@ local function has(value)
   return vim.fn.has(value) == 1
 end
 
-if has('conceal') then
+if has("conceal") then
   opt.conceallevel = 2
   opt.concealcursor = "niv"
 end
 
 if vim.fn.exists("+undofile") == 1 then
-  if vim.fn.isdirectory(vim.fn.expand("$HOME").."/.config/nvim/undo") == 0 then
-      vim.api.nvim_command[[:silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1]]
+  if vim.fn.isdirectory(vim.fn.expand("$HOME") .. "/.config/nvim/undo") == 0 then
+    vim.api.nvim_command([[:silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1]])
   end
-  opt.undodir = "./.vim-undo//,"..vim.fn.expand("$HOME").."/.config/nvim/undo//"
+  opt.undodir = "./.vim-undo//," .. vim.fn.expand("$HOME") .. "/.config/nvim/undo//"
   opt.undofile = true
 end
 
-if has('persistent_undo') then
+if has("persistent_undo") then
   opt.undofile = true
   opt.undolevels = 250
   opt.undoreload = 500
 end
 
 augroup("ftspelloptions", {
-  {"FileType", "gitcommit", "set spell"},
+  { "FileType", "gitcommit", "set spell" },
 })

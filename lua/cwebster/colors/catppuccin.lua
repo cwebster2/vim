@@ -40,6 +40,7 @@ M.overrides = {
     all = {
       CmpItemAbbrMatch = { fg = my_palette.blue },
       CmpItemAbbrMatchFuzzy = { fg = my_palette.blue },
+      -- NormalFloat = { bg = my_palette.crust },
       Pmenu = { bg = my_palette.crust },
       PmenuSel = { fg = my_palette.sapphire },
       PmenuSbar = { bg = my_palette.base }, -- Popup menu: scrollbar.
@@ -142,6 +143,8 @@ function M.setup()
       mason = true,
       notify = true,
       noice = true,
+      mini = true,
+      octo = true,
       which_key = true,
       semantic_tokens = true,
       indent_blankline = {
@@ -166,11 +169,6 @@ function M.setup()
           warnings = { "underline" },
           information = { "underline" },
         },
-      },
-      neotree = {
-        enabled = true,
-        show_root = true,
-        transparent_panel = false,
       },
     },
     color_overrides = M.overrides.colors,
