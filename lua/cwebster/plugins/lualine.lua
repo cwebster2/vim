@@ -5,13 +5,21 @@ return {
     opts = {
       globalstatus = true,
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(str)
+              return str:sub(1, 1)
+            end,
+          },
+        },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { "filename" },
-        lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = { "progress" },
+        lualine_c = { { "filename", path = 1 } },
+        lualine_x = { "encoding", "fileformat", "filetype", "lsp_status" },
+        lualine_y = { "searchcount", "progress" },
         lualine_z = { "location" },
       },
+      extensions = { "oil", "man", "lazy" },
     },
   },
 }
