@@ -9,7 +9,13 @@ return {
     -- branch = "nightly",
     event = "VeryLazy",
     keys = {
-      { "<leader>gg", function() require("neogit").open() end, desc = "Open Neogit" },
+      {
+        "<leader>gg",
+        function()
+          require("neogit").open()
+        end,
+        desc = "Open Neogit",
+      },
     },
     opts = {
       integrations = {
