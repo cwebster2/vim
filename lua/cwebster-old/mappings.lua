@@ -20,14 +20,6 @@ M.init_keymap = function()
     require("gitsigns").stage_hunk()
   end, { desc = "Stage hunk" })
 
-  map("n", "<leader>bs", function()
-    require("telescope.builtin").buffers()
-  end, { desc = "Buffers" })
-  map("n", "<leader>bb", "<cmd>e#<CR>", { desc = "Last Buffer" })
-  map("n", "<leader>bv", function()
-    require("cwebster.utils").scratchBuffer("vsplit")
-  end, { desc = "Scrach buffer in vert split" })
-
   -- <leader>h -- help
 
   map("n", "<leader>ht", "<cmd>Telescope builtin<cr>", { desc = "Telescope" })
@@ -45,12 +37,6 @@ M.init_keymap = function()
   map("n", "<leader>hf", "<cmd>Telescope filetypes<cr>", { desc = "File Types" })
   map("n", "<leader>ho", "<cmd>Telescope vim_options<cr>", { desc = "Options" })
   map("n", "<leader>ha", "<cmd>Telescope autocommands<cr>", { desc = "Auto Commands" })
-  map(
-    "n",
-    "<leader>hi",
-    '<cmd>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . \'> trans<\' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR> ',
-    { desc = "Highlight Under Cursos" }
-  )
 
   -- <leader>f -- file finders
   --
@@ -79,7 +65,6 @@ M.init_keymap = function()
     "<cmd>lua require('telescope.builtin').quickfix()<CR>",
     { desc = "Quickfix" }
   )
-  map("n", "<leader>ss", "<cmd>lua require('telescope.builtin').spell_suggest()<CR>")
 
   -- leader t -- testing
   map("n", "<leader>tr", "<Plug>RestNvim<CR>", { desc = "REST request", noremap = true })
@@ -93,8 +78,6 @@ M.init_keymap = function()
     vim.cmd.noh()
   end, { desc = "Clear hightlights and notifications" })
 
-  map("v", "J", "<cmd>m '>+1<CR>gv=gv", { desc = "Move down" })
-  map("v", "K", "<cmd>m '<-2<CR>gv=gv", { desc = "Move up" })
   -- vnoremap <leader>di :lua require'dap.ui.variables'.visual_hover()<CR>
 
   -- testing

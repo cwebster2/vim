@@ -40,6 +40,8 @@ return {
         timeout = 3000,
       },
       zen = { enabled = true },
+      scope = {enabled = true },
+      scroll = {enabled = true },
       statuscolumn = {
         left = { "mark", "sign" },
         right = { "fold", "git" },

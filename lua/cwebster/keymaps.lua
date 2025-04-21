@@ -28,16 +28,16 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
-  vim.api.nvim_exec(
-    [[
-    set wildcharm=<C-Z>
-    cnoremap  <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
-    cnoremap  <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
-    cnoremap  <expr> <left> wildmenkeyumode() ? "\<up>" : "\<left>"
-    cnoremap  <expr> <right> wildmenumode() ? "\<bs><C-Z>" : "\<right>"
-  ]],
-    {}
-  )
+--  vim.api.nvim_exec(
+--    [[
+--    set wildcharm=<C-Z>
+--    cnoremap  <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
+--    cnoremap  <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
+--    cnoremap  <expr> <left> wildmenkeyumode() ? "\<up>" : "\<left>"
+--    cnoremap  <expr> <right> wildmenumode() ? "\<bs><C-Z>" : "\<right>"
+--  ]],
+--    {}
+--  )
 
   -- Toggle to disable mouse mode and indentlines for easier paste
   ToggleMouse = function()
@@ -68,11 +68,29 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
   vim.keymap.set("v", "<", "<gv", { noremap = true })
   vim.keymap.set("v", ">", ">gv", { noremap = true })
   vim.keymap.set("v", ".", ":normal .<CR>", { noremap = true })
+  vim.keymap.set("v", "J", "<cmd>m '>+1<CR>gv=gv", { desc = "Move down" })
+  vim.keymap.set("v", "K", "<cmd>m '<-2<CR>gv=gv", { desc = "Move up" })
 
 vim.keymap.set("n", "k", function()
+  return vim.v.count > 0 and "m'" .. vim.v.count .. "k" or "gk"
+end, { expr = true })
+
+vim.keymap.set("n", "<up>", function()
   return vim.v.count > 0 and "m'" .. vim.v.count .. "k" or "gk"
 end, { expr = true })
 
 vim.keymap.set("n", "j", function()
   return vim.v.count > 0 and "m'" .. vim.v.count .. "j" or "gj"
 end, { expr = true })
+
+vim.keymap.set("n", "<down>", function()
+  return vim.v.count > 0 and "m'" .. vim.v.count .. "j" or "gj"
+end, { expr = true })
+
+vim.keymap.set(
+    "n",
+    "<leader>hi",
+    '<cmd>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . \'> trans<\' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR> ',
+    { desc = "Highlight Under Cursos" }
+  )
+vim.keymap.set("n", "<leader>sp", "<cmd>lua require('telescope.builtin').spell_suggest()<CR>")
