@@ -1,5 +1,5 @@
 {
-  "CopilotChat.nvim": { "branch": "main", "commit": "634aa58117a9b70b3f08a0b150f11afd64f1c0eb" },
+  "CopilotChat.nvim": { "branch": "main", "commit": "f0e9b6cdeabdc7e05c4b9a462ed252cc0b5fb159" },
   "LuaSnip": { "branch": "master", "commit": "c9b9a22904c97d0eb69ccb9bab76037838326817" },
   "blink-copilot": { "branch": "main", "commit": "71102fe2fa1616353f8cb315bb8b85db0812a218" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
