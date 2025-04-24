@@ -3,14 +3,6 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     enabled = true,
-    dependencies = {
-      {
-        "rcarriga/nvim-notify",
-        opts = {
-          background_colour = "#000000",
-        },
-      },
-    },
     keys = {
       -- stylua: ignore start
       { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline", },
@@ -42,31 +34,23 @@ return {
       },
     },
     opts = {
-      cmdline = {
-        view = "cmdline_popup",
-      },
-      popupmenu = {
-        backend = "cmp",
+      -- popupmenu = {
+      --   backend = "nui",
+      -- },
+      presets = {
+        long_message_to_split = true,
+        inc_rename = true,
+        lsp_doc_border = true,
       },
       messages = {
         view = "mini",
+        view_error = "mini",
+        view_warn = "mini",
       },
       lsp = {
-        progress = {
-          enabled = true,
-        },
         override = {
-          ["cmp.entry.get_documentation"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        },
-        signature = {
-          enabled = true,
-        },
-        documentation = {
-          opts = {
-            lang = "markdown",
-          },
         },
       },
       views = {
