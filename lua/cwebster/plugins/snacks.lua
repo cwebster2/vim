@@ -4,14 +4,62 @@ return {
     priority = 1000,
     lazy = false,
     keys = {
-      { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-      { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
-      { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-      { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-      { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
-      { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-      { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
-      { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
+      {
+        "<leader>z",
+        function()
+          Snacks.zen()
+        end,
+        desc = "Toggle Zen Mode",
+      },
+      {
+        "<leader>Z",
+        function()
+          Snacks.zen.zoom()
+        end,
+        desc = "Toggle Zoom",
+      },
+      {
+        "<leader>.",
+        function()
+          Snacks.scratch()
+        end,
+        desc = "Toggle Scratch Buffer",
+      },
+      {
+        "<leader>S",
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = "Select Scratch Buffer",
+      },
+      {
+        "<leader>n",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notification History",
+      },
+      {
+        "<leader>bd",
+        function()
+          Snacks.bufdelete()
+        end,
+        desc = "Delete Buffer",
+      },
+      {
+        "<c-/>",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "Toggle Terminal",
+      },
+      {
+        "<c-_>",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "which_key_ignore",
+      },
       {
         "<leader>N",
         desc = "Neovim News",
@@ -29,10 +77,29 @@ return {
             },
           })
         end,
-      }
+      },
     },
     opts = {
+      animate = { enabled = true },
       bigfile = { enabled = true },
+      bufdelete = { enabled = true },
+      dashboard = {
+        enabled = true,
+        sections = {
+          { section = "header" },
+          { section = "keys", gap = 1 },
+          {
+            icon = " ",
+            title = "Recent Files",
+            section = "recent_files",
+            indent = 2,
+            padding = { 2, 2 },
+          },
+          { section = "startup" },
+        },
+      },
+      gitbrowse = { enabled = true },
+      git = { enabled = "true" },
       quickfile = { enabled = true },
       terminal = {},
       notifier = {
@@ -40,8 +107,8 @@ return {
         timeout = 3000,
       },
       zen = { enabled = true },
-      scope = {enabled = true },
-      scroll = {enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true },
       statuscolumn = {
         left = { "mark", "sign" },
         right = { "fold", "git" },
@@ -54,6 +121,11 @@ return {
         },
         refresh = 50,
       },
-    }
+      styles = {
+        notification = {
+          wo = { wrap = true },
+        },
+      },
+    },
   },
 }
