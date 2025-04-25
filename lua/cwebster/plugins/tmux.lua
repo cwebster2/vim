@@ -1,7 +1,7 @@
 return {
   {
     "christoomey/vim-tmux-navigator",
-    enabled = false,
+    enabled = true,
     cmd = {
       "TmuxNavigateLeft",
       "TmuxNavigateDown",
@@ -19,25 +19,24 @@ return {
     },
   },
   {
-    {
-      "swaits/zellij-nav.nvim",
-      lazy = true,
-      event = "VeryLazy",
-      keys = {
-        {
-          "<M-m>",
-          "<cmd>ZellijNavigateLeftTab<cr>",
-          { silent = true, desc = "navigate left or tab" },
-        },
-        { "<M-n>", "<cmd>ZellijNavigateDown<cr>", { silent = true, desc = "navigate down" } },
-        { "<M-e>", "<cmd>ZellijNavigateUp<cr>", { silent = true, desc = "navigate up" } },
-        {
-          "<M-i>",
-          "<cmd>ZellijNavigateRightTab<cr>",
-          { silent = true, desc = "navigate right or tab" },
-        },
+    "swaits/zellij-nav.nvim",
+    lazy = true,
+    enabled = false,
+    event = "VeryLazy",
+    keys = {
+      {
+        "<M-m>",
+        "<cmd>ZellijNavigateLeftTab<cr>",
+        { silent = true, desc = "navigate left or tab" },
       },
-      opts = {},
+      { "<M-n>", "<cmd>ZellijNavigateDown<cr>", { silent = true, desc = "navigate down" } },
+      { "<M-e>", "<cmd>ZellijNavigateUp<cr>", { silent = true, desc = "navigate up" } },
+      {
+        "<M-i>",
+        "<cmd>ZellijNavigateRightTab<cr>",
+        { silent = true, desc = "navigate right or tab" },
+      },
     },
+    opts = {},
   },
 }
