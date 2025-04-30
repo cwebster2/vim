@@ -1,6 +1,7 @@
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
+  enabled = false,
   version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
   config = function()
     require("avante").setup({
@@ -33,8 +34,8 @@ return {
         model = "qwen2.5-coder:7b",
       },
       rag_service = {
-        enabled = false, -- Enables the RAG service
-        host_mount = os.getenv("HOME") .. "/github", -- Host mount path for the rag service (subfolder under home)
+        enabled = true, -- Enables the RAG service
+        host_mount = os.getenv("HOME") .. "/src", -- Host mount path for the rag service (subfolder under home)
         provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
         llm_model = "deepseek-r1:8b",
         endpoint = "http://localhost:11434", -- The API endpoint for RAG service
