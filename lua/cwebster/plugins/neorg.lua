@@ -2,6 +2,7 @@ return {
   {
     "nvim-neorg/neorg",
     lazy = false,
+    -- enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
