@@ -1,6 +1,6 @@
 # My neovim configuration
 
-![image](https://raw.githubusercontent.com/cwebster2/vim/nvim-lua/.images/screenshot.png)
+![image](https://raw.githubusercontent.com/cwebster2/vim/nvim-v11-restart/.images/screenshot.png)
 
 ## Note
 
