@@ -223,7 +223,23 @@ return {
         },
         vuels = {},
         svelte = {},
-        gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              completeUnimported = true,
+              usePlaceholders = true,
+              analyses = {
+                unusedparams = true,
+              },
+              ["ui.inlayHints"] = {
+                compositeLiteralFields = true,
+                constatntValues = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+            },
+          },
+        },
         terraformls = {
           filetypes = { "tf", "tofu" },
         },
