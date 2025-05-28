@@ -1,21 +1,25 @@
 vim.opt.number = true
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 vim.opt.showmode = false
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+  if vim.fn.has("unnamedplus") then
+    vim.opt.clipboard = "unnamedplus"
+  else
+    vim.opt.clipboard = "unnamed"
+  end
 end)
 vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.inccommand = 'split'
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.confirm = true
