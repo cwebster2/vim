@@ -193,53 +193,10 @@ return {
         html = {},
         bashls = {},
         rust_analyzer = {},
-        ts_ls = {
-          settings = {
-            javascript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-            typescript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-          },
-        },
+        ts_ls = {},
         vuels = {},
         svelte = {},
-        gopls = {
-          settings = {
-            gopls = {
-              completeUnimported = true,
-              usePlaceholders = true,
-              analyses = {
-                unusedparams = true,
-              },
-              ["ui.inlayHints"] = {
-                compositeLiteralFields = true,
-                constatntValues = true,
-                parameterNames = true,
-                rangeVariableTypes = true,
-              },
-            },
-          },
-        },
+        gopls = {},
         terraformls = {
           filetypes = { "tf", "tofu" },
         },
@@ -261,18 +218,18 @@ return {
         },
         yamlls = {},
         lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = "Replace",
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
+          -- -- cmd = { ... },
+          -- -- filetypes = { ... },
+          -- -- capabilities = {},
+          -- settings = {
+          --   Lua = {
+          --     completion = {
+          --       callSnippet = "Replace",
+          --     },
+          --     -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+          --     -- diagnostics = { disable = { 'missing-fields' } },
+          --   },
+          -- },
         },
       }
 
@@ -306,7 +263,8 @@ return {
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities =
               vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
+            -- require("lspconfig")[server_name].setup(server)
+            vim.lsp.enable(server)
           end,
         },
       })
