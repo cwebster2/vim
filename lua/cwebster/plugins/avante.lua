@@ -1,7 +1,7 @@
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
-  enabled = false,
+  enabled = true,
   version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
   config = function()
     require("avante").setup({
@@ -40,16 +40,16 @@ return {
         llm_model = "deepseek-r1:8b",
         endpoint = "http://localhost:11434", -- The API endpoint for RAG service
       },
-      -- system_prompt = function()
-      --   local hub = require("mcphub").get_hub_instance()
-      --   return hub:get_active_servers_prompt()
-      -- end,
-      --The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
-      -- custom_tools = function()
-      --   return {
-      --     require("mcphub.extensions.avante").mcp_tool(),
-      --   }
-      -- end,
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub:get_active_servers_prompt()
+      end,
+      -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
+      custom_tools = function()
+        return {
+          require("mcphub.extensions.avante").mcp_tool(),
+        }
+      end,
     })
   end,
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
