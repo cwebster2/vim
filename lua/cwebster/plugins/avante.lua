@@ -27,18 +27,22 @@ return {
         enable_claude_text_editor_tool_mode = true,
       },
       provider = "copilot",
-      copilot = {
-        model = "claude-3.7-sonnet",
-      },
-      ollama = {
-        model = "qwen2.5-coder:7b",
+      providers = {
+        copilot = {
+          model = "claude-3.7-sonnet",
+        },
+        ollama = {
+          model = "qwen2.5-coder:7b",
+        },
       },
       rag_service = {
         enabled = true, -- Enables the RAG service
         host_mount = os.getenv("HOME") .. "/src", -- Host mount path for the rag service (subfolder under home)
-        provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
-        llm_model = "deepseek-r1:8b",
-        endpoint = "http://localhost:11434", -- The API endpoint for RAG service
+        llm = {
+          provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
+          model = "deepseek-r1:8b",
+          endpoint = "http://localhost:11434", -- The API endpoint for RAG service
+        },
       },
       system_prompt = function()
         local hub = require("mcphub").get_hub_instance()
