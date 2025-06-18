@@ -29,14 +29,14 @@ return {
       provider = "copilot",
       providers = {
         copilot = {
-          model = "claude-3.7-sonnet",
+          model = "claude-sonnet-4",
         },
         ollama = {
           model = "qwen2.5-coder:7b",
         },
       },
       rag_service = {
-        enabled = true, -- Enables the RAG service
+        enabled = false, -- Enables the RAG service
         host_mount = os.getenv("HOME") .. "/src", -- Host mount path for the rag service (subfolder under home)
         llm = {
           provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
