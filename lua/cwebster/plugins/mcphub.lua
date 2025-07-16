@@ -3,7 +3,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
   },
-  enabled = true,
+  enabled = false,
   -- cmd = "MCPHub", -- lazily start the hub when `MCPHub` is called
   build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
   config = function()

@@ -14,6 +14,13 @@ return {
     --     insert = "<M-y>",
     --   },
     -- },
+    -- selection = function(source)
+    --   return select.visual(source) or select.buffer(source)
+    -- end,
   },
+  -- setup = function(_, opts)
+  --   local select = require("CopilotChat.select")
+  --   require("CopilotChat").setup(opts)
+  -- end,
   -- See Commands section for default commands if you want to lazy load on them
 }
