@@ -6,6 +6,11 @@ return {
     { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
   },
   opts = {
+    -- prompts = {
+    --   Commit = {
+    --     selection = select.buffer,
+    --   },
+    -- },
     -- debug = true, -- Enable debugging
     -- See Configuration section for rest
     -- mappings = {
