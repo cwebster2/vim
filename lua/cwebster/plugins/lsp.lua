@@ -252,6 +252,40 @@ return {
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
+      -- -- Now setup those configurations
+      -- for name, config in pairs(servers) do
+      --   local config = config or {}
+      --   -- This handles overriding only values explicitly passed
+      --   -- by the server configuration above. Useful when disabling
+      --   -- certain features of an LSP (for example, turning off formatting for ts_ls)
+      --   config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+      --   vim.lsp.config(name, config)
+      -- end
+
+      -- local installedPacks = require("mason-registry").get_installed_packages()
+      -- -- local lspConfigNames = vim
+      -- --   .iter(installedPacks)
+      -- --   :filter(function(pkg)
+      -- --     return pkg:is_lsp_server()
+      -- --   end)
+      -- --   :map(function(pkg)
+      -- --     return pkg:name()
+      -- --   end)
+      -- --   :totable()
+      --
+      -- local lspConfigNames = vim.iter(installedPacks):fold({}, function(acc, pack)
+      --   table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
+      --   return acc
+      -- end)
+      --
+      -- vim.print(vim.inspect(lspConfigNames))
+      -- for _, name in ipairs(lspConfigNames) do
+      --   local server = servers[name]
+      --   server.capabilities =
+      --     vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+      --   vim.lsp.enable(name)
+      -- end
+
       require("mason-lspconfig").setup({
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
