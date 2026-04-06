@@ -94,3 +94,41 @@ vim.keymap.set(
     { desc = "Highlight Under Cursos" }
   )
 
+
+vim.keymap.set("n", "<leader>bg", "<cmd>BufferLinePick<cr>", { desc = "Goto Buffer" })
+vim.keymap.set("n", "<leader>bp", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
+vim.keymap.set("n", "<leader>bn", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+vim.keymap.set("n", "<leader>bd", "<Cmd>BufferLineSortByDirectory<CR>", { desc = "Order by Dir" })
+vim.keymap.set("n", "<leader>bl", "<Cmd>BufferLineSortByDirectory<CR>", { desc = "Order by Lang" })
+vim.keymap.set("n", "<leader>m", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
+vim.keymap.set("n", "<leader>i", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+
+vim.keymap.set("n", "<leader>z", function() Snacks.zen() end, { desc = "Toggle Zen Mode", })
+vim.keymap.set("n", "<leader>Z", function() Snacks.zen.zoom() end, { desc = "Toggle Zoom", })
+vim.keymap.set("n", "<leader>.", function() Snacks.scratch() end, { desc = "Toggle Scratch Buffer", })
+vim.keymap.set("n", "<leader>S", function() Snacks.scratch.select() end, { desc = "Select Scratch Buffer", })
+vim.keymap.set("n", "<leader>n", function() Snacks.notifier.show_history() end, { desc = "Notification History", })
+vim.keymap.set("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer", })
+vim.keymap.set("n", "<c-/>", function() Snacks.terminal() end, { desc = "Toggle Terminal", })
+vim.keymap.set("n", "<c-_>", function() Snacks.terminal() end, { desc = "which_key_ignore", })
+vim.keymap.set("n", "<leader>N", function()
+    Snacks.win({
+      file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+      width = 0.6,
+      height = 0.6,
+      wo = {
+        spell = false,
+        wrap = false,
+        signcolumn = "yes",
+        statuscolumn = " ",
+        conceallevel = 3,
+      },
+    })
+  end,
+  { desc = "Neovim News", }
+)
+
+vim.keymap.set("c", "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, { desc = "Redirect Cmdline", })
+vim.keymap.set("n", "<leader>snl", function() require("noice").cmd("last") end, { desc = "Noice Last Message", })
+vim.keymap.set("n", "<leader>snh", function() require("noice").cmd("history") end, { desc = "Noice History", })
+vim.keymap.set("n", "<leader>sna", function() require("noice").cmd("all") end, { desc = "Noice All", })
