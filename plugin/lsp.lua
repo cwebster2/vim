@@ -33,18 +33,18 @@ local servers = {
   },
   yamlls = {},
   lua_ls = {
-    -- -- cmd = { ... },
-    -- -- filetypes = { ... },
-    -- -- capabilities = {},
-    -- settings = {
-    --   Lua = {
-    --     completion = {
-    --       callSnippet = "Replace",
-    --     },
-    --     -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-    --     -- diagnostics = { disable = { 'missing-fields' } },
-    --   },
-    -- },
+    -- cmd = { ... },
+    filetypes = { "lua" },
+    -- capabilities = {},
+    settings = {
+      Lua = {
+        completion = {
+          callSnippet = "Replace",
+        },
+        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+        -- diagnostics = { disable = { 'missing-fields' } },
+      },
+    },
   },
   stylua = {},
 }
@@ -59,7 +59,8 @@ for index, server_name in ipairs(ensure_installed) do
   local server = servers[server_name] or {}
   server.capabilities =
     vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-  vim.lsp.enable(server)
+  vim.lsp.config(server_name, server)
+  vim.lsp.enable(server_name)
 end
 
 
