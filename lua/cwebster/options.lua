@@ -32,10 +32,10 @@ vim.opt.fillchars = {
   foldsep = " ",
   fold = " ",
 }
--- opt.foldtext = "nvim_treesitter#foldtext()"
 vim.opt.foldtext =
   [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' … ' . '(' . (v:foldend - v:foldstart + 1) . ' lines)']]
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "nvim_treesitter.foldexpr()"
+vim.opt.foldtext = "nvim_treesitter.foldtext()"
 vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = "expr"
 vim.opt.foldenable = true

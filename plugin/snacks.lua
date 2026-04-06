@@ -18,7 +18,7 @@ require("snacks").setup({
     },
   },
   gitbrowse = { enabled = true },
-  git = { enabled = "true" },
+  git = { enabled = true },
   quickfile = { enabled = true },
   terminal = {},
   notifier = {

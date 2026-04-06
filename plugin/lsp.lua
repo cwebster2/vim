@@ -33,20 +33,19 @@ local servers = {
   },
   yamlls = {},
   lua_ls = {
-    -- cmd = { ... },
-    filetypes = { "lua" },
-    -- capabilities = {},
-    settings = {
-      Lua = {
-        completion = {
-          callSnippet = "Replace",
-        },
-        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-        -- diagnostics = { disable = { 'missing-fields' } },
-      },
-    },
+    -- -- cmd = { ... },
+    -- filetypes = { "lua" },
+    -- -- capabilities = {},
+    -- settings = {
+    --   Lua = {
+    --     completion = {
+    --       callSnippet = "Replace",
+    --     },
+    --     -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+    --     -- diagnostics = { disable = { 'missing-fields' } },
+    --   },
+    -- },
   },
-  stylua = {},
 }
 
 -- Ensure the servers and tools above are installed
@@ -57,12 +56,10 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 for index, server_name in ipairs(ensure_installed) do
   local server = servers[server_name] or {}
-  server.capabilities =
-    vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+  server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
   vim.lsp.config(server_name, server)
   vim.lsp.enable(server_name)
 end
-
 
 -- Diagnostic Config
 -- See :help vim.diagnostic.Opts
@@ -93,7 +90,6 @@ vim.diagnostic.config({
   },
 })
 
-
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
   callback = function(event)
@@ -109,11 +105,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("grd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
     map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
-    map(
-      "gW",
-      require("telescope.builtin").lsp_dynamic_workspace_symbols,
-      "Open Workspace Symbols"
-    )
+    map("gW", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Open Workspace Symbols")
     map("grt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
 
     local function client_supports_method(client, method, bufnr)
@@ -162,11 +154,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- This may be unwanted, since they displace some of your code
     if
       client
-      and client_supports_method(
-        client,
-        vim.lsp.protocol.Methods.textDocument_inlayHint,
-        event.buf
-      )
+      and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
     then
       map("<leader>th", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
@@ -174,4 +162,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
-
