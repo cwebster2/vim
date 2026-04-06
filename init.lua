@@ -46,8 +46,12 @@ vim.pack.add({
   { src = "https://github.com/folke/lazydev.nvim" }, -- dep ft=lua
   { src = "https://github.com/fang2hou/blink-copilot" }, --dep
   { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("v1.*") }, -- VimEnter
-  { src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim", name = "copliotchat" },
+  { src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim" },
   { src = "https://github.com/stevearc/conform.nvim", name = "conform" }, -- BufWritePre
+  { src = "https://github.com/folke/which-key.nvim" }, -- VimEnter
+  { src = "https://github.com/christoomey/vim-tmux-navigator" }, -- VimEnter
+  { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/ahmedkhalf/project.nvim" },
 })
 
 require("cwebster.keymaps")

@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "CopilotChat.nvim": {
+      "rev": "d2d2574863529cb76b62b028cb5c3196ef5796d6",
+      "src": "https://github.com/CopilotC-Nvim/CopilotChat.nvim"
+    },
     "LuaSnip": {
       "rev": "642b0c595e11608b4c18219e93b88d7637af27bc",
       "src": "https://github.com/L3MON4D3/LuaSnip",
@@ -106,9 +110,17 @@
       "rev": "14e0427bef6c55da0d63f9a313fd9941be3a2479",
       "src": "https://github.com/epwalsh/obsidian.nvim"
     },
+    "oil.nvim": {
+      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
     "plenary.nvim": {
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
       "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "project.nvim": {
+      "rev": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb",
+      "src": "https://github.com/ahmedkhalf/project.nvim"
     },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
@@ -125,6 +137,14 @@
     "telescope.nvim": {
       "rev": "cfb85dcf7f822b79224e9e6aef9e8c794211b20b",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "vim-tmux-navigator": {
+      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
+      "src": "https://github.com/christoomey/vim-tmux-navigator"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
     }
   }
 }

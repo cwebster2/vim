@@ -1,9 +1,14 @@
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set(
+  "n",
+  "<leader>q",
+  vim.diagnostic.setloclist,
+  { desc = "Open diagnostic [Q]uickfix list" }
+)
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -11,16 +16,16 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
@@ -39,37 +44,37 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --    {}
 --  )
 
-  -- Toggle to disable mouse mode and indentlines for easier paste
-  ToggleMouse = function()
-    if vim.o.mouse == "a" then
-      vim.cmd([[IndentBlanklineDisable]])
-      vim.wo.signcolumn = "no"
-      vim.o.mouse = "v"
-      vim.wo.number = false
-      vim.wo.relativenumber = false
-      print("Mouse disabled")
-    else
-      vim.cmd([[IndentBlanklineEnable]])
-      vim.wo.signcolumn = "yes"
-      vim.o.mouse = "a"
-      vim.wo.number = true
-      print("Mouse enabled")
-    end
+-- Toggle to disable mouse mode and indentlines for easier paste
+ToggleMouse = function()
+  if vim.o.mouse == "a" then
+    vim.cmd([[IndentBlanklineDisable]])
+    vim.wo.signcolumn = "no"
+    vim.o.mouse = "v"
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+    print("Mouse disabled")
+  else
+    vim.cmd([[IndentBlanklineEnable]])
+    vim.wo.signcolumn = "yes"
+    vim.o.mouse = "a"
+    vim.wo.number = true
+    print("Mouse enabled")
   end
+end
 
-  vim.api.nvim_set_keymap(
-    "n",
-    "<F10>",
-    "<cmd>lua ToggleMouse()<cr>",
-    { noremap = true, desc = "Toggle mouse for paste" }
-  )
+vim.api.nvim_set_keymap(
+  "n",
+  "<F10>",
+  "<cmd>lua ToggleMouse()<cr>",
+  { noremap = true, desc = "Toggle mouse for paste" }
+)
 
-  -- visual mode indent keep selection
-  vim.keymap.set("v", "<", "<gv", { noremap = true })
-  vim.keymap.set("v", ">", ">gv", { noremap = true })
-  vim.keymap.set("v", ".", ":normal .<CR>", { noremap = true })
-  vim.keymap.set("v", "J", "<cmd>m '>+1<CR>gv=gv", { desc = "Move down" })
-  vim.keymap.set("v", "K", "<cmd>m '<-2<CR>gv=gv", { desc = "Move up" })
+-- visual mode indent keep selection
+vim.keymap.set("v", "<", "<gv", { noremap = true })
+vim.keymap.set("v", ">", ">gv", { noremap = true })
+vim.keymap.set("v", ".", ":normal .<CR>", { noremap = true })
+vim.keymap.set("v", "J", "<cmd>m '>+1<CR>gv=gv", { desc = "Move down" })
+vim.keymap.set("v", "K", "<cmd>m '<-2<CR>gv=gv", { desc = "Move up" })
 
 vim.keymap.set("n", "k", function()
   return vim.v.count > 0 and "m'" .. vim.v.count .. "k" or "gk"
@@ -88,12 +93,11 @@ vim.keymap.set("n", "<down>", function()
 end, { expr = true })
 
 vim.keymap.set(
-    "n",
-    "<leader>hi",
-    '<cmd>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . \'> trans<\' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR> ',
-    { desc = "Highlight Under Cursos" }
-  )
-
+  "n",
+  "<leader>hi",
+  '<cmd>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . \'> trans<\' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR> ',
+  { desc = "Highlight Under Cursos" }
+)
 
 vim.keymap.set("n", "<leader>bg", "<cmd>BufferLinePick<cr>", { desc = "Goto Buffer" })
 vim.keymap.set("n", "<leader>bp", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
@@ -103,32 +107,59 @@ vim.keymap.set("n", "<leader>bl", "<Cmd>BufferLineSortByDirectory<CR>", { desc =
 vim.keymap.set("n", "<leader>m", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
 vim.keymap.set("n", "<leader>i", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
 
-vim.keymap.set("n", "<leader>z", function() Snacks.zen() end, { desc = "Toggle Zen Mode", })
-vim.keymap.set("n", "<leader>Z", function() Snacks.zen.zoom() end, { desc = "Toggle Zoom", })
-vim.keymap.set("n", "<leader>.", function() Snacks.scratch() end, { desc = "Toggle Scratch Buffer", })
-vim.keymap.set("n", "<leader>S", function() Snacks.scratch.select() end, { desc = "Select Scratch Buffer", })
-vim.keymap.set("n", "<leader>n", function() Snacks.notifier.show_history() end, { desc = "Notification History", })
-vim.keymap.set("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer", })
-vim.keymap.set("n", "<c-/>", function() Snacks.terminal() end, { desc = "Toggle Terminal", })
-vim.keymap.set("n", "<c-_>", function() Snacks.terminal() end, { desc = "which_key_ignore", })
+vim.keymap.set("n", "<leader>z", function()
+  Snacks.zen()
+end, { desc = "Toggle Zen Mode" })
+vim.keymap.set("n", "<leader>Z", function()
+  Snacks.zen.zoom()
+end, { desc = "Toggle Zoom" })
+vim.keymap.set("n", "<leader>.", function()
+  Snacks.scratch()
+end, { desc = "Toggle Scratch Buffer" })
+vim.keymap.set("n", "<leader>S", function()
+  Snacks.scratch.select()
+end, { desc = "Select Scratch Buffer" })
+vim.keymap.set("n", "<leader>n", function()
+  Snacks.notifier.show_history()
+end, { desc = "Notification History" })
+vim.keymap.set("n", "<leader>bd", function()
+  Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
+vim.keymap.set("n", "<c-/>", function()
+  Snacks.terminal()
+end, { desc = "Toggle Terminal" })
+vim.keymap.set("n", "<c-_>", function()
+  Snacks.terminal()
+end, { desc = "which_key_ignore" })
 vim.keymap.set("n", "<leader>N", function()
-    Snacks.win({
-      file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-      width = 0.6,
-      height = 0.6,
-      wo = {
-        spell = false,
-        wrap = false,
-        signcolumn = "yes",
-        statuscolumn = " ",
-        conceallevel = 3,
-      },
-    })
-  end,
-  { desc = "Neovim News", }
-)
+  Snacks.win({
+    file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+    width = 0.6,
+    height = 0.6,
+    wo = {
+      spell = false,
+      wrap = false,
+      signcolumn = "yes",
+      statuscolumn = " ",
+      conceallevel = 3,
+    },
+  })
+end, { desc = "Neovim News" })
 
-vim.keymap.set("c", "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, { desc = "Redirect Cmdline", })
-vim.keymap.set("n", "<leader>snl", function() require("noice").cmd("last") end, { desc = "Noice Last Message", })
-vim.keymap.set("n", "<leader>snh", function() require("noice").cmd("history") end, { desc = "Noice History", })
-vim.keymap.set("n", "<leader>sna", function() require("noice").cmd("all") end, { desc = "Noice All", })
+vim.keymap.set("c", "<S-Enter>", function()
+  require("noice").redirect(vim.fn.getcmdline())
+end, { desc = "Redirect Cmdline" })
+vim.keymap.set("n", "<leader>snl", function()
+  require("noice").cmd("last")
+end, { desc = "Noice Last Message" })
+vim.keymap.set("n", "<leader>snh", function()
+  require("noice").cmd("history")
+end, { desc = "Noice History" })
+vim.keymap.set("n", "<leader>sna", function()
+  require("noice").cmd("all")
+end, { desc = "Noice All" })
+
+vim.keymap.set("n", "<M-m>", "<cmd>TmuxNavigateLeft<cr>")
+vim.keymap.set("n", "<M-n>", "<cmd>TmuxNavigateDown<cr>")
+vim.keymap.set("n", "<M-e>", "<cmd>TmuxNavigateUp<cr>")
+vim.keymap.set("n", "<M-i>", "<cmd>TmuxNavigateRight<cr>")
