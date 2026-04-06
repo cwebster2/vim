@@ -1,21 +1,26 @@
 return {
   {
     "NeogitOrg/neogit",
-    dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
     -- branch = "nightly",
     event = "VeryLazy",
-    opts = {
-      disable_signs = false,
-      disable_context_highlighting = false,
-      disable_commit_confirmation = true,
-      signs = {
-        -- { CLOSED, OPENED }
-        section = { ">", "v" },
-        item = { ">", "v" },
-        hunk = { "", "" },
+    keys = {
+      {
+        "<leader>gg",
+        function()
+          require("neogit").open()
+        end,
+        desc = "Open Neogit",
       },
+    },
+    opts = {
       integrations = {
         diffview = true,
+        telescope = true,
       },
     },
   },
