@@ -14,9 +14,12 @@ to change with every commit.
 
 ## Requirements
 
-- Neovim 0.11
+- Neovim 0.12
 
 ## What plugins am I using?
+
+See [init.lua](./init.lua) for a list of plugins and [plugins](./plugin) for their
+configurations.
 
 ## Using this configuration
 
