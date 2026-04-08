@@ -163,3 +163,5 @@ vim.keymap.set("n", "<M-m>", "<cmd>TmuxNavigateLeft<cr>")
 vim.keymap.set("n", "<M-n>", "<cmd>TmuxNavigateDown<cr>")
 vim.keymap.set("n", "<M-e>", "<cmd>TmuxNavigateUp<cr>")
 vim.keymap.set("n", "<M-i>", "<cmd>TmuxNavigateRight<cr>")
+
+vim.keymap.set("n", "<leader>u", ":Undotree<CR>", { noremap = true, silent = true })
