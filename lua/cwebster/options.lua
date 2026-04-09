@@ -43,7 +43,7 @@ vim.opt.foldcolumn = "1"
 vim.opt.foldnestmax = 3
 vim.opt.laststatus = 3
 
-vim.o.cmdheight = 0
+vim.o.cmdheight = 1
 require("vim._core.ui2").enable({
   enable = true,
   msg = {

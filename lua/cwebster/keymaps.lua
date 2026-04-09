@@ -33,16 +33,21 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
---  vim.api.nvim_exec(
---    [[
+-- vim.api.nvim_exec(
+--   [[
 --    set wildcharm=<C-Z>
 --    cnoremap  <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
 --    cnoremap  <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
 --    cnoremap  <expr> <left> wildmenkeyumode() ? "\<up>" : "\<left>"
 --    cnoremap  <expr> <right> wildmenumode() ? "\<bs><C-Z>" : "\<right>"
 --  ]],
---    {}
---  )
+--   {}
+-- )
+
+-- vim.keymap.set("c", "<up>", "wildmenumode() ? <left> : <up>", { expr = true, remap = false })
+-- vim.keymap.set("c", "<down>", "wildmenumode() ? <right> : <down>", { expr = true, remap = false })
+-- vim.keymap.set("c", "<left>", "wildmenumode() ? <up> : <left>", { expr = true, remap = false })
+-- vim.keymap.set("c", "<right>", "wildmenumode() ? <down> : <right>", { expr = true, remap = false })
 
 -- Toggle to disable mouse mode and indentlines for easier paste
 ToggleMouse = function()
@@ -165,3 +170,7 @@ vim.keymap.set("n", "<M-e>", "<cmd>TmuxNavigateUp<cr>")
 vim.keymap.set("n", "<M-i>", "<cmd>TmuxNavigateRight<cr>")
 
 vim.keymap.set("n", "<leader>u", ":Undotree<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>gg", function()
+  require("neogit").open()
+end, { desc = "Open Neogit" })

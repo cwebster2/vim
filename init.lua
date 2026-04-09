@@ -1,8 +1,6 @@
 local g = vim.g
 local a = vim.api
 
-require("vim._core.ui2").enable({})
-
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 g.mapleader = " "
 g.maplocalleader = ","
@@ -13,9 +11,11 @@ g.have_nerd_font = true
 require("cwebster.options")
 -- require("cwebster.earlystartup").setup()
 
+vim.cmd.cd(vim.fs.root(0, ".git") or ".")
+
+vim.cmd("packadd nvim.undotree")
+
 vim.pack.add({
-  -- { "nvim.undotree" },
-  -- { "nvim.diftool" },
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/lewis6991/gitsigns.nvim", name = "gitsigns" },
@@ -32,8 +32,7 @@ vim.pack.add({
   { src = "https://github.com/williamboman/mason.nvim" },
   { src = "https://github.com/j-hui/fidget.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
-  { src = "https://github.com/MunifTanjim/nui.nvim" }, -- dependency
-  { src = "https://github.com/folke/noice.nvim" }, -- lazy
+
   { src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" }, -- dependency
   { src = "https://github.com/nvim-telescope/telescope.nvim" }, -- VimEnter
   { src = "https://github.com/saghen/blink.compat" }, -- dep
@@ -51,7 +50,7 @@ vim.pack.add({
   { src = "https://github.com/folke/which-key.nvim" }, -- VimEnter
   { src = "https://github.com/christoomey/vim-tmux-navigator" }, -- VimEnter
   { src = "https://github.com/stevearc/oil.nvim" },
-  { src = "https://github.com/ahmedkhalf/project.nvim" },
+  { src = "https://github.com/NeogitOrg/neogit" }, -- VeryLazy
 })
 
 require("cwebster.keymaps")

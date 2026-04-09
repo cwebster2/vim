@@ -2,62 +2,30 @@ require("mason").setup({})
 require("fidget").setup({})
 
 local servers = {
-  clangd = {},
-  biome = {},
-  pyright = {},
-  html = {},
-  bashls = {},
-  rust_analyzer = {},
-  ts_ls = {},
-  vuels = {},
-  svelte = {},
-  gopls = {},
-  terraformls = {
-    filetypes = { "tf", "tofu" },
-  },
-  dockerls = {},
-  jsonls = {},
-  texlab = {
-    settings = {
-      latex = {
-        build = {
-          executable = "pdflatex",
-          onSave = true,
-          args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
-        },
-        forwardSearch = {
-          args = { "--synctex-forward", "%l:1:%f", "%p" },
-        },
-      },
-    },
-  },
-  yamlls = {},
-  lua_ls = {
-    -- -- cmd = { ... },
-    -- filetypes = { "lua" },
-    -- -- capabilities = {},
-    -- settings = {
-    --   Lua = {
-    --     completion = {
-    --       callSnippet = "Replace",
-    --     },
-    --     -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-    --     -- diagnostics = { disable = { 'missing-fields' } },
-    --   },
-    -- },
-  },
+  "clangd",
+  "biome",
+  "pyright",
+  "html",
+  "bashls",
+  "rust_analyzer",
+  "ts_ls",
+  "vue_ls",
+  "svelte",
+  "gopls",
+  "terraformls",
+  "dockerls",
+  "jsonls",
+  "texlab",
+  "yamlls",
+  "lua_ls",
 }
 
--- Ensure the servers and tools above are installed
-local ensure_installed = vim.tbl_keys(servers or {})
+vim.lsp.config("*", {
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
+})
 
-local capabilities = require("blink.cmp").get_lsp_capabilities()
--- require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-for index, server_name in ipairs(ensure_installed) do
-  local server = servers[server_name] or {}
-  server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-  vim.lsp.config(server_name, server)
+-- loop over servers
+for _, server_name in ipairs(servers) do
   vim.lsp.enable(server_name)
 end
 
