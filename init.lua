@@ -56,4 +56,8 @@ vim.pack.add({
 require("cwebster.keymaps")
 require("cwebster.autocommands")
 
-a.nvim_command("silent! helptags ALL")
+vim.api.nvim_create_autocmd("PackChanged", {
+  callback = function()
+    a.nvim_command("silent! helptags ALL")
+  end,
+})

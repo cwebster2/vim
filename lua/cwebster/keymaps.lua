@@ -3,12 +3,7 @@
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set(
-  "n",
-  "<leader>q",
-  vim.diagnostic.setloclist,
-  { desc = "Open diagnostic [Q]uickfix list" }
-)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -52,14 +47,14 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- Toggle to disable mouse mode and indentlines for easier paste
 ToggleMouse = function()
   if vim.o.mouse == "a" then
-    vim.cmd([[IndentBlanklineDisable]])
+    vim.cmd([[IBLDisable]])
     vim.wo.signcolumn = "no"
     vim.o.mouse = "v"
     vim.wo.number = false
     vim.wo.relativenumber = false
     print("Mouse disabled")
   else
-    vim.cmd([[IndentBlanklineEnable]])
+    vim.cmd([[IBLEnable]])
     vim.wo.signcolumn = "yes"
     vim.o.mouse = "a"
     vim.wo.number = true
@@ -67,12 +62,7 @@ ToggleMouse = function()
   end
 end
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<F10>",
-  "<cmd>lua ToggleMouse()<cr>",
-  { noremap = true, desc = "Toggle mouse for paste" }
-)
+vim.api.nvim_set_keymap("n", "<F10>", "<cmd>lua ToggleMouse()<cr>", { noremap = true, desc = "Toggle mouse for paste" })
 
 -- visual mode indent keep selection
 vim.keymap.set("v", "<", "<gv", { noremap = true })
@@ -101,7 +91,7 @@ vim.keymap.set(
   "n",
   "<leader>hi",
   '<cmd>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . \'> trans<\' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR> ',
-  { desc = "Highlight Under Cursos" }
+  { desc = "Highlight Under Cursor" }
 )
 
 vim.keymap.set("n", "<leader>bg", "<cmd>BufferLinePick<cr>", { desc = "Goto Buffer" })
@@ -150,19 +140,6 @@ vim.keymap.set("n", "<leader>N", function()
     },
   })
 end, { desc = "Neovim News" })
-
-vim.keymap.set("c", "<S-Enter>", function()
-  require("noice").redirect(vim.fn.getcmdline())
-end, { desc = "Redirect Cmdline" })
-vim.keymap.set("n", "<leader>snl", function()
-  require("noice").cmd("last")
-end, { desc = "Noice Last Message" })
-vim.keymap.set("n", "<leader>snh", function()
-  require("noice").cmd("history")
-end, { desc = "Noice History" })
-vim.keymap.set("n", "<leader>sna", function()
-  require("noice").cmd("all")
-end, { desc = "Noice All" })
 
 vim.keymap.set("n", "<M-m>", "<cmd>TmuxNavigateLeft<cr>")
 vim.keymap.set("n", "<M-n>", "<cmd>TmuxNavigateDown<cr>")

@@ -32,8 +32,8 @@ vim.opt.fillchars = {
   foldsep = " ",
   fold = " ",
 }
-vim.opt.foldtext =
-  [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' … ' . '(' . (v:foldend - v:foldstart + 1) . ' lines)']]
+-- vim.opt.foldtext =
+--   [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' … ' . '(' . (v:foldend - v:foldstart + 1) . ' lines)']]
 vim.opt.foldexpr = "nvim_treesitter.foldexpr()"
 vim.opt.foldtext = "nvim_treesitter.foldtext()"
 vim.opt.foldlevelstart = 99
@@ -42,6 +42,9 @@ vim.opt.foldenable = true
 vim.opt.foldcolumn = "1"
 vim.opt.foldnestmax = 3
 vim.opt.laststatus = 3
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 
 vim.o.cmdheight = 1
 require("vim._core.ui2").enable({
