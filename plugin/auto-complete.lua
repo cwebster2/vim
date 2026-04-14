@@ -16,6 +16,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     require("blink.compat").setup({})
     require("LuaSnip").setup({})
+    require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/luasnippets" } })
+    require("luasnip").filetype_extend("typescriptreact", { "typescript" })
+    require("luasnip").filetype_extend("javascriptreact", { "javascript" })
     require("blink-copilot").setup({})
     require("copilot").setup({
       suggestion = { enabled = true },

@@ -14,6 +14,7 @@ require("cwebster.options")
 vim.cmd.cd(vim.fs.root(0, ".git") or ".")
 
 vim.cmd("packadd nvim.undotree")
+-- vim.cmd("packadd nvim.diffview")
 
 vim.pack.add({
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
