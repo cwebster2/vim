@@ -2,67 +2,32 @@ require("mason").setup({})
 require("fidget").setup({})
 
 local servers = {
-  clangd = {},
-  biome = {},
-  pyright = {},
-  html = {},
-  bashls = {},
-  rust_analyzer = {},
-  ts_ls = {},
-  vuels = {},
-  svelte = {},
-  gopls = {},
-  terraformls = {
-    filetypes = { "tf", "tofu" },
-  },
-  dockerls = {},
-  jsonls = {},
-  texlab = {
-    settings = {
-      latex = {
-        build = {
-          executable = "pdflatex",
-          onSave = true,
-          args = { "-interaction=nonstopmode", "-synctex=1", "%f" },
-        },
-        forwardSearch = {
-          args = { "--synctex-forward", "%l:1:%f", "%p" },
-        },
-      },
-    },
-  },
-  yamlls = {},
-  lua_ls = {
-    -- cmd = { ... },
-    filetypes = { "lua" },
-    -- capabilities = {},
-    settings = {
-      Lua = {
-        completion = {
-          callSnippet = "Replace",
-        },
-        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-        -- diagnostics = { disable = { 'missing-fields' } },
-      },
-    },
-  },
-  stylua = {},
+  "clangd",
+  "biome",
+  "pyright",
+  "html",
+  "bashls",
+  "rust_analyzer",
+  "ts_ls",
+  "vue_ls",
+  "svelte",
+  "gopls",
+  "terraformls",
+  "dockerls",
+  "jsonls",
+  "texlab",
+  "yamlls",
+  "lua_ls",
 }
 
--- Ensure the servers and tools above are installed
-local ensure_installed = vim.tbl_keys(servers or {})
+vim.lsp.config("*", {
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
+})
 
-local capabilities = require("blink.cmp").get_lsp_capabilities()
--- require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-for index, server_name in ipairs(ensure_installed) do
-  local server = servers[server_name] or {}
-  server.capabilities =
-    vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-  vim.lsp.config(server_name, server)
+-- loop over servers
+for _, server_name in ipairs(servers) do
   vim.lsp.enable(server_name)
 end
-
 
 -- Diagnostic Config
 -- See :help vim.diagnostic.Opts
@@ -93,7 +58,6 @@ vim.diagnostic.config({
   },
 })
 
-
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
   callback = function(event)
@@ -109,11 +73,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("grd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
     map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
-    map(
-      "gW",
-      require("telescope.builtin").lsp_dynamic_workspace_symbols,
-      "Open Workspace Symbols"
-    )
+    map("gW", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Open Workspace Symbols")
     map("grt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
 
     local function client_supports_method(client, method, bufnr)
@@ -122,16 +82,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- When you move your cursor, the highlights will be cleared (the second autocommand).
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if
-      client
-      and client_supports_method(
-        client,
-        vim.lsp.protocol.Methods.textDocument_documentHighlight,
-        event.buf
-      )
-    then
-      local highlight_augroup =
-        vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+    if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+      local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
       vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
         buffer = event.buf,
         group = highlight_augroup,
@@ -160,18 +112,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- code, if the language server you are using supports them
     --
     -- This may be unwanted, since they displace some of your code
-    if
-      client
-      and client_supports_method(
-        client,
-        vim.lsp.protocol.Methods.textDocument_inlayHint,
-        event.buf
-      )
-    then
+    if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
       map("<leader>th", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
       end, "[T]oggle Inlay [H]ints")
     end
   end,
 })
-

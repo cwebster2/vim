@@ -3,7 +3,7 @@ require("snacks").setup({
   bigfile = { enabled = true },
   bufdelete = { enabled = true },
   dashboard = {
-    enabled = true,
+    enabled = false,
     sections = {
       { section = "header" },
       { section = "keys", gap = 1 },
@@ -18,7 +18,7 @@ require("snacks").setup({
     },
   },
   gitbrowse = { enabled = true },
-  git = { enabled = "true" },
+  git = { enabled = true },
   quickfile = { enabled = true },
   terminal = {},
   notifier = {
