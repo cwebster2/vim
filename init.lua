@@ -29,7 +29,7 @@ vim.pack.add({
   { src = "https://github.com/lukas-reineke/indent-blankline.nvim", name = "ibl" },
   { src = "https://github.com/folke/snacks.nvim" },
   { src = "https://github.com/nvim-lua/plenary.nvim" }, -- dependency
-  { src = "https://github.com/epwalsh/obsidian.nvim" }, -- lazy?
+  { src = "https://github.com/obsidian-nvim/obsidian.nvim", version = vim.version.range("*") }, -- lazy?
   { src = "https://github.com/williamboman/mason.nvim" },
   { src = "https://github.com/j-hui/fidget.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
