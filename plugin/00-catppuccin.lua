@@ -18,6 +18,7 @@ require("catppuccin").setup({
       enabled = true,
       color_mode = true,
     },
+    fidget = true,
     indent_blankline = {
       enabled = true,
     },
@@ -33,4 +34,3 @@ require("catppuccin").setup({
 })
 
 vim.cmd.colorscheme("catppuccin")
-

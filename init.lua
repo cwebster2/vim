@@ -63,6 +63,7 @@ vim.pack.add({
   { src = "https://github.com/kristijanhusak/vim-dadbod-completion" }, --dep ft sql mysql plsql
   { src = "https://github.com/kristijanhusak/vim-dadbod-ui" },
   { src = "https://github.com/tpope/vim-sleuth" },
+  { src = "https://github.com/rachartier/tiny-cmdline.nvim" },
 })
 
 require("cwebster.keymaps")
