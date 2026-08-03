@@ -28,7 +28,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
         help = true,
       },
     })
-    require("CopilotChat").setup({})
+    require("CopilotChat").setup({
+      model = "gpt-5.6-luna",
+    })
 
     require("blink.cmp").setup({
       keymap = {
